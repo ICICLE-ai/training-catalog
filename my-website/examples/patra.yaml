@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  title: Patra APIs
+  description: You can find the API endpoints for the Patra project.
+  version: 1.0.0
+
+tags:
+  - name: patra-apis
+    description: API endpoints for using Patra
+    x-displayName: Parta APIs
+
+x-tagGroups:
+  - name: Patra APIs
+    tags:
+      - patra-apis
+
+paths:
+  /all_models:
+    get:
+      summary: List all Models
+      tags:
+        - Patra APIs
+      parameters:
+        - name: user_id
+          in: query
+          description: The ID of the user making the request
+          required: true
+          schema:
+            type: string
+        - name: application_id
+          in: query
+          description: The ID of the application making the request
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of all the available models
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    model_id:
+                      type: string
+                      description: The ID of the model
+                    model_name:
+                      type: string
+                      description: The name of the model
+                  required:
+                    - model_id
+                    - model_name
+
+  /get_model:
+    get:
+      summary: Single model info
+      tags:
+        - Patra APIs
+      parameters:
+        - name: model_id
+          in: query
+          description: The ID of the application making the request
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information of the given model will be available
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    model_id:
+                      type: string
+                      description: The ID of the model
+                    model_name:
+                      type: string
+                      description: The name of the model
+                    model_size:
+                      type: string
+                      description: The name of the model
+                    model_description:
+                      type: string
+                      description: The name of the model
+                  required:
+                    - model_id
+                    - model_name
+                    - model_size

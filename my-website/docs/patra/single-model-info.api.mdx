@@ -1,0 +1,71 @@
+---
+id: single-model-info
+title: "Single model info"
+description: "Single model info"
+sidebar_label: "Single model info"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVEuP00AM/isjn0CKuoVjbpVAqLcKlgOqqpWbOIl3JzOzM06hRPnvyElV0m1BPHJJ5Mfnz48vPQjWCfItbFAimtVmnWCXQcCILQlF9fXgsCXIofUl2QcuIQN2kMNzR/EIGZSUishB2Kv1viGzfmd8ZaQhgyFYLlB9psUndvVojvTcURLIQL84Ugm5xI4ySEVDLULegxyDVk0S2dUwDDsNTsG7REn9b5dLfV1WX7vKx3aqd6JQ84GcGcmbr2yt2ZPBA7LFvSXIoPBOyIlizdjePSYF7K8JYYyobbNQm2Z2v3+kQlsK0QeKwhPN89SuWvr95MY8GLITwLSDP4HQyF+AJP7+/yAXwf+INcwXv51f1qzbC9a7YXxe4n9iV9sTrGFXec0iaXwJOdQ0rgOlgRzuapKHqbzeb+VH8ixW2c/O/2WFL74zBTpTsSvHFlabtSFXBs9Okql8HK0TQohej2ABGRwopgnhzWK5WOr8gk/S4ji1k6Ru0b89X6FvchcsslOkLlr1Ta1t4Wdruwwan0SNfb/HRJ+jHQY1T2pVOZec9PRLyCu0ia4qngUBrz6elvTa/KWsb7J+ouPlb+SAttMwUHEfMPIoyXy7GzJoCEuKI+Epb1UUFGSWdaVWRTkv/8P7exiGH7NtrTE=
+sidebar_class_name: "get api-method"
+info_path: docs/patra/patra-apis
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Single model info"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/get_model"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Single model info
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"model_id","in":"query","description":"The ID of the application making the request","required":true,"schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Information of the given model will be available","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"model_id":{"type":"string","description":"The ID of the model"},"model_name":{"type":"string","description":"The name of the model"},"model_size":{"type":"string","description":"The name of the model"},"model_description":{"type":"string","description":"The name of the model"}},"required":["model_id","model_name","model_size"]}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      
