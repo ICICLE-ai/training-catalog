@@ -79,6 +79,20 @@ const config = {
         },
       },
     ],
+    [
+      "@dipakparmar/docusaurus-plugin-umami",
+        /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
+        ({
+          websiteID: "your-website-id", // Required
+          analyticsDomain: "analytics.mydomain.com", // Required
+          scriptName: "umami-docusaurus", // Optional
+          dataHostURL: "https://umami.pods.icicleai.tapis.io/", // Optional
+          dataAutoTrack: true, // Optional
+          dataDoNotTrack: true, // Optional
+          dataCache: true, // Optional
+          dataDomains: "umami.pods.icicleai.tapis.io", // comma separated list of domains, *Recommended*
+        }),
+    ],
   ],
 
   themeConfig: {
