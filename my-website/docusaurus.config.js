@@ -7,11 +7,20 @@ const config = {
   tagline: 'Training and APIs documentation.',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  // // Set the production url of your site here
+  // url: 'https://your-docusaurus-site.example.com',
+  // // Set the /<baseUrl>/ pathname under which your site is served
+  // // For GitHub pages deployment, it is often '/<projectName>/'
+  // baseUrl: '/',
+
+
+  url: 'https://ICICLE-ai.github.io', // Your GitHub Pages root
+  baseUrl: '/training-catalog/', // The repository name, with a trailing slash
+  organizationName: 'ICICLE-ai', // Your GitHub organization name
+  projectName: 'training-catalog', // Your GitHub repository name
+  deploymentBranch: 'gh-pages', // This is where GitHub Pages will be deployed
+  trailingSlash: false, // Helps with correct URL resolution
+
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
