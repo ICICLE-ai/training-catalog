@@ -34,7 +34,7 @@ jobs:
         run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # Latest version
+        uses: actions/upload-pages-artifact@v3  # Latest version
         with:
           path: my-website/build  # Ensure correct build path
 
@@ -48,4 +48,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2  # Latest version
+        uses: actions/deploy-pages@v4  # Latest version
