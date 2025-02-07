@@ -1,34 +1,51 @@
-name: Deploy to GitHub Pages
+name: Deploy Docusaurus to GitHub Pages
 
 on:
   push:
     branches:
       - docusaurus-demo
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: my-website/package-lock.json  # Ensure correct path
 
-    - name: Install dependencies
-      working-directory: ./my-website
-      run: npm install
+      - name: Install dependencies
+        working-directory: my-website
+        run: npm install
 
-    - name: Build project
-      working-directory: ./my-website
-      run: npm run build
+      - name: Build Docusaurus site
+        working-directory: my-website
+        run: npm run build
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./my-website/build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: my-website/build  # Ensure correct build path
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
