@@ -38,6 +38,15 @@ const config = {
     locales: ['en'],
   },
 
+  scripts: [
+    {
+      src: 'https://umami.pods.icicleai.tapis.io/script.js', //Correct Umami tracking script URL
+      async: true,
+      defer: true,
+      'data-website-id': '0502dde3-2e0b-4a95-83b0-407cfa13ee91', //  Umami website ID
+    },
+  ],
+
   presets: [
     [
       'classic',
@@ -94,7 +103,6 @@ const config = {
         ({
           websiteID: "0502dde3-2e0b-4a95-83b0-407cfa13ee91", // Required
           analyticsDomain: "icicle-ai.github.io", // Required
-          scriptName: "script.js", // Optional
           dataHostURL: "https://umami.pods.icicleai.tapis.io", // Optional
           dataAutoTrack: true, // Optional
           dataDoNotTrack: false, // Optional
