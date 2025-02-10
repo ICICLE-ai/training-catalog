@@ -48,18 +48,18 @@ const config = {
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        // blog: {
+        //   showReadingTime: true,
+        //   feedOptions: {
+        //     type: ['rss', 'atom'],
+        //     xslt: true,
+        //   },
+        //   editUrl:
+        //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+        //   onInlineTags: 'warn',
+        //   onInlineAuthors: 'warn',
+        //   onUntruncatedBlogPosts: 'warn',
+        // },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -92,14 +92,14 @@ const config = {
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
         ({
-          websiteID: "your-website-id", // Required
-          analyticsDomain: "analytics.mydomain.com", // Required
-          scriptName: "umami-docusaurus", // Optional
+          websiteID: "0502dde3-2e0b-4a95-83b0-407cfa13ee91", // Required
+          analyticsDomain: "icicle-ai.github.io", // Required
+          scriptName: "Training-Catalog", // Optional
           dataHostURL: "https://umami.pods.icicleai.tapis.io/", // Optional
           dataAutoTrack: true, // Optional
           dataDoNotTrack: true, // Optional
           dataCache: true, // Optional
-          dataDomains: "umami.pods.icicleai.tapis.io", // comma separated list of domains, *Recommended*
+          dataDomains: "umami.pods.icicleai.tapis.io, icicle-ai.github.io", // comma separated list of domains, *Recommended*
         }),
     ],
   ],
@@ -119,7 +119,7 @@ const config = {
           position: 'left',
           label: 'Tutorial',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        // { to: '/blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
