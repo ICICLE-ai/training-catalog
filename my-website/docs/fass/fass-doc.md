@@ -102,7 +102,4 @@ improvements. Should you need further support or wish to provide feedback, our t
 assist.
 
 
-<video controls width="100%">
-    <source src="https://buckeyemailosu-my.sharepoint.com/personal/vyas_154_osu_edu/Documents/fass_demo.mp4?download=1" type="video/mp4"/>
-    Your browser does not support the video tag.
-</video>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4gBSKf4to7U?si=YJE64U8VKs_0D72D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
