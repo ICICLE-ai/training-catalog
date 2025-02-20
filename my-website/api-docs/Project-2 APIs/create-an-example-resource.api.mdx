@@ -1,0 +1,72 @@
+---
+id: create-an-example-resource
+title: "Create an example resource"
+description: "This endpoint allows creating a new example resource."
+sidebar_label: "Create an example resource"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVDtz2zAM/is4TO0d4zhpJ01N2wxZGl8ek88DTUESU4pk+LDj0+m/9yDJjh1nqhZJJAjge4AdJllHLJZ4+yZbbwhXAkuKKmiftLNY4FOjI5AtvdM2gTTGbSOoQDJpW4MES1ug8TAEii4HRTMUGOg1U0w/XbnDoht+daASixQyCVTOJrKJt6T3RivJ9S5fIhftMKqGWslfaecJC3TrF1IJBfrgPIWkKfKulS0dRcUUtK3xHAMBR4KrIDV01i8KnJawwMdx7w9n7gVSK7X5rETlQisTFlPEx5rPkQIMW/BlD/7rSaEcKfyYfmfKtdj34oin5Qhu38Gq78f96J2NI/rr+RW/Tgs/TKBGkaiEmJWiGKtszI4RfZ/Pz0/d2Y00uoRJNlizblywpdS4Egv0Lg78y9RggZd7HAJZs4d3tfdOOqhzwuiB0E/gC9S2cgPXOg0U3Szu4LdTuSWbBoOc0Xz75o0LNMjK0XunRqhcgEVwbJuLawEVyZRZOiipdTamMCTceyFCctCQ8VBnXRLsXIbUBJfrhnPrADnKmgRPAKyzNgmkUi6UnDE5uPdkuf7mG0RPSleToyPPwoZCHNu9ms1ncxSHsbtZ3OGqFwO5rbRHpP0a1ANpP3PrCQfd+zD997RO5k70li69kdqyGjkMxh8VXx6cuxLYsBeKJXbdWkZ6Dqbvefk1U9hhsVwJ3Mig5ZpFXDK+hmRJAYtlh39px/DGli+euDCHm8wNnN0F/erIgov7xycUuJ7ulNaVfCbILd83cosFokA30DLMx7DWoZG2zrLm2DEnP/8AVVu6Sw==
+sidebar_class_name: "post api-method"
+info_path: api/Project-2 APIs/api-documentation
+custom_edit_url: null
+tags: ['API']
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create an example resource"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/example"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+This endpoint allows creating a new example resource.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"name":{"type":"string","description":"The name of the example resource","example":"Sample Name"},"email":{"type":"string","format":"email","description":"User email (required)","example":"user@example.com"}},"required":["name","email"]}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"Resource created successfully"},"400":{"description":"Invalid request body"}}}
+>
+  
+</StatusCodes>
+
+
+      

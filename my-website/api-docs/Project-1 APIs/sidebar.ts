@@ -4,21 +4,21 @@ const sidebar: SidebarsConfig = {
   apisidebar: [
     {
       type: "doc",
-      id: "patra/patra-apis",
+      id: "Project-1 APIs/project-1-apis",
     },
     {
       type: "category",
-      label: "Patra APIs",
+      label: "Project-1 APIs",
       items: [
         {
           type: "doc",
-          id: "patra/list-all-models",
+          id: "Project-1 APIs/list-all-models",
           label: "List all Models",
           className: "api-method get",
         },
         {
           type: "doc",
-          id: "patra/single-model-info",
+          id: "Project-1 APIs/single-model-info",
           label: "Single model info",
           className: "api-method get",
         },

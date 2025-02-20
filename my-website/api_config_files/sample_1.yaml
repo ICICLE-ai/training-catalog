@@ -1,25 +1,25 @@
 openapi: 3.0.0
 info:
-  title: Patra APIs
-  description: You can find the API endpoints for the Patra project.
+  title: Project-1 APIs
+  description: Explore the API endpoints for Project-1, featuring demonstration examples to help guide you through their usage, all built according to OpenAPI v3 specifications.
   version: 1.0.0
 
 tags:
-  - name: patra-apis
-    description: API endpoints for using Patra
-    x-displayName: Parta APIs
+  - name: Project-1-apis
+    description: API endpoints for using Project-1
+    x-displayName: Project-1 APIs
 
 x-tagGroups:
-  - name: Patra APIs
+  - name: Project-1 APIs
     tags:
-      - patra-apis
+      - Project-1-apis
 
 paths:
   /all_models:
     get:
       summary: List all Models
       tags:
-        - Patra APIs
+        - Project-1 APIs
       parameters:
         - name: user_id
           in: query
@@ -57,7 +57,7 @@ paths:
     get:
       summary: Single model info
       tags:
-        - Patra APIs
+        - Project-1 APIs
       parameters:
         - name: model_id
           in: query

@@ -3,8 +3,8 @@ import { themes as prismThemes } from 'prism-react-renderer';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config = {
-  title: 'ICICLE Training Catalog',
-  tagline: 'Training and APIs documentation.',
+  title: 'ICICLE AI Institute - Training Catalog',
+  tagline: 'Documentation and APIs of ICICLE AI Institute projects.',
   favicon: 'img/favicon.ico',
 
   // // Set the production url of your site here
@@ -24,8 +24,6 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -51,24 +49,7 @@ const config = {
     [
       'classic',
       {
-        docs: {
-          sidebarPath: './sidebars.js',
-          docItemComponent: "@theme/ApiItem",
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        // blog: {
-        //   showReadingTime: true,
-        //   feedOptions: {
-        //     type: ['rss', 'atom'],
-        //     xslt: true,
-        //   },
-        //   editUrl:
-        //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        //   onInlineTags: 'warn',
-        //   onInlineAuthors: 'warn',
-        //   onUntruncatedBlogPosts: 'warn',
-        // },
+        docs: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -82,14 +63,44 @@ const config = {
 
   plugins: [
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs',
+        path: 'docs', // this is where all the folder containning .md files are present
+        sidebarPath: './sidebars.js',
+        routeBasePath: 'docs', // thie is for the url
+        // docItemComponent: '@theme/ApiItem',  //Not needed for normal docs
+        tagsBasePath: 'tags'
+      },
+  
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'api',                // plugin ID (must be unique)
+        path: 'api-docs',         // folder with .mdx for API docs
+        routeBasePath: 'api',     // for the url
+        sidebarPath: './sidebars.js',
+        docItemComponent: '@theme/ApiItem', 
+      },
+    ],
+
+    [
       'docusaurus-plugin-openapi-docs',
       {
-        id: 'api', // Plugin id
-        docsPluginId: 'classic', // Configured for preset-classic
+        id: 'openapi', // Plugin ID
+        docsPluginId: 'api', // Associate it with API docs
         config: {
-          patra: {
-            specPath: 'examples/patra.yaml',
-            outputDir: 'docs/patra',
+          sample_1: {
+            specPath: 'api_config_files/sample_1.yaml', // Path to OpenAPI spec
+            outputDir: 'api-docs/Project-1 APIs', // API docs location
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+          sample_2: {
+            specPath: 'api_config_files/sample_2.json', // Path to OpenAPI spec
+            outputDir: 'api-docs/Project-2 APIs', // API docs location
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -115,69 +126,18 @@ const config = {
   themeConfig: {
     image: 'img/ICICLE_logo.jpg',
     navbar: {
-      title: 'ICICLE Training Catalog',
+      title: 'ICICLE AI Training Catalog',
       logo: {
         alt: 'My Site Logo',
         src: 'img/ICICLE_logo.jpg',
       },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        // { to: '/blog', label: 'Blog', position: 'left' },
-        {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
-        },
+        { to: '/training-catalog/docs/intro', label: 'Documentation', position: 'left' },
+        { to: '/training-catalog/api/intro', label: 'APIs', position: 'left' }, // API Docs
       ],
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
-      ],
       copyright: `Copyright © ${new Date().getFullYear()} ICICLE AI Institute. Built with Docusaurus.`,
     },
     prism: {
