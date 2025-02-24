@@ -1,6 +1,6 @@
 ---
 id: intro
-title: Welcome to the APIs Documentation
+title: Welcome to the Documentation
 sidebar: apiSidebar
 position: 0
 ---
