@@ -84,6 +84,17 @@ const config = {
         docItemComponent: '@theme/ApiItem', 
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'curriculum',
+        path: 'curriculum', // this is where all the folder containning .md files are present
+        sidebarPath: './sidebars.js',
+        routeBasePath: 'curriculum', // thie is for the url
+        tagsBasePath: 'tags'
+      },
+  
+    ],
 
     [
       'docusaurus-plugin-openapi-docs',
@@ -134,6 +145,7 @@ const config = {
       items: [
         { to: '/training-catalog/docs/intro', label: 'Documentation', position: 'left' },
         { to: '/training-catalog/api/intro', label: 'APIs', position: 'left' }, // API Docs
+        { to: '/training-catalog/curriculum/intro', label: 'Curriculum', position: 'left' }, // Curriculum Docs
       ],
     },
     footer: {
