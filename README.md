@@ -37,7 +37,7 @@ A short description about your project goes here.
 
 
 
-## **Explantion**
+## **Explanation**
 
 ### What can be included:
 - High-level overview of core concepts and principles.
