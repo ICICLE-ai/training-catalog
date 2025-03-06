@@ -2,7 +2,16 @@
 # Project Name
 
 A short description about your project goes here.
-Please inlcude atleast 1 tag from this list: ["Software","CI4AI","AI4CI","Foundation-AI","PADI","Visual-Analytics","Digital-Agriculture","Animal-Ecology,"Smart-Foodsheds"],
+Please inlcude atleast 1 tag from this list: 
+- Software
+- CI4AI
+- AI4CI
+- Foundation-AI
+- PADI
+- Visual-Analytics
+- Digital-Agriculture
+- Animal-Ecology
+- Smart-Foodsheds
 
 <div align="center">
   
