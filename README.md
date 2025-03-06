@@ -53,3 +53,7 @@ A short description about your project goes here.
 ### What can be included:
 - Links to related resources (e.g., libraries, tools) or external documentation.
 - Definitions of key terms and concepts used in the project.
+
+
+## Acknowledgements
+*This release is brought to you by the National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
