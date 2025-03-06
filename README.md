@@ -3,7 +3,7 @@
 
 A short description about your project goes here.
 
-Inlcude atleast 1 tag from this list: 
+Inlcude atleast 1 tag from the following list: 
 - Software
 - CI4AI
 - AI4CI
