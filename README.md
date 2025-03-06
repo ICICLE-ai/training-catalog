@@ -56,4 +56,6 @@ A short description about your project goes here.
 
 
 ## Acknowledgements
-*This release is brought to you by the National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
+- Please include other funding sources to the section below.
+   
+*National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
