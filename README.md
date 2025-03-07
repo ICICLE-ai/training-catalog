@@ -14,7 +14,7 @@ Inlcude atleast 1 tag from the following list:
 - Animal-Ecology
 - Smart-Foodsheds
 
-You can follow [Diatxis](https://diataxis.fr/) in order to see how what can be added to Tutorials, How-To Guides, Explanation, Reference.
+You can follow [Diatxis](https://diataxis.fr/) in order to see what can be added to Tutorials, How-To Guides, Explanation, Reference.
 <div align="center">
   
 <!-- ------ Add Link to licenses and build statuses if any ---------
