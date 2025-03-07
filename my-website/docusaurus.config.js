@@ -150,7 +150,7 @@ const config = {
     },
     footer: {
       style: 'dark',
-      copyright: `Copyright © ${new Date().getFullYear()} ICICLE AI Institute. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606). Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
