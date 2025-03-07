@@ -14,7 +14,7 @@ Inlcude atleast 1 tag from the following list:
 - Animal-Ecology
 - Smart-Foodsheds
 
-For guidance on what to include in Tutorials, How-To Guides, Explanations, and References, you can follow [Diatxis](https://diataxis.fr/).
+For guidance on what to include in Tutorials, How-To Guides, Explanation, and Reference, you can follow [Diatxis](https://diataxis.fr/).
 <div align="center">
   
 <!-- ------ Add Link to licenses and build statuses if any ---------
