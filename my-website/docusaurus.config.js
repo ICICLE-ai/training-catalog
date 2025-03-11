@@ -70,7 +70,8 @@ const config = {
         sidebarPath: './sidebars.js',
         routeBasePath: 'docs', // thie is for the url
         // docItemComponent: '@theme/ApiItem',  //Not needed for normal docs
-        tagsBasePath: 'tags'
+        tagsBasePath: 'tags',
+        showLastUpdateTime: true,
       },
   
     ],
@@ -82,6 +83,7 @@ const config = {
         routeBasePath: 'api',     // for the url
         sidebarPath: './sidebars.js',
         docItemComponent: '@theme/ApiItem', 
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -91,7 +93,8 @@ const config = {
         path: 'curriculum', // this is where all the folder containning .md files are present
         sidebarPath: './sidebars.js',
         routeBasePath: 'curriculum', // thie is for the url
-        tagsBasePath: 'tags'
+        tagsBasePath: 'tags',
+        showLastUpdateTime: true,
       },
   
     ],
