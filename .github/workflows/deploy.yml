@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4  # Updated to latest version
@@ -31,7 +33,9 @@ jobs:
 
       - name: Build Docusaurus site
         working-directory: my-website
-        run: npm run build
+        run: |
+          export GIT_COMMITTER_DATE="$(git log -1 --format=%cd)"
+          npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3  # Latest version
