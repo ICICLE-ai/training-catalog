@@ -2,14 +2,14 @@
     "openapi": "3.0.0",
     "info": {
       "title": "API Documentation",
-      "description": "Explore the API endpoints for Project-2, featuring demonstration examples to help guide you through their usage, all built according to OpenAPI v3 specifications.",
+      "description": "Explore the API endpoints for a sample project, featuring examples to help guide you through their usage, all built according to OpenAPI v3 specifications. This is a sample API descrition is used just for demo purposes.",
       "version": "1.0.0",
       "tags" : ["API"]
     },
     "tags": [
       {
         "name": "Example",
-        "description": "Operations related to example endpoints"
+        "description": "Operations related to example endpoints for demo."
       }
     ],
     "paths": {
@@ -17,7 +17,7 @@
         "post": {
           "summary": "Create an example resource",
           "tags": ["Example"], 
-          "description": "This endpoint allows creating a new example resource.",
+          "description": "This is a sample description for the demo. Here you can write a short decription on what's the use of this API endpoint.",
           "requestBody": {
             "required": true,
             "content": {

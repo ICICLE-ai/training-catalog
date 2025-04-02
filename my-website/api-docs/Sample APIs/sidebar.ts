@@ -4,7 +4,7 @@ const sidebar: SidebarsConfig = {
   apisidebar: [
     {
       type: "doc",
-      id: "Project-2 APIs/api-documentation",
+      id: "Sample APIs/api-documentation",
     },
     {
       type: "category",
@@ -12,7 +12,7 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "Project-2 APIs/create-an-example-resource",
+          id: "Sample APIs/create-an-example-resource",
           label: "Create an example resource",
           className: "api-method post",
         },

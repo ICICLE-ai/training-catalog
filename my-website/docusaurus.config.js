@@ -105,16 +105,9 @@ const config = {
         id: 'openapi', // Plugin ID
         docsPluginId: 'api', // Associate it with API docs
         config: {
-          sample_1: {
-            specPath: 'api_config_files/sample_1.yaml', // Path to OpenAPI spec
-            outputDir: 'api-docs/Project-1 APIs', // API docs location
-            sidebarOptions: {
-              groupPathsBy: "tag",
-            },
-          },
           sample_2: {
-            specPath: 'api_config_files/sample_2.json', // Path to OpenAPI spec
-            outputDir: 'api-docs/Project-2 APIs', // API docs location
+            specPath: 'api_config_files/sample_apis.json', // Path to OpenAPI spec
+            outputDir: 'api-docs/Sample APIs', // API docs location
             sidebarOptions: {
               groupPathsBy: "tag",
             },
