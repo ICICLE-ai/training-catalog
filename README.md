@@ -60,7 +60,7 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 
 
 
-## **Reference**
+## **References**
 
 ### What can be included:
 - Links to related resources (e.g., libraries, tools) or external documentation.
