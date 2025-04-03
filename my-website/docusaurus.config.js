@@ -98,6 +98,18 @@ const config = {
       },
   
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'sample_docs',
+        path: 'sample_docs', // this is where all the folder containning .md files are present
+        sidebarPath: './sidebars.js',
+        routeBasePath: 'sample_docs', // thie is for the url
+        tagsBasePath: 'tags',
+        showLastUpdateTime: true,
+      },
+  
+    ],
 
     [
       'docusaurus-plugin-openapi-docs',
@@ -141,7 +153,8 @@ const config = {
       items: [
         { to: '/training-catalog/docs/intro', label: 'Documentation', position: 'left' },
         { to: '/training-catalog/api/intro', label: 'APIs', position: 'left' }, // API Docs
-        { to: '/training-catalog/curriculum/intro', label: 'Curriculum', position: 'left' }, // Curriculum Docs
+        { to: '/training-catalog/curriculum/intro', label: 'Curriculum', position: 'left' }, // Curriculum    
+        { to: '/training-catalog/sample_docs/intro', label: 'Sample Documentation', position: 'left' },
       ],
     },
     footer: {
