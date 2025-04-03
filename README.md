@@ -27,7 +27,7 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 
 
 
-## **Tutorials**
+# Tutorials
 
 ### What can be included:
 - A high-level introduction to the task or workflow.
@@ -38,7 +38,7 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 
 
 
-## **How-To Guides**
+# How-To Guides
 
 ### What can be included:
 - Problem description: A brief overview of the task or issue at hand.
@@ -49,7 +49,7 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 
 
 
-## **Explanation**
+# Explanation
 
 ### What can be included:
 - High-level overview of core concepts and principles.
@@ -60,7 +60,7 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 
 
 
-## **References**
+## References
 
 ### What can be included:
 - Links to related resources (e.g., libraries, tools) or external documentation.
