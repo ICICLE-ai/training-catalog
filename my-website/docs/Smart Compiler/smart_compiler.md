@@ -1,3 +1,8 @@
+---
+tags:
+  - CI4AI
+---
+
 # Smart Compiler
 
 This project introduces an agentic approach for high-level and multi-purpose compilers
