@@ -1,8 +1,7 @@
 {
     "label": "Smart Compiler",
     "link": {
-      "type": "generated-index",
-      "description": "Smart Compiler documentation"
+      "type": "generated-index"
     }
 }
   
