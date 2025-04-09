@@ -63,7 +63,8 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 # License
 - MIT, BSD etc.
 - e.g  [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+- Add any other liceses that yuo may wanna include
+  
 ## References
 
 ### What can be included:
