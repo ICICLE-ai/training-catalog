@@ -4,6 +4,8 @@ tags:
 ---
 
 # Forte Overview
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 The Forte library provides robust out-of-distribution (OOD) detection capabilities through the `ForteOODDetector` class. The core algorithm is built on the principle of **F**inding **O**utliers using **R**epresentation **T**ypicality **E**stimation, which:
 

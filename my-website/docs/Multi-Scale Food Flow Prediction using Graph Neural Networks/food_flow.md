@@ -5,6 +5,8 @@ tags:
 ---
 
 # Multi-Scale Food Flow Prediction using Graph Neural Networks
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A project leveraging Graph Neural Networks (GNNs) to predict food flows between counties and FAF zones for economic planning, infrastructure development, and policy-making.
 
 ## References
