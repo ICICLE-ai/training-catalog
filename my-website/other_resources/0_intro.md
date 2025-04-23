@@ -18,7 +18,7 @@ Below you’ll find all additional ICICLE resources—access portals, documentat
   </a>
 
 - **Login to Tapis**  
-  Tapis platform can be used for managing your data, jobs, and workflows.  
+  TapisUI can be used for managing your data, jobs, and workflows.  
   <a href="https://icicleai.tapis.io/#/login" target="_blank" rel="noopener noreferrer">
     Access the TapisUI.
   </a>
