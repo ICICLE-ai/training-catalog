@@ -7,7 +7,7 @@ position: 0
 
 # ICICLE Resource Hub
 
-Below you’ll find all additional ICICLE resources—access portals, documentation, and tools.
+Below you’ll find links to additional ICICLE resources—access portals, documentation, and tools.
 
 ## TACC and Tapis Resources
 
