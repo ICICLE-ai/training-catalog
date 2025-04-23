@@ -20,11 +20,25 @@ Below you’ll find all additional ICICLE resources—access portals, documentat
 - **Login to Tapis**  
   Tapis platform can be used for managing your data, jobs, and workflows.  
   <a href="https://icicleai.tapis.io/#/login" target="_blank" rel="noopener noreferrer">
-    Access the Tapis dashboard
+    Access the TapisUI.
   </a>
 
-- **Tapis API Documentation**  
-  Learn how to integrate with Tapis programmatically—browse tutorials, API references, and examples.  
+- **Tapis Python SDK Documentation**  
+  Install and use the Tapis Python SDK—browse installation instructions, API reference, and code examples.  
   <a href="https://tapis.readthedocs.io/en/latest/getting-started/index.html" target="_blank" rel="noopener noreferrer">
-    Explore the Tapis API guide
+    Explore the Python SDK guide
   </a>
+
+- **Tapis Live Documentation (Live Docs)**  
+  View the current Tapis OpenAPI V3 specifications for all our services.  
+  <a href="https://tapis-project.github.io/tutorials/" target="_blank" rel="noopener noreferrer">
+    Browse the Tapis Live Docs
+  </a>
+
+
+
+
+
+
+
+
