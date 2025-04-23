@@ -23,15 +23,14 @@ Below you’ll find all additional ICICLE resources—access portals, documentat
     Access the TapisUI.
   </a>
 
-- **Tapis Python SDK Documentation**  
-  Install and use the Tapis Python SDK—browse installation instructions, API reference, and code examples.  
-  <a href="https://tapis.readthedocs.io/en/latest/getting-started/index.html" target="_blank" rel="noopener noreferrer">
-    Explore the Python SDK guide
-  </a>
+- **Tapis Documentation and Tutorials** 
+  Quickstart, API reference, and hands-on guides for the Tapis Python SDK.  
+  <a href="https://tapis.readthedocs.io/en/latest/contents.html" target="_blank" rel="noopener noreferrer">View Docs</a> | <a href="https://tapis-project.github.io/tutorials/" target="_blank" rel="noopener noreferrer">Browse Tutorials</a>
+
 
 - **Tapis Live Documentation (Live Docs)**  
   View the current Tapis OpenAPI V3 specifications for all our services.  
-  <a href="https://tapis-project.github.io/tutorials/" target="_blank" rel="noopener noreferrer">
+  <a href="https://tapis-project.github.io/live-docs/?service=Systems" target="_blank" rel="noopener noreferrer">
     Browse the Tapis Live Docs
   </a>
 
