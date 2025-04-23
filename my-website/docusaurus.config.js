@@ -68,7 +68,7 @@ const config = {
         id: 'docs',
         path: 'docs', // this is where all the folder containning .md files are present
         sidebarPath: './sidebars.js',
-        routeBasePath: 'docs', // thie is for the url
+        routeBasePath: 'docs', // this is for the url
         // docItemComponent: '@theme/ApiItem',  //Not needed for normal docs
         tagsBasePath: 'tags',
         showLastUpdateTime: true,
@@ -92,19 +92,33 @@ const config = {
         id: 'curriculum',
         path: 'curriculum', // this is where all the folder containning .md files are present
         sidebarPath: './sidebars.js',
-        routeBasePath: 'curriculum', // thie is for the url
+        routeBasePath: 'curriculum', // this is for the url
         tagsBasePath: 'tags',
         showLastUpdateTime: true,
       },
   
     ],
+
     [
       '@docusaurus/plugin-content-docs',
       {
         id: 'sample_docs',
         path: 'sample_docs', // this is where all the folder containning .md files are present
         sidebarPath: './sidebars.js',
-        routeBasePath: 'sample_docs', // thie is for the url
+        routeBasePath: 'sample_docs', // this is for the url
+        tagsBasePath: 'tags',
+        showLastUpdateTime: true,
+      },
+  
+    ],
+
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'other_resources',
+        path: 'other_resources', // this is where all the folder containning .md files are present
+        sidebarPath: './sidebars.js',
+        routeBasePath: 'other_resources', // this is for the url
         tagsBasePath: 'tags',
         showLastUpdateTime: true,
       },
@@ -127,6 +141,8 @@ const config = {
         },
       },
     ],
+
+    
     [
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
@@ -155,6 +171,7 @@ const config = {
         { to: '/training-catalog/api/intro', label: 'APIs', position: 'left' }, // API Docs
         { to: '/training-catalog/curriculum/intro', label: 'Curriculum', position: 'left' }, // Curriculum    
         { to: '/training-catalog/sample_docs/intro', label: 'Sample Documentation', position: 'left' },
+        { to: '/training-catalog/other_resources/intro', label: 'ICICLE Resources', position: 'left' },
       ],
     },
     footer: {
