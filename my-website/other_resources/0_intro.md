@@ -1,6 +1,6 @@
 ---
 id: intro
-title: ICICLE Quick Links
+title: Links to the ICICLE Resources
 sidebar: apiSidebar
 position: 0
 ---
