@@ -10,10 +10,22 @@ tags:
 
 ### From source
 
-Clone the repo and ensure that you run from the root of the ctcontroller repository.
+Download the release as source code and unzip it
+
 ```
-git clone https://github.com/ICICLE-ai/ctcontroller.git
-cd ctcontroller
+wget https://github.com/ICICLE-ai/ct-controller/archive/refs/tags/${VER}.tar.gz
+tar xf ${VER}.tar.gz
+```
+Then ensure that you run from the root of the ctcontroller repository
+
+```
+cd ct-controller-${VER}
+```
+
+or add the package to the `PYTHONPATH`
+
+```
+export PYTHONPATH:$PWD/ct-controller-${VER}/ctcontroller:$PYTHONPATH
 ```
 
 ### Pip
@@ -21,7 +33,7 @@ cd ctcontroller
 `ctcontroller` can also be installed via pip with:
 
 ```
-pip install https://github.com/ICICLE-ai/ct-controller@v${VER}
+pip install git+https://github.com/ICICLE-ai/ct-controller@${VER}
 ```
 
 
@@ -39,16 +51,17 @@ docker pull tapis/ctcontroller
 
 If installation is via pip or source, export the variables described [below](#control_variables) to your path. For instance, to run on a non-GPU x86 node at TACC you might export:
 ```
+export CT_CONTROLLER_NUM_NODES=1
 export CT_CONTROLLER_TARGET_SITE=TACC
 export CT_CONTROLLER_NODE_TYPE=x86
 export CT_CONTROLLER_GPU=0
 export CT_CONTROLLER_CONFIG_PATH=./config.yml
+export CT_CONTROLLER_OUTPUT_DIR=./output
 ```
 
-Then, import and run the `ctcontroller` package:
+Ensure that the output directory exists and is writable. Then, import and run the `ctcontroller` package:
 
 ```
-cd ctcontroller
 python -c "import ctcontroller; ctcontroller.run()"
 ```
 
@@ -62,6 +75,7 @@ docker run \
 --mount type=bind,source="./output",target=/output \
 --mount type=bind,source="./config.yml",target=/config.yml \
 -e CT_CONTROLLER_TARGET_SITE=TACC \
+-e CT_CONTROLLER_NUM_NODES=1
 -e CT_CONTROLLER_NODE_TYPE=x86 \
 -e CT_CONTROLLER_GPU=0 \
 -e CT_CONTROLLER_CONFIG_PATH=./config.yml \

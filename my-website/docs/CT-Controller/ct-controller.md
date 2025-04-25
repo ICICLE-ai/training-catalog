@@ -7,7 +7,7 @@ tags:
 # CT-Controller
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-The ctcontroller tool can be used to manage the provisioning and releasing of edge hardware as well as running and shutting down the camera-traps application.
+The `ctcontroller` tool can be used to manage the provisioning and releasing of edge hardware as well as running and shutting down the camera-traps application.
 
 # Acknowledgements
 
