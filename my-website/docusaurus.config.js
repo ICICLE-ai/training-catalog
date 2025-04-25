@@ -161,7 +161,7 @@ const config = {
   themeConfig: {
     image: 'img/ICICLE_logo.jpg',
     navbar: {
-      title: 'ICICLE AI Training Catalog',
+      title: 'ICICLE AI Institute Training Catalog',
       logo: {
         alt: 'My Site Logo',
         src: 'img/ICICLE_logo.jpg',
@@ -169,9 +169,10 @@ const config = {
       items: [
         { to: '/training-catalog/docs/intro', label: 'Documentation', position: 'left' },
         { to: '/training-catalog/api/intro', label: 'APIs', position: 'left' }, // API Docs
-        { to: '/training-catalog/curriculum/intro', label: 'Curriculum', position: 'left' }, // Curriculum    
+        { to: '/training-catalog/curriculum/intro', label: 'Curriculum', position: 'left' }, // Curriculum 
+        { to: '/training-catalog/other_resources/intro', label: 'ICICLE Resources', position: 'left' },   
         { to: '/training-catalog/sample_docs/intro', label: 'Sample Documentation', position: 'left' },
-        { to: '/training-catalog/other_resources/intro', label: 'ICICLE Resources', position: 'left' },
+        
       ],
     },
     footer: {

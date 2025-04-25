@@ -1,6 +1,6 @@
 ---
 id: intro
-title: Welcome to the Sample Documentation
+title: Sample Documentation
 sidebar: apiSidebar
 position: 0
 ---

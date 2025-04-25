@@ -12,7 +12,7 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
 ## TACC and Tapis Resources
 
 - **Create your TACC Account**  
-  To access the Texas Advanced Computing Center’s HPC resources, you’ll first need an account.  
+  To access the Texas Advanced Computing Center (TACC) HPC resources, you’ll first need an account.  
   <a href="https://accounts.tacc.utexas.edu/login?redirect_url=profile" target="_blank" rel="noopener noreferrer">
     Sign up for a TACC account
   </a>
