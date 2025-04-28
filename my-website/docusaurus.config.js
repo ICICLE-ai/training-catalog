@@ -177,7 +177,7 @@ const config = {
     },
     footer: {
       style: 'dark',
-      copyright: `© ${new Date().getFullYear()} National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606). Learn more about <a href="https://icicle.ai/" target="_blank" rel="noopener noreferrer">ICICLE AI</a>`,
+      copyright: `© ${new Date().getFullYear()} National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606). Learn more about <a href="https://icicle.ai/" target="_blank" rel="noopener noreferrer">ICICLE AI Institute.</a>`,
     },
     prism: {
       theme: prismThemes.github,
