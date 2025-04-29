@@ -5,7 +5,6 @@ tags:
 ---
 
 # Explanation
-
 ## Architecture Overview
 
 `ctcontroller` is made up of two main subcomponents:
@@ -44,3 +43,12 @@ The Application Controller handles the setup, running, shutting down, and cleani
 ## Configuration File
 
 The path to the configuration file is specified through the environment variable `CT_CONTROLLER_CONFIG_PATH`. `ctcontroller` expects this file to be a YAML file. [sample_config.yml](sample_config.yml) is a sample config file. Configuration files can be used to specify target host nodes to be provisioned, service account credentials, and authorized users.
+
+The configuration file consists of three parts: 
+1. A description of the systems that can be accessed. Each system is given a unique identifier and contains the following attributes:
+   1. `Name`, which expects a string corresponding to an identifier to for the ssh key for the system
+   2. `Path`, which contains the path to the ssh key for the system
+   3. `Hosts`, which is a dictionary whose keys are a hardware type and the values are lists of valid IP addresses for that host and the username on those hosts. For instance, `{'hardware_type': [{'IP': ip_address1, 'Username': username1}, {'IP': ip_address2, 'Username: username2}]}` would be a valid value for the `Hosts` attribute.
+2. A list of authenticated users. The key is `Users` and authorized users must be a list
+3. Advanced settings. The key is `Settings` and available settings are:
+   1. `AuthenticateUsers=True|False`.

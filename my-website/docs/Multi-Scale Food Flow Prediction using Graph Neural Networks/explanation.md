@@ -6,7 +6,7 @@ tags:
 
 # Explanation
 
-### Graph Neural Networks for Trade Flow Prediction
+### Graph Neural Networks for Food Trade Flow Prediction
 Our approach uses Graph Neural Networks to model trade relationships between counties and FAF zones. The model architecture includes:
 - Graph Attention Networks (GAT) to capture the importance of different connections
 - Graph Convolutional Networks (GCN) for comparison

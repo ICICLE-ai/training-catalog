@@ -49,7 +49,7 @@ docker pull tapis/ctcontroller
 
 ### Source/pip
 
-If installation is via pip or source, export the variables described [below](#control_variables) to your path. For instance, to run on a non-GPU x86 node at TACC you might export:
+If installation is via pip or source, export the variables described [below](#control-variables) to your path. For instance, to run on a non-GPU x86 node at TACC you might export:
 ```
 export CT_CONTROLLER_NUM_NODES=1
 export CT_CONTROLLER_TARGET_SITE=TACC
