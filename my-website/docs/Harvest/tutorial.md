@@ -43,7 +43,14 @@ tags:
 
 	- If a labeled images json is provided training will automatically start
 
-	- format for labeled image json is as follows {"class1":[images...],"class2":[images...],...}
+	- format for labeled image json is as follows 
+    ```json
+    {
+        "class1":[images...],
+        "class2":[images...],
+        ...
+    }
+    ```
 	- The labeler will first ask the user for their desired class labels type the desired labels one by one pressing the enter key in between examples of classes maybe "soil", "weed", "soybean", etc then hit the next button
 	![Alt text for image](https://icicle.osu.edu/media/image/2025-04-29/tapsellabels.png)
 
