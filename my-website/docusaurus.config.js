@@ -41,7 +41,7 @@ const config = {
       src: 'https://umami.pods.icicleai.tapis.io/script.js', //Correct Umami tracking script URL
       async: true,
       defer: true,
-      'data-website-id': '0502dde3-2e0b-4a95-83b0-407cfa13ee91', //  Umami website ID
+      'data-website-id': 'e1e727a2-edd2-436d-a3f0-3794e11d3718', //  Umami website ID
     },
   ],
 
@@ -149,7 +149,7 @@ const config = {
         ({
           websiteID: "e1e727a2-edd2-436d-a3f0-3794e11d3718", // Required
           analyticsDomain: "icicle-ai.github.io", // Required
-          dataHostURL: "https://umami.pods.icicleai.tapis.io", // Optional
+          dataHostURL: "https://umami.pods.icicleai.tapis.io", //Required
           dataAutoTrack: true, // Optional
           dataDoNotTrack: false, // Optional
           dataCache: true, // Optional
