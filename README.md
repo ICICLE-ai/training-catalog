@@ -15,15 +15,24 @@ Inlcude atleast 1 tag from the following list:
 - Smart-Foodsheds
 
 For guidance on what to include in Tutorials, How-To Guides, Explanation, and Reference, you can follow [Diatxis](https://diataxis.fr/).
-<div align="center">
+
+### License
+- MIT, BSD etc.
+- e.g  [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+- Add any other liceses that you want to include.
   
-<!-- ------ Add Link to licenses and build statuses if any ---------
+## References
 
-[![Documentation Status](https://img.shields.io/badge/docs-latest-blue.svg)](link-to-any-other-docs)
-[![Build Status](link-to-image)](link-to-status-passed) 
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) -->
+### What can be included:
+- Links to related resources (e.g., libraries, tools) or external documentation.
+- Definitions of key terms and concepts used in the project.
 
-</div>
+
+## Acknowledgements
+- Please include other funding sources to the section below.
+   
+*National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
+
 
 
 
@@ -58,21 +67,3 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 - Background information to help users grasp the context of the project’s design and architecture.
 - Suggested readings or resources for further exploration.
 
-
-
-### License
-- MIT, BSD etc.
-- e.g  [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-- Add any other liceses that you want to include.
-  
-## References
-
-### What can be included:
-- Links to related resources (e.g., libraries, tools) or external documentation.
-- Definitions of key terms and concepts used in the project.
-
-
-## Acknowledgements
-- Please include other funding sources to the section below.
-   
-*National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
