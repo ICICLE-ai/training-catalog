@@ -92,8 +92,30 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
     Event Engine Documentation
   </a>
 
+
+## iciflaskn v1.0
+- The iciflaskn package provides a Flask blueprint that can be registered with your Flask application to endow it with Tapis Federated Authentication Service based on OAuth2.
+
+  <a href="https://pypi.org/project/iciflaskn/" target="_blank" rel="noopener noreferrer">
+    iciflaskn v1.0
+  </a>
+
   
 
+## TapisCL-ICICLE 1.0.11
+- Tapis CLI is designed to provide a simple to use, versatile way to interface with Tapis services hosted on HPC resources. User can either start the app and use it as a traditional command line applications, or pass commands directly from bash. Allows you to work with all major Tapis services: Pods, Systems, Files, and Apps in one place.
+
+  <a href="https://pypi.org/project/TapisCL-ICICLE/" target="_blank" rel="noopener noreferrer">
+    Link to TapisCL-ICICLE 1.0.11 PyPi Package
+  </a>
+
+
+## ICICONSOLE 0.8.0
+- ICICONSOLE is designed to provide an efficient and powerful interface to Neo4j Knowledge Graph databases hosted on HPC resources, leveraging Tapis.
+
+  <a href="https://pypi.org/project/ICICONSOLE/#description" target="_blank" rel="noopener noreferrer">
+    Link to ICICONSOLE 0.8.0 PyPi Package
+  </a>
 
 
 
