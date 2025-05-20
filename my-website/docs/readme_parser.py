@@ -70,7 +70,7 @@ def main():
 
     # Dict for filename mapping with possible headings
     mapping = {
-        "how-to": ["# How-To Guide", "# How-To Guide"],
+        "how-to": ["# How-To Guides", "# How-To Guide"],
         "explanations": ["# Explanation", "# Explanations"],
         "tutorials": ["# Tutorial", "# Tutorials"]
     }
