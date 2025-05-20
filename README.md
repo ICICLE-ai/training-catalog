@@ -34,7 +34,7 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 *National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
 
 
-
+---
 
 # Tutorials
 
@@ -45,7 +45,7 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 - Visual aids such as screenshots or GIFs, if necessary, to clarify complex steps.
 - End results, showcasing the outcome of following the tutorial.
 
-
+---
 
 # How-To Guides
 
@@ -57,6 +57,7 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
 - Relevant code snippets, commands, or configuration examples.
 
 
+---
 
 # Explanation
 
