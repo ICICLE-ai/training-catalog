@@ -5,6 +5,7 @@ tags:
 
 # Smart Compiler
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/SMART-COMPILER)
 
 This project introduces an agentic approach for high-level and multi-purpose compilers
 

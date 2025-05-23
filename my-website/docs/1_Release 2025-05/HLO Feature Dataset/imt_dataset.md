@@ -11,6 +11,7 @@ tags:
 <div align="center">
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Hugging Face Repo](https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.png)]([repo_url](https://huggingface.co/datasets/ICICLE-AI/ResourceEstimation_HLOGenCNN))
 
 </div>
 

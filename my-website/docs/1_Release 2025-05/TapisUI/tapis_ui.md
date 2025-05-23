@@ -8,6 +8,9 @@ tags:
 ---
 # Tapis UI Extension
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/ICICLE-ai/tapisui-extension-icicle/blob/main/LICENSE.md)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/tapisui-extension-icicle)
+
+
 
 This tapis ui extension enables additional icicle specific branding and tabs on tapisui.  
 The main tapis-ui repository is here: https://github.com/tapis-project/tapis-ui
