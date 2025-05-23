@@ -118,6 +118,17 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
   </a>
 
 
+## Food Access Strategy Simulator (FASS) v0.1
+- The Food Access and Strategy Simulation tool is a powerful resource for analyzing and simulating the effects of adding or removing stores on household food access. This guide provides clear, step-by-step instructions to help you navigate and utilize the tool effectively.
+
+  <a href="https://fass.pods.icicleai.tapis.io/" target="_blank" rel="noopener noreferrer">
+    Link to FASS Website
+  </a>
 
 
+# CI Components Catalog
+- Hosted using our Tapis Pods Service, the CI Components Catalog showcases the most up-to-date released CI components of ICICLE AI Institute available to the public.
 
+  <a href="https://componentcatalog.pods.icicleai.tapis.io/" target="_blank" rel="noopener noreferrer">
+    Link to Component Catalog
+  </a>
