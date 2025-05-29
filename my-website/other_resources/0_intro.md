@@ -132,3 +132,10 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
   <a href="https://componentcatalog.pods.icicleai.tapis.io/" target="_blank" rel="noopener noreferrer">
     Link to Component Catalog
   </a>
+
+# Reference Architecture Data Schema v0.1.0
+- Data schema for describing the architecture of a component in the ICICLE component catalog.
+  <a href=" https://github.com/icicle-ai/CI-Components-Catalog/blob/master/architecture/architecture-component-schema.yaml" target="_blank" rel="noopener noreferrer">
+    Link to the Data Schema
+  </a>
+ 

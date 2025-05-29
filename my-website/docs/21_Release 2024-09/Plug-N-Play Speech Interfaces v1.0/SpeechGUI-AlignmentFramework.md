@@ -7,7 +7,7 @@ tags:
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-# SpeechGUI-AlignmentFramework
+# Plug-N-Play Speech Interfaces v1.0
 Speech is the new essential fuel for human-computer interaction. With the current trend of
 modern-day human-computer interaction and its increasing reliance on voice commands,
 the development of a robust speech framework is paramount. The demand for intuitive
