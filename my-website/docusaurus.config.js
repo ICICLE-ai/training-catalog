@@ -102,6 +102,19 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'workshops',
+        path: 'workshops', // this is where all the folder containning .md files are present
+        sidebarPath: './sidebars.js',
+        routeBasePath: 'workshops', // this is for the url
+        tagsBasePath: 'tags',
+        showLastUpdateTime: true,
+      },
+  
+    ],
+
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'sample_docs',
         path: 'sample_docs', // this is where all the folder containning .md files are present
         sidebarPath: './sidebars.js',
@@ -170,7 +183,8 @@ const config = {
         { to: '/training-catalog/docs/intro', label: 'Documentation', position: 'left' },
         { to: '/training-catalog/api/intro', label: 'APIs', position: 'left' }, // API Docs
         { to: '/training-catalog/curriculum/intro', label: 'Curriculum', position: 'left' }, // Curriculum 
-        { to: '/training-catalog/other_resources/intro', label: 'ICICLE Resources', position: 'left' },   
+        { to: '/training-catalog/other_resources/intro', label: 'ICICLE Resources', position: 'left' }, 
+        { to: '/training-catalog/workshops/intro', label: 'Workshops', position: 'left' },   
         { to: '/training-catalog/sample_docs/intro', label: 'Sample Documentation', position: 'left' },
         
       ],
