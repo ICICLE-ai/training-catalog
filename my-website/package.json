@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@dipakparmar/docusaurus-plugin-umami": "^2.1.7",
-    "@docusaurus/core": "3.7.0",
-    "@docusaurus/preset-classic": "3.7.0",
+    "@docusaurus/core": "^3.7.0",
+    "@docusaurus/preset-classic": "^3.7.0",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "docusaurus-plugin-openapi-docs": "^4.3.3",

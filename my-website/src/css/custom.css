@@ -28,3 +28,16 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* Don't show content in this class on the page */
+.markdown h1.hide-on-page,
+.markdown h2.hide-on-page,
+.markdown h3 .hide-on-page,
+.markdown h4 .hide-on-page{  
+  display: none;
+}
+
+/* Don't show content in this class on the table of contents */
+.table-of-contents .hide-on-toc {
+  display: none;
+}
