@@ -10,9 +10,9 @@ sidebar_label: "Home"
 
 In Conjunction with the [54th International Conference on Parallel Processing (ICPP 2025)](https://icpp2025.sdsc.edu/)
 
-(Date - Undecided)
+(Date - Monday Sep 08 – Tuesday Sep 09, 2025)
 
-(Location - Undecided)
+(Location - The Catamaran Resort Hotel San Diego, CA)
  
 ---
 
@@ -38,8 +38,30 @@ The objectives of this workshop will be to share the experiences of the members 
 
 ---
 
+## Important Dates
+
+Paper Submission: TBD
+
+ 
+
+Author Notiﬁcation: TBD
+
+ 
+
+Poster submission: TBD
+
+ 
+
+Poster Author notification: TBD
+
+---
+
 ## Organizing Committee
 
 [Hari Subramoni](https://cse.osu.edu/people/subramoni.1)
 
 [Scott Shearer](https://fabe.osu.edu/our-people/scott-shearer)
+
+## Technical Program Committee
+
+TBD

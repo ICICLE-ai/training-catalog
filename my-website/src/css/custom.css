@@ -37,7 +37,7 @@
   display: none;
 }
 
-/* Don't show content in this class on the page */
+/* Don't show content in this class on the table of contents */
 .table-of-contents .hide-on-toc {
   display: none;
 }

@@ -10,3 +10,7 @@ sidebar_label: "Organizing Committee"
 [Hari Subramoni](https://cse.osu.edu/people/subramoni.1)
 
 [Scott Shearer](https://fabe.osu.edu/our-people/scott-shearer)
+
+## Technical Program Committee
+
+TBD
