@@ -29,15 +29,101 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* Use the hide classes when you want a table of contents
+link different than the text it links to */
+
 /* Don't show content in this class on the page */
 .markdown h1.hide-on-page,
 .markdown h2.hide-on-page,
-.markdown h3 .hide-on-page,
-.markdown h4 .hide-on-page{  
+.markdown h3.hide-on-page,
+.markdown h4.hide-on-page{
   display: none;
 }
 
-/* Don't show content in this class on the page */
+/* Don't show content in this class on the table of contents */
 .table-of-contents .hide-on-toc {
   display: none;
+}
+
+/* Workshop Styling */
+
+/* Scoping to workshop-container */
+
+.workshop-container {
+  /* Color variables*/
+  --primary-green: #2e8555;  /* Main green color */
+  --section-bg-color: #f8f9fa; /* Section backgrounds */
+  --text-main-color: #333;   /* Main text color */
+
+  --workshop-header-bg-color: #d1e3e1;  /* Soft background used for workshop header */
+  --workshop-title-color: #2c3e50;  /* Title color */
+  --workshop-subtitle-color: #4b636b;  /* Subtitle color */
+  --workshop-location-date-color: #3a4d4f;  /* Location and date color */
+  --link-color: #2e8555;  /* Link color, matches primary green for now */
+  
+  /* Spacing variables*/
+  --large-spacing: 2rem;
+  --medium-spacing: 1.5rem;
+  --small-spacing: 1rem; 
+
+  /* Text */
+  --font-family-sans: 'Arial', sans-serif;
+  --font-family-serif: 'Georgia', serif;
+  line-height: 1.6;
+  color: var(--text-main-color);
+  
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.workshop-container .workshop-header {
+  text-align: center;
+  margin: var(--large-spacing) 0;
+  padding: var(--large-spacing);
+  background: var(--workshop-header-bg-color);
+  border-radius: 8px;
+}
+
+.workshop-container .workshop-title {
+  font-size: 3rem;
+  color: var(--workshop-title-color);
+  margin-bottom: var(--small-spacing);
+  font-weight: bold;
+}
+
+.workshop-container .workshop-subtitle {
+  font-size: 1.4rem;
+  color: var(--workshop-subtitle-color);
+  margin-bottom: var(--small-spacing);
+}
+
+.workshop-container .workshop-location-date {
+  margin: var(--small-spacing) 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--workshop-location-date-color);
+}
+
+/* Content Sections */
+.workshop-section {
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  padding: var(--medium-spacing);
+  margin: var(--large-spacing) 0;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: var(--primary-green);
+  border-bottom: 2px solid var(--primary-green);
+  padding-bottom: var(--small-spacing);
+  margin-bottom: var(--medium-spacing);
+}
+
+/* Cards */
+.workshop-card {
+  background: var(--section-bg-color);
+  border-left: 4px solid var(--primary-green);
+  border-right: 4px solid var(--primary-green);
+  padding: var(--medium-spacing);
+  margin: var(--medium-spacing) 0;
 }
