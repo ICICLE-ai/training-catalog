@@ -1,6 +1,8 @@
 ---
 tags:
-  - Foundational-AI
+  - CI4AI
+  - Software
+  - PADI
   - Release 2024-12
 ---
 # Patra Model Card Toolkit

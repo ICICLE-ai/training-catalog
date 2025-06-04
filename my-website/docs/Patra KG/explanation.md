@@ -1,6 +1,8 @@
 ---
 tags:
-  - Foundational-AI
+  - CI4AI
+  - Software
+  - PADI
 ---
 
 # Explanation
