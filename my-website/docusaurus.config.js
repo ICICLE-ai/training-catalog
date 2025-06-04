@@ -183,7 +183,7 @@ const config = {
         { to: '/training-catalog/docs/intro', label: 'Documentation', position: 'left' },
         { to: '/training-catalog/api/intro', label: 'APIs', position: 'left' }, // API Docs
         { to: '/training-catalog/Education/intro', label: 'Education', position: 'left' }, // Education 
-        { to: '/training-catalog/other_resources/intro', label: 'ICICLE Resources', position: 'left' }, 
+        { to: '/training-catalog/other_resources/intro', label: 'Resources', position: 'left' }, 
         { to: '/training-catalog/workshops/intro', label: 'Workshops', position: 'left' },   
         { to: '/training-catalog/sample_docs/intro', label: 'Sample Documentation', position: 'left' },
         { to: '/training-catalog/docs/tags', label: 'Tags',  position: 'left' },
