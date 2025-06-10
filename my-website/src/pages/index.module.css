@@ -3,6 +3,26 @@
  * and scoped locally.
  */
 
+ /* styles.module.css */
+.heroBody {
+  margin-top: 2rem;
+  text-align: justify; /* This will justify the text */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.heroHeading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.heroDescription {
+  font-size: 1.1rem;
+}
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
