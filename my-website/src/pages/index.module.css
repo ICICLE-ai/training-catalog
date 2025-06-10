@@ -15,14 +15,14 @@
   font-size: 1.55rem;
   font-weight: 600;
   text-align: justify;
-  color: black; /* Ensures heading is black */
+  color: var(--ifm-font-color-base);/* Ensures heading is black */
 }
 
 .heroDescription {
   font-size: 1.3rem;
   line-height: 1.8;
   text-align: justify;
-  color: black; /* Ensures description is black */
+  color:var(--ifm-font-color-base); /* Ensures description is black */
 }
 
 .heroBanner {

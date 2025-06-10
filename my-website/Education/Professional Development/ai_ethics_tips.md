@@ -1,3 +1,8 @@
+---
+tags:
+  - Video
+---
+
 # AI Ethics Tips
 
 **NSF ICICLE Tips series on AI Ethics** – A series of short videos that situates AI Ethics in an accessible, tip-oriented manner.

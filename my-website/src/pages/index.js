@@ -17,13 +17,13 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <div className={clsx('container', styles.heroBody)}>
+        <div className={styles.heroBody}>
             <p className={styles.heroHeading}>{heroHeading}</p>
         </div>
       </div>
     </header>
     <main>
-        <div className={clsx('container', styles.heroBody)}>
+        <div className={styles.heroBody}>
           <p className={styles.heroDescription}>{heroDescription}</p>
         </div>
     </main>
