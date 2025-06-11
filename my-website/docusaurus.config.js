@@ -73,6 +73,7 @@ const config = {
         id: 'docs',
         path: 'docs', // this is where all the folder containning .md files are present
         sidebarPath: './sidebars.js',
+        include: ['**/*.{md,mdx}'],   
         routeBasePath: 'docs', // this is for the url
         // docItemComponent: '@theme/ApiItem',  //Not needed for normal docs
         tagsBasePath: 'tags',
@@ -191,7 +192,16 @@ const config = {
         { to: '/training-catalog/other_resources/intro', label: 'Resources', position: 'left' }, 
         { to: '/training-catalog/workshops/intro', label: 'Workshops', position: 'left' },   
         { to: '/training-catalog/sample_docs/intro', label: 'Sample Documentation', position: 'left' },
-        { to: '/training-catalog/docs/tags', label: 'Tags',  position: 'left' },
+        { type: 'dropdown', to: '/training-catalog/tags', label: 'Tags',  position: 'left' ,items: [
+            {
+              label: 'Documentation Tags',
+              to: '/training-catalog/docs/tags',
+            },
+            {
+              label: 'Education Tags',
+              to: '/training-catalog/education/tags',
+            },
+          ],},
       ],
     },
     footer: {
