@@ -192,7 +192,7 @@ const config = {
         { to: '/training-catalog/other_resources/intro', label: 'Resources', position: 'left' }, 
         { to: '/training-catalog/workshops/intro', label: 'Workshops', position: 'left' },   
         { to: '/training-catalog/sample_docs/intro', label: 'Sample Documentation', position: 'left' },
-        { type: 'dropdown', to: '/training-catalog/tags', label: 'Tags',  position: 'left' ,items: [
+        { type: 'dropdown', label: 'Tags',  position: 'left' ,items: [
             {
               label: 'Documentation Tags',
               to: '/training-catalog/docs/tags',
