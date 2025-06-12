@@ -29,7 +29,8 @@ jobs:
 
       - name: Install dependencies
         working-directory: my-website
-        run: npm install
+        run: |
+          npm install || npm install || npm install
 
       - name: Build Docusaurus site
         working-directory: my-website
