@@ -175,6 +175,17 @@ const config = {
           dataDomains: "icicle-ai.github.io", // comma separated list of domains, *Recommended*
         }),
     ],
+    
+    [
+      require.resolve('docusaurus-lunr-search'),
+      {
+        languages: ['en'],
+        indexBaseUrl: true,
+        highlightResult: true,
+        maxHits: 8,
+      },
+    ],
+
   ],
 
   themeConfig: {
@@ -201,7 +212,9 @@ const config = {
               label: 'Education Tags',
               to: '/training-catalog/education/tags',
             },
-          ],},
+          ],
+        },
+        { type: 'search', position: 'right',},
       ],
     },
     footer: {
