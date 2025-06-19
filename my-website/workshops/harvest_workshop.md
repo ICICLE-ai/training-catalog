@@ -6,4 +6,4 @@ The emergence of modern AI systems powered by high-performance computing (HPC) h
 The objectives of this workshop will be to share the experiences of the members of this community and to learn the opportunities and challenges in designing HPC-powered AI-enabled systems for agriculture. Through presentations and discussions, participants will gain a comprehensive understanding of the potential for HPC and AI to revolutionize the field of agriculture and the challenges that need to be overcome. The workshop will provide attendees with the opportunity to learn from experts in the field and explore how HPC and AI can be applied to their specific areas of interest within agriculture. The workshop is designed for researchers, practitioners, and developers who are interested in exploring the benefits HPC and AI can bring to agriculture.
 
 ## Link to the workshop website
-<a href="https://icicle-ai.github.io/harvest-workshop/" target="_blank">Harvest 2025 Workshop</a>
+<a href="https://icicle-ai.github.io/harvest/" target="_blank">Harvest 2025 Workshop</a>
