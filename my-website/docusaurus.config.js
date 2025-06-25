@@ -229,6 +229,10 @@ const config = {
               label: 'Education Tags',
               to: '/training-catalog/education/tags',
             },
+            {
+              label: 'API Tags',
+              to: '/training-catalog/api/tags',
+            },
           ],
         },
         { type: 'search', position: 'right',},
