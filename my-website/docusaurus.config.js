@@ -200,6 +200,14 @@ const config = {
         indexBaseUrl: true,
         highlightResult: true,
         maxHits: 8,
+        docsRouteBasePath: [
+          'docs',
+          'api',
+          'Education',
+          'workshops',
+          'sample_docs',
+          'other_resources'
+        ],
       },
     ],
 
