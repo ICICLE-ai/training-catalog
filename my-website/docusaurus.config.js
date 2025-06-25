@@ -161,7 +161,24 @@ const config = {
       },
     ],
 
-    
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: 'openapi-faf', // Plugin ID
+        docsPluginId: 'api', // Associate it with API docs
+        config: {
+          faf_apis: {
+            specPath: 'api_config_files/faf_API.json', // Path to OpenAPI spec
+            outputDir: 'api-docs/FAF APIs', // API docs location
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+        },
+      },
+    ],
+
+
     [
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */

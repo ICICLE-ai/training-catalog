@@ -1,0 +1,73 @@
+---
+id: exports-imports-mode-details-create
+title: "exports_imports_mode_details_create"
+description: "get_mode_details/ takes in a region or state with a year or year frame and returns all mode details."
+sidebar_label: "exports_imports_mode_details_create"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVk1PIzkQ/SulOg1SQ7Jo95JbYIjU2tEuIuHERqjSXaQ9dNs9djUhivq/r8oOpGGAGe1hD3PpD/u5/Orr2Tt0LXsS42xe4gT5sXVewq1p0rtxJd+WLGTqcFt4JmHMsORQeNPqKpzgmuUFbgRC9xzAWCDwvDbOgvMQhIRhY6QCgi2T18H4vvPUMJAtwbN03gagugY1CXuTJ/9YzFBoHXBy8yFJXGbo+VvHQc5cucXJDgtnha3oJ7VtbYro7uhrUPY7DEXFDemXbFvGCbrVVy4EM2y9BkcMhzhrGo5MB1DynraYoRFuwmDcWOE1e+wzbOgxT7OnfYZ3tdsMcEG8sWuMqC9s11Lh5Pdx3ycfjOdS/Y2LsgGBpf5IrRbOyJ9X5AV10dC9x+PNZnN853xz3PmabeFKtfZL+dt0tZiWvIyinyUJ/VIevlglvuM+w8BF541scXKjpe3uDU873eVm2Wc7XFEwxWCgj/0QWmdDcvp0PP4vTfFeXN4JbclBjKWkEB8G57c/+gwL1zSujF59DB73GcoLm7ZrVuwxQy0BEpxg6bpVzZop8WSDasTPmFUpeivhr1J3oJq98DLxGu65NzlIbZ4E6yqqnOa3f62lqaxZKqdq3LoQQ0tKEkcf6d4ID6Ux1+SlPAzK4dmzSqRVdEThJGEwZuFQTYfEt+ZPjplXfgmCGdrYNhg4BOOsKSNxrZ6rg/hePFLT1vyq1W7Gy6eueUpGr9bvXAKmUM2mM5he5uG702ZRmQAmAEHlgnAJVxfzhUJBHEjFcD2Hs84zdeDuYPGUjZgkmOs7iCkCfDpbzI9gxmZdCUwt1dtgAsyU48b5e/g0m86OQCUlsJxALlBRgBWzhZIfuHYtl7Daxi0/kxAsHOQ2RHPnbIU9fPp8mh8BCeS2NGQJrq15YB+MbIECqHApR7Xw13wG+Xl+/uUCprnaESOdpEPRWChcXdPKpYM6naE/7+oJZhi3jfEbn4xPxoPDdHqZ47LPYq01FDtrn9t9ucG+3F4cyPD2XWCgK//jtSAVqvCjjNqajNV66nytdFLr/ODKkKE2qZaTQne7FQW+9nXf6/C3jr2K7TLDB/KGVFqitGLFVLKPOnzPW5zgefL9eKGEFF53qYN+dCqrcCcT06LgVt5ZHMVZBf1ZIC7/ni8ww9X+pqNe4QQHlrPhT6JN3/X3fezv/Ye68zRltwMmh1bP9mT1qdTfhO92STn6/hmfpt5dsY/nE1rzuOz7/l9dxq25
+sidebar_class_name: "post api-method"
+info_path: api/FAF APIs/faf-apis
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2025-07]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"exports_imports_mode_details_create"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/exports_imports_mode_details/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+get_mode_details/ takes in a region or state with a year or year frame and returns all mode details.
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"flow":{"type":"string","maxLength":40}},"required":["flow","timeframe"],"title":"BarChart"}},"application/x-www-form-urlencoded":{"schema":{"type":"object","properties":{"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"flow":{"type":"string","maxLength":40}},"required":["flow","timeframe"],"title":"BarChart"}},"multipart/form-data":{"schema":{"type":"object","properties":{"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"flow":{"type":"string","maxLength":40}},"required":["flow","timeframe"],"title":"BarChart"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"destination":{"type":"string","maxLength":15},"commodity":{"type":"string","maxLength":10},"ton":{"type":"number","format":"double"},"transport":{"type":"string","maxLength":10},"year":{"type":"integer"}},"required":["commodity","destination","ton","transport","year"],"title":"ImportsReturn"}}}},"description":""}}}
+>
+  
+</StatusCodes>
+
+
+      

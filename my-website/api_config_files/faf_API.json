@@ -1,0 +1,1621 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FAF APIs",
+    "description": "This is a hosted REST API to the US Bureau of Transportation Statistics (BTS) Feight Analysis Framework (FAF) dataset. It has been developed by the Data To Insight Center (D2I) at Indiana University as part of the NSF ICICLE AI Institute and in collaboration with the US Bureau of Transportation Statistics.",
+    "version": "0.0.0",
+    "tags" : ["API"]
+  },
+  "paths": {
+    "/commodity_total/": {
+      "get": {
+        "operationId": "commodity_total_list",
+        "description": "commodity_total/ endpoint accepts a timeframe and an option specifying either state or region. It returns a CSV file detailing the difference between the tonnage of each commodity imported and exported from each area by year. Currently, this endpoint supports domestic trade only, with plans for future updates to include international import and export data related to the U.S.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "option",
+            "schema": {
+              "type": "string"
+            },
+            "description": "There are two options to put in this parameter:\n\n* region : uses the region tables I.E. regional\n* state: uses the state tables I.E. state\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "timeframe",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable timeframe takes a list that can hold either one or two integer values for years, like the following [2017] or [2017,2025]. One year will give all the data stored for that year, while two years will give the value for those two years as well as each year in between the two.\n",
+            "required": true
+          }
+        ],
+        "tags": [
+          "commodity_total"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityTotalReturn"
+                  }
+                },
+                "examples": {
+                  "ExampleYear": {
+                    "value": [
+                      {
+                        "timeframe": [
+                          2017,
+                          2020
+                        ],
+                        "option": "region"
+                      }
+                    ],
+                    "summary": "Example Year"
+                  },
+                  "ExampleTimeFrame": {
+                    "value": [
+                      {
+                        "timeframe": [
+                          2017
+                        ],
+                        "option": "state"
+                      }
+                    ],
+                    "summary": "Example TimeFrame"
+                  },
+                  "ReturnExample": {
+                    "value": [
+                      {
+                        "Place": "Mississippi",
+                        "Commodity": "Alcoholic beverages",
+                        "tons_2017": 118.362666,
+                        "value_2017": 355.4254889999997,
+                        "current_value_2017": 355.4254889999997,
+                        "Trade": "export"
+                      }
+                    ],
+                    "summary": "Return Example"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "commodity_total_create",
+        "description": "POST request for Commodity_total with timeframe and option in body.",
+        "tags": [
+          "commodity_total"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommodityTotal"
+              },
+              "examples": {
+                "ExampleYear": {
+                  "value": {
+                    "timeframe": [
+                      2017,
+                      2020
+                    ],
+                    "option": "region"
+                  },
+                  "summary": "Example Year"
+                },
+                "ExampleTimeFrame": {
+                  "value": {
+                    "timeframe": [
+                      2017
+                    ],
+                    "option": "state"
+                  },
+                  "summary": "Example TimeFrame"
+                },
+                "ReturnExample": {
+                  "value": {
+                    "Place": "Mississippi",
+                    "Commodity": "Alcoholic beverages",
+                    "tons_2017": 118.362666,
+                    "value_2017": 355.4254889999997,
+                    "current_value_2017": 355.4254889999997,
+                    "Trade": "export"
+                  },
+                  "summary": "Return Example"
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CommodityTotal"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CommodityTotal"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityTotalReturn"
+                  }
+                },
+                "examples": {
+                  "ExampleYear": {
+                    "value": [
+                      {
+                        "timeframe": [
+                          2017,
+                          2020
+                        ],
+                        "option": "region"
+                      }
+                    ],
+                    "summary": "Example Year"
+                  },
+                  "ExampleTimeFrame": {
+                    "value": [
+                      {
+                        "timeframe": [
+                          2017
+                        ],
+                        "option": "state"
+                      }
+                    ],
+                    "summary": "Example TimeFrame"
+                  },
+                  "ReturnExample": {
+                    "value": [
+                      {
+                        "Place": "Mississippi",
+                        "Commodity": "Alcoholic beverages",
+                        "tons_2017": 118.362666,
+                        "value_2017": 355.4254889999997,
+                        "current_value_2017": 355.4254889999997,
+                        "Trade": "export"
+                      }
+                    ],
+                    "summary": "Return Example"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/data_option/": {
+      "get": {
+        "operationId": "data_option_retrieve",
+        "description": "Populates data choices based on keyword received (GET method)",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "option",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Choose from: states, regions, commodities, foreign",
+            "required": true
+          }
+        ],
+        "tags": [
+          "data_option"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        }
+      },
+      "post": {
+        "operationId": "data_option_create",
+        "description": "Populates data choices based on keyword received (POST method)",
+        "tags": [
+          "data_option"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Option"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Option"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Option"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        }
+      }
+    },
+    "/exports_imports_details/": {
+      "get": {
+        "operationId": "exports_imports_details_list",
+        "description": "imports_exports_details/ takes in a region or state with a year or year frame and returns all exported commodities from that area. The endpoint returns the commodity type, the transportation type, the area the commodity was sent to, and the year's ton and value.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "commodity",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable commodity takes a  string value corresponding to commodity names.\nEach string value should match an existing commodity name stored in the database.\n\nExample:\n- \"Coal\" will give details for the commodity \"Coal\" only.\n\nThe string value provided should correspond exactly to the commodity names as they are stored in the database to retrieve accurate data.\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The destination parameter accepts a string that must represent either a region, state, or an area outside of the U.S. The names corresponding to these options can be retrieved from the [NAME ENDPOINT].\n\nBoth destination and origin need to use either region, state, or one of the two can be an out of country area.\n"
+          },
+          {
+            "in": "query",
+            "name": "flow",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable flow takes a single string value that represents the type of flow, which can be one of the following:\n\n- \"domestic\" – Represents a flow within the same country.\n- \"foreign-Import\" – Represents a flow of goods coming into the country from abroad.\n- \"foreign-Export\" – Represents a flow of goods leaving the country to be exported abroad.\n\nOnly one of these string values should be provided at a time.\n\nExample:\n- \"domestic\" will provide data related to goods or services that are within the same country.\n- \"foreign-Export\" will provide data related to goods or services leaving the country.\n\nThe string value provided must exactly match one of these options to retrieve the appropriate data.\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "origin",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The origin parameter accepts a string that must represent either a region, state, or an area outside of the U.S. The names corresponding to these options can be retrieved from the [NAME ENDPOINT].\n\nBoth destination and origin need to use either region, state, or one of the two can be an out of country area.\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "timeframe",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable timeframe takes a list that can hold either one or two integer values for years, like the following [2017] or [2017,2025]. One year will give all the data stored for that year, while two years will give the value for those two years as well as each year in between the two.\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "transpotation",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable transportation takes a string value corresponding to transport modes, like the following Truck, Air, Water\nEach string value should match an existing transport mode stored in the database.\n\nExample:\n- Truck will give details for the transport mode \"Truck\" only.\n\nThe string value provided should correspond exactly to the transport mode names as they are stored in the database to retrieve accurate data.\n",
+            "required": true
+          }
+        ],
+        "tags": [
+          "exports_imports_details"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExportsReturn"
+                  }
+                },
+                "examples": {
+                  "GETExample": {
+                    "value": [
+                      {
+                        "commodity": "Logs",
+                        "ton": 1.9478550000000001,
+                        "transport": "Truck",
+                        "year": 2017
+                      }
+                    ],
+                    "summary": "GET Example"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "exports_imports_details_create",
+        "description": "Submit export request with POST body",
+        "tags": [
+          "exports_imports_details"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Exports"
+              },
+              "examples": {
+                "SingleYearExample": {
+                  "value": {
+                    "origin": "Indiana",
+                    "commodity": "Animal feed",
+                    "destination": "Alaska",
+                    "transpotation": "Truck",
+                    "flow": "domestic",
+                    "timeframe": [
+                      2018,
+                      2025
+                    ]
+                  },
+                  "summary": "Single Year Example"
+                },
+                "YearWindowExample": {
+                  "value": {
+                    "origin": "Pennsylvania",
+                    "year": [
+                      2020
+                    ]
+                  },
+                  "summary": "Year Window Example"
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Exports"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Exports"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExportsReturn"
+                  }
+                },
+                "examples": {
+                  "SingleYearExample": {
+                    "value": [
+                      {
+                        "origin": "Indiana",
+                        "commodity": "Animal feed",
+                        "destination": "Alaska",
+                        "transpotation": "Truck",
+                        "flow": "domestic",
+                        "timeframe": [
+                          2018,
+                          2025
+                        ]
+                      }
+                    ],
+                    "summary": "Single Year Example"
+                  },
+                  "YearWindowExample": {
+                    "value": [
+                      {
+                        "origin": "Pennsylvania",
+                        "year": [
+                          2020
+                        ]
+                      }
+                    ],
+                    "summary": "Year Window Example"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/exports_imports_mode_details/": {
+      "get": {
+        "operationId": "exports_imports_mode_details_list",
+        "description": "get_mode_details/ takes in a region or state with a year or year frame and returns all mode details.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "flow",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable flow takes a single string value that represents the type of flow, which can be one of the following:\n\n- \"domestic\" – Represents a flow within the same country.\n- \"foreign-Import\" – Represents a flow of goods coming into the country from abroad.\n- \"foreign-Export\" – Represents a flow of goods leaving the country to be exported abroad.\n\nOnly one of these string values should be provided at a time.\n\nExample:\n- \"domestic\" will provide data related to goods or services that are within the same country.\n- \"foreign-Import\" will provide data related to goods or services coming from outside the country.\n- \"foreign-Export\" will provide data related to goods or services leaving the country.\n\nThe string value provided must exactly match one of these options to retrieve the appropriate data.\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "timeframe",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable timeframe takes a list that can hold either one or two integer values for years, like the following [2017] or [2017,2025]. One year will give all the data stored for that year, while two years will give the value for those two years as well as each year in between the two.\n",
+            "required": true
+          }
+        ],
+        "tags": [
+          "exports_imports_mode_details"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ImportsReturn"
+                  }
+                },
+                "examples": {
+                  "SingleYearExample": {
+                    "value": [
+                      {
+                        "flow": "foreign_import",
+                        "timeframe": [
+                          2018,
+                          2025
+                        ]
+                      }
+                    ],
+                    "summary": "Single Year Example"
+                  },
+                  "YearWindowExample": {
+                    "value": [
+                      {
+                        "flow": "foreign_import",
+                        "timeframe": [
+                          2017
+                        ]
+                      }
+                    ],
+                    "summary": "Year Window Example"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "exports_imports_mode_details_create",
+        "description": "get_mode_details/ takes in a region or state with a year or year frame and returns all mode details.\n",
+        "tags": [
+          "exports_imports_mode_details"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BarChart"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/BarChart"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/BarChart"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ImportsReturn"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/get_bar_chart_details/": {
+      "post": {
+        "operationId": "get_bar_chart_details_create",
+        "description": "The endpoint provides detailed information about foreign and domestic exports and imports for the past five years",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "flow",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable flow takes a single string value that represents the type of flow, which can be one of the following:\n\n- \"domestic\" – Represents a flow within the same country.\n- \"foreign-Import\" – Represents a flow of goods coming into the country from abroad.\n- \"foreign-Export\" – Represents a flow of goods leaving the country to be exported abroad.\n\nOnly one of these string values should be provided at a time.\n\nExample:\n- \"domestic\" will provide data related to goods or services that are within the same country.\n- \"foreign-Import\" will provide data related to goods or services coming from outside the country.\n\nThe string value provided must exactly match one of these options to retrieve the appropriate data.\n"
+          },
+          {
+            "in": "query",
+            "name": "timeframe",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable timeframe takes a list that can hold either one or two integer values for years, like the following [2017] or [2017,2025]. One year will give all the data stored for that year, while two years will give the value for those two years as well as each year in between the two.\n"
+          }
+        ],
+        "tags": [
+          "get_bar_chart_details"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BarChart"
+              },
+              "examples": {
+                "SingleYearExample": {
+                  "value": {
+                    "flow": "foreign_import",
+                    "timeframe": [
+                      2018,
+                      2025
+                    ]
+                  },
+                  "summary": "Single Year Example"
+                },
+                "YearWindowExample": {
+                  "value": {
+                    "flow": "foreign_import",
+                    "timeframe": [
+                      2017
+                    ]
+                  },
+                  "summary": "Year Window Example"
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/BarChart"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/BarChart"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ImportsReturn"
+                  }
+                },
+                "examples": {
+                  "SingleYearExample": {
+                    "value": [
+                      {
+                        "flow": "foreign_import",
+                        "timeframe": [
+                          2018,
+                          2025
+                        ]
+                      }
+                    ],
+                    "summary": "Single Year Example"
+                  },
+                  "YearWindowExample": {
+                    "value": [
+                      {
+                        "flow": "foreign_import",
+                        "timeframe": [
+                          2017
+                        ]
+                      }
+                    ],
+                    "summary": "Year Window Example"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/get_domestic_flow_details/": {
+      "get": {
+        "operationId": "get_domestic_flow_details_retrieve",
+        "description": "Populates data choices based on keyword recieved",
+        "tags": [
+          "get_domestic_flow_details"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Option"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/get_foreign_export_details/": {
+      "get": {
+        "operationId": "get_foreign_export_details_retrieve",
+        "description": "Populates data choices based on keyword recieved",
+        "tags": [
+          "get_foreign_export_details"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Option"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/get_foreign_import_details/": {
+      "get": {
+        "operationId": "get_foreign_import_details_retrieve",
+        "description": "Populates data choices based on keyword recieved",
+        "tags": [
+          "get_foreign_import_details"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Option"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/get_table_data/": {
+      "post": {
+        "operationId": "get_table_data_create",
+        "description": "get_table_data/ retrieves one of six fully populated tables based on the year timeframe provided. The return is a downloadable CSV file. The data will contain the origin, destination, commodity type, transportation type, distance traveled, tonnage, and value based on the timeframe provided.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "table",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The tables follow the naming convention of \"faf\" or \"state\" followed by 0, 1, 2, or 3, which describe the meaning of each table. FAF tables use regions, while state tables use U.S. states.\n\n* 0 indicates that the table includes all movements of commodities between states, including those entering or leaving the U.S.\n\n* 1 means the commodities are transported only within the U.S.\n\n* 2 shows imported commodities into the U.S.\n\n* 3 shows exported commodities from the U.S.\n\nHence the options for table are: faf0, faf1, faf2, faf3, state0, state1, state2, state3\n"
+          },
+          {
+            "in": "query",
+            "name": "timeframe",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable timeframe takes a list that can hold either one or two integer values for years, like the following [2017] or [2017,2025]. One year will give all the data stored for that year, while two years will give the value for those two years as well as each year in between the two.\n"
+          }
+        ],
+        "tags": [
+          "get_table_data"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Table"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "table": "faf0",
+                    "timeframe": [
+                      2013,
+                      2018
+                    ]
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Table"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Table"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Table"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "table": "faf0",
+                      "timeframe": [
+                        2013,
+                        2018
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/import_export_sum/": {
+      "post": {
+        "operationId": "import_export_sum_create",
+        "description": "import_export_sum/ takes a region or state and a timeframe, then sums up each commodity\nimported and exported from the origin separately for each year. This endpoint returns a CSV file containing the name of the origin, the commodity type if it is imported or exported, and the tonnage per year. Currently, this endpoint only works with domestic-traded commodities.   \n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The destination parameter accepts a string that must represent either a region, state, or an area outside of the U.S. The names corresponding to these options can be retrieved from the [NAME ENDPOINT].\n\nBoth destination and origin need to use either region, state, or one of the two can be an out of country area.\n"
+          },
+          {
+            "in": "query",
+            "name": "flow",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable flow takes a single string value that represents the type of flow, which can be one of the following:\n\n- \"domestic\" – Represents a flow within the same country.\n- \"foreign-Import\" – Represents a flow of goods coming into the country from abroad.\n- \"foreign-Export\" – Represents a flow of goods leaving the country to be exported abroad.\n\nOnly one of these string values should be provided at a time.\n\nExample:\n- \"domestic\" will provide data related to goods or services that are within the same country.\n- \"foreign-Import\" will provide data related to goods or services coming from outside the country.\n- \"foreign-Export\" will provide data related to goods or services leaving the country.\n\nThe string value provided must exactly match one of these options to retrieve the appropriate data.\n"
+          },
+          {
+            "in": "query",
+            "name": "origin",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The origin parameter accepts a string that must represent either a region, state, or an area outside of the U.S. The names corresponding to these options can be retrieved from the [NAME ENDPOINT].\n\nBoth destination and origin need to use either region, state, or one of the two can be an out of country area.\n"
+          },
+          {
+            "in": "query",
+            "name": "timeframe",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable timeframe takes a list that can hold either one or two integer values for years, like the following [2017] or [2017,2025]. One year will give all the data stored for that year, while two years will give the value for those two years as well as each year in between the two.\n"
+          }
+        ],
+        "tags": [
+          "import_export_sum"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RawResource"
+              },
+              "examples": {
+                "ExampleYear": {
+                  "value": {
+                    "origin": "Indiana",
+                    "timeframe": [
+                      2017,
+                      2020
+                    ],
+                    "commodity": "",
+                    "destination": "",
+                    "transpotation": "",
+                    "flow": "domestic"
+                  },
+                  "summary": "Example Year"
+                },
+                "ExampleYearFrame": {
+                  "value": {
+                    "origin": "Indiana",
+                    "timeframe": [
+                      2017
+                    ],
+                    "commodity": "",
+                    "destination": "Iowa",
+                    "transpotation": "",
+                    "flow": "domestic"
+                  },
+                  "summary": "Example Year Frame"
+                },
+                "ReturnExample": {
+                  "value": {
+                    "commodity": "Logs",
+                    "ton": 5721.232202,
+                    "option": "Export"
+                  },
+                  "summary": "Return Example"
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/RawResource"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/RawResource"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RawResourceReturn"
+                  }
+                },
+                "examples": {
+                  "ExampleYear": {
+                    "value": [
+                      {
+                        "origin": "Indiana",
+                        "timeframe": [
+                          2017,
+                          2020
+                        ],
+                        "commodity": "",
+                        "destination": "",
+                        "transpotation": "",
+                        "flow": "domestic"
+                      }
+                    ],
+                    "summary": "Example Year"
+                  },
+                  "ExampleYearFrame": {
+                    "value": [
+                      {
+                        "origin": "Indiana",
+                        "timeframe": [
+                          2017
+                        ],
+                        "commodity": "",
+                        "destination": "Iowa",
+                        "transpotation": "",
+                        "flow": "domestic"
+                      }
+                    ],
+                    "summary": "Example Year Frame"
+                  },
+                  "ReturnExample": {
+                    "value": [
+                      {
+                        "commodity": "Logs",
+                        "ton": 5721.232202,
+                        "option": "Export"
+                      }
+                    ],
+                    "summary": "Return Example"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/point_to_point/": {
+      "get": {
+        "operationId": "point_to_point_list",
+        "description": "Returns a CAV file detailing all one-way trade between two specified locations. The data includes:\n\n* Origin to Destination: Indicates the direction of trade.\n\n* Commodity: Specity unique commodities or use \"all\" to include all commodities. \n\n* Timeframe: Specify the year to filter the data accordingly.\n\nRetrieves the transportation method, the tonnage, and the value of each commodity traded.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "commodity",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The commodity parameter accepts a string specifying the desired commodity. If \"all\" is used, the endpoint will return data for all commodities sent from the origin to the destination.\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "destination",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The destination parameter accepts a string representing either a region, state, or an area outside of the U.S. The names corresponding to these options can be obtained from the [NAME ENDPOINT].\n\nBoth destination and origin need to use either region, state, or one of the two can be an out of country area.\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "origin",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The origin parameter accepts a string that must represent either a region, state, or an area outside of the U.S. The names corresponding to these options can be retrieved from the [NAME ENDPOINT].\n\nBoth destination and origin need to use either region, state, or one of the two can be an out of country area.\n",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "timeframe",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The variable timeframe takes a list that can hold either one or two integer values for years, like the following [2017] or [2017,2025]. One year will give all the data stored for that year, while two years will give the value for those two years as well as each year in between the two.\n",
+            "required": true,
+            "examples": {
+              "TimeframeExample": {
+                "value": "[2017, 2025]",
+                "summary": "Timeframe Example"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "point_to_point"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PtoPReturn"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "point_to_point_create",
+        "description": "Returns a CAV file detailing all one-way trade between two specified locations. The data includes:\n\n* Origin to Destination: Indicates the direction of trade.\n\n* Commodity: Specity unique commodities or use \"all\" to include all commodities. \n\n* Timeframe: Specify the year to filter the data accordingly.\n\nRetrieves the transportation method, the tonnage, and the value of each commodity traded.\n",
+        "tags": [
+          "point_to_point"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PointToPoint"
+              },
+              "examples": {
+                "YearRangeExample": {
+                  "value": {
+                    "commodity": "all",
+                    "origin": "Alaska",
+                    "destination": "California",
+                    "timeframe": [
+                      2017,
+                      2021
+                    ]
+                  },
+                  "summary": "Year Range Example"
+                },
+                "SingleYearExample": {
+                  "value": {
+                    "commodity": "Live animals/fish",
+                    "origin": "Alabama",
+                    "destination": "Florida",
+                    "timeframe": [
+                      2023
+                    ]
+                  },
+                  "summary": "Single Year Example"
+                },
+                "ResponseExample": {
+                  "value": {
+                    "commodity": "Logs",
+                    "ton": 1.9478550000000001,
+                    "transport": "Truck",
+                    "year": 2017
+                  },
+                  "summary": "Response Example"
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/PointToPoint"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/PointToPoint"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PtoPReturn"
+                  }
+                },
+                "examples": {
+                  "YearRangeExample": {
+                    "value": [
+                      {
+                        "commodity": "all",
+                        "origin": "Alaska",
+                        "destination": "California",
+                        "timeframe": [
+                          2017,
+                          2021
+                        ]
+                      }
+                    ],
+                    "summary": "Year Range Example"
+                  },
+                  "SingleYearExample": {
+                    "value": [
+                      {
+                        "commodity": "Live animals/fish",
+                        "origin": "Alabama",
+                        "destination": "Florida",
+                        "timeframe": [
+                          2023
+                        ]
+                      }
+                    ],
+                    "summary": "Single Year Example"
+                  },
+                  "ResponseExample": {
+                    "value": [
+                      {
+                        "commodity": "Logs",
+                        "ton": 1.9478550000000001,
+                        "transport": "Truck",
+                        "year": 2017
+                      }
+                    ],
+                    "summary": "Response Example"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BarChart": {
+        "type": "object",
+        "properties": {
+          "timeframe": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 2
+          },
+          "flow": {
+            "type": "string",
+            "maxLength": 40
+          }
+        },
+        "required": [
+          "flow",
+          "timeframe"
+        ]
+      },
+      "CommodityTotal": {
+        "type": "object",
+        "properties": {
+          "timeframe": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 2
+          },
+          "option": {
+            "type": "string",
+            "maxLength": 10
+          }
+        },
+        "required": [
+          "option",
+          "timeframe"
+        ]
+      },
+      "CommodityTotalReturn": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "ton": {
+            "type": "number",
+            "format": "double"
+          },
+          "option": {
+            "type": "string",
+            "maxLength": 6
+          }
+        },
+        "required": [
+          "option",
+          "origin",
+          "ton"
+        ]
+      },
+      "Exports": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "timeframe": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 2
+          },
+          "commodity": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "destination": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "transpotation": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "flow": {
+            "type": "string",
+            "maxLength": 40
+          }
+        },
+        "required": [
+          "flow",
+          "origin",
+          "timeframe"
+        ]
+      },
+      "ExportsReturn": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "commodity": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "ton": {
+            "type": "number",
+            "format": "double"
+          },
+          "transport": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "year": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "commodity",
+          "destination",
+          "ton",
+          "transport",
+          "year"
+        ]
+      },
+      "ImportsReturn": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "commodity": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "ton": {
+            "type": "number",
+            "format": "double"
+          },
+          "transport": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "year": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "commodity",
+          "destination",
+          "ton",
+          "transport",
+          "year"
+        ]
+      },
+      "Option": {
+        "type": "object",
+        "properties": {
+          "option": {
+            "type": "string",
+            "maxLength": 15
+          }
+        },
+        "required": [
+          "option"
+        ]
+      },
+      "PointToPoint": {
+        "type": "object",
+        "properties": {
+          "commodity": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "origin": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "destination": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "timeframe": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 2
+          }
+        },
+        "required": [
+          "commodity",
+          "destination",
+          "origin",
+          "timeframe"
+        ]
+      },
+      "PtoPReturn": {
+        "type": "object",
+        "properties": {
+          "commodity": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "ton": {
+            "type": "number",
+            "format": "double"
+          },
+          "transport": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "year": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "commodity",
+          "ton",
+          "transport",
+          "year"
+        ]
+      },
+      "RawResource": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "timeframe": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 2
+          },
+          "commodity": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "destination": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "transpotation": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "flow": {
+            "type": "string",
+            "maxLength": 40
+          }
+        },
+        "required": [
+          "flow",
+          "timeframe"
+        ]
+      },
+      "RawResourceReturn": {
+        "type": "object",
+        "properties": {
+          "commodity": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "ton": {
+            "type": "number",
+            "format": "double"
+          },
+          "option": {
+            "type": "string",
+            "maxLength": 6
+          }
+        },
+        "required": [
+          "commodity",
+          "option",
+          "ton"
+        ]
+      },
+      "Table": {
+        "type": "object",
+        "properties": {
+          "table": {
+            "type": "string",
+            "maxLength": 6
+          },
+          "timeframe": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 2
+          }
+        },
+        "required": [
+          "table",
+          "timeframe"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "sessionid"
+      }
+    }
+  }
+}

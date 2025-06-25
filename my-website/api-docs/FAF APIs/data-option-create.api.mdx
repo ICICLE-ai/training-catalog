@@ -1,0 +1,72 @@
+---
+id: data-option-create
+title: "data_option_create"
+description: "Populates data choices based on keyword received (POST method)"
+sidebar_label: "data_option_create"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVE1r3DAQ/SvDnBJQsttCL75t0iyYljZ0N6ewFNmaxMrakiuNszGL/3sZeZN1aEspFHLxh/Q082b03uzRtxQ0W+9ygxkazfq7b+X/exlIM6FCQ7EMNi1ihte+7WrNFEHAUFbelhSh0JEMeAdb6nc+GAhUkn0kAyfXX1draIgrb05RIev7iNntNBduFAb60VHkC296zPZYesfkWD5129a2TCRnD1FI7DGWFTVavrhvCTP0xQOVjArbICWxpSi7h/hHXORg3T0qbPTTZ3L3XGH27sMwjARsICPcjrTYci3nvo4rApzyeTrb7XZndz40Z12oyZXeSIS3Jdh0NdtWB54lYtLot6X0Csmho0FhpLILlnvMbuW2/dbSopPIt5tB7bHQ0ZaThSFJJLbexZHl+/lcXq/F+cXDMwgKUVJqR5IeZtj6mKrVEhVnEwHO8EhoJW0ac0xIvDSjYm4FnVCYjRgc1KsaXtC6tZ+oR4VW6I0QVOh0OhspRuudNYmnaPvb0QVXT7pppY/HG3m+iUHi3fmU59Dr5WIJi+s8/uLXdWUj2AgaKh+ZDHy7Wq0FCuyBK4KbFVx0gXQH/g7WQbvY+sBJ3rCSd2RbRji5WK9OYUn2vmJYOF330UZYBt3QzoctnCwXy9M0EyLxOeQMlY5QEDkw9Ei1b8lA0aeUH2VyrD3kLqZwl+SYApx8fJ+fgmbInbHaabhx9pFCtNyDjiCKFo4S4ctqCfllfvn5Cha5xGHLHRNoZ8A6KH1d68KPkw12lqt/KPUcFaa0qX/z8/n5fDK2Ftc5bgaVxNToZJPDbaZ5OF4V/H54Tsbaf5ijo8KYnnjW1to6kUUXakkzSvz1jFUo3hQRyM5+L5luQj0MsvyjoyBW3Ch81MHqQkQlxsOKtKGQXLqlHjO8HEs4W0t+gdfdqPS/TUWx8IsXpRhUWBzGfeONBJmg1fRnpKJ/8dY2eevwIRSft1w/oXa0mTrUIE+ZMr+F7/eja4fhBT9u/fHEoUfPaLmKzTAMPwEUuojJ
+sidebar_class_name: "post api-method"
+info_path: api/FAF APIs/faf-apis
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2025-07]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"data_option_create"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/data_option/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Populates data choices based on keyword received (POST method)
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"option":{"type":"string","maxLength":15}},"required":["option"],"title":"Option"}},"application/x-www-form-urlencoded":{"schema":{"type":"object","properties":{"option":{"type":"string","maxLength":15}},"required":["option"],"title":"Option"}},"multipart/form-data":{"schema":{"type":"object","properties":{"option":{"type":"string","maxLength":15}},"required":["option"],"title":"Option"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"No response body"}}}
+>
+  
+</StatusCodes>
+
+
+      

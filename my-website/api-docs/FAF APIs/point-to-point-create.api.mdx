@@ -1,0 +1,81 @@
+---
+id: point-to-point-create
+title: "point_to_point_create"
+description: "Returns a CAV file detailing all one-way trade between two specified locations. The data includes:"
+sidebar_label: "point_to_point_create"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV19vGkcQ/yqjeUqqM8Y0Vdp7IyRIqFZjGVKpwiga7gbY+G73srtnjNB992p2MRx2Urt1IvUhPMCyOzvz2/k/WzQVW/LK6FGOKVZGaf/Rm49xkVkmz5hgzi6zqhI6TPGSfW21A4JB/09YqIIhZ0+qUHoJVBRgNJ+saQPeUs4wZ79m1uDXBlzFmVoozqEwWZDrOjBZMeTkCZTOijpnl17pK/0TvLdqqTR4A2/ZeaUDfQojnauMPDvwclFZzuQAzCIK7MTbA1OWJld+k8JYpPoN1Fp9rhmy3YliB8ZC7RiukIriCkXWDkR4SIuyA5HtRJW8sFTyju1iE2BsmKzcXqjCs43I5EmUZcbmSi+LTcB1yd4qvtmB95a0q4z14WlQsl+ZPIlHRmtacgKk87BxQ0XN8kimbLVHtlNy3rnSmKCnpcN0es+OOEvQ8ueanX9j8g2mW8yM9qy9LKmqChVtcfrJiYG36LIVlyQrv6kYUzTzT5x5TLCy4jGikMhmh6JF6rxVeokJlnR7znrpV5i+6jYJmmDOp1DmB3M/hdzfmaRFTNbSBhNUnkvX2lfa85ItNoHNKJ72miZqSFnORX+Hdx2D2T+iLXQmf3wh3C9E3RMTfkQE31JZFVFXfzHZS9JLfhc3ZS/Y9J4ixRMPglLsF+Su6R6QFAdUqIWxWtERmHTa6569Tnrd3tmsSdDVZUlWuIp4CPLhDkCT4Fg8k+XsMVTn6oaBtCqpcKcL5Vb3MM6pfAhyWBir8ocIez8fg4swIGBsobtkVxntHtXYuVk6kSEyzzq/vXr96y+/dO8+ZwnuwwxTnNg6u8YEJWAxFWUdIbkTeYAhvtGOkduT9Xp9sjC2PKltwTozuTjNj6D5NkEjMurCq4qsPw1aljz6Q7/fTL9HXL2tWfyfs9oGjU1Ff+Zacb+Wp0xnTbLFOTmVtTaaUFBioIR39Lrd/1JVvqaPZxr2LOj/yEy6LudsMUHxKJI8kJt6HrNMKzs8zjamjYeW+wdb+WCjg5Qdk7aFvLmITVVg9MSqMf1eZWP2vLox/c6FY/asynEf3fNKx+yx2tHcb55jhguNXmi4XfBzEgfD0+O+7RQPkTmW2Iku0YrGvR+uvK+EOlBhGmlEEe1gPsRdpX7nEHiCKJJggjpoGR07p4xWeYAqwXt5aB5bCm2rcR8ve8vud44Nu99u27Ur3YDSCxMw7oJi2B9C/2LkHowfk5VyoGT8WBnnOYfLd+OJkEr/LZ3yhzG8qS1TLd3y5LjFHsuv8ypz8OLNZPwShqyWKw99TcXGKQdDwbQ29hpeDPvDl6GLd+w7MPKwIgdzGWVyvuHCVJzDPLb/b6XXnxgYaRfYDVjLGPDibW/0EsiHmYU0wQetbtg66dvJgdS4MLasGP4YD2E0GA3O30F/JHy88rXn0P4rDZkpCpqbOKvBWvnVv3hqBxMMYoP+up1up9saFvoXIxQDiC+WFLLmzhOCF4pW4+LL42Ar7f+YDP+/k2GMfM+3/rQqSGlJDrUtxH4x+zyYGhOUGiUxJofb7Zwcf7BF08j255ol501nCd6QVSS1NDQHuGLK2YZEe82SGwbRPU4mAiG5y8NP6Kml9Ygs+lnGlf/K5dBeSCbeZ9WL9+MJJjjfDbulyeVOi3PS/hNh04MUeR1S5G4hz7k70psWkkO2THZg5Vugf5F8u43Jt2n29PHoqzd2+ryjFsvNmqb5G70rH+4=
+sidebar_class_name: "post api-method"
+info_path: api/FAF APIs/faf-apis
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2025-07]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"point_to_point_create"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/point_to_point/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Returns a CAV file detailing all one-way trade between two specified locations. The data includes:
+
+* Origin to Destination: Indicates the direction of trade.
+
+* Commodity: Specity unique commodities or use "all" to include all commodities. 
+
+* Timeframe: Specify the year to filter the data accordingly.
+
+Retrieves the transportation method, the tonnage, and the value of each commodity traded.
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"commodity":{"type":"string","maxLength":40},"origin":{"type":"string","maxLength":40},"destination":{"type":"string","maxLength":40},"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2}},"required":["commodity","destination","origin","timeframe"],"title":"PointToPoint"},"examples":{"YearRangeExample":{"value":{"commodity":"all","origin":"Alaska","destination":"California","timeframe":[2017,2021]},"summary":"Year Range Example"},"SingleYearExample":{"value":{"commodity":"Live animals/fish","origin":"Alabama","destination":"Florida","timeframe":[2023]},"summary":"Single Year Example"},"ResponseExample":{"value":{"commodity":"Logs","ton":1.9478550000000001,"transport":"Truck","year":2017},"summary":"Response Example"}}},"application/x-www-form-urlencoded":{"schema":{"type":"object","properties":{"commodity":{"type":"string","maxLength":40},"origin":{"type":"string","maxLength":40},"destination":{"type":"string","maxLength":40},"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2}},"required":["commodity","destination","origin","timeframe"],"title":"PointToPoint"}},"multipart/form-data":{"schema":{"type":"object","properties":{"commodity":{"type":"string","maxLength":40},"origin":{"type":"string","maxLength":40},"destination":{"type":"string","maxLength":40},"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2}},"required":["commodity","destination","origin","timeframe"],"title":"PointToPoint"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"commodity":{"type":"string","maxLength":10},"ton":{"type":"number","format":"double"},"transport":{"type":"string","maxLength":10},"year":{"type":"integer"}},"required":["commodity","ton","transport","year"],"title":"PtoPReturn"}},"examples":{"YearRangeExample":{"value":[{"commodity":"all","origin":"Alaska","destination":"California","timeframe":[2017,2021]}],"summary":"Year Range Example"},"SingleYearExample":{"value":[{"commodity":"Live animals/fish","origin":"Alabama","destination":"Florida","timeframe":[2023]}],"summary":"Single Year Example"},"ResponseExample":{"value":[{"commodity":"Logs","ton":1.9478550000000001,"transport":"Truck","year":2017}],"summary":"Response Example"}}}},"description":""}}}
+>
+  
+</StatusCodes>
+
+
+      

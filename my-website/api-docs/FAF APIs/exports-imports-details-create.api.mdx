@@ -1,0 +1,72 @@
+---
+id: exports-imports-details-create
+title: "exports_imports_details_create"
+description: "Submit export request with POST body"
+sidebar_label: "exports_imports_details_create"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV99v4jgQ/ldG89RKaUvRrXTijXaLhG51VxWq0wmhlUkG8Daxs/akFKH876uxA4R2uaK7lz7sCyTO/PJ838zYG7QlOcXammGGPaSX0jr2X3UR/zNipXP/NXWkmDDBjHzqdCkK2MNRNSs0Q9QCR98r8gwrzUu4/2s0hpnN1pggq4XH3uSYdZwm2OjeiEJvg6k1TIblUZVlrtMQ4tU3L2436NMlFUqeeF0S9tDOvlHKmGDpZEOsyctX6/RCm5acZ6fNAhMs1MsXMgteYu/6U50g64LmThXUElbOKQlfMxW+ta4N04Ic1sHMMH7t1gmmtihspnn9jsffOnXIJGujYibfF2enjC8tn6wwz+3qfbk6pl47ygShoJRs89ZOy1ReOBdTdxFG2T+9qKLMY7JH2ixy+oeUu4ursvis8oraUODQZFoZhQfpwr7RhcphTpThq9xgP1f+SRRe5QDHrkqfcLtVzGwheulB3L1Jt3P9e9LtdD9N6wR9VRTKiccYLki8sA24TlDe/9Yms6t/3cU9GePX+bMyWiJbk3LBVbdz6CWYj/b2XiTrbVq/XKxWq4u5dcVF5XIyqc0Ejl88/yA8lwRUOetSOb4KMGWK1S+APg5AB9rsKpIipLRyIQcTGSj2SVO/Em+TaZ1scKa8TlsLdZhCvrTGR8y6nc5/GUXHwDrCjNOzH+hxKrLXAaoDm6YqZuSkXVpXKA4Ns5rFrteA6vgUs7HZvWXhKwj3oR5yLMbV9tmYfIvsA3HlTLB86qSZfJBRM/2fs2Zy4rCZnjBt6tfnttjSiJdWDn2l9YGXShDGqyOntCvcl9RISB+xaJXRjhFL5lKkgxT2ogwG9u6rcF8wpf6DQsVIaFEEEzQhpejJe22NzkLMUnUP+6NiK227ZO1o2wamMz3kwE7oEP697iv4dx8a/Jv3WoKe27CZhrmD/gD690P/5qw8XmoP2oOCpfVMGTzcjcYiCmyBlwSPI7ipHKkK7BzG2+IIEcBI/oVwHs5uxqNzGJBeLBn6RuVrrz0MZKMr657gbNAfnIMMKE98CUOGpfIwIzKQ0TPltqQMZuvg8rNiBWMLQ+ODuVsyTA7OPneH56AYmgKCR6OfyXnNa1AeZAxKjGLhz9EAhrfD2y930B+KHdZcMYEyGWgDqc1zNbPxhhEvBqdv9RITDG5D/jqXnctO6zLRvx+inLWEvYUKja6hTENgaAgMDYHh55eYVoc/+T4Ticv0wldlrrQRIlQuF2Oxio7fdRKUPicUEKnNZqY8Pbq8rmX5e0VSx5Npgs/KaSXdOUwnXJLKyIW28ETC4NsY9MVYYkm2XeOEY6XMvmiin6ZU8hHlMN+ku+zahGQAE5w1V7TCZqLTspy0X2LY6k2pP4VSbx5kO9tPZt2KZF/1SROs/EroPxXfbGITqeudfPx0VKPJ51ZaIJzWdf0DGBQuqw==
+sidebar_class_name: "post api-method"
+info_path: api/FAF APIs/faf-apis
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2025-07]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"exports_imports_details_create"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/exports_imports_details/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Submit export request with POST body
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"origin":{"type":"string","maxLength":15},"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"commodity":{"type":"string","maxLength":40},"destination":{"type":"string","maxLength":40},"transpotation":{"type":"string","maxLength":40},"flow":{"type":"string","maxLength":40}},"required":["flow","origin","timeframe"],"title":"Exports"},"examples":{"SingleYearExample":{"value":{"origin":"Indiana","commodity":"Animal feed","destination":"Alaska","transpotation":"Truck","flow":"domestic","timeframe":[2018,2025]},"summary":"Single Year Example"},"YearWindowExample":{"value":{"origin":"Pennsylvania","year":[2020]},"summary":"Year Window Example"}}},"application/x-www-form-urlencoded":{"schema":{"type":"object","properties":{"origin":{"type":"string","maxLength":15},"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"commodity":{"type":"string","maxLength":40},"destination":{"type":"string","maxLength":40},"transpotation":{"type":"string","maxLength":40},"flow":{"type":"string","maxLength":40}},"required":["flow","origin","timeframe"],"title":"Exports"}},"multipart/form-data":{"schema":{"type":"object","properties":{"origin":{"type":"string","maxLength":15},"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"commodity":{"type":"string","maxLength":40},"destination":{"type":"string","maxLength":40},"transpotation":{"type":"string","maxLength":40},"flow":{"type":"string","maxLength":40}},"required":["flow","origin","timeframe"],"title":"Exports"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"destination":{"type":"string","maxLength":15},"commodity":{"type":"string","maxLength":10},"ton":{"type":"number","format":"double"},"transport":{"type":"string","maxLength":10},"year":{"type":"integer"}},"required":["commodity","destination","ton","transport","year"],"title":"ExportsReturn"}},"examples":{"SingleYearExample":{"value":[{"origin":"Indiana","commodity":"Animal feed","destination":"Alaska","transpotation":"Truck","flow":"domestic","timeframe":[2018,2025]}],"summary":"Single Year Example"},"YearWindowExample":{"value":[{"origin":"Pennsylvania","year":[2020]}],"summary":"Year Window Example"}}}},"description":""}}}
+>
+  
+</StatusCodes>
+
+
+      

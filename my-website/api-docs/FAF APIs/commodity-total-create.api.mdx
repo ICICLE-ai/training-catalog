@@ -1,0 +1,72 @@
+---
+id: commodity-total-create
+title: "commodity_total_create"
+description: "POST request for Commodity_total with timeframe and option in body."
+sidebar_label: "commodity_total_create"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVt9v4jgQ/lesedpKLqXsttvjjXaLhG7vrir04YRQZZIp8Taxs/akLUL531djB0hbuPZW93KLEDjxeH7P528FtkSnSFszSqEPiS0Km2pa3pIlld8mDhUhSEjRJ06XLAh9uPprPBEOv1foSdxZJy6enxOPmjJBusA7pwoUyqTChsNCGzG36bIDEkgtPPSnL43CTEKj+9ymS+ivILGG0BAvVVnmOgkeH33z7M0KfJJhoXhFyxKhD3b+DRMCCaXj+EijD7trh1qiyjm1BAmasPCt99oQLtBBLaFQT6O426sl2CYJG0lPTpsFBLmvaBaUQf+4W9cxCu0w5SCbY7LlxIwfKGcdm/xNQgZqCfikijKPfl/G9d+oHD8+qLzCF/FMe93jz7LX7XVnWxfB4YIXtQRfFYVyS+ivlYmgrZbr54kucLjOzV4LbeWeuDV26t4qqyVcI1XONFvPtF/lKuHo/9De87csNchtLqAPgzyxmc11Iub4gE4t0HMKrfG37A70j4/POh9Pe6enpzLqbd5/PDnpfOqdfDo7+y18PktIKufQ0O0bYhOnUnYKn0rr6Hl8MRSxjqXmIrcb8unw8fHx8M664rByOZrEplz9X7FD2WqVky6Vo6MQcapI/aKxPjtNrkLuCkwqF7p0ygBl7zUOKrY2ndVyBXPlddJ6UQdU86U1Pobf63Z/Btr2ZWhPkq3TC/1mfk7qMFQtMVMVc3QggUurCPqQ2mqeh4F+V85P96a8cSla3Jv1OGqhz96Gwum/wMLZT4LhDhs70HCn9nfB4fR/goezfwbE+iVXiFCBlFkmGKX1oUkV9wgcvbj6j2A7V2Pu/Fj01ixtei4jKlk6SEE/ynB+26O4nZpS/45hbExgOSwCEkyoJXj0Xluj0+Arj971ln+0KtWuf/d58cMA1Kz/zkbR2NTDwVAMrkb+FYWaZNoL7YUSmfWEqbi+HE9YVJAVlKG4GYvzyqGqhL0TE6eM5/wHdBBj/vekEy8+nE/GB2KIepGRGBiVL732InTbo3X34sNwMDwQjM0eqSNGJDLlxRzRiBQfMLclpmK+DCa/KFJiYsXI+KDuAg2hEx++9EYHQpEYmVQro8SN0Q/ovKalUF7wDcA+soY/x0MxuhhdfL0UgxHrIU0VRQKojUhsnqu5jYSzIYnvDpUpYzAb8tftdDvdFokcXI1gVsvQYIUK6NRUd9NjInLT3Zy2hcT/Fb2NrUf4REdlrnTgYZXL2Vbs/9fUVwIjIncE765Wc+XxxuV1za+/V8hDN53xaDutGI7D5QIZqhRdwJB7XAYsDbEcTtgHuYaYd3AVvrqiikGSYEl7DofriaFgM9icM5Awbxh7YQNotDTL9kN0W70a0vswpM0iQG6zZZYtT7bzKhtn+Zdd3ym+WsXxr+uNfNzae6LJ51qaSzer6/oHAzJ7aw==
+sidebar_class_name: "post api-method"
+info_path: api/FAF APIs/faf-apis
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2025-07]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"commodity_total_create"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/commodity_total/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+POST request for Commodity_total with timeframe and option in body.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"option":{"type":"string","maxLength":10}},"required":["option","timeframe"],"title":"CommodityTotal"},"examples":{"ExampleYear":{"value":{"timeframe":[2017,2020],"option":"region"},"summary":"Example Year"},"ExampleTimeFrame":{"value":{"timeframe":[2017],"option":"state"},"summary":"Example TimeFrame"},"ReturnExample":{"value":{"Place":"Mississippi","Commodity":"Alcoholic beverages","tons_2017":118.362666,"value_2017":355.4254889999997,"current_value_2017":355.4254889999997,"Trade":"export"},"summary":"Return Example"}}},"application/x-www-form-urlencoded":{"schema":{"type":"object","properties":{"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"option":{"type":"string","maxLength":10}},"required":["option","timeframe"],"title":"CommodityTotal"}},"multipart/form-data":{"schema":{"type":"object","properties":{"timeframe":{"type":"array","items":{"type":"integer"},"maxItems":2},"option":{"type":"string","maxLength":10}},"required":["option","timeframe"],"title":"CommodityTotal"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"origin":{"type":"string","maxLength":15},"ton":{"type":"number","format":"double"},"option":{"type":"string","maxLength":6}},"required":["option","origin","ton"],"title":"CommodityTotalReturn"}},"examples":{"ExampleYear":{"value":[{"timeframe":[2017,2020],"option":"region"}],"summary":"Example Year"},"ExampleTimeFrame":{"value":[{"timeframe":[2017],"option":"state"}],"summary":"Example TimeFrame"},"ReturnExample":{"value":[{"Place":"Mississippi","Commodity":"Alcoholic beverages","tons_2017":118.362666,"value_2017":355.4254889999997,"current_value_2017":355.4254889999997,"Trade":"export"}],"summary":"Return Example"}}}},"description":""}}}
+>
+  
+</StatusCodes>
+
+
+      
