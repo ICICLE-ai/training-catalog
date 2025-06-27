@@ -23,9 +23,9 @@ function HomepageHeader() {
       </div>
     </header>
     <main>
-        <div className={styles.heroBody}>
-          <p className={styles.heroDescription}>{heroDescription}</p>
-        </div>
+        <div className={styles.heroDescription}
+          dangerouslySetInnerHTML={{ __html: siteConfig.customFields.heroDescription }}
+        />
     </main>
   </>
     

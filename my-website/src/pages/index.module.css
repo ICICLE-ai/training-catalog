@@ -4,6 +4,7 @@
  */
 
 .heroBody {
+  font-size: 1.4rem;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -22,6 +23,10 @@
   font-size: 1.3rem;
   line-height: 1.8;
   text-align: justify;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  max-width: 800px;
   color:var(--ifm-font-color-base); /* Ensures description is black */
 }
 

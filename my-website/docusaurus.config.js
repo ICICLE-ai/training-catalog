@@ -8,9 +8,16 @@ const config = {
   favicon: 'img/favicon.ico',
   customFields: {
     heroHeading: 'Welcome to the Official Documentation Hub for ICICLE AI Institute',
-    heroDescription:
-      'Explore a centralized repository featuring component and API documentation, educational resources for both youth and professionals, workshop materials, ICICLE in a Nutshell videos, and much more. Easily filter content by tags or browse freely through our well-organized documentation to find exactly what you need.',
-  },
+    heroDescription:`
+        <p>
+          Explore a centralized repository featuring component and API documentation, educational resources for both youth and professionals, workshop materials, ICICLE in a Nutshell videos, and much more.
+          Easily filter content by tags or browse freely through our well-organized documentation to find exactly what you need. <br>
+          <a href="https://icicle-ai.github.io/training-catalog/Education/Professional%20Development/training_catalog_article">
+            Click here
+          </a> to discover the Open Source Tech Powering Our Training Catalog.
+        </p>
+      `
+    },
 
   // // Set the production url of your site here
   // url: 'https://your-docusaurus-site.example.com',
