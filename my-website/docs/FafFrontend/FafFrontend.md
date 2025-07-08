@@ -5,8 +5,6 @@ tags:
   - Release 2025-07
 ---
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/faf-frontend-ICICLE)
-
 # FafFrontend
 
 This is intended as a helpful front end to a REST API to the US Bureau of Transportation Statistics (BTS) Feight Analysis Framework (FAF) dataset. It has been developed by the Data To Insight Center (D2I) at Indiana University as part of the [NSF ICICLE AI Institute](https://icicle.osu.edu/) and in collaboration with the US Bureau of Transportation Statistics. See [FAF-API-ICICLE](https://github.com/Data-to-Insight-Cnter/faf-api-dev). This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
