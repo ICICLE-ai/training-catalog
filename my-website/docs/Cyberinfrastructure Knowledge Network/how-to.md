@@ -9,10 +9,16 @@ tags:
 
 See the full [documentation](https://cyberinfrastructure-knowledge-network.readthedocs.io/en/latest/) for detailed instructions on creating custom plug‑ins and streaming events to the knowledge graph.
 
-## Prerequisites
+### Prerequisites
 
-* **Docker** and **Docker Compose** installed.
-* The following ports available: `7474`, `7687`, `2181`, `9092`, `8083`, `8502`.
+- [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose) installed and running.
+- Open network access to the following ports:
+  - `7474` (Neo4j Web UI)
+  - `7687` (Neo4j Bolt)
+  - `2181` (ZooKeeper)
+  - `9092` (Kafka Broker)
+  - `8083` (Kafka Connect)
+  - `8502` (CKN dashboard)
 
 ## Quick‑Start
 

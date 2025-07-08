@@ -1,7 +1,6 @@
 ---
 tags:
   - CI4AI
-  - Software
   - PADI
 ---
 

@@ -1,9 +1,9 @@
 ---
 tags:
   - CI4AI
-  - Software
   - PADI
   - Release 2024-12
+  - Release 2025-07
 ---
 
 

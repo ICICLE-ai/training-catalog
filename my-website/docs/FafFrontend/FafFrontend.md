@@ -15,7 +15,7 @@ The frontend utilizes the following version of the FAF dataset:
 
 - **Most recent update:** December 18, 2023
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/faf-frontend-ICICLE)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/Data-to-Insight-Center/faf-frontend-ICICLE)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## License

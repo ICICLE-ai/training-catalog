@@ -1,7 +1,6 @@
 ---
 tags:
   - CI4AI
-  - Software
   - PADI
 ---
 
@@ -127,4 +126,4 @@ mc.submit(
 ## Examples
 
 Explore the following example notebooks and model cards to learn more about how to use the Patra Model Card Toolkit:
-[Notebook Example](./examples/notebooks/GettingStarted.ipynb), [Model Card Example](./examples/model_cards/tesorflow_adult_nn_MC.json)
+[Notebook Example](https://github.com/Data-to-Insight-Center/patra-toolkit/blob/main/examples/notebooks/GettingStarted.ipynb), [Model Card Example](https://github.com/Data-to-Insight-Center/patra-toolkit/blob/main/examples/model_cards/tesorflow_adult_nn_MC.json)

@@ -7,21 +7,11 @@ tags:
 
 # Tutorial
 
-## Step 1  |  Set Up Your Environment
+#### 1. Create a CKN Topic
 
-```bash
-git clone https://github.com/Data-to-Insight-Center/cyberinfrastructure-knowledge-network.git
-cd cyberinfrastructure-knowledge-network
-make up  # launches Kafka, Neo4j, and supporting services
-```
+We will create a CKN topic named `temperature-sensor-data` to store temperature events. The CKN topics and their details are mentioned [here](https://github.com/Data-to-Insight-Center/cyberinfrastructure-knowledge-network/blob/main/docs/topics.md).
 
-*Wait a few moments for all services to initialise.*
-
-## Step 2  |  Create a Kafka Topic for Temperature Events
-
-We will create a Kafka topic named `temperature-sensor-data` to store temperature events.
-
-**Update `docker-compose.yml`** (root directory) and add the topic to the broker environment:
+Update `docker-compose.yml` (root directory) and add the topic to the broker environment:
 
 ```yaml
 services:
@@ -37,32 +27,20 @@ make down
 make up
 ```
 
-*(Alternatively, create the topic with Kafka CLI, noting that it will disappear when the broker restarts.)*
 
-## Step 3  |  Produce Temperature Events
+#### 2. Produce Events
 
-### Install required libraries
-
-```bash
-python -m venv venv
-source venv/bin/activate  # or .\venv\Scripts\activate on Windows
-pip install confluent-kafka  # <https://pypi.org/project/confluent-kafka/>
-```
-
-### Create the producer script – `produce_temperature_events.py`
+Create a producer script `produce_temperature_events.py` and run it.
 
 ```python
 from confluent_kafka import Producer
 import json, time
 
-kafka_conf = {"bootstrap.servers": "localhost:9092"}
-producer = Producer(kafka_conf)
-
-sensors = ["sensor_1", "sensor_2", "sensor_3"]
+producer = Producer({"bootstrap.servers": "localhost:9092"})
 
 try:
     for i in range(10):
-        for sensor_id in sensors:
+        for sensor_id in ["sensor_1", "sensor_2", "sensor_3"]:
             event = {
                 "sensor_id": sensor_id,
                 "temperature": round(20 + 10 * (0.5 - time.time() % 1), 2),
@@ -76,33 +54,16 @@ except Exception as e:
     print(f"An error occurred: {e}")
 ```
 
-Run the producer:
+Open a shell inside the broker container and start the consumer. You should see JSON‑formatted temperature events.
 
 ```bash
-python produce_temperature_events.py
+kafka-console-consumer --bootstrap-server localhost:9092 --topic temperature-sensor-data --from-beginning
 ```
 
-## Step 4  |  Consume and View Events
 
-1. **Open a shell inside the Kafka container**
+#### 3. Connect to a Data Sink
 
-   ```bash
-   docker exec -it broker bash  # replace "broker" with the container name if different
-   ```
-
-2. **Start a Kafka consumer**
-
-   ```bash
-   kafka-console-consumer --bootstrap-server localhost:9092 --topic temperature-sensor-data --from-beginning
-   ```
-
-   You should see JSON‑formatted temperature events.
-
-Press **Ctrl +C** (or **Ctrl + Break** on Windows) to exit.
-
-## Step 5  |  Connect Kafka to Neo4j
-
-### Create connector configuration – `neo4jsink-temperature-connector.json`
+Create the connector configuration `neo4jsink-temperature-connector.json` and place the file in `ckn_broker/connectors/` (or your chosen directory).
 
 ```json
 {
@@ -127,9 +88,7 @@ Press **Ctrl +C** (or **Ctrl + Break** on Windows) to exit.
 }
 ```
 
-Place the file in `ckn_broker/connectors/` (or your chosen directory).
-
-### Register the connector – `setup_connector.sh`
+#### 4. Register the connector
 
 ```bash
 curl -X POST -H "Content-Type: application/json" \
@@ -137,31 +96,14 @@ curl -X POST -H "Content-Type: application/json" \
      http://localhost:8083/connectors
 ```
 
-Restart CKN:
+Restart CKN and run the `temperature‑event` producer again.
 
 ```bash
 make down
 make up
-```
 
-Run the temperature‑event producer again:
-
-```bash
 python produce_temperature_events.py
 ```
 
-## Step 6  |  Visualise Data in Neo4j
-
-1. **Open the Neo4j browser:** [http://localhost:7474/browser/](http://localhost:7474/browser/)
-
-2. **Log in** – username `neo4j`, password `PWD_HERE`.
-
-3. **Query the graph:**
-
-   ```cypher
-   MATCH (s:Sensor)-[:REPORTED]->(r:TemperatureReading)
-   RETURN s, r;
-   ```
-
-
-4. **Explore** the graph using Neo4j visual tools.
+Open [neo4j browser](http://localhost:7474/browser/) and log in with the credentials mentioned in the docker-compose file to view the streamed data. 
+You have successfully set up a temperature‑monitoring plugin with CKN!
