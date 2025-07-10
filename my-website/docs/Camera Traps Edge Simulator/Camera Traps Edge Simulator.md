@@ -11,7 +11,7 @@ tags:
   - Release 2023-04
 ---
 
-# camera-traps
+# Camera-traps
 
 The Camera Traps application is both a simulator and IoT device software for utilizing machine learning on the edge in field research. The first implementation specializes in applying computer vision (detection and classification) to wildlife images for animal ecology studies. Two operational modes are supported: "simulation" mode and "demo" mode. When executed in simulation mode, the software serves as a test bed for studying ML models, protocols and techniques that optimize storage, execution time, power and accuracy. It requires an input dataset of images to act as the images that would be generated an IoT camera device; it uses these images to drive the simulation. 
 
