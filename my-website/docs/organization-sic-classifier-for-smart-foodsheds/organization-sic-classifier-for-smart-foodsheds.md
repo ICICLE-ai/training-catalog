@@ -4,7 +4,7 @@ tags:
   - Release 2025-07
 ---
 
-# organization-sic-classifier-for-smart-foodsheds
+# Organization-SIC-Classifier-for-Smart-Foodsheds
 
 
 This repository contains code for training and evaluating models that classify organizations into Standard Industrial Classification (SIC) codes based on different types of descriptive text.  This model is designed for researchers and data scientists who need to categorize unknown or newly listed organizations by business type. It can be applied to tasks such as food systems research, analyzing supply chains, and regional economic mapping, particularly in scenarios where structured corpora are unavailable. Given only an organization’s name and its description, the model predicts a high-level SIC category.
