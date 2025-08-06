@@ -7,7 +7,7 @@ tags:
 
 # FafFrontend
 
-This is intended as a helpful front end to a REST API to the US Bureau of Transportation Statistics (BTS) Feight Analysis Framework (FAF) dataset. It has been developed by the Data To Insight Center (D2I) at Indiana University as part of the [NSF ICICLE AI Institute](https://icicle.osu.edu/) and in collaboration with the US Bureau of Transportation Statistics. See [FAF-API-ICICLE](https://github.com/Data-to-Insight-Cnter/faf-api-dev). This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+This is intended as a helpful front end to a REST API to the US Bureau of Transportation Statistics (BTS) Feight Analysis Framework (FAF) dataset. It has been developed by the Data To Insight Center (D2I) at Indiana University as part of the [NSF ICICLE AI Institute](https://icicle.osu.edu/) and in collaboration with the US Department of Transportation, Bureau of Transportation Statistics, and the University of Wisconsin-Madison. See [FAF-API-ICICLE](https://github.com/Data-to-Insight-Cnter/faf-api-dev). This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
 
 The frontend utilizes the following version of the FAF dataset:
 
@@ -23,7 +23,7 @@ FAF Frontend is developed by Indiana University and distributed under the BSD 3-
 
 ## Acknowledgements
 
-Thanks to colleagues at Texas Advanced Computing Center (TACC) who are hosting the FAF Frontend as part of the NSF AI ICICLE Institute (OAC 2112606). Thanks to the US Bureau of Transportation Statistics Freight Analysis Framework for guidance.
+Thanks to colleagues at Texas Advanced Computing Center (TACC) who are hosting the FAF API and at University of Wisconsin-Madison for organizing this work as part of the NSF AI ICICLE Institute (OAC 2112606). Thanks to the US Department of Transportation Bureau of Transportation Statistics for guidance.
 
 ## References
 Freight Analysis Framework, Bureau of Transportation Statistics https://www.bts.gov/faf
