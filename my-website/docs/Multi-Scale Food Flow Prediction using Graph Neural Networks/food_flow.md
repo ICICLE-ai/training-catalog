@@ -31,23 +31,12 @@ Please go to https://github.com/ICICLE-ai/GNNFoodFlowPortal/ for more updated in
 ### Data Sources
 - **Trade Data**: [FAF5.6.1 SCTG1 commodity flow data](https://faf.ornl.gov/faf5/) (`code/data/FAF5_SCTG1.csv`)
 - **Geographic Information**:
-  - County shapefiles (`portal/code/data/shapefiles/cb_2017_us_county_500k/cb_2017_us_county_500k.shp`)  https://github.com/GeoDS/GNNFoodFlow/blob/master/portal/data/shapefiles/cb_2017_us_county_500k/cb_2017_us_county_500k.shp
-  - State shapefiles (`portal/code/data/shapefiles/cb_2018_us_state_20m/cb_2018_us_state_20m.shp`)
-  - FAF zones shapefiles (`portal/code/data/shapefiles/2017_CFS_Metro_Areas_with_FAF/2017_CFS_Metro_Areas_with_FAF.shp`)
-- **FAF Economic Indicators**: FAF-level economic data (`code/data/faf_features_aligned_filtered.csv`)
-- **County Economic Indicators**: County-level economic data (`code/data/county_aligned_filtered.csv`)
-- **Distance Information**: FAF Distance Matrix (`code/data/FAF_Distance_Matrix.csv`)
-Due to the low efficiency of separating county level distance matrix, the distance information is included within county level feature information
-
-### Data Sources
-- **Trade Data**: [FAF5.6.1 SCTG1 commodity flow data](https://faf.ornl.gov/faf5/) (`code/data/FAF5_SCTG1.csv`)
-- **Geographic Information**:
   - County shapefiles (`code/data/shapefiles/cb_2017_us_county_500k/cb_2017_us_county_500k.shp`) https://github.com/GeoDS/GNNFoodFlow/blob/master/portal/data/shapefiles/cb_2017_us_county_500k/cb_2017_us_county_500k.shp
   - State shapefiles (`code/data/shapefiles/cb_2018_us_state_20m/cb_2018_us_state_20m.shp`) https://github.com/GeoDS/GNNFoodFlow/blob/master/portal/data/shapefiles/cb_2017_us_county_500k/cb_2018_us_state_20m/cb_2018_us_state_20m.shp
   - FAF zones shapefiles (`code/data/shapefiles/2017_CFS_Metro_Areas_with_FAF/2017_CFS_Metro_Areas_with_FAF.shp`) https://github.com/GeoDS/GNNFoodFlow/blob/master/portal/data/shapefiles/2017_CFS_Metro_Areas_with_FAF/2017_CFS_Metro_Areas_with_FAF.shp
-  
-- **Economic Indicators**: County-level economic data (`code/data/faf_features.csv`) 
-- **Distance Information**: FAF Distance Matrix (`code/data/FAF_Distance_Matrix.csv`) 
+- **FAF Economic Indicators**: FAF-level economic data (`code/data/faf_features_aligned_filtered.csv`)https://github.com/GeoDS/GNNFoodFlow/blob/master/code/data/faf_features_aligned_filtered.csv
+- **County Economic Indicators**: County-level economic data (`code/data/county_aligned_filtered.csv`) https://github.com/GeoDS/GNNFoodFlow/blob/master/code/data/county_aligned_filtered.csv
+- **Distance Information**: FAF Distance Matrix (`code/data/FAF_Distance_Matrix.csv`) https://github.com/GeoDS/GNNFoodFlow/blob/master/code/data/FAF_distance_matrix.csv
 
 ## Acknowledgements
 National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)
