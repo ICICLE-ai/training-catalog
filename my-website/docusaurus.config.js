@@ -6,6 +6,9 @@ const config = {
   title: 'ICICLE AI Institute - Training Catalog',
   //tagline: 'Welcome to the Official Documentation Hub for ICICLE AI Institute \nExplore a centralized repository featuring component and API documentation, educational resources for both youth and professionals, workshop materials, ICICLE in a Nutshell videos, and much more.\nEasily filter content by tags or browse freely through our well-organized documentation to find exactly what you need.',
   favicon: 'img/favicon.ico',
+  markdown: {
+    mermaid: true,   // <-- ENABLE MERMAID SUPPORT
+  },
   customFields: {
     heroHeading: 'Welcome to the Official Documentation Hub for ICICLE AI Institute',
     heroDescription:`
@@ -71,6 +74,7 @@ const config = {
 
   themes: [
     'docusaurus-theme-openapi-docs',
+    '@docusaurus/theme-mermaid',
   ],
 
   plugins: [
