@@ -5,48 +5,201 @@ tags:
 
 # Tutorials
 
-This Smart Compiler uses AI models and traditional compiler techniques to enhance the performance scalability of C programs and Python programs. By profiling, and finding approaches for optimizations.
+The Smart Compiler leverages AI models alongside traditional compiler techniques to boost the performance and scalability of C and Python programs. Through intelligent profiling and optimization strategies, it identifies and applies enhancements to improve code efficiency.
 
-# Sofwate Requirements
+## Getting Started as an MCP Tool with COpilot or Cursor or Claude Desktop
 
-## Install the project
-For dependency management and installation, this project uses ```uv```.
-See [Astral Documentation](https://docs.astral.sh/uv) for installing the uv package manager.
+This section guides you through setting up and using the Smart Compiler as an MCP (Model Context Protocol) tool alongside Cursor or Claude Desktop for code profiling and optimization.
 
+### Copilot
+(In case the env varibales are not enabled and the client and the server are not deployed)
+First, we need to enable the environment variables for both, the Server and the client. See previous sections .
 
-## Project dependencies
+Now, we must deploy the server
 
-### Packages
-After installing **uv** run: ```uv sync``` for syncing project dependencies.
+```bash
+python src/run_server.py
 
-### Ollama
-To deploy a LLM using ollama first we need to install Ollama by following 
-its [Official Documentation](https://ollama.com).
-
-Once Ollama is installed deploy the Ollama server (if it was not deployed by the installation).
-
-
-
-### Quick Ollama deploy
-1. Serve the Ollama server: ```ollama serve``` (if it is not already deployed).
-2. Create LLM model using the SmartCompiler Modelfile: ```ollama create llama3.1-smart-compiler -f ollama-smart-compiler-Modelfile```.
-3. Run the created LLM: ```ollama run llama3.1-smart-compiler:latest```.
-4. If it opens a chat after running the LLM, just type ```/bye``` to close that chat.
-
-#### Setting up Environment variables
-Set up the environment variables in a ```.env``` file.
-An example of how this file looks like.
 ```
-# .env
-OLLAMA_MODEL=llama3.1-smart-compiler:latest
-OLLAMA_HOST=http://localhost:11434
-MCP_SERVER_SCRIPT_PATH=<project_folder>/src/server_main.py
+
+Once the servwer is deployed, let's deploy the Client
+
+```bash
+python src/run_client.py
+
+```
+
+Once the client and the server are deployed, we must go to VScode and type "control + shift + P " and search for " MCP: add Server"
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/addServer.png" alt="addServer" width="600"/>
+
+Then we choose HTTP:
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/httpMCP.png" alt="http" width="600"/>
+
+and then we add our Smart Compiler CLient deployed address: 
+
+```bash
+http://localhost:8000/sse
+```
+
+Now, we open a chat in COpilot and we set "Agent" instead of "Ask"
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/Agent.png" alt="agent" width="600"/>
+
+Now, we can start our first use case: 
+
+Create a python code snippet that do some matrix multiplication and profile it
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/usecaseCopilot.png" alt="usecaseCo" width="600"/>
+
+The code snippet and the profiling information will be stored in the following path:
+
+/home/miguel/Desktop/Smart-COmpiler/SMART-COMPILER/tmp/.
+
+
+### CORSE AND CLAUDE CONFIGURATION
+
+### Server Setup
+Configure the required environment variables in a local `.env` file, such as `.local.server.env`, to enable the MCP server.
+
+```bash
+#.local.server.env
+LOG_LEVEL=INFO
+OLLAMA_MODEL=llama3.1:latest
+OLLAMA_HOST=http://localhost:11434  # Adjust to your model's hosting address
+MCP_SERVER_HOST=0.0.0.0 #used for both, rest api and mcp servers
+MCP_SERVER_PORT=8000 #for mcp and rest
 MCP_SERVER_TRANSPORT=stdio
-MCP_SERVER_HOST=0.0.0.0
+ENABLE_REST_API=false
+ALLOWED_PATHS="/path/to/smart-compiler/examples"  # Specify the accessible directory
+```
+
+### Configuring Cursor
+For Cursor, update the configuration to connect to the MCP server.
+
+```json
+{
+  "mcpServers": {
+    "smart_compiler": {
+      "url": "http://localhost:8000/sse",
+      "env": {}
+    }
+  }
+}
+```
+
+### Configuring Claude Desktop
+For Claude Desktop, configure the command and environment settings to run the MCP server.
+
+```json
+{
+  "mcpServers": {
+    "smart_compiler": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/path/to/smart-compiler",
+        "run",
+        "src/run_server.py"
+      ],
+      "env": {
+        "UV_PROJECT_ENVIRONMENT": "/path/to/smart-compiler",
+        "UV_ENV_FILE": "/path/to/smart-compiler/envs/.local.mcp_server.env"
+      }
+    }
+  }
+}
+```
+
+### Verifying Server Deployment
+Ensure the MCP server is running correctly by checking its connectivity.Refer to the example profiling request screenshot in the documentation:
+<div>
+    <img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_1_1.png" alt="Checking MCP SSE server with Cursor" width="600"/>
+</div>
+
+### Generating Code Snippets
+Using Cursor to generate a code snippet for analysis.  
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_1_2.png" alt="Example code snippet generated by Cursor" width="600"/>
+
+### Profiling Code
+Request the Smart Compiler to profile your code via the MCP client. An example of tool usage is shown in the documentation.
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_1_3.png" alt="Asking Cursor to profile the code snippet" width="600"/>
+
+### Advanced Usage
+Experiment with larger datasets and more complex interactions, as demonstrated in the documentation screenshots:
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_1_4.png" alt="Trying a larger dataset" width="600"/>
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_1_5.png" alt="Executing MCP tool" width="600"/>
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_1_6.png" alt="Cursor explaining profiling results" width="600"/>
+
+For a complete example, review the chat history in [Cursor + SmartCompiler example](https://github.com/ICICLE-ai/SMART-COMPILER/blob/main/docs/cursor_simple_python_snippet_for_matrix.md)
+
+**Summary**: This section covers setting up the Smart Compiler as an MCP tool, configuring environment variables, connecting with Cursor or Claude Desktop, verifying server deployment, generating code snippets, profiling code, and exploring advanced use cases with larger datasets.
+
+## Using Smart Compiler as a REST Service
+
+This section explains how to deploy the Smart Compiler as part of monitoring environment by enabling its REST API for compiler tasks.
+
+### Environment Setup for REST API
+Configure the environment variables in `local.server.env` and enable the REST API.
+
+```bash
+LOG_LEVEL=INFO
+OLLAMA_MODEL=llama3.1:latest
+OLLAMA_HOST=http://localhost:11434  # Adjust to your model's hosting address
+MCP_SERVER_HOST=0.0.0.0 #used for mcp and rest servers
 MCP_SERVER_PORT=8000
 MCP_SERVER_TRANSPORT=stdio
-MCP_SERVER_OLLAMA_MODEL=llama3.1:latest
-LOG_LEVEL=INFO # OR DEBUG
+ENABLE_REST_API=true  # Enable REST API
+ALLOWED_PATHS="/path/to/smart-compiler/examples"  # Specify the accessible directory
 ```
 
-Then type : export $(cat .env | xargs)
+### Accessing API Documentation
+Once the server is deployed, access the API documentation at `http://localhost:8000/docs`. For Postman collections, refer to the Smart Compiler GitHub repository.
+
+### Scheduling a Profiling Task - IMT integration
+Schedule a profiling task to analyze a code snippet, such as the provided [example](examples/matrix-multiplication/main.py)
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_2_1.png" alt="Postman request for scheduling task" width="600"/>
+
+### Checking Task Status
+Monitor the status of a scheduled profiling task, as shown in the screenshot.
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_2_2.png" width="600" alt="Monitoring task through the API"/>
+
+### Retrieving Profiling Results
+Access profiling results via the API: 
+
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/docs/images/use_case_2_3.png" width="600" alt="Getting profiling content"/>
+
+### Scheduling an Optimization Task
+*Note*: Optimization task scheduling is currently in development and not yet available.
+
+
+### Client Setup
+
+Check `envs` folder to see examples for environment configuration. 
+
+```bash
+LOG_LEVEL=INFO
+OLLAMA_MODEL=llama3.1-smart-compiler:latest #A LLM that support tools is required
+OLLAMA_HOST=http://localhost:11434
+MCP_SERVER_URL=http://localhost:8000/sse
+ALLOWED_PATHS="/mnt/d/workspace/python/smart-compiler/examples"
+```
+
+Then, you can run the following command to initialize the Smart Compiler. 
+```bash
+python run src/run_client.py
+#or
+uv run src/run_client.py
+```
+
+Note: The client implemented in the SmartCompiler project is a PoC of a client. The “client” inside the SmartCompiler project is not a full production-ready client, but rather a minimal or experimental implementation. Its purpose is to demonstrate feasibility—showing that a client can connect, interact, and work with the SmartCompiler system. For more advanced uses, we recommend trying it out with platforms focused on MCP tools such as Cursor, Claude Desktop or Github Copilot as explain in previous sections.
+
+--- 

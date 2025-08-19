@@ -5,17 +5,18 @@ tags:
 
 # Explanation
 
-Details about the smart compiler can be found on the following diagramas:
-- **Diagrams**:  
-  - [Diagram 1](https://drive.google.com/file/d/1S5gRxw_vizR1XnmbiZnAH1yZnkB8Ep0_/view?usp=drive_link)  
-  - [Diagram 2](https://drive.google.com/file/d/1tgCcINlzBUe6A1PCNX6R_ftAnb9WidcA/view?usp=sharing)
+The core vision is to integrate a suite of expert-level compiler tools, enabling seamless, intelligent code analysis, optimization, and profiling for diverse programming languages.
 
-## Internal Notes
+## Smart Compiler Architectural Diagram
 
-### To extract Modelfile
+<img src="https://raw.githubusercontent.com/ICICLE-ai/SMART-COMPILER/main/diagrams/architecture.png" alt="Components Diagram" style={{ maxWidth: "100%", height: "auto" }} />
 
-```ollama show --modelfile llama3.1 > Modelfile```
+## IMT Integration
 
-### To create from Modelfile
+Details about the Smart Compiler as an Integration with the IMT (ICICLE Middleware and Tools) project can be found on the following diagramas:
+### **Diagrams**:  
+- [Diagram 1](https://drive.google.com/file/d/1S5gRxw_vizR1XnmbiZnAH1yZnkB8Ep0_/view?usp=drive_link)  
+- [Diagram 2](https://drive.google.com/file/d/1tgCcINlzBUe6A1PCNX6R_ftAnb9WidcA/view?usp=sharing)
 
-```ollama create llama3.1-tool -f Modelfile```
+
+---

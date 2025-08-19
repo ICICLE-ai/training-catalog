@@ -2,6 +2,7 @@
 tags:
   - CI4AI
   - Release 2025-05
+  - Release 2025-08
 ---
 
 # Smart Compiler
