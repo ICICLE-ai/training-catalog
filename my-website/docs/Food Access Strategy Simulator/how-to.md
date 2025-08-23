@@ -50,6 +50,8 @@ assist.
 
 To get a local copy up and running follow these simple steps.
 
+Link to front end repo for installing front end : https://github.com/ICICLE-ai/FASS-Frontend
+
 ### Prerequisites
 
 You will need python to run this application.
