@@ -21,8 +21,12 @@ bash install.sh
 
 # ⚠️Note: Don't worry if the application displays this error: error: Internal error occurred: unable to upgrade connection: container not found ("apache"). It will take some time and application will automatically processed with futher installation.
 
+# ⚠️Note: OpenPass directory is only for installation. Once done the application must be controlled and runned from icicleEdge folder created inside the /home/icicle/icicleEdge/
+
 # Check if pods are READ and in RUNNING state
 kubecmd get pods
+
+cd icicleEdge/ea1openpass/
 
 # One all the pods are RUNNING
 bash restartASU.sh
