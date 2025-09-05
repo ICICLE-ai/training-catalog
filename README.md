@@ -34,6 +34,9 @@ For guidance on what to include in Tutorials, How-To Guides, Explanation, and Re
    
 *National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
 
+## Issue reporting
+- Please include how can someone report any issue(s) that they had when using the component, email support, github issues, etc?
+
 
 ---
 
