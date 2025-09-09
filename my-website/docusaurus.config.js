@@ -52,12 +52,12 @@ const config = {
   },
 
   scripts: [
-    {
-      src: 'https://umami.pods.icicleai.tapis.io/script.js', //Correct Umami tracking script URL
-      async: true,
-      defer: true,
-      'data-website-id': 'e1e727a2-edd2-436d-a3f0-3794e11d3718', //  Umami website ID
-    },
+    // {
+    //   src: 'https://umami.pods.icicleai.tapis.io/script.js', //Correct Umami tracking script URL
+    //   async: true,
+    //   defer: true,
+    //   'data-website-id': 'e1e727a2-edd2-436d-a3f0-3794e11d3718', //  Umami website ID
+    // },
     {
       src: '/training-catalog/js/outbound-tracking.js',
       async: true,
@@ -203,7 +203,7 @@ const config = {
           dataHostURL: "https://umami.pods.icicleai.tapis.io", //Required
           dataAutoTrack: true, // Optional
           dataDoNotTrack: false, // Optional
-          dataCache: true, // Optional
+          dataCache: false, // Optional
           dataDomains: "icicle-ai.github.io", // comma separated list of domains, *Recommended*
         }),
     ],
