@@ -199,7 +199,7 @@ const config = {
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
         ({
           websiteID: "e1e727a2-edd2-436d-a3f0-3794e11d3718", // Required
-          analyticsDomain: "icicle-ai.github.io", // Required
+          analyticsDomain: "umami.pods.icicleai.tapis.io", // Required
           dataHostURL: "https://umami.pods.icicleai.tapis.io", //Required
           dataAutoTrack: true, // Optional
           dataDoNotTrack: false, // Optional
