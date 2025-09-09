@@ -58,6 +58,10 @@ const config = {
       defer: true,
       'data-website-id': 'e1e727a2-edd2-436d-a3f0-3794e11d3718', //  Umami website ID
     },
+    {
+      src: '/js/outbound.js',
+      async: true,
+    },
   ],
 
   presets: [
