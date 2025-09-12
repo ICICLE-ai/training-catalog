@@ -3,7 +3,6 @@ tags:
   - Software
   - Digital-Agriculture
   - Animal-Ecology
-  - Release 2025-08
 ---
 
 # How-To Guides
