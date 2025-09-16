@@ -2,6 +2,7 @@
 tags:
   - CI4AI
   - Release 2024-09
+  - Release 2025-10
 ---
 
 # Ilúvatar
