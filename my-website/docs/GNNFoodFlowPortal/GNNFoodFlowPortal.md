@@ -3,6 +3,7 @@ tags:
   - Smart-Foodsheds
   - AI4CI
   - Release 2025-08
+  - Release 2025-10
 ---
 
 
