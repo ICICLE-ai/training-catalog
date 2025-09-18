@@ -11,7 +11,7 @@ tags:
 
 An open-source, autonomous and affordable UAS for animal behaviour video monitoring using Parrot Anafi drones to track group-living animals.
 
-![Summary of the WildWing system, showing a drone and a laptop. There is are two arrows between the drone and the laptop, showing they are connected with the SoftwarePilot control software, with the Python logo.](images/overview.png)
+![Summary of the WildWing system, showing a drone and a laptop. There is are two arrows between the drone and the laptop, showing they are connected with the SoftwarePilot control software, with the Python logo.](https://raw.githubusercontent.com/jennamk14/wildwing-icicle/main/images/overview.png)
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/jennamk14/wildwing-icicle)
 
@@ -22,7 +22,7 @@ An open-source, autonomous and affordable UAS for animal behaviour video monitor
 - **Dataset:** [WildWing deployment data](https://doi.org/10.5281/zenodo.14838100)
 - **Control Software:** [SoftwarePilot](https://github.com/KevynAngueira/SoftwarePilot/)
 - **Video Analysis Tools:** [KABR tools](https://github.com/Imageomics/kabr-tools) for automatic behavior labeling
-- **Field Deployment Guide:** [WildWing wiki](wiki.md) - Detailed instructions for in-field operations and deployment phases
+- **Field Deployment Guide:** [WildWing wiki](https://github.com/jennamk14/wildwing-icicle/blob/main/wiki.md) - Detailed instructions for in-field operations and deployment phases
 - **Key Terms:**
   - **UAS:** Unmanned Aerial System
   - **YOLO:** Computer vision model for object detection
@@ -37,4 +37,4 @@ This work was also supported by the [Imageomics Institute](https://imageomics.or
 The data was gathered at [The Wilds](https://www.thewilds.org/), a private, non-profit conservation center located on nearly 10,000 acres of reclaimed coal mine land in southeastern Ohio, conducted under approval by the The Wilds Science Committee.
 
 ## Issue reporting
-Please report issues through GitHub issues in this repository. For additional support, refer to the [WildWing wiki](wiki.md) for troubleshooting guidance.
+Please report issues through GitHub issues in this repository. For additional support, refer to the [WildWing wiki](https://github.com/jennamk14/wildwing-icicle/blob/main/wiki.md) for troubleshooting guidance.

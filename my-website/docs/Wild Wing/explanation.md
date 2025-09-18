@@ -9,7 +9,7 @@ tags:
 
 ## System Architecture and Design Philosophy
 
-![Detailed overview of the WildWing control system, including drone, control software, and GPU laptop. The control software includes an illustration of video frames flowing into the navigation component and outputting commands. The navigation includes computer vision models and autonomous policy. The GPU laptop illustrates the live system system monitoring, including battery level and video stream.](images/ww.png)
+![Detailed overview of the WildWing control system, including drone, control software, and GPU laptop. The control software includes an illustration of video frames flowing into the navigation component and outputting commands. The navigation includes computer vision models and autonomous policy. The GPU laptop illustrates the live system system monitoring, including battery level and video stream.](https://raw.githubusercontent.com/jennamk14/wildwing-icicle/main/images/ww.png)
 
 ### Core Components
 
@@ -46,6 +46,6 @@ This distributed approach (drone + ground processing) was chosen over onboard pr
 - **Cost effectiveness:** Leverages existing research computing resources
 - **Real-time monitoring:** Researchers maintain situational awareness throughout missions
 
-![Map displaying drone missions with photos of the animals surveyed, including horses, giraffes, and zebras.](images/maps.png)
+![Map displaying drone missions with photos of the animals surveyed, including horses, giraffes, and zebras.](https://raw.githubusercontent.com/jennamk14/wildwing-icicle/main/images/maps.png)
 
 The system has been successfully deployed across diverse species and habitats, demonstrating its flexibility and effectiveness for behavioral ecology research. The open-source nature encourages community contributions and adaptations for specific research needs.
