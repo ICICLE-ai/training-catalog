@@ -14,9 +14,7 @@ An open-source, autonomous and affordable UAS for animal behaviour video monitor
 ![Summary of the WildWing system, showing a drone and a laptop. There is are two arrows between the drone and the laptop, showing they are connected with the SoftwarePilot control software, with the Python logo.](https://raw.githubusercontent.com/jennamk14/wildwing-icicle/main/images/overview.png)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14902303.svg)](https://doi.org/10.5281/zenodo.14902303)
-
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/jennamk14/wildwing-icicle)
-
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## References
