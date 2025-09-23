@@ -198,7 +198,7 @@ const config = {
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
         ({
-          websiteID: "e1e727a2-edd2-436d-a3f0-3794e11d3718", // Required
+          websiteID: "deba3010-64bf-4138-9b16-728353ed6aff", // Required
           analyticsDomain: "umami.pods.icicleai.tapis.io", // Required
           dataHostURL: "https://umami.pods.icicleai.tapis.io", //Required
           dataAutoTrack: true, // Optional
