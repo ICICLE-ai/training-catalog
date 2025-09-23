@@ -3,7 +3,6 @@ tags:
   - Animal-Ecology
   - AI4CI
   - Software
-  - Docs
 ---
 # Explanation
 

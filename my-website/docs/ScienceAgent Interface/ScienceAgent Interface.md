@@ -1,9 +1,8 @@
 ---
 tags:
   - Foundation-AI
-  - Release 2025-07
+  - Release 2025-10
 ---
-
 
 
 # ScienceAgent Interface
@@ -13,9 +12,8 @@ ScienceAgent Interface provides a web interface for conducting data-driven scien
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/ScienceAgentInterface)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-  
-## References
 
+## References
 - [ScienceAgent](https://github.com/ICICLE-ai/ScienceAgent)
 - [ScienceAgentBench](https://github.com/OSU-NLP-Group/ScienceAgentBench)
 
