@@ -1,37 +1,49 @@
-function addOutboundTracking() {
-  const name = 'outbound-link-click';
-  document.querySelectorAll('a').forEach((a) => {
-    if (
-      a.host !== window.location.host &&
-      !a.getAttribute('data-umami-event')
-    ) {
-      a.setAttribute('data-umami-event', name);
-      a.setAttribute('data-umami-event-url', a.href);
-    }
-  });
+import {useEffect} from 'react';
+import {useLocation} from '@docusaurus/router';
+
+function trackPageview(url) {
+  if (window.umami?.trackView) {
+    window.umami.trackView(url, document.referrer);
+  } else if (window.umami?.track) {
+    window.umami.track('pageview', { url });
+  }
 }
 
-// Run on initial load
-addOutboundTracking();
+function isExternalLink(a) {
+  const href = a.getAttribute('href');
+  if (!href) return false;
+  // Skip non-http(s) schemes
+  if (/^(mailto:|tel:|javascript:)/i.test(href)) return false;
+  const u = new URL(href, window.location.origin);
+  return u.origin !== window.location.origin;
+}
 
-// Run again on SPA navigations
-document.addEventListener('DOMContentLoaded', () => {
-  // For Docusaurus route updates (React SPA), listen to pushes/replaceState
-  const pushState = history.pushState;
-  const replaceState = history.replaceState;
+export default function UmamiRouteAndOutbound() {
+  const {pathname, search, hash} = useLocation();
 
-  function hook(func) {
-    return function () {
-      const result = func.apply(this, arguments);
-      setTimeout(addOutboundTracking, 200); // re-run after DOM updates
-      return result;
+  // Track every SPA URL change
+  useEffect(() => {
+    const url = `${pathname}${search || ''}${hash || ''}`;
+    trackPageview(url);
+  }, [pathname, search, hash]);
+
+  // Track outbound link clicks via event delegation
+  useEffect(() => {
+    const onClick = (e) => {
+      const a = e.target.closest?.('a');
+      if (!a || !isExternalLink(a)) return;
+
+      // Optional: strip query/hash to reduce cardinality
+      const u = new URL(a.href);
+      const href = u.href; // or `${u.origin}${u.pathname}`
+
+      // Fire-and-forget; don't block navigation
+      window.umami?.track?.('outbound_link', { href });
     };
-  }
 
-  history.pushState = hook(pushState);
-  history.replaceState = hook(replaceState);
+    document.addEventListener('click', onClick, { capture: true });
+    return () => document.removeEventListener('click', onClick, { capture: true });
+  }, []);
 
-  window.addEventListener('popstate', () => {
-    setTimeout(addOutboundTracking, 200);
-  });
-});
+  return null;
+}

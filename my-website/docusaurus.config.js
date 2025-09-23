@@ -192,8 +192,6 @@ const config = {
         },
       },
     ],
-
-
     [
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
@@ -201,13 +199,13 @@ const config = {
           websiteID: "7d316a92-6921-48bb-bad7-1b0a07478043", // Required
           analyticsDomain: "umami.pods.icicleai.tapis.io", // Required
           dataHostURL: "https://umami.pods.icicleai.tapis.io", //Required
-          dataAutoTrack: true, // Optional
+          dataAutoTrack: false, // Optional
           dataDoNotTrack: false, // Optional
           dataCache: false, // Optional
           dataDomains: "icicle-ai.github.io", // comma separated list of domains, *Recommended*
         }),
     ],
-    
+
     [
       require.resolve('docusaurus-lunr-search'),
       {
@@ -228,6 +226,8 @@ const config = {
 
   ],
 
+  clientModules: [require.resolve('./src/outbound-tracking.js')],
+  
   themeConfig: {
     image: 'img/ICICLE_logo.jpg',
     navbar: {
