@@ -9,7 +9,7 @@ tags:
 A curated ICICLE benchmark for evaluating the performance of pre-trained models and fostering the development of adaptation algorithms in the camera trap domain.
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/CAN-Benchmark)
-[![Hugging Face](https://img.shields.io/badge/🤗-Hugging%20Face-yellow?logo=huggingface&style=flat-square)](https://huggingface.co/datasets/ICICLE-AI/CAN_Benchmark)
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-yellow?logo=huggingface&style=flat-square)](https://huggingface.co/datasets/ICICLE-AI/CAN_Benchmark)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## References
