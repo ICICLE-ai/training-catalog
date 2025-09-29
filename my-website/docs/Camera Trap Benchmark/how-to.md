@@ -64,7 +64,7 @@ Zero-shot (zs)
 	- Runs 10 epochs initially. Decision at epoch 10:
 		- If epoch 10 is best so far → continue up to 20 epochs max (or configured `epochs`, whichever is lower).
 		- Else → stop at 10 and pick the best epoch found within the first 10.
-	- Training restarts fresh for each round (ckp_k → validate on ckp_k, test on ckp_{k+1}).
+	- Training restarts fresh for each round (`ckp_k` → validate on `ckp_k`, test on `ckp_{k+1}`).
 
 Per-epoch testing
 - If `--train_test` is provided:
