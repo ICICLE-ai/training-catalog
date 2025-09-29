@@ -226,7 +226,7 @@ const config = {
 
   ],
 
-  clientModules: [require.resolve('./src/outbound-tracking.js')],
+  clientModules: [require.resolve('./static/js/outbound-tracking.js')],
   
   themeConfig: {
     image: 'img/ICICLE_logo.jpg',
