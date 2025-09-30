@@ -2,7 +2,6 @@
 tags:
   - Foundation-AI
 ---
-
 # Explanation
 ### Dataset Structure
 The dataset consists of of two folders:
