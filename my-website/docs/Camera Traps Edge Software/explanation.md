@@ -1,10 +1,9 @@
 ---
 tags:
-  - Animal-Ecology
   - Software
   - CI4AI
+  - Animal-Ecology
 ---
-
 # Explanation
 
 ## Architectual Overview
@@ -25,6 +24,7 @@ In general, plugins can also depend on their own environment variables and/or co
 | -------------------------- | ------------------------------- | -------------------------- | ----------------------------------- |
 | camera-traps application | TRAPS_CONFIG_FILE             | ~/traps.toml             | Can be 1st command line parameter |
 | image_gen_plugin         |                               | /input.json              |                                   |
+| video_generating_plugin  | TRAPS_VIDEO_OUTPUT_PATH       |                          |                                   | 
 | image_detecting_plugin   |                               | /etc/motion/motion.conf  |
 | detection_reporter_plugin| TRAPS_DETECTION_REPORTER_*    | /traps-detection.toml    |
 | image_store_plugin       | TRAPS_IMAGE_STORE_FILE        | ~/traps-image-store.toml |                                   |
@@ -62,7 +62,7 @@ Camera-traps uses a [TOML](https://toml.io/en/) file to configure the internal a
 > \# python but can be written in any language.  External plugins run in their own processes
 > \# and communicate via tcp or ipc.
 > [plugins]
-> \# Uncomment the internal plugins loaded when the camera-traps application starts.<br>
+> \# Uncomment the internal plugins loaded when the camera-traps application starts.
 > internal = [
 > \#    "image_gen_plugin",
 > "image_recv_plugin",
@@ -71,8 +71,8 @@ Camera-traps uses a [TOML](https://toml.io/en/) file to configure the internal a
 > \#    "observer_plugin"
 > ]
 >
-> \# Configure each of the active internal plugins with the image processing action they should<br>
-> \# take when new work is received.  If no action is specified for a plugin, its no-op action<br>
+> \# Configure each of the active internal plugins with the image processing action they should
+> \# take when new work is received.  If no action is specified for a plugin, its no-op action
 > \# is used by default.
 > internal_actions = [
 > "image_recv_write_file_action",
@@ -126,7 +126,10 @@ Camera-traps uses a [TOML](https://toml.io/en/) file to configure the internal a
 >       "ImageDeletedEvent",
 >       "PluginTerminateEvent"
 >   ]
+>
+>
 ```
+
 
 Every plugin must subscribe to the PluginTerminateEvent, which upon receipt causes the plugin to stop.  Subscriptions are statically defined in internal plugin code and explicitly configured for external plugins.  External plugins also provide their predetermined UUIDs and external TCP ports.
 

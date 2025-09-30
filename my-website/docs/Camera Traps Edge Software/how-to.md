@@ -1,11 +1,10 @@
 ---
 tags:
-  - Animal-Ecology
   - Software
   - CI4AI
+  - Animal-Ecology
 ---
-
-# How-To Guides
+# How-To Guide
 
 ## Quick Start
 
@@ -78,7 +77,8 @@ allow_anonymous true
 
 In-memory representations of events are translated into flatbuffer binary streams plus a leading two byte sequence that identifies the event type.  These statically defined byte sequences are specified in the [events.rs](https://github.com/tapis-project/camera-traps/blob/main/src/events.rs) source file and repeated here for convenience.
 
-// Each event is assigned a binary prefix that zqm uses to route incoming binary streams to all of the event's subscribers.
+Each event is assigned a binary prefix that zqm uses to route incoming binary streams to all of the event's subscribers.
+```
 pub const NEW_IMAGE_PREFIX:           [u8; 2] = [0x01, 0x00];
 pub const IMAGE_RECEIVED_PREFIX:      [u8; 2] = [0x02, 0x00];
 pub const IMAGE_SCORED_PREFIX:        [u8; 2] = [0x03, 0x00];
@@ -89,7 +89,7 @@ pub const PLUGIN_TERMINATING_PREFIX:  [u8; 2] = [0x11, 0x00];
 pub const PLUGIN_TERMINATE_PREFIX:    [u8; 2] = [0x12, 0x00];
 pub const MONITOR_POWER_START_PREFIX: [u8; 2] = [0x20, 0x00];
 pub const MONITOR_POWER_STOP_PREFIX:  [u8; 2] = [0x21, 0x00];
-
+```
 Each event sent or received begins with its two byte prefix followed by its serialized form as defined in the camera-traps flatbuffer definition file ([events.fbs](https://github.com/tapis-project/camera-traps/blob/main/resources/events.fbs)).  The following section describes how to generate Rust source code from this definition file, a similar process can be used for any language supported by flatbuffers.
 
 ### Updating the flatbuffers messages
@@ -129,10 +129,10 @@ The instructions in this section assume [Docker](https://docs.docker.com/get-doc
 From the top-level camera-traps directory, issue the following command to build the application's Docker images:
 
 make build
-See [Makefile](https://github.com/tapis-project/camera-traps/blob/main/Makefile) for details.  Use the installer [install script](https://github.com/tapis-project/camera-traps/blob/main/installer/install.sh) to create a run directory. See the installer [README](https://github.com/tapis-project/camera-traps/blob/main/installer/README.md) for more details. Then, navigate to the new run directory. Issue the following command to run the application, including the external plugins for which it's configured:
+See [Makefile](https://github.com/tapis-project/camera-traps/blob/main/Makefile) for details.  Use the installer [install script](installer/install.sh) to create a run directory. See the installer [README](https://github.com/tapis-project/camera-traps/blob/main/installer/README.md) for more details. Then, navigate to the new run directory. Issue the following command to run the application, including the external plugins for which it's configured:
 
 docker-compose up
-See [docker-compose.yaml](https://github.com/tapis-project/camera-traps/blob/main/installer/templates/docker-compose.yml) for details.  From the same release directory, issue the following command to stop the application:
+See [docker-compose.yaml](installer/templates/docker-compose.yml) for details.  From the same release directory, issue the following command to stop the application:
 
 docker-compose down
 
@@ -160,3 +160,13 @@ For example, the *image_gen_plugin* injects new images into the event stream, th
 Another reason for introducing a new plugin would be to also service new events.  As the application evolves new capabilities might require new events.  This occurred as we develop support for power monitoring, which introduces 2 new events and a plugin to handle them.
 
 When implementing a plugin the choice between internal and external is often technology driven.  Do we want to write a plugin in Rust and compile it into the application (internal) or do we want to write it in some other language and start it up in its own container (external)?  Considerations as to which approach to take include performance, resource usage, and availability of domain-specific libraries.
+
+## Release Procedures
+
+When development on a new release begins, create a new branch. If you would to test your changes, merge into the dev branch. This will trigger the building of docker images with the latest tag and a [suite of tests](https://github.com/ICICLE-ai/ml_workbench_test_suite).  When development completes and the final version of the release's images are pushed to docker hub, we tag those images with the release number.
+
+To be able to rebuild a release at anytime, we also tag the release's source code in github.  The tag is the same as the release version number.  Once confident that the tagged code is stable, release tags can be protected using github [tag protection](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/configuring-tag-protection-rules).
+
+# Acknowledgements
+
+*This work has been funded by grants from the National Science Foundation, including the ICICLE AI Institute (OAC 2112606) and Tapis (OAC 1931439).*
