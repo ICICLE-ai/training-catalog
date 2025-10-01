@@ -23,11 +23,11 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
     Event Engine Documentation
   </a>
 
-## FEAST/Food Access Strategy Simulator (FASS) v0.1
-- The Food Access and Strategy Simulation tool is a powerful resource for analyzing and simulating the effects of adding or removing stores on household food access. This guide provides clear, step-by-step instructions to help you navigate and utilize the tool effectively.
+## Food Equity Access Simulation Technology (FEAST)
+- Food Equity Access Simulation Technology (FEAST) tool previously known as the Food Access and Strategy Simulation (FASS) is a powerful resource for analyzing and simulating the effects of adding or removing stores on household food access. This guide provides clear, step-by-step instructions to help you navigate and utilize the tool effectively.
 
-  <a href="https://fass.pods.icicleai.tapis.io/" target="_blank" rel="noopener noreferrer">
-    Link to FASS Website
+  <a href="https://feast.pods.icicleai.tapis.io/" target="_blank" rel="noopener noreferrer">
+    Link to FEAST Website
   </a>
 
 ## ICICONSOLE 0.8.0
