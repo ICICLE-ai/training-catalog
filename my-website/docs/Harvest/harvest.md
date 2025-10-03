@@ -1,8 +1,10 @@
 ---
 tags:
   - Digital-Agriculture
-  - Release 2025-07
   - Release 2024-09
+  - Release 2025-07
+  - Release 2025-08
+  - Release 2025-10
 ---
 
 # Harvest
