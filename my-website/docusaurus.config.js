@@ -17,7 +17,10 @@ const config = {
           Easily filter content by tags or browse freely through our well-organized documentation to find exactly what you need. <br>
           <a href="https://icicle-ai.github.io/training-catalog/Education/Professional%20Development/training_catalog_article">
             Click here
-          </a> to discover the Open Source Tech Powering Our Training Catalog.
+          </a> to discover the Open Source Tech Powering Our Training Catalog.<br>
+          <a href="https://www.youtube.com/watch?v=8GHWQWrGesw">
+            Click here
+          </a> to watch a video walkthrough of the website and its key features.
         </p>
       `
     },
