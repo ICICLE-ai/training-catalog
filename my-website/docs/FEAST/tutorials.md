@@ -4,6 +4,7 @@ tags:
   - Smart-Foodsheds
 ---
 # Tutorials
+[Click here](https://youtu.be/kltZCvLqHp0) for the video tutorial.
 ## Example Use Case
 
 1. Add a Store: Place a new supermarket in an underserved area—for example, add
