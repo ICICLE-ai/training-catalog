@@ -2,9 +2,26 @@
 tags:
   - Food-Access
   - Smart-Foodsheds
+  - Video
 ---
 # Tutorials
-[Click here](https://youtu.be/kltZCvLqHp0) for the video tutorial.
+<!-- [Click here](https://youtu.be/kltZCvLqHp0) for the video tutorial. -->
+
+
+:::tip Video Tutorial
+**FEAST Video tutorial**
+<iframe 
+  width="560" 
+  height="315" 
+  src="https://www.youtube.com/embed/kltZCvLqHp0" 
+  title="FEAST Video tutorial"
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen>
+</iframe>
+
+:::
+
 ## Example Use Case
 
 1. Add a Store: Place a new supermarket in an underserved area—for example, add
