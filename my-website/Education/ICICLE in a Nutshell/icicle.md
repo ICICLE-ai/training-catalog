@@ -63,24 +63,6 @@ tags:
 
 :::tip Video Tutorial
 
-**SmartFoodsheds: GNN Food Flow Demo Walkthrough (Y4)**
-
-<div style={{ position: 'relative', paddingTop: '56.25%' }}>
-  <iframe
-    src="https://www.youtube.com/embed/AZrqhO3LIQY"
-    title="SmartFoodsheds: GNN Food Flow Demo Walkthrough (Y4)"
-    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowFullScreen
-    loading="lazy"
-  />
-</div>
-
-:::
-
-
-:::tip Video Tutorial
-
 **SmartFoodSheds: Food System Sandbox (Y4)**
 
 <div style={{ position: 'relative', paddingTop: '56.25%' }}>
