@@ -8,19 +8,21 @@ tags:
 <!-- [Click here](https://youtu.be/kltZCvLqHp0) for the video tutorial. -->
 
 
-:::tip Video Tutorial
-**FEAST Video tutorial**
-<iframe 
-  width="560" 
-  height="315" 
-  src="https://www.youtube.com/embed/kltZCvLqHp0" 
-  title="FEAST Video tutorial"
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
+:::tip Video Tutorial — FEAST Video tutorial
+
+<div style={{ position: 'relative', paddingTop: '56.25%' }}>
+  <iframe
+    src="https://www.youtube.com/embed/kltZCvLqHp0"
+    title="FEAST Video tutorial"
+    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen
+    loading="lazy"
+  ></iframe>
+</div>
 
 :::
+
 
 ## Example Use Case
 
