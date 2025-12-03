@@ -8,7 +8,7 @@ tags:
 
 - The prerequisites to use Harvest are an Internet browser and contacting us at icicle_harvest@osu.edu for a trial account.  
 
-- [Click here for the user guide with expected time](https://icicle.osu.edu/media/document/2025-12-03/harvest_user_guide.pdf)
+- [User guide with expected learning time estimates is available here.](https://icicle.osu.edu/media/document/2025-12-03/harvest_user_guide.pdf)
 
 - The two main use cases for Harvest are:
 
