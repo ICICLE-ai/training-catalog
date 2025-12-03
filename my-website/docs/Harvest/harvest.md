@@ -5,6 +5,7 @@ tags:
   - Release 2025-07
   - Release 2025-08
   - Release 2025-10
+  - Release 2025-12
 ---
 
 # Harvest
