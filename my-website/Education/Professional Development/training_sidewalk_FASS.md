@@ -1,3 +1,8 @@
+---
+tags:
+  - Video
+---
+
 # Enhancing Food Access Through AI-Guided Infrastructure Improvement
 
 - <a href="/training-catalog/img/training_sidewalk_FASS_20251117.pdf" target="_blank">Enhancing Food Access Through AI-Guided Infrastructure Improvement PDF</a>
