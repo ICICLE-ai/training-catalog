@@ -1,9 +1,9 @@
-# Enhancing Food Access Through AI-Guided Infrastructure Imporvement
+# Enhancing Food Access Through AI-Guided Infrastructure Improvement
 
-- <a href="/training-catalog/img/training_sidewalk_FASS_20251117.pdf" target="_blank">Enhancing Food Access Through AI-Guided Infrastructure Imporvement PDF</a>
+- <a href="/training-catalog/img/training_sidewalk_FASS_20251117.pdf" target="_blank">Enhancing Food Access Through AI-Guided Infrastructure Improvement PDF</a>
 
 
-:::tip Video — Enhancing Food Access Through AI-Guided Infrastructure Imporvement
+:::tip Video — Enhancing Food Access Through AI-Guided Infrastructure Improvement
 
 <div style={{ position: 'relative', paddingTop: '56.25%' }}>
   <iframe
