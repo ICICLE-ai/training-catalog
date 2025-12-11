@@ -4,6 +4,7 @@ tags:
   - Smart-Foodsheds
   - Release 2025-08
   - Release 2025-10
+  - Release 2025-12
 ---
 
 

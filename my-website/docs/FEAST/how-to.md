@@ -3,6 +3,7 @@ tags:
   - Food-Access
   - Smart-Foodsheds
 ---
+
 # How To Guide
 ## How To Use The Tool
 Step 1: Adding a Store
@@ -26,9 +27,10 @@ Step 2: Simulating Changes
 
 Step 3: Removing a Store
 
-1. Go to the Remove Store feature.
-2. Select the store you want to remove (e.g., "Charlie’s Market").
-3. Confirm the removal. The store will disappear from the map.
+1. Select the store(s) you want to remove (e.g., "Charlie’s Market"). To select multiple stores,
+hold down the shift or command key as you select. To deselect stores, click on the map.
+2. Click the "Remove Store" button.
+3. Confirm the removal. The store(s) will disappear from the map.
 4. Use the Step Function to evaluate the effects of this change on household food access.
 
 ## Tips for Effective Use
@@ -161,4 +163,4 @@ Don't forget to give the project a star! Thanks again!
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com
+[JQuery-url]: https://jquery.com 

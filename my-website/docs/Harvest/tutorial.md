@@ -17,7 +17,7 @@ tags:
 	- Infer on a dataset with a model with or without preprocessing and visualization of the results
 
 - To start using Harvest upload the images that you wish to use Harvest on and then log into https://icicleai.tapis.io/#/ and click on Harvest on the sidebar.
- ![Alt text for image](https://icicle.osu.edu/media/image/2025-04-29/tapside.png)
+ ![Alt text for image](https://icicle.osu.edu/media/image/2025-12-11/image.png)
 
 ----------------------------------------------------------------------------------------------------------------------------		
 
@@ -167,7 +167,6 @@ tags:
 - **Classifier:**
 
 	- On the dashboard page, select "Classifier". **PLEASE NOTE DATA FOR TRAINING JOBS MUST BE IN SCRATCH**
-	![PLACEHOLDER: Classifier Dashboard Selection]
 
 	- The classifier module works in two steps:
     ![Alt text for image](https://icicle.osu.edu/media/image/2025-11-21/cl_dash.png)
