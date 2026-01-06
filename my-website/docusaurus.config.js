@@ -62,10 +62,10 @@ const config = {
 
   scripts: [
     // {
-    //   src: 'https://umami.pods.icicleai.tapis.io/script.js', //Correct Umami tracking script URL
+    //   src: process.env.UMAMI_DATA_HOST_URL, //Correct Umami tracking script URL
     //   async: true,
     //   defer: true,
-    //   'data-website-id': 'e1e727a2-edd2-436d-a3f0-3794e11d3718', //  Umami website ID
+    //   data-website-id: process.env.UMAMI_WEBSITE_ID, //  Umami website ID
     // },
     {
       src: '/training-catalog/js/outbound-tracking.js',

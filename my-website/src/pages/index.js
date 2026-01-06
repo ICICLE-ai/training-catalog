@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import DOMPurify from 'isomorphic-dompurify';
 
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
@@ -10,6 +11,14 @@ import styles from './index.module.css';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   const { heroHeading, heroDescription } = siteConfig.customFields;
+  
+  // Sanitize HTML to prevent XSS attacks
+  const sanitizedDescription = DOMPurify.sanitize(heroDescription, {
+    ALLOWED_TAGS: ['p', 'br', 'b', 'strong', 'iframe'],
+    ALLOWED_ATTR: ['width', 'height', 'src', 'title', 'frameborder', 'allow', 'allowfullscreen'],
+    ALLOWED_URI_REGEXP: /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)/i,
+  });
+  
   return (
     <>
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
@@ -24,7 +33,7 @@ function HomepageHeader() {
     </header>
     <main>
         <div className={styles.heroDescription}
-          dangerouslySetInnerHTML={{ __html: siteConfig.customFields.heroDescription }}
+          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
         />
     </main>
   </>
