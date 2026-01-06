@@ -205,13 +205,13 @@ const config = {
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
         ({
-          websiteID: "7d316a92-6921-48bb-bad7-1b0a07478043", // Required
-          analyticsDomain: "umami.pods.icicleai.tapis.io", // Required
-          dataHostURL: "https://umami.pods.icicleai.tapis.io", //Required
+          websiteID: process.env.UMAMI_WEBSITE_ID, // Required - use env var for security
+          analyticsDomain: process.env.UMAMI_ANALYTICS_DOMAIN, // Required
+          dataHostURL: process.env.UMAMI_DATA_HOST_URL, //Required
           dataAutoTrack: false, // Optional
           dataDoNotTrack: false, // Optional
           dataCache: false, // Optional
-          dataDomains: "icicle-ai.github.io", // comma separated list of domains, *Recommended*
+          dataDomains: process.env.UMAMI_DATA_DOMAINS, // comma separated list of domains, *Recommended*
         }),
     ],
 

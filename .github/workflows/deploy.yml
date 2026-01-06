@@ -34,6 +34,11 @@ jobs:
 
       - name: Build Docusaurus site
         working-directory: my-website
+        env:
+          UMAMI_WEBSITE_ID: ${{ secrets.UMAMI_WEBSITE_ID }}
+          UMAMI_ANALYTICS_DOMAIN: ${{ secrets.UMAMI_ANALYTICS_DOMAIN }}
+          UMAMI_DATA_HOST_URL: ${{ secrets.UMAMI_DATA_HOST_URL }}
+          UMAMI_DATA_DOMAINS: ${{ secrets.UMAMI_DATA_DOMAINS }}
         run: |
           export GIT_COMMITTER_DATE="$(git log -1 --format=%cd)"
           npm run build
