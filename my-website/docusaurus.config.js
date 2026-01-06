@@ -1,5 +1,13 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 
+// Load environment variables from .env file (for local development only)
+// In production/CI, these come from GitHub Secrets or environment variables
+// Check for CI environment or production mode to skip .env loading
+const isCI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+if (!isCI && process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config = {

@@ -3,7 +3,8 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import DOMPurify from 'isomorphic-dompurify';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+import {useEffect, useState} from 'react';
 
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
@@ -11,13 +12,21 @@ import styles from './index.module.css';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   const { heroHeading, heroDescription } = siteConfig.customFields;
+  const [sanitizedDescription, setSanitizedDescription] = useState(heroDescription);
   
-  // Sanitize HTML to prevent XSS attacks
-  const sanitizedDescription = DOMPurify.sanitize(heroDescription, {
-    ALLOWED_TAGS: ['p', 'br', 'b', 'strong', 'iframe'],
-    ALLOWED_ATTR: ['width', 'height', 'src', 'title', 'frameborder', 'allow', 'allowfullscreen'],
-    ALLOWED_URI_REGEXP: /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)/i,
-  });
+  // Sanitize HTML on client-side only to prevent SSR Buffer polyfill issues
+  useEffect(() => {
+    if (ExecutionEnvironment.canUseDOM) {
+      import('isomorphic-dompurify').then((DOMPurify) => {
+        const sanitized = DOMPurify.default.sanitize(heroDescription, {
+          ALLOWED_TAGS: ['p', 'br', 'b', 'strong', 'iframe'],
+          ALLOWED_ATTR: ['width', 'height', 'src', 'title', 'frameborder', 'allow', 'allowfullscreen'],
+          ALLOWED_URI_REGEXP: /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)/i,
+        });
+        setSanitizedDescription(sanitized);
+      });
+    }
+  }, [heroDescription]);
   
   return (
     <>
