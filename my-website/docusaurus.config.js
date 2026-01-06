@@ -75,10 +75,7 @@ const config = {
     //   defer: true,
     //   data-website-id: process.env.UMAMI_WEBSITE_ID, //  Umami website ID
     // },
-    {
-      src: '/training-catalog/js/outbound-tracking.js',
-      async: true,
-    },
+    // Note: outbound-tracking.js is loaded via clientModules, not as a script
   ],
 
   presets: [
