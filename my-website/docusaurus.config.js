@@ -8,7 +8,7 @@ if (!isCI && process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+// This runs in Node.js - Don't use client-side code here (browser APIs, JSX..)
 
 const config = {
   title: 'ICICLE AI Institute - Training Catalog',
