@@ -30,6 +30,21 @@
   color:var(--ifm-font-color-base); /* Ensures description is black */
 }
 
+/* Ensure YouTube iframe maintains full width and aspect ratio */
+.heroDescription iframe {
+  width: 100% !important;
+  height: 400px !important;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Make video container wider if needed */
+.heroDescription p:has(iframe) {
+  max-width: 100%;
+  width: 100%;
+}
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;

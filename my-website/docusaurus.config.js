@@ -1,6 +1,14 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+// Load environment variables from .env file (for local development only)
+// In production/CI, these come from GitHub Secrets or environment variables
+// Check for CI environment or production mode to skip .env loading
+const isCI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+if (!isCI && process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+// This runs in Node.js - Don't use client-side code here (browser APIs, JSX..)
 
 const config = {
   title: 'ICICLE AI Institute - Training Catalog',
@@ -62,15 +70,12 @@ const config = {
 
   scripts: [
     // {
-    //   src: 'https://umami.pods.icicleai.tapis.io/script.js', //Correct Umami tracking script URL
+    //   src: process.env.UMAMI_DATA_HOST_URL, //Correct Umami tracking script URL
     //   async: true,
     //   defer: true,
-    //   'data-website-id': 'e1e727a2-edd2-436d-a3f0-3794e11d3718', //  Umami website ID
+    //   data-website-id: process.env.UMAMI_WEBSITE_ID, //  Umami website ID
     // },
-    {
-      src: '/training-catalog/js/outbound-tracking.js',
-      async: true,
-    },
+    // Note: outbound-tracking.js is loaded via clientModules, not as a script
   ],
 
   presets: [
@@ -205,13 +210,13 @@ const config = {
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
         ({
-          websiteID: "7d316a92-6921-48bb-bad7-1b0a07478043", // Required
-          analyticsDomain: "umami.pods.icicleai.tapis.io", // Required
-          dataHostURL: "https://umami.pods.icicleai.tapis.io", //Required
+          websiteID: process.env.UMAMI_WEBSITE_ID, // Required - use env var for security
+          analyticsDomain: process.env.UMAMI_ANALYTICS_DOMAIN, // Required
+          dataHostURL: process.env.UMAMI_DATA_HOST_URL, //Required
           dataAutoTrack: false, // Optional
           dataDoNotTrack: false, // Optional
           dataCache: false, // Optional
-          dataDomains: "icicle-ai.github.io", // comma separated list of domains, *Recommended*
+          dataDomains: process.env.UMAMI_DATA_DOMAINS, // comma separated list of domains, *Recommended*
         }),
     ],
 
