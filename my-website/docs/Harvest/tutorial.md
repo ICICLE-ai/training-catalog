@@ -4,11 +4,9 @@ tags:
 ---
 
 # Tutorial
-
+  
 
 - The prerequisites to use Harvest are an Internet browser and contacting us at icicle_harvest@osu.edu for a trial account.  
-
-- [User guide with expected learning time estimates is available here.](https://icicle.osu.edu/media/document/2025-12-03/harvest_user_guide.pdf)
 
 - The two main use cases for Harvest are:
 
@@ -47,7 +45,7 @@ tags:
 
 	- If a labeled images json is provided training will automatically start
 
-	- format for labeled image json is as follows ```{"class1":[images...],"class2":[images...],...}```
+	- Format for labeled image JSON is as follows: `{"class1":[images...],"class2":[images...],...}`
 	- The labeler will first ask the user for their desired class labels type the desired labels one by one pressing the enter key in between examples of classes maybe "soil", "weed", "soybean", etc then hit the next button
 	![Alt text for image](https://icicle.osu.edu/media/image/2025-04-29/tapsellabels.png)
 
@@ -135,7 +133,6 @@ tags:
 
 - **Object Detector:**
 
-	- On the dashboard page, select "Object Detector". **PLEASE NOTE DATA FOR TRAINING JOBS MUST BE IN SCRATCH**
 	![Alt text for image](https://icicle.osu.edu/media/image/2025-11-21/od_dash.png)
 
 	- Fill in all the requested information. All fields are required, and the job will not proceed if any are left blank.
@@ -166,7 +163,6 @@ tags:
 
 - **Classifier:**
 
-	- On the dashboard page, select "Classifier". **PLEASE NOTE DATA FOR TRAINING JOBS MUST BE IN SCRATCH**
 
 	- The classifier module works in two steps:
     ![Alt text for image](https://icicle.osu.edu/media/image/2025-11-21/cl_dash.png)
@@ -269,5 +265,13 @@ tags:
 			- This allows you to see at a glance which areas of the field require more intensive spray treatment
 	 - You can use the + and – buttons on the map to zoom in and out to examine specific regions in detail.
 
-	- "Download Shapefile" button will download the shapefile in ZIP format for feeding to agricultural machinery.
-	![Alt text for image](https://icicle.osu.edu/media/image/2025-08-12/5_map.png)
+	- "Spot Spraying Shapefile" button will download the Spot Spraying shapefile in ZIP format for feeding to agricultural machinery.
+	- "Farm Area Shapefile" button will download the Farm Area shapefile without Spot Spraying in ZIP format for feeding to agricultural machinery.
+	- ![Alt text for image](https://icicle.osu.edu/media/image/2026-02-19/shapefile_vis.png)
+
+### Object Detection Pipeline
+
+For detailed instructions on the Object Detection Pipeline, please refer to [Object-detection-readme.md](https://github.com/ICICLE-ai/harvest-webservers/blob/main/Object-detection-readme.md).
+
+Demo Link - You can access the demo of Harvest at the following link: [Demo](https://www.youtube.com/watch?v=RlM7ZrZvJqM)
+

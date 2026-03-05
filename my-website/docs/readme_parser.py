@@ -7,6 +7,20 @@ import pandas as pd  # required only if --excel_file is used
 from urllib.parse import urlparse
 from typing import List, Optional, Tuple, Dict
 
+"""
+README parser modes:
+1) Single repo mode:
+   - uses --repo_link (+ optional --project_name, --tags, --release)
+2) Excel batch mode:
+   - uses --excel_file and reads metadata per row
+   - strict required columns in Excel:
+     * README        : GitHub repo URL or README blob URL
+     * Tags          : comma-separated tags (example: "AI, NLP, Demo")
+   - optional column:
+     * Component     : project/folder name; if missing/empty, repo name is derived from URL
+   - release is taken from CLI flag --release (same value applied to all rows for the run)
+"""
+
 # -----------------------------
 # GitHub helpers
 # -----------------------------
@@ -120,6 +134,7 @@ def derive_project_name(repo_link: str) -> str:
 
 SECTION_SPLIT_REGEX = r"^\s*---\s*$"  # line containing only '---'
 SECTION_PATTERN = re.compile(SECTION_SPLIT_REGEX, flags=re.MULTILINE)
+FRONTMATTER_PATTERN = re.compile(r"^---\s*\r?\n(.*?)\r?\n---\s*(?:\r?\n)?", re.DOTALL)
 
 # Map target filenames to heading patterns (case-insensitive)
 HEADING_MAP: Dict[str, List[re.Pattern]] = {
@@ -153,16 +168,184 @@ def tag_block(tags: List[str]) -> str:
     lines.append("---\n")
     return "\n".join(lines)
 
+def extract_frontmatter_tags(existing_text: str) -> List[str]:
+    """
+    Extract tag values from a YAML-like frontmatter block at top of file, if present.
+    Only reads simple form:
+      ---
+      tags:
+        - A
+        - B
+      ---
+    """
+    match = FRONTMATTER_PATTERN.match(existing_text)
+    if not match:
+        return []
+    block = match.group(1)
+    lines = block.splitlines()
+    tags: List[str] = []
+    in_tags = False
+    for line in lines:
+        if re.match(r"^\s*tags\s*:\s*$", line, flags=re.IGNORECASE):
+            in_tags = True
+            continue
+        if in_tags:
+            bullet = re.match(r"^\s*-\s*(.+?)\s*$", line)
+            if bullet:
+                tags.append(bullet.group(1).strip())
+            elif line.strip():
+                # stop if a non-empty non-bullet key/value appears
+                in_tags = False
+    return tags
+
+def unique_tags_keep_order(tags: List[str]) -> List[str]:
+    """Deduplicate tags while preserving first-seen order."""
+    out: List[str] = []
+    seen = set()
+    for t in tags:
+        if t not in seen:
+            seen.add(t)
+            out.append(t)
+    return out
+
+def strip_leading_frontmatter(content: str) -> str:
+    """Remove a leading YAML frontmatter block from content if present."""
+    return FRONTMATTER_PATTERN.sub("", content, count=1).lstrip()
+
+def remove_stray_tag_lines(content: str) -> str:
+    """
+    Remove stray tag metadata lines from body content so tags only exist in top frontmatter.
+    Removes lines like:
+      - tags:
+      - Tag:
+      - Tasg,tags:
+      - *tags*:
+      - **Tags**:
+      - **Tag**:
+    and immediately following bullet list lines.
+    """
+    cleaned: List[str] = []
+    lines = content.splitlines()
+    i = 0
+    tag_header_pattern = re.compile(
+        r"^\s*(?:\*{1,2}\s*)?(?:tasg,\s*)?tags?(?:\s*\*{1,2})?\s*:\s*(?:.+)?$",
+        flags=re.IGNORECASE,
+    )
+    while i < len(lines):
+        line = lines[i]
+        if tag_header_pattern.match(line):
+            i += 1
+            while i < len(lines) and re.match(r"^\s*-\s+.+$", lines[i]):
+                i += 1
+            continue
+        cleaned.append(line)
+        i += 1
+    return "\n".join(cleaned).strip()
+
+def is_badge_line(line: str) -> bool:
+    """Heuristic to detect badge lines commonly found near top of README files."""
+    s = line.strip().lower()
+    if not s:
+        return False
+    return (
+        "[![" in s
+        or "shields.io" in s
+        or "<img" in s
+        or "badge" in s
+    )
+
+def move_top_badges_after_description(content: str, extra_badges: Optional[List[str]] = None) -> str:
+    """
+    Move top badge lines to after the first description paragraph.
+    This keeps title + short description first in main project docs.
+    """
+    lines = content.splitlines()
+    if not lines:
+        badges = extra_badges or []
+        return "\n".join(badges).strip()
+
+    badges: List[str] = []
+    if extra_badges:
+        badges.extend(extra_badges)
+
+    # Collect badge lines appearing near top (after optional title).
+    i = 0
+    if i < len(lines) and re.match(r"^\s*#\s+.+$", lines[i]):
+        i += 1
+
+    while i < len(lines) and not lines[i].strip():
+        i += 1
+
+    badge_start = i
+    while i < len(lines) and (is_badge_line(lines[i]) or not lines[i].strip()):
+        if is_badge_line(lines[i]):
+            badges.append(lines[i].strip())
+        i += 1
+
+    # Remove collected badge area from original content.
+    if i > badge_start:
+        lines = lines[:badge_start] + lines[i:]
+
+    badges = unique_tags_keep_order([b for b in badges if b.strip()])
+    if not badges:
+        return "\n".join(lines).strip()
+
+    # Find insertion point after first non-empty paragraph (usually the short description).
+    insert_at = len(lines)
+    idx = 0
+    while idx < len(lines) and not lines[idx].strip():
+        idx += 1
+    if idx < len(lines) and re.match(r"^\s*#\s+.+$", lines[idx]):
+        idx += 1
+    while idx < len(lines) and not lines[idx].strip():
+        idx += 1
+
+    para_started = False
+    while idx < len(lines):
+        if lines[idx].strip():
+            para_started = True
+            idx += 1
+        else:
+            if para_started:
+                insert_at = idx
+                break
+            idx += 1
+
+    prefix = lines[:insert_at]
+    suffix = lines[insert_at:]
+    stitched = prefix + [""] + badges + [""] + suffix
+    return "\n".join(stitched).strip()
+
 def save_file(folder: str, fname: str, content: str, tags: List[str], github_link: Optional[str] = None):
     """
-    Save a Markdown file with frontmatter and optional GitHub badge.
+    Save a Markdown file with frontmatter.
+    Behavior:
+      - preserves existing frontmatter tags already present in file
+      - appends new tags (deduplicated)
+      - removes stray body tag metadata lines ('tags:' / 'Tasg,tags:')
+      - ensures badges are placed after the initial description in main files
     """
     os.makedirs(folder, exist_ok=True)
-    md = tag_block(tags)
+    out_path = os.path.join(folder, fname)
+
+    existing_tags: List[str] = []
+    if os.path.exists(out_path):
+        with open(out_path, "r", encoding="utf-8") as f:
+            existing_text = f.read()
+        existing_tags = extract_frontmatter_tags(existing_text)
+
+    merged_tags = unique_tags_keep_order(existing_tags + tags)
+
+    body = strip_leading_frontmatter(content)
+    body = remove_stray_tag_lines(body)
     if github_link:
-        md += f'[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)]({github_link})\n\n'
-    md += content.strip() + "\n"
-    with open(os.path.join(folder, fname), "w", encoding="utf-8") as f:
+        github_badge = f'[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)]({github_link})'
+        body = move_top_badges_after_description(body, extra_badges=[github_badge])
+    else:
+        body = move_top_badges_after_description(body)
+
+    md = tag_block(merged_tags) + body.strip() + "\n"
+    with open(out_path, "w", encoding="utf-8") as f:
         f.write(md)
 
 def write_category_json(folder: str, project_name: str):
@@ -270,25 +453,53 @@ def process_single_repo(
 # Excel helpers
 # -----------------------------
 
-def read_repos_from_excel(xlsx_path: str) -> List[Tuple[str, Optional[str]]]:
+def parse_excel_tags(tags_cell, row_number: int) -> List[str]:
     """
-    Reads an Excel file and returns a list of (repo_link, project_name_opt).
-    Requires a column named 'README' containing normal GitHub links (not raw).
-    Uses column 'Component' as the project name if available.
+    Parse comma-separated tags from a single Excel cell.
+    Strict: this value is required in Excel mode.
+    """
+    if pd.isna(tags_cell):
+        raise ValueError(f"Row {row_number}: 'Tags' is required and cannot be empty.")
+    raw = str(tags_cell).strip()
+    if not raw or raw.lower() == "nan":
+        raise ValueError(f"Row {row_number}: 'Tags' is required and cannot be empty.")
+    parsed_tags = [t.strip() for t in raw.split(",") if t.strip()]
+    if not parsed_tags:
+        raise ValueError(f"Row {row_number}: 'Tags' must contain at least one comma-separated tag.")
+    return parsed_tags
+
+def read_repos_from_excel(xlsx_path: str) -> List[Tuple[str, Optional[str], List[str]]]:
+    """
+    Reads an Excel file and returns a list of:
+      (repo_link, project_name_opt, row_tags)
+    Strict required columns:
+      - README
+      - Tags
+    Optional columns:
+      - Component
     """
     df = pd.read_excel(xlsx_path)
-    if "README" not in df.columns:
-        raise ValueError("Excel file must contain a column named 'README' with GitHub links.")
+    required_columns = ["README", "Tags"]
+    missing = [col for col in required_columns if col not in df.columns]
+    if missing:
+        raise ValueError(
+            "Excel file is missing required column(s): "
+            + ", ".join(missing)
+            + ". Required: README, Tags."
+        )
     
-    repos: List[Tuple[str, Optional[str]]] = []
+    repos: List[Tuple[str, Optional[str], List[str]]] = []
     has_component = "Component" in df.columns
 
-    for _, row in df.iterrows():
+    for idx, row in df.iterrows():
+        row_number = idx + 2  # +2 because DataFrame is 0-based and row 1 is header in Excel
         link = str(row["README"]).strip()
         if not link or link.lower() == "nan":
-            continue
+            raise ValueError(f"Row {row_number}: 'README' is required and cannot be empty.")
+
         proj = str(row["Component"]).strip() if has_component and not pd.isna(row["Component"]) else None
-        repos.append((link, proj))
+        row_tags = parse_excel_tags(row["Tags"], row_number)
+        repos.append((link, proj, row_tags))
     return repos
 
 # -----------------------------
@@ -301,11 +512,27 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--repo_link", type=str, help="GitHub repository URL or README blob URL (non-raw).")
     parser.add_argument("--project_name", type=str, help="Project name (folder and main file). If omitted, derived from repo URL.")
     # Batch mode via Excel
-    parser.add_argument("--excel_file", type=str, help="Path to an Excel file containing a 'README' column with GitHub links and optional 'Project' column.")
+    parser.add_argument(
+        "--excel_file",
+        type=str,
+        help=(
+            "Path to an Excel file. Required columns: README, Tags. "
+            "Optional: Component."
+        ),
+    )
     # Output and metadata
     parser.add_argument("--output_folder", type=str, default=".", help="Output root folder (defaults to current directory).")
-    parser.add_argument("--tags", nargs="+", default=[], help="Base tags to include in all generated files.")
-    parser.add_argument("--release", type=str, help="Release in 'YYYY-MM' format. Adds a 'Release YYYY-MM' tag to the main project file.")
+    parser.add_argument(
+        "--tags",
+        nargs="+",
+        default=[],
+        help="Base tags (single mode only). Ignored when --excel_file is used because tags come from Excel 'Tags' column.",
+    )
+    parser.add_argument(
+        "--release",
+        type=str,
+        help="Release in 'YYYY-MM' format. Applied to generated main file(s). In --excel_file mode, one release value is used for all rows.",
+    )
     # Auth
     parser.add_argument("--github_pat", type=str, help="Optional GitHub PAT (overrides GITHUB_PAT env var).")
     return parser.parse_args()
@@ -319,15 +546,20 @@ def main():
         raise SystemExit("Provide either --repo_link for single-run OR --excel_file for batch processing.")
 
     if args.excel_file:
+        if args.tags:
+            raise SystemExit(
+                "In --excel_file mode, do not pass --tags. "
+                "Use Excel column 'Tags' per row."
+            )
         repos = read_repos_from_excel(args.excel_file)
         if not repos:
             raise SystemExit("No valid rows found in the Excel file.")
-        for repo_link, proj_name in repos:
+        for repo_link, proj_name, row_tags in repos:
             process_single_repo(
                 repo_link=repo_link,
                 project_name=proj_name or args.project_name,  # allow CLI to override, else use Excel, else derive
                 output_folder=args.output_folder,
-                tags=args.tags,
+                tags=row_tags,
                 release=args.release,
                 session=session
             )
