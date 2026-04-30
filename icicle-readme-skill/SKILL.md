@@ -1,5 +1,6 @@
 ---
 name: icicle-readme-skill
+disable-model-invocation: true
 description: Scaffold or restructure the top-level README.md for an ICICLE component repository so it matches the canonical ICICLE README template (project description + tag + license + references + acknowledgements + issue reporting, then Tutorials / How-To Guides / Explanation sections separated by `---` delimiters, following the Diátaxis framework). Use this whenever the user asks to write, scaffold, or fix a README for an ICICLE component, mentions the ICICLE README template, or asks for the Diátaxis Tutorials/How-To/Explanation layout. ONLY apply this skill when the target repo is under https://github.com/ICICLE-ai/ — for any other repo, confirm with the user first before applying.
 ---
 
