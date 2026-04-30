@@ -68,10 +68,34 @@ Between the top metadata block (description / license / references / acknowledge
 
 The `---` lines render as visual dividers in GitHub and other Markdown viewers and match the canonical template.
 
+## Operating modes
+
+The skill has two modes. **Detect which one applies before doing anything else** by checking whether `README.md` exists at the repo root.
+
+### Mode A — Scaffold (no README, or empty README)
+
+Used when the repo has no `README.md`, or only a placeholder (e.g. just `# project-name`). Generate a fresh README from `templates/README.md`.
+
+### Mode B — Update in place (README exists with real content)
+
+Used when a real `README.md` already exists. **Do not regenerate the whole file.** The user may have added custom content over time — extra subsections, prose, badges, links, formatting tweaks — and rewriting from the template would silently destroy it.
+
+Update rules:
+
+1. **Read the existing `README.md` first** with the Read tool, in full.
+2. **Identify only the sections that need to change** based on the user's stated intent and any recent code/content changes (e.g., new tutorial, license change, new contact, added dependency in a how-to). If the user did not say what changed, ask before editing.
+3. **Edit narrowly** with the Edit tool — change only the affected text inside the affected sections. Do not touch unrelated sections.
+4. **Preserve everything the user added**: custom H2/H3 subsections, extra prose, additional badges, extra links, reordered content within a section, formatting choices. The template is a *scaffold*, not a style guide to enforce retroactively.
+5. **Add missing required pieces only.** If a hard requirement is missing (canonical tag, NSF acknowledgement line, at least one Diátaxis section, `---` delimiters), add only the minimum needed to satisfy the requirement — do not "tidy up" the rest of the file.
+6. **Show a change summary before writing** when the edit touches more than one section: list the sections you intend to modify and what will change, and ask the user to confirm. For a single, obvious section edit, you can proceed without a confirmation prompt.
+
+The template at `templates/README.md` is used in Mode B only as a reference for *missing* sections (e.g., if `## Acknowledgements` is absent and needs to be inserted). Do not pull placeholder text from the template into a section that already has real content.
+
 ## Steps
 
 1. **Check the repo origin** (see the scope guard above). If the repo is not under `github.com/ICICLE-ai/`, ask the user to confirm before continuing.
-2. **Gather inputs** from the user or from existing repo content:
+2. **Detect the mode**: does `README.md` exist with real content? If yes → Mode B. If no or near-empty → Mode A.
+3. **Gather inputs** from the user or from existing repo content. In Mode B, read first and only ask for what's actually missing or being changed.
    - Project name (used in the H1).
    - Short description (1–3 sentences).
    - At least one tag from the canonical list.
@@ -80,14 +104,16 @@ The `---` lines render as visual dividers in GitHub and other Markdown viewers a
    - Other funding sources (optional).
    - Issue-reporting channel (URL or email).
    - Which Diátaxis sections will be included (Tutorials / How-To / Explanation — at least one).
-3. **Copy** `templates/README.md` to the repo root as `README.md` (or merge into an existing README).
-4. **Replace** every `{{PLACEHOLDER}}` token with the gathered content.
-5. **Drop** any Diátaxis section the user has no content for. Keep the `---` delimiters between the sections that remain. Do *not* leave empty section bodies.
-6. **Verify** before finishing:
+4. **Apply the mode**:
+   - **Mode A**: copy `templates/README.md` to the repo root, replace every `{{PLACEHOLDER}}`, drop any Diátaxis section with no content.
+   - **Mode B**: edit the existing file narrowly per the update rules above. Do not write a new file from the template.
+5. **Verify the hard requirements** in the final file (in both modes):
    - At least one canonical tag is present.
    - The exact ICICLE NSF acknowledgement line (with `OAC 2112606`) is present.
    - At least one of `# Tutorials`, `# How-To Guides`, `# Explanation` is present.
    - `---` delimiters separate each top-level section after the metadata block.
+
+   If any are missing in Mode B, add the minimum needed to satisfy them. Do not reformat existing content.
 
 ## Cross-platform usage
 
