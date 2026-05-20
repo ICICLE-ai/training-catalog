@@ -2,6 +2,7 @@ import argparse
 import os
 import re
 import json
+import posixpath
 import requests
 import pandas as pd  # required only if --excel_file is used
 from urllib.parse import urlparse
@@ -75,12 +76,15 @@ def to_raw_readme_url(repo_link: str) -> Optional[str]:
             return f"https://raw.githubusercontent.com/{user_repo}/main/README.md"  # default try main first
     return None
 
-def fetch_raw_readme(repo_link: str, session: requests.Session) -> str:
+def fetch_raw_readme(repo_link: str, session: requests.Session) -> Tuple[str, str]:
     """
     Fetch README content as text using a raw URL. Supports:
       - raw links
       - /blob/ links converted to raw
       - repo root links: tries main then master
+    Returns a tuple of (readme_text, resolved_raw_url). The resolved raw URL is
+    the raw.githubusercontent.com URL that actually succeeded; it carries the
+    user/repo/branch/path needed to rewrite relative links and images.
     Raises Exception on failure.
     """
     # Case 1: raw or blob → raw
@@ -88,13 +92,13 @@ def fetch_raw_readme(repo_link: str, session: requests.Session) -> str:
     if raw_candidate and "raw.githubusercontent.com" in raw_candidate:
         resp = session.get(raw_candidate)
         if resp.status_code == 200:
-            return resp.text
+            return resp.text, raw_candidate
         # If it was a root link defaulting to main, try master as a fallback
         if "/main/" in raw_candidate:
             fallback = raw_candidate.replace("/main/", "/master/")
             resp2 = session.get(fallback)
             if resp2.status_code == 200:
-                return resp2.text
+                return resp2.text, fallback
         raise Exception(f"Could not fetch README.md, status code {resp.status_code} for {raw_candidate}")
 
     # Case 2: Standard repo URL we couldn't transform—try main/master explicitly
@@ -104,7 +108,7 @@ def fetch_raw_readme(repo_link: str, session: requests.Session) -> str:
         raw_url = f"https://raw.githubusercontent.com/{path}/{branch}/README.md"
         resp = session.get(raw_url)
         if resp.status_code == 200:
-            return resp.text
+            return resp.text, raw_url
 
     raise Exception("Could not fetch README.md from the provided repo link.")
 
@@ -127,6 +131,129 @@ def derive_project_name(repo_link: str) -> str:
         return parts[1]
     # Fallback: last path segment
     return parts[-1] if parts else "project"
+
+# -----------------------------
+# Relative link / image rewriting
+# -----------------------------
+#
+# The catalog site is deployed away from GitHub, so relative paths in a README
+# (./docs/x.md, images/diagram.png, ../CONTRIBUTING.md) would break once the
+# content is lifted into Docusaurus. We rewrite them to absolute GitHub URLs so
+# every reference stays clickable and points back to where it was authored:
+#   - images          -> https://raw.githubusercontent.com/{user}/{repo}/{branch}/{path}
+#   - all other links -> https://github.com/{user}/{repo}/blob/{branch}/{path}
+# Absolute URLs (http/https/mailto/#anchors/protocol-relative) are left untouched.
+
+EXTERNAL_PREFIXES = ("http://", "https://", "mailto:", "tel:", "ftp://", "data:", "//")
+
+FENCE_PATTERN = re.compile(r"(```.*?```|~~~.*?~~~)", re.DOTALL)
+MD_IMAGE_PATTERN = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+MD_LINK_PATTERN = re.compile(r"(?<!!)\[([^\]]*)\]\(([^)]+)\)")
+HTML_SRC_PATTERN = re.compile(r"(\bsrc\s*=\s*[\"'])([^\"']+)([\"'])", re.IGNORECASE)
+HTML_HREF_PATTERN = re.compile(r"(\bhref\s*=\s*[\"'])([^\"']+)([\"'])", re.IGNORECASE)
+
+
+def parse_raw_url(raw_url: str) -> Optional[Tuple[str, str, str, str]]:
+    """
+    Decompose a raw.githubusercontent.com URL into (user, repo, branch, readme_dir).
+    readme_dir is the directory that contains the README ('' when at repo root),
+    used as the base for resolving relative paths.
+    """
+    parsed = urlparse(raw_url)
+    parts = [p for p in parsed.path.split("/") if p]
+    # parts: [user, repo, branch, ...path, filename]
+    if len(parts) < 4:
+        return None
+    user, repo, branch = parts[0], parts[1], parts[2]
+    readme_dir = "/".join(parts[3:-1])  # drop the filename
+    return user, repo, branch, readme_dir
+
+
+def _is_external(url: str) -> bool:
+    """True for URLs we must not rewrite (absolute, anchor, or empty)."""
+    u = url.strip()
+    if not u or u.startswith("#"):
+        return True
+    return u.lower().startswith(EXTERNAL_PREFIXES)
+
+
+def _resolve_repo_path(rel_path: str, readme_dir: str) -> str:
+    """
+    Resolve a relative path to a repo-root-relative path, collapsing ./ and ../.
+    A leading '/' is treated as repo-root anchored.
+    """
+    rel_path = rel_path.strip().strip("<>")
+    if rel_path.startswith("/"):
+        base = rel_path.lstrip("/")
+    elif readme_dir:
+        base = posixpath.join(readme_dir, rel_path)
+    else:
+        base = rel_path
+    return posixpath.normpath(base).lstrip("/")
+
+
+def _split_url_and_title(inner: str) -> Tuple[str, str]:
+    """
+    Split the inside of a markdown ()-target into (url, trailing) so an optional
+    "title" or <angle-bracket> form is preserved on re-emit.
+    """
+    inner = inner.strip()
+    if inner.startswith("<"):
+        end = inner.find(">")
+        if end != -1:
+            return inner[1:end], inner[end + 1:]
+    parts = inner.split(None, 1)
+    if len(parts) == 1:
+        return parts[0], ""
+    return parts[0], " " + parts[1]
+
+
+def rewrite_relative_links(text: str, user: str, repo: str, branch: str, readme_dir: str) -> str:
+    """Rewrite relative image/link targets in README text to absolute GitHub URLs."""
+    raw_base = f"https://raw.githubusercontent.com/{user}/{repo}/{branch}"
+    blob_base = f"https://github.com/{user}/{repo}/blob/{branch}"
+
+    def to_raw(rel: str) -> str:
+        return f"{raw_base}/{_resolve_repo_path(rel, readme_dir)}"
+
+    def to_blob(rel: str) -> str:
+        return f"{blob_base}/{_resolve_repo_path(rel, readme_dir)}"
+
+    def repl_md_image(m: "re.Match") -> str:
+        url, trailing = _split_url_and_title(m.group(2))
+        if _is_external(url):
+            return m.group(0)
+        return f"![{m.group(1)}]({to_raw(url)}{trailing})"
+
+    def repl_md_link(m: "re.Match") -> str:
+        url, trailing = _split_url_and_title(m.group(2))
+        if _is_external(url):
+            return m.group(0)
+        return f"[{m.group(1)}]({to_blob(url)}{trailing})"
+
+    def repl_html_src(m: "re.Match") -> str:
+        if _is_external(m.group(2)):
+            return m.group(0)
+        return f"{m.group(1)}{to_raw(m.group(2))}{m.group(3)}"
+
+    def repl_html_href(m: "re.Match") -> str:
+        if _is_external(m.group(2)):
+            return m.group(0)
+        return f"{m.group(1)}{to_blob(m.group(2))}{m.group(3)}"
+
+    out: List[str] = []
+    # Skip fenced code blocks so code samples are never mangled.
+    for seg in FENCE_PATTERN.split(text):
+        if seg.startswith("```") or seg.startswith("~~~"):
+            out.append(seg)
+            continue
+        seg = MD_IMAGE_PATTERN.sub(repl_md_image, seg)
+        seg = MD_LINK_PATTERN.sub(repl_md_link, seg)
+        seg = HTML_SRC_PATTERN.sub(repl_html_src, seg)
+        seg = HTML_HREF_PATTERN.sub(repl_html_href, seg)
+        out.append(seg)
+    return "".join(out)
+
 
 # -----------------------------
 # Content splitting & mapping
@@ -429,7 +556,15 @@ def process_single_repo(
     project_folder = os.path.join(output_folder, repo_name)
     os.makedirs(project_folder, exist_ok=True)
 
-    readme_text = fetch_raw_readme(repo_link, session)
+    readme_text, raw_url = fetch_raw_readme(repo_link, session)
+
+    # Rewrite relative images/links to absolute GitHub URLs so they survive
+    # being deployed outside GitHub.
+    parsed_raw = parse_raw_url(raw_url)
+    if parsed_raw:
+        gh_user, gh_repo, gh_branch, readme_dir = parsed_raw
+        readme_text = rewrite_relative_links(readme_text, gh_user, gh_repo, gh_branch, readme_dir)
+
     parts = split_sections(readme_text)
 
     repo_home = repo_home_url(repo_link)

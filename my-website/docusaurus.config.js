@@ -264,7 +264,7 @@ const config = {
             },
             {
               label: 'Education Tags',
-              to: '/training-catalog/education/tags',
+              to: '/training-catalog/Education/tags',
             },
             {
               label: 'API Tags',
