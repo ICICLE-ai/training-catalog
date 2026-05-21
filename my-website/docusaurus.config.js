@@ -206,6 +206,41 @@ const config = {
         },
       },
     ],
+
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: 'openapi-icicle-vector-db-service', // Plugin ID
+        docsPluginId: 'api', // Associate it with API docs
+        config: {
+          'icicle-vector-db-service': {
+            specPath: 'api_config_files/icicle-vector-db-service.json', // Path to OpenAPI spec
+            outputDir: 'api-docs/ICICLE Vector DB Service', // API docs location
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+        },
+      },
+    ],
+
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: 'openapi-icicle-embedding-service', // Plugin ID
+        docsPluginId: 'api', // Associate it with API docs
+        config: {
+          'icicle-embedding-service': {
+            specPath: 'api_config_files/icicle-embedding-service.json', // Path to OpenAPI spec
+            outputDir: 'api-docs/ICICLE Embedding Service', // API docs location
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+        },
+      },
+    ],
+
     [
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */

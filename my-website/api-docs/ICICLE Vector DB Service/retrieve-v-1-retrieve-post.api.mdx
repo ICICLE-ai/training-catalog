@@ -1,0 +1,72 @@
+---
+id: retrieve-v-1-retrieve-post
+title: "Retrieve"
+description: "Retrieve"
+sidebar_label: "Retrieve"
+hide_title: true
+hide_table_of_contents: true
+api: eJydV9tuGzcQ/RVin1pAV7dPenMUFTWSNK6sBAUkQ6Z2RxJjLrkluYoEQf/eGXKv0SWF/SCL5PDMcOYccnSMdAaGO6HVQxKNIgPOCNjBcjdcVt8zbV3UiTJueAoOjI1G82OkcIA7/unOeCZsd6ZfQaGVUDi5BZ6AwZGBf3NhAKGdyaET2XgLKY9Gx8gdMtpu0YfaoKUTTp7jnU7PAQSse6eTA+38ETPWyoFytMSzTIrYH6f/zWpFc7XLzNBhnQBLI8Q0hyWkK0gSCgGnhIPUNoJTOa6a6NQpJ7gx/NAI9m/CYJMKgyx1tnxtYAgMbuNzkfK9SPM0Gg0HAxwJVYxquJnO2Ae0TGDNc+nIMiCK2J9OHT6vfe7byTt1GhFLGVHOGpC4GVHWQmLp2jDthGAeE0Gp8yOehAGXjw2rkPHCmV59g9g10jGuEegQNjYioyEufYBDd8dlDizjwljmNEu5i7eMb7hQ1jG3BYbs4gl3HG0OUvOErQXIBElw3eWnYssf4Xg/ug3TzAI36MuAxbRatjrUrrwL21uohZpwtHltBRqCBNsKUyEZIWEvLyXIy0s7YkS7l5LVCWXcALv/6z3ucnoDCGJ6jH0lN5bFXLEVjBaKsS7jLBS1H7jXX2kt2VobBnseuxBOaSkFBkRrC6op0+tFFAwuMOJSDmshzc/U0KDQtLgHpkGGWA4Cw1xmeLJAnbvBgP61c/+UxzFYu84lmxbG0ZvVmlswS5Hcujm+oAnDW+ymCNtSC+cgTrTk33Z922twaGNt4PzmqM2evEFTzdcAK8U62Ls3y572Ika8zdWrvXS3VSDX7rZx2IoGJc3fei2UGr0o5CYJMdNlKstEVUdohNHiJlXvAc924yTTosQ/c19yrORPTY6LaigoHeTw+93duQJQ4CLx/GYTY7R5O/0TPLuQN0gqddxa/R+kKUWBl8PV1H3UIUBPA7u5xdtPqHW+gboO1019MtiMVk/UMWS5T0glKT9B7HX7Bsyl58Zr5Gd1pdyE8Au7RjnrEoUKXU/F+1CCW4/Rn7PZ4xlg4EebGCWJAqu3mlqvqstyWxz1d8O+qa2IH9O6DZrseZpJuNjGzAfP1QU4HFQXTl2FuhNovfg+TKHWulWK8cP444TdP7CveFQs2hOYnYjh7KEtli1+IAkYVwkrwucSn1+/yb9V9IDWqKgFrlyPjaVAVViGpN6JBMgKH1/9XeEMdGOdIiPw8ayOaXsYwQ5b0eB90PutN6DaURJT7qVU9KeNVLcirmhFFOpnEp93AsiNV1mowjzaDT2XCghM7JaqhAvH44pb+GLk6UTTvgo4j1933Ai+ouzNSVhFK0xKTISlBSz2mksLZwFVd0P0y7Sg768s6lwOFPuUC92371xw3us8mIwDatfLrbY4u33qHff4bmfupu1zg7iPn59maLwq2vNUJ7TH8O+UOvzEaDr4M6PqLP0c3lhcbXK6MEZRwKS//wAXTk/V
+sidebar_class_name: "post api-method"
+info_path: api/ICICLE Vector DB Service/icicle-ai-vector-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Retrieve"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/retrieve"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retrieve
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"properties":{"query_embedding":{"items":{"type":"number"},"type":"array","title":"Query Embedding"},"top_k":{"type":"integer","maximum":100,"minimum":1,"title":"Top K","default":10},"topic":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Topic"},"filter":{"anyOf":[{"properties":{"conditions":{"additionalProperties":true,"type":"object","title":"Conditions","description":"Key-value pairs to match against the metadata payload field"}},"type":"object","title":"MetadataFilter","description":"Filter search results by metadata fields.\n\nEach key-value pair matches against the nested ``metadata`` payload field.\nAll conditions are ANDed together.  Values can be:\n  - a string/number/bool for exact match\n  - a list for \"any of\" match"},{"type":"null"}]}},"type":"object","required":["query_embedding"],"title":"RetrieveRequest"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"user_id":{"type":"string","title":"User Id"},"top_k":{"type":"integer","title":"Top K"},"results":{"items":{"properties":{"id":{"type":"string","title":"Id"},"score":{"type":"number","title":"Score"},"topic":{"type":"string","title":"Topic"},"text":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Text"},"chunks":{"items":{"type":"string"},"type":"array","title":"Chunks"},"metadata":{"additionalProperties":true,"type":"object","title":"Metadata"}},"type":"object","required":["id","score","topic","chunks","metadata"],"title":"ResultItem"},"type":"array","title":"Results"}},"type":"object","required":["user_id","top_k","results"],"title":"RetrieveResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,0 +1,72 @@
+---
+id: embed-v-1-embed-post
+title: "Embed"
+description: "Generate embedding vectors for one or more text inputs. Pass `input_type: 'query'` to wrap inputs with the Qwen3 retrieval-instruction template; documents are embedded as-is."
+sidebar_label: "Embed"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVV1FT2zgQ/isavRTmkhDoPeWmDxxwXGa4K4W00xnaIYq9SVRsyZXkkDST/367kh3bMYTeDC/NAyTyerX77X6fVmseg42MzJzUig/4JSgwwgGDdAJxLNWMLSBy2lg21YZpBQz/pdoAc7B0TKosd7bHroW1bOx/3btVBgP2hX/Pway+8DFzmj0akRXG7FG6OXNzYB8eQb1lBpyRsBBJVyrrTB5RKOg9zRIM5A8W6yhPQeGLwpRxQcyE7Urb4x2uM4oY3xnGmIB/fr84vg9fMm0d2mTCiBQcGMsHd2uu8Afafu6ORCZtd6QfQKGVJATmIGIw+MvA91waQKcYFHS4jeaQCj5Yc0oQLTFYxActnXRJ299m8zU4Aev+1PGK3tz1GWnlMDV6JLIskZFP5OibpWKs21vqyTesRm3LC8ryJmzSiPmOe7Q5xpAZgshJsOQpLJPLwsXQL3R2GuGUWUwuARaypKon0jqmp8WKpbJ6kKkIQq3eTz22TXA2ne2KMEasCGUsrW3DiHBtOrzqoFaIbESrnRb6oPKU8vXtRnkU/UKpxzAVeYLpVqu7iY79e2PfoZaBiOahT3fb9OnmHJd+xwEL698w4tHTo8d9StsXmzlVy7sxneXW6ZQ5YR8a+xIFfbhdK2PYkm84U0jImD3OQbEKwXdvyuDe9Nh5QMJXTbAZ0VxGFfcYNkmauX2l7PBULK9AzdycD076/X6ttipPEr6pA04rmDwGlopE/miU89/t4raaE60TEAGJwkNgSBOYq5Pu1mNAGlxuFOZeqtSBgUinmDRpBOEVaWxkbGMQJpofYkX8h6hiM61sIAWmQ/+am93mUQTWTvOE3RTG/PUou3VY52yqY0gIBJnyBhlqSMb0XDjRpnZ4e49A/eMNNsF/ZScxo5nXvNLwHJ+32fg/iPcEczeNHCp/Velb/RH7WCnXwYsy8jTOQ7Rq6WIMSwq/POGe0kgy2QfQ0Fts6l5eDhHxmqCXzU6McZC/2vI5pVw26u/943ZvnubY/coV3cemQibY7weptCTbHQbLjPLtMAQSWZDSVySD0qorfFejDuAhddh7lY42RptnOjoGh7G1IS7W9zTrebCoYHjbhsGftEzicILyhbqGeQiFhxSCY1AfBD6LZITtJX+hRE9O2ol+Qj7EodY+CHaAR5BbBbXH0i5wtCHC+EO6/jvs9jp1/ns0uq4C8XHwF9P9ab62PdfhTXREJ5CdlWdGC2iy2LPtT0woJc39JFKGdaUDTkRb2n6fvCKvxMwr3XOa2eikQhcbzK/3Au0Ibq5prt0OsnT68qPF8ZFXHlyi+t1UY+bFUuBwArVRr9q9ruf1iagxolTmtcObDmN/IEx1Y4g5G55dXbDTIfNKxm7BLGQErYGGQExqd4pZuGYgBJNcJkhYxZJEpKIbZVk3W2HOiv0WBq/uViPZ5eXHv3psJB7AlrePTjEB2O0AgKx3LELmT2h29XPRQgo/LFTRfvLGZbg9dppgdCrOtKR7xgEsI8gcO8K7QOLmPw5Z0YmoMAvqUtaY9IP40Aal2BQ6RKTzRPQY9HvHvT71BpUyFZ5zxUXkoihlA7R1Rdhf8VpWdBmFc4SvSE+g3HhpCF18xxfH5TlMdJ5Ti+Pqej0RFj6aZLOh5TBeDO7w60IYKSbUeXdE0eKqRpyOpaUHyJSpSOzu3FiH8uCmUJVD9lyUD7B64naIUORk6xUjmJwFr93iZlJatNS1euM0os7aa/u1xvrr97cjNJ4U10ca8HAVrxekjvgXo6ELML3tRc6voRQKNctJiQY8+KTPfwHHhi8=
+sidebar_class_name: "post api-method"
+info_path: api/ICICLE Embedding Service/icicle-ai-embed-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Embed"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/embed"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Generate embedding vectors for one or more text inputs. Pass `input_type: "query"` to wrap inputs with the Qwen3 retrieval-instruction template; documents are embedded as-is.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","title":"EmbedRequest","required":["input"],"properties":{"input":{"title":"Input","description":"A single string or list of strings to embed.","anyOf":[{"type":"string"},{"type":"array","items":{"type":"string"}}]},"input_type":{"title":"Input Type","type":"string","enum":["query","document"],"default":"document","description":"`query` wraps each input with the Qwen3 instruction template; `document` embeds the raw text."},"instruction":{"title":"Instruction","description":"Custom task instruction for query-side inputs. Ignored when input_type='document'. Defaults to a generic retrieval prompt.","anyOf":[{"type":"string","maxLength":2000},{"type":"null"}],"default":null},"normalize":{"title":"Normalize","type":"boolean","default":true,"description":"L2-normalize the returned vectors (recommended for cosine search)."}}}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","title":"EmbedResponse","required":["model","dim","input_type","normalized","data"],"properties":{"model":{"type":"string","title":"Model"},"dim":{"type":"integer","title":"Dim"},"input_type":{"type":"string","enum":["query","document"],"title":"Input Type"},"normalized":{"type":"boolean","title":"Normalized"},"data":{"type":"array","items":{"type":"object","title":"EmbedItem","required":["index","embedding"],"properties":{"index":{"type":"integer","title":"Index"},"embedding":{"type":"array","items":{"type":"number"},"title":"Embedding"}}},"title":"Data"}}}}}},"401":{"description":"Authentication failed (missing, expired, malformed, or non-access token).","content":{"application/json":{"schema":{"type":"object","title":"ErrorResponse","required":["detail"],"properties":{"detail":{"type":"string","title":"Detail"}}}}}},"403":{"description":"Token is from a tenant other than icicleai.","content":{"application/json":{"schema":{"type":"object","title":"ErrorResponse","required":["detail"],"properties":{"detail":{"type":"string","title":"Detail"}}}}}},"422":{"description":"Validation Error (empty input, oversized list, oversized string).","content":{"application/json":{"schema":{"type":"object","title":"HTTPValidationError","properties":{"detail":{"type":"array","items":{"type":"object","title":"ValidationError","required":["loc","msg","type"],"properties":{"loc":{"type":"array","items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}}},"title":"Detail"}}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

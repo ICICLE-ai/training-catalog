@@ -1,0 +1,13 @@
+# Python dependencies for the training-catalog helper scripts used by the
+# .claude skills (readme_parser.py + api_parser.py).
+#
+# Canonical source is pyproject.toml / uv.lock — provision with:
+#   uv sync
+# This file is a plain-pip mirror for non-uv users:
+#   python -m venv .venv && .venv/bin/pip install -r requirements.txt
+#
+# (api_parser.py is standard-library only; these deps are for readme_parser.py.)
+
+requests>=2.31
+pandas>=2.0
+openpyxl>=3.1

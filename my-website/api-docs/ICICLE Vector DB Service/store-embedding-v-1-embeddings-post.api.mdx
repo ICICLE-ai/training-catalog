@@ -1,0 +1,72 @@
+---
+id: store-embedding-v-1-embeddings-post
+title: "Store Embedding"
+description: "Store Embedding"
+sidebar_label: "Store Embedding"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVsFuGjEQ/RXLp1aCBNKeuKUUqUiJEhFSVUIImfUAThZ7a3tJEOLfO2Mv7MISmubSHJKs/WY8fvNmxhtuMrDCK6P7kne488bCBJZTkFLp+WTVLj/cJDPO8wbPhBVL8GAd74w2XOMHmv5qDkWmXHNonkEjSmlcXICQYPHLwu9cWcAzvM2hwV2ygKXgnQ336wzCyRbPQKRXPq37227H0Qk4/83INVke+0yM9qA9bYksS1US7nX55IymtfLIzNKtvQJHX/sL0ofysHSVsHSOu5ZvG7sFYa1YV8Ls7a0JYzKVnLvUMAAQmSxy/exOnVjYvH1iN5qG45CaiZIn/SgkY3429MAs68vgCxMqpPCBH4EXIupEel9hKpJc+DLTJ0h8xdntzh59lfpZGglpcKnXd7Mgl+NrVqhOU05prlHLboOb7bZ+fKmBUSWRu0zseT7ltWtBeECv5NeCy4x2URFXrTb9keASqzJiAu0e8iQB52Z5ygYFmH9Yc0qeUwmWIoaUO7CT88BHhLCI/gfphXvLifDn4JEdya59iCWT77B5jKjC5j+pABkruasIobz1wXVOnTSAxFhZKOPr1VVdDD9FqmRINetZa+zHlSCxblR6UMCHgNQkB7vv4HBf+uO3i//GxABD7bv5ubTeouzFHMpO8jY0kMGGtLulEZDlUTA7YYcF0qB/rbipNZMucfnq/5pr4iaGX+Aq2SxTFDP0NhXfYwpOHbaD/BgO72sOoz6OugQNUNardCJsrAtDs3U/Pf0Cvy5X7ctytOI6CWVQDrjeq1hmKRwNqFFrvC/1kv3dMBntlsYHsyEYVfr7qdqsjB2lZ+Ygad1+96bHrvvsJ5KC6X0Au1IJdb+joojb9IZAuTChJbOAbmElUuaiEZshwi+AlV6xaoT2F6ybKqwfx1D+KyWBUMoy86JxBZqJWaJ2sLmUpF1gBCt8hcTTWxdfLloUP/G8FKHoiqdJPSkHge91SJq7zFKhQlXkNpRlzNeIr9q8wlsYKQvKKG5tNlPh4NGm2y0tYw4tPlBG+O9KWCWmROOIarF4DlHxSuVoA4UxE6mDWkj7dsI/DQrFf2a8cTrUZ1ifeIEh7TlhQ2uIkG702gwVWiJqDau0uMapl/mz2HFF5Pd3D0MET4snGqkLV614ocrF3xhNA9+cZB26WVjDJif0PKce0+HRJ/38AWuEn9k=
+sidebar_class_name: "post api-method"
+info_path: api/ICICLE Vector DB Service/icicle-ai-vector-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Store Embedding"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/embeddings"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Store Embedding
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"properties":{"embedding":{"items":{"type":"number"},"type":"array","title":"Embedding"},"topic":{"type":"string","title":"Topic"},"chunks":{"items":{"type":"string"},"type":"array","title":"Chunks"},"token_ids":{"items":{"type":"integer"},"type":"array","title":"Token Ids"},"metadata":{"additionalProperties":true,"type":"object","title":"Metadata"},"embedding_model":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Embedding Model"}},"type":"object","required":["embedding","topic","chunks"],"title":"EmbeddingCreate"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"id":{"type":"string","title":"Id"},"user_id":{"type":"string","title":"User Id"},"topic":{"type":"string","title":"Topic"},"created_at":{"type":"string","title":"Created At"},"updated_at":{"type":"string","title":"Updated At"},"embedding_model":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Embedding Model"}},"type":"object","required":["id","user_id","topic","created_at","updated_at"],"title":"EmbeddingRecord"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

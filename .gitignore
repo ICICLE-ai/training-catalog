@@ -18,6 +18,17 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Python (readme_parser.py) — bytecode, caches, and the uv virtualenv
+__pycache__/
+*.py[cod]
+.venv/
+.python-version
+
+# Data inputs (release-testing spreadsheets/CSVs are local-only, not committed)
+*.csv
+*.xlsx
+*.xls
+
 # OS / editor cruft
 .DS_Store
 

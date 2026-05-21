@@ -1,25 +1,31 @@
 import argparse
 import os
 import re
+import glob
 import json
 import posixpath
 import requests
 import pandas as pd  # required only if --excel_file is used
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote
 from typing import List, Optional, Tuple, Dict
 
 """
 README parser modes:
 1) Single repo mode:
    - uses --repo_link (+ optional --project_name, --tags, --release)
-2) Excel batch mode:
-   - uses --excel_file and reads metadata per row
-   - strict required columns in Excel:
-     * README        : GitHub repo URL or README blob URL
-     * Tags          : comma-separated tags (example: "AI, NLP, Demo")
-   - optional column:
-     * Component     : project/folder name; if missing/empty, repo name is derived from URL
-   - release is taken from CLI flag --release (same value applied to all rows for the run)
+2) Batch mode (Excel via --excel_file, or CSV via --csv_file):
+   - reads metadata per row from a table
+   - column resolution is case-insensitive and tolerant of the catalog's
+     release-spreadsheet headers:
+     * README        : GitHub repo URL or README blob URL          (required)
+     * Tags          : comma-separated tags (e.g. "AI4CI, Software")(required)
+                       matched by prefix, so "Tags: Training Catalog" also works
+     * Component     : project/folder name (optional; if missing/empty, derived
+                       from the repo URL). When present it is the folder name.
+     * Release Dates : YYYY-MM (optional); used per row when --release is absent
+   - extra columns (e.g. OPENAPI JSON, Version, Source Code) are ignored here —
+     they belong to the API-docs pipeline.
+   - --release (CLI), if given, overrides the per-row release for every row.
 """
 
 # -----------------------------
@@ -381,44 +387,138 @@ def is_badge_line(line: str) -> bool:
         or "badge" in s
     )
 
-def move_top_badges_after_description(content: str, extra_badges: Optional[List[str]] = None) -> str:
+# -----------------------------
+# License extraction / badge
+# -----------------------------
+#
+# ICICLE READMEs carry license info in a "## License" / "### License" section in a
+# few shapes: a shields.io License badge, a `[License: <name>](<link>)` link, or a
+# "licensed under the <X> License … see [LICENSE](…)" sentence. We pull the license
+# name + link out, drop the whole section from the body, and re-emit a single
+# standardized License badge in the centered badge block next to the GitHub badge.
+
+LICENSE_HEADING_RE = re.compile(r"^\s*#{1,6}\s*licen[sc]e\b.*$", re.IGNORECASE)
+SHIELDS_LICENSE_BADGE_RE = re.compile(
+    r"\[!\[[^\]]*\]\(\s*https?://img\.shields\.io/badge/License-(.+?)-[A-Za-z0-9]+\.svg[^)]*\)\]\(\s*([^)\s]+)\s*\)",
+    re.IGNORECASE,
+)
+LICENSE_TEXT_LINK_RE = re.compile(
+    r"\[\s*licen[sc]e\s*:?\s*([^\]]+?)\s*\]\(\s*([^)\s]+)\s*\)", re.IGNORECASE
+)
+LICENSED_UNDER_RE = re.compile(r"licensed under (?:the\s+)?(.+?)\s+licen[sc]e", re.IGNORECASE)
+
+
+def _decode_badge_label(s: str) -> str:
+    """shields.io badge label -> human text: '%20' -> space, '--' -> '-'."""
+    return s.replace("%20", " ").replace("--", "-").strip()
+
+
+def make_license_badge(name: str, link: str) -> str:
+    """Build a standardized shields.io License badge that links to the license."""
+    name = name.strip()
+    enc = name.replace("-", "--").replace(" ", "%20")
+    return (
+        f"[![License: {name}](https://img.shields.io/badge/License-{enc}-yellow.svg)]"
+        f"({link.strip()})"
+    )
+
+
+def is_license_badge(line: str) -> bool:
+    """True for a markdown badge line that represents a license."""
+    s = line.strip().lower()
+    return "shields.io/badge/license" in s or s.startswith(("[![license", "![license"))
+
+
+def extract_license(body: str) -> Tuple[Optional[str], str]:
     """
-    Move top badge lines to after the first description paragraph.
-    This keeps title + short description first in main project docs.
+    Find license info in a README body. Returns (license_badge_or_None, cleaned_body),
+    with the whole "License" section removed from the body when one is found. The raw
+    `License: …` text is dropped — we represent it only as the standardized badge.
+    """
+    lines = body.splitlines()
+    start = next((i for i, l in enumerate(lines) if LICENSE_HEADING_RE.match(l)), None)
+    if start is None:
+        return None, body
+
+    level = len(re.match(r"^\s*(#+)", lines[start]).group(1))
+    end = len(lines)
+    for j in range(start + 1, len(lines)):
+        m = re.match(r"^\s*(#+)\s", lines[j])
+        if m and len(m.group(1)) <= level:  # next heading of same/higher level
+            end = j
+            break
+    section = "\n".join(lines[start:end])
+
+    badge = None
+    mb = SHIELDS_LICENSE_BADGE_RE.search(section)
+    mt = LICENSE_TEXT_LINK_RE.search(section)
+    if mb:  # an existing shields License badge — reuse its name + link
+        badge = make_license_badge(_decode_badge_label(mb.group(1)), mb.group(2))
+    elif mt:  # a `[License: <name>](<link>)` text link
+        badge = make_license_badge(mt.group(1), mt.group(2))
+    else:  # "licensed under the <X> License … [LICENSE](link)"
+        mu = LICENSED_UNDER_RE.search(section)
+        ml = MD_LINK_PATTERN.search(section)
+        if mu and ml:
+            badge = make_license_badge(mu.group(1), ml.group(2))
+
+    cleaned = "\n".join(lines[:start] + lines[end:]).strip()
+    return badge, cleaned
+
+
+def _center_badges(badges: List[str]) -> List[str]:
+    """Wrap badge lines in a center-aligned div. The blank lines are required so MDX
+    renders the markdown badges inside the HTML block."""
+    return ['<div align="center">', ""] + badges + ["", "</div>"]
+
+
+def move_top_badges_after_description(
+    content: str,
+    github_badge: Optional[str] = None,
+    license_badge: Optional[str] = None,
+) -> str:
+    """
+    Collect badge/shield lines from the top of the content and re-emit them as a single
+    center-aligned block placed right after the first description paragraph. Order:
+    GitHub badge, License badge, then any other badges. If no license_badge is supplied
+    but a license badge is found among the top badges, it is used as the license badge
+    (so it still lands next to GitHub).
     """
     lines = content.splitlines()
-    if not lines:
-        badges = extra_badges or []
-        return "\n".join(badges).strip()
 
-    badges: List[str] = []
-    if extra_badges:
-        badges.extend(extra_badges)
+    # Collect badge lines near the top (after an optional title), removing them.
+    collected: List[str] = []
+    if lines:
+        i = 0
+        if i < len(lines) and re.match(r"^\s*#\s+.+$", lines[i]):
+            i += 1
+        while i < len(lines) and not lines[i].strip():
+            i += 1
+        badge_start = i
+        while i < len(lines) and (is_badge_line(lines[i]) or not lines[i].strip()):
+            if is_badge_line(lines[i]):
+                collected.append(lines[i].strip())
+            i += 1
+        if i > badge_start:
+            lines = lines[:badge_start] + lines[i:]
 
-    # Collect badge lines appearing near top (after optional title).
-    i = 0
-    if i < len(lines) and re.match(r"^\s*#\s+.+$", lines[i]):
-        i += 1
+    # Separate any license badge so it can sit right next to the GitHub badge.
+    other_badges = [b for b in collected if not is_license_badge(b)]
+    if license_badge is None:
+        license_badge = next((b for b in collected if is_license_badge(b)), None)
 
-    while i < len(lines) and not lines[i].strip():
-        i += 1
+    ordered: List[str] = []
+    if github_badge:
+        ordered.append(github_badge)
+    if license_badge:
+        ordered.append(license_badge)
+    ordered.extend(other_badges)
+    ordered = unique_tags_keep_order([b for b in ordered if b.strip()])
 
-    badge_start = i
-    while i < len(lines) and (is_badge_line(lines[i]) or not lines[i].strip()):
-        if is_badge_line(lines[i]):
-            badges.append(lines[i].strip())
-        i += 1
-
-    # Remove collected badge area from original content.
-    if i > badge_start:
-        lines = lines[:badge_start] + lines[i:]
-
-    badges = unique_tags_keep_order([b for b in badges if b.strip()])
-    if not badges:
+    if not ordered:
         return "\n".join(lines).strip()
 
-    # Find insertion point after first non-empty paragraph (usually the short description).
-    insert_at = len(lines)
+    # Insertion point: after the first non-empty paragraph (the short description).
     idx = 0
     while idx < len(lines) and not lines[idx].strip():
         idx += 1
@@ -426,7 +526,7 @@ def move_top_badges_after_description(content: str, extra_badges: Optional[List[
         idx += 1
     while idx < len(lines) and not lines[idx].strip():
         idx += 1
-
+    insert_at = len(lines)
     para_started = False
     while idx < len(lines):
         if lines[idx].strip():
@@ -440,10 +540,94 @@ def move_top_badges_after_description(content: str, extra_badges: Optional[List[
 
     prefix = lines[:insert_at]
     suffix = lines[insert_at:]
-    stitched = prefix + [""] + badges + [""] + suffix
+    stitched = prefix + [""] + _center_badges(ordered) + [""] + suffix
     return "\n".join(stitched).strip()
 
-def save_file(folder: str, fname: str, content: str, tags: List[str], github_link: Optional[str] = None):
+# -----------------------------
+# Cross-link to API docs (same site)
+# -----------------------------
+#
+# If this component also has OpenAPI docs in the site (api-docs/<Component>/, deployed
+# by the icicle-tc-deploy-api skill), the main doc gets a link to that API reference
+# page. The link is a root-relative route ('/api/<Component>/<info-id>') so Docusaurus
+# prepends the site baseUrl (…/training-catalog/api/…) and the broken-link checker
+# validates it. The check is *best-effort and order-independent*: if the API folder
+# isn't there yet, no link is added (no broken link) — re-run the doc skill after the
+# API docs exist to add it. So there's no ordering deadlock between the two skills.
+
+def find_api_doc_route(component_name: str, api_docs_dir: str) -> Optional[str]:
+    """
+    Return the in-site API info-page route for a component if its API docs exist under
+    `api_docs_dir/<component_name>/`, else None. The route is read from a generated
+    *.api.mdx `info_path` (authoritative), falling back to the *.info.mdx `id`. Spaces
+    are %20-encoded so it's a valid markdown link target.
+    """
+    folder = os.path.join(api_docs_dir, component_name)
+    if not os.path.isdir(folder):
+        return None
+
+    info_path = None
+    for f in sorted(glob.glob(os.path.join(folder, "*.api.mdx"))):
+        m = re.search(r"^info_path:\s*(.+?)\s*$", open(f, encoding="utf-8").read(), re.MULTILINE)
+        if m:
+            info_path = m.group(1).strip()
+            break
+    if not info_path:
+        infos = sorted(glob.glob(os.path.join(folder, "*.info.mdx")))
+        if not infos:
+            return None
+        text = open(infos[0], encoding="utf-8").read()
+        mid = re.search(r"^id:\s*(.+?)\s*$", text, re.MULTILINE)
+        info_id = mid.group(1).strip() if mid else os.path.basename(infos[0])[: -len(".info.mdx")]
+        info_path = f"api/{component_name}/{info_id}"
+
+    return quote("/" + info_path.lstrip("/"), safe="/")
+
+
+def _first_paragraph_end(lines: List[str]) -> int:
+    """Index just past the first non-empty paragraph (skipping a leading title)."""
+    idx = 0
+    while idx < len(lines) and not lines[idx].strip():
+        idx += 1
+    if idx < len(lines) and re.match(r"^\s*#\s+.+$", lines[idx]):
+        idx += 1
+    while idx < len(lines) and not lines[idx].strip():
+        idx += 1
+    started = False
+    while idx < len(lines):
+        if lines[idx].strip():
+            started = True
+            idx += 1
+        elif started:
+            return idx
+        else:
+            idx += 1
+    return len(lines)
+
+
+def insert_api_reference(body: str, route: str, label: str) -> str:
+    """
+    Insert a Docusaurus tip linking to the component's API docs, right after the
+    centered badge block (its closing </div>) or, failing that, after the first
+    paragraph. Idempotent: the body is rebuilt from the README every run, so this
+    never stacks duplicate callouts.
+    """
+    admonition = (
+        ":::tip API reference\n"
+        f"This component exposes an HTTP API — see its "
+        f"[API documentation]({route}) on this site.\n"
+        ":::"
+    )
+    lines = body.splitlines()
+    insert_at = next((i + 1 for i, l in enumerate(lines) if l.strip() == "</div>"), None)
+    if insert_at is None:
+        insert_at = _first_paragraph_end(lines)
+    new_lines = lines[:insert_at] + ["", admonition, ""] + lines[insert_at:]
+    return "\n".join(new_lines).strip()
+
+
+def save_file(folder: str, fname: str, content: str, tags: List[str],
+              github_link: Optional[str] = None, api_doc_route: Optional[str] = None):
     """
     Save a Markdown file with frontmatter.
     Behavior:
@@ -451,6 +635,7 @@ def save_file(folder: str, fname: str, content: str, tags: List[str], github_lin
       - appends new tags (deduplicated)
       - removes stray body tag metadata lines ('tags:' / 'Tasg,tags:')
       - ensures badges are placed after the initial description in main files
+      - when api_doc_route is given, adds a tip linking to the component's API docs
     """
     os.makedirs(folder, exist_ok=True)
     out_path = os.path.join(folder, fname)
@@ -467,7 +652,14 @@ def save_file(folder: str, fname: str, content: str, tags: List[str], github_lin
     body = remove_stray_tag_lines(body)
     if github_link:
         github_badge = f'[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)]({github_link})'
-        body = move_top_badges_after_description(body, extra_badges=[github_badge])
+        # Pull the license out of its README section and re-emit it as a badge next
+        # to the GitHub badge; the raw "License: …" text is dropped from the body.
+        license_badge, body = extract_license(body)
+        body = move_top_badges_after_description(
+            body, github_badge=github_badge, license_badge=license_badge
+        )
+        if api_doc_route:
+            body = insert_api_reference(body, api_doc_route, os.path.splitext(fname)[0])
     else:
         body = move_top_badges_after_description(body)
 
@@ -504,7 +696,8 @@ def classify_and_write_sections(
     base_tags: List[str],
     repo_link_for_badge: str,
     project_name: str,
-    release: Optional[str] = None
+    release: Optional[str] = None,
+    api_doc_route: Optional[str] = None
 ):
     """
     - Save the first section as {project_name}.md (with optional Release tag injected only here)
@@ -521,7 +714,8 @@ def classify_and_write_sections(
         fname=f"{project_name}.md",
         content=parts[0],
         tags=main_tags,
-        github_link=repo_link_for_badge
+        github_link=repo_link_for_badge,
+        api_doc_route=api_doc_route
     )
 
     written = set()
@@ -544,17 +738,24 @@ def process_single_repo(
     output_folder: str,
     tags: List[str],
     release: Optional[str],
-    session: requests.Session
+    session: requests.Session,
+    api_docs_dir: Optional[str] = None
 ):
     """
     Process a single repo:
       - fetch README
       - split into sections
       - write markdown files and category json
+      - cross-link to the component's API docs if they already exist on the site
     """
     repo_name = project_name or derive_project_name(repo_link)
     project_folder = os.path.join(output_folder, repo_name)
     os.makedirs(project_folder, exist_ok=True)
+
+    # Default api-docs to the sibling of the docs output root (my-website/api-docs).
+    if api_docs_dir is None:
+        api_docs_dir = os.path.join(os.path.dirname(os.path.abspath(output_folder)), "api-docs")
+    api_doc_route = find_api_doc_route(repo_name, api_docs_dir)
 
     readme_text, raw_url = fetch_raw_readme(repo_link, session)
 
@@ -571,7 +772,7 @@ def process_single_repo(
 
     if not parts:
         # No content; write an empty main file at least
-        save_file(project_folder, f"{repo_name}.md", "", (tags + ([f"Release {release}"] if release else [])), github_link=repo_home)
+        save_file(project_folder, f"{repo_name}.md", "", (tags + ([f"Release {release}"] if release else [])), github_link=repo_home, api_doc_route=api_doc_route)
     else:
         classify_and_write_sections(
             folder=project_folder,
@@ -579,63 +780,99 @@ def process_single_repo(
             base_tags=tags,
             repo_link_for_badge=repo_home,
             project_name=repo_name,
-            release=release
+            release=release,
+            api_doc_route=api_doc_route
         )
 
     write_category_json(project_folder, repo_name)
 
 # -----------------------------
-# Excel helpers
+# Batch (Excel / CSV) helpers
 # -----------------------------
 
-def parse_excel_tags(tags_cell, row_number: int) -> List[str]:
+def find_column(df: "pd.DataFrame", *candidates: str, prefix: bool = False) -> Optional[str]:
     """
-    Parse comma-separated tags from a single Excel cell.
-    Strict: this value is required in Excel mode.
+    Resolve a column name case-insensitively. First tries an exact (lowercased,
+    trimmed) match against each candidate. If none match and prefix=True, returns
+    the first column whose lowercased/trimmed name *starts with* a candidate — this
+    is how "Tags: Training Catalog" resolves for the candidate "tags".
+    """
+    lower = {str(c).strip().lower(): c for c in df.columns}
+    for cand in candidates:
+        if cand.strip().lower() in lower:
+            return lower[cand.strip().lower()]
+    if prefix:
+        for c in df.columns:
+            cl = str(c).strip().lower()
+            if any(cl.startswith(cand.strip().lower()) for cand in candidates):
+                return c
+    return None
+
+def parse_tags_cell(tags_cell, row_number: int) -> List[str]:
+    """
+    Parse comma-separated tags from a single table cell. Required in batch mode.
     """
     if pd.isna(tags_cell):
-        raise ValueError(f"Row {row_number}: 'Tags' is required and cannot be empty.")
+        raise ValueError(f"Row {row_number}: tags column is required and cannot be empty.")
     raw = str(tags_cell).strip()
     if not raw or raw.lower() == "nan":
-        raise ValueError(f"Row {row_number}: 'Tags' is required and cannot be empty.")
+        raise ValueError(f"Row {row_number}: tags column is required and cannot be empty.")
     parsed_tags = [t.strip() for t in raw.split(",") if t.strip()]
     if not parsed_tags:
-        raise ValueError(f"Row {row_number}: 'Tags' must contain at least one comma-separated tag.")
+        raise ValueError(f"Row {row_number}: tags must contain at least one comma-separated tag.")
     return parsed_tags
 
-def read_repos_from_excel(xlsx_path: str) -> List[Tuple[str, Optional[str], List[str]]]:
+def read_repos_from_table(df: "pd.DataFrame", source_desc: str) -> List[Tuple[str, Optional[str], List[str], Optional[str]]]:
     """
-    Reads an Excel file and returns a list of:
-      (repo_link, project_name_opt, row_tags)
-    Strict required columns:
-      - README
-      - Tags
-    Optional columns:
-      - Component
+    Resolve catalog columns from a DataFrame (Excel or CSV) and return a list of:
+      (repo_link, project_name_opt, row_tags, row_release_opt)
+    Required (resolved case-insensitively): README, a Tags* column.
+    Optional: Component (folder name), Release Dates (per-row release).
+    Rows with an empty README are skipped, so blank trailing rows don't break a batch.
     """
-    df = pd.read_excel(xlsx_path)
-    required_columns = ["README", "Tags"]
-    missing = [col for col in required_columns if col not in df.columns]
-    if missing:
+    readme_col = find_column(df, "README")
+    if not readme_col:
+        raise ValueError(f"{source_desc} is missing the required 'README' column.")
+    tags_col = find_column(df, "Tags", prefix=True)
+    if not tags_col:
         raise ValueError(
-            "Excel file is missing required column(s): "
-            + ", ".join(missing)
-            + ". Required: README, Tags."
+            f"{source_desc} is missing a tags column "
+            "(a column named 'Tags' or beginning with 'Tags', e.g. 'Tags: Training Catalog')."
         )
-    
-    repos: List[Tuple[str, Optional[str], List[str]]] = []
-    has_component = "Component" in df.columns
+    component_col = find_column(df, "Component")
+    release_col = find_column(df, "Release Dates", "Release", prefix=True)
 
+    repos: List[Tuple[str, Optional[str], List[str], Optional[str]]] = []
     for idx, row in df.iterrows():
-        row_number = idx + 2  # +2 because DataFrame is 0-based and row 1 is header in Excel
-        link = str(row["README"]).strip()
+        row_number = idx + 2  # +2: DataFrame is 0-based and row 1 is the header
+        link = str(row[readme_col]).strip()
         if not link or link.lower() == "nan":
-            raise ValueError(f"Row {row_number}: 'README' is required and cannot be empty.")
+            continue  # skip rows without a README
 
-        proj = str(row["Component"]).strip() if has_component and not pd.isna(row["Component"]) else None
-        row_tags = parse_excel_tags(row["Tags"], row_number)
-        repos.append((link, proj, row_tags))
+        proj = None
+        if component_col is not None and not pd.isna(row[component_col]):
+            proj = str(row[component_col]).strip() or None
+            if proj and proj.lower() == "nan":
+                proj = None
+
+        row_tags = parse_tags_cell(row[tags_col], row_number)
+
+        row_release = None
+        if release_col is not None and not pd.isna(row[release_col]):
+            rv = str(row[release_col]).strip()
+            if rv and rv.lower() != "nan":
+                row_release = rv
+
+        repos.append((link, proj, row_tags, row_release))
     return repos
+
+def read_repos_from_excel(xlsx_path: str) -> List[Tuple[str, Optional[str], List[str], Optional[str]]]:
+    """Read component rows from an Excel file. See read_repos_from_table for columns."""
+    return read_repos_from_table(pd.read_excel(xlsx_path), f"Excel file '{xlsx_path}'")
+
+def read_repos_from_csv(csv_path: str) -> List[Tuple[str, Optional[str], List[str], Optional[str]]]:
+    """Read component rows from a CSV file. See read_repos_from_table for columns."""
+    return read_repos_from_table(pd.read_csv(csv_path), f"CSV file '{csv_path}'")
 
 # -----------------------------
 # CLI
@@ -646,13 +883,21 @@ def parse_args() -> argparse.Namespace:
     # Single-run options
     parser.add_argument("--repo_link", type=str, help="GitHub repository URL or README blob URL (non-raw).")
     parser.add_argument("--project_name", type=str, help="Project name (folder and main file). If omitted, derived from repo URL.")
-    # Batch mode via Excel
+    # Batch mode via Excel or CSV
     parser.add_argument(
         "--excel_file",
         type=str,
         help=(
-            "Path to an Excel file. Required columns: README, Tags. "
-            "Optional: Component."
+            "Path to an Excel file. Required columns: README, Tags (matched by "
+            "prefix). Optional: Component (folder name), Release Dates."
+        ),
+    )
+    parser.add_argument(
+        "--csv_file",
+        type=str,
+        help=(
+            "Path to a CSV file (same columns as --excel_file). Use this for the "
+            "release-testing catalog CSV."
         ),
     )
     # Output and metadata
@@ -661,12 +906,29 @@ def parse_args() -> argparse.Namespace:
         "--tags",
         nargs="+",
         default=[],
-        help="Base tags (single mode only). Ignored when --excel_file is used because tags come from Excel 'Tags' column.",
+        help="Base tags (single mode only). Ignored in batch mode because tags come from the table's Tags column.",
     )
     parser.add_argument(
         "--release",
         type=str,
-        help="Release in 'YYYY-MM' format. Applied to generated main file(s). In --excel_file mode, one release value is used for all rows.",
+        help="Release in 'YYYY-MM' format, added as 'Release <value>' to main file(s). Overrides any per-row release in batch mode; otherwise the table's Release column is used per row.",
+    )
+    # Targeted update
+    parser.add_argument(
+        "--only",
+        nargs="+",
+        metavar="COMPONENT",
+        help="Batch mode: process only the row(s) whose Component matches, "
+             "case-insensitive. Comma-separated (names contain spaces), e.g. "
+             '--only "ICICLE Vector DB Service, Smart Labeler". Update a subset '
+             "without rerunning the whole table.",
+    )
+    # Cross-linking
+    parser.add_argument(
+        "--api_docs_dir",
+        type=str,
+        help="Path to the site's api-docs root. Defaults to the 'api-docs' sibling of "
+             "--output_folder. If api-docs/<Component>/ exists, the main doc links to it.",
     )
     # Auth
     parser.add_argument("--github_pat", type=str, help="Optional GitHub PAT (overrides GITHUB_PAT env var).")
@@ -676,27 +938,46 @@ def main():
     args = parse_args()
     session = build_requests_session(args.github_pat)
 
-    # Validation: either single mode or excel mode must be present
-    if not args.excel_file and not args.repo_link:
-        raise SystemExit("Provide either --repo_link for single-run OR --excel_file for batch processing.")
+    # Validation: exactly one input mode
+    batch_file = args.excel_file or args.csv_file
+    if args.excel_file and args.csv_file:
+        raise SystemExit("Provide only one of --excel_file or --csv_file, not both.")
+    if not batch_file and not args.repo_link:
+        raise SystemExit("Provide --repo_link for single-run OR --excel_file/--csv_file for batch processing.")
 
-    if args.excel_file:
+    if batch_file:
         if args.tags:
             raise SystemExit(
-                "In --excel_file mode, do not pass --tags. "
-                "Use Excel column 'Tags' per row."
+                "In batch mode, do not pass --tags. Tags come from the table's Tags column per row."
             )
-        repos = read_repos_from_excel(args.excel_file)
+        repos = read_repos_from_csv(args.csv_file) if args.csv_file else read_repos_from_excel(args.excel_file)
         if not repos:
-            raise SystemExit("No valid rows found in the Excel file.")
-        for repo_link, proj_name, row_tags in repos:
+            raise SystemExit("No valid rows (with a README) found in the batch file.")
+        if args.only:
+            # Accept a comma-separated list and/or multiple args; names contain spaces
+            # so commas (not spaces) are the delimiter.
+            names = [n.strip() for n in ",".join(args.only).split(",") if n.strip()]
+            wanted = {n.lower() for n in names}
+            filtered = [r for r in repos if r[1] and r[1].strip().lower() in wanted]
+            if not filtered:
+                available = ", ".join(sorted({r[1] for r in repos if r[1]})) or "(none)"
+                raise SystemExit(
+                    f"--only matched no rows for: {', '.join(names)}. "
+                    f"Available components: {available}"
+                )
+            missing = wanted - {r[1].strip().lower() for r in filtered}
+            if missing:
+                print(f"warning: --only names not found, skipped: {', '.join(sorted(missing))}")
+            repos = filtered
+        for repo_link, proj_name, row_tags, row_release in repos:
             process_single_repo(
                 repo_link=repo_link,
-                project_name=proj_name or args.project_name,  # allow CLI to override, else use Excel, else derive
+                project_name=proj_name or args.project_name,  # CLI override, else table Component, else derived
                 output_folder=args.output_folder,
                 tags=row_tags,
-                release=args.release,
-                session=session
+                release=args.release or row_release,  # CLI release wins, else per-row release
+                session=session,
+                api_docs_dir=args.api_docs_dir
             )
     else:
         # Single repo path
@@ -706,7 +987,8 @@ def main():
             output_folder=args.output_folder,
             tags=args.tags,
             release=args.release,
-            session=session
+            session=session,
+            api_docs_dir=args.api_docs_dir
         )
 
 if __name__ == "__main__":

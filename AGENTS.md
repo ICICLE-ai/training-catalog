@@ -33,15 +33,25 @@ npm install            # install deps (first run)
 npm run start          # local dev server
 npm run build          # production build — the gate for "done"; must exit clean
 npm run serve          # serve the production build locally
-npx docusaurus gen-api-docs <id> --clean   # generate OpenAPI docs for a spec
-npx docusaurus clean-api-docs <id>          # remove generated OpenAPI docs for a spec
+npx docusaurus gen-api-docs <id> -p openapi-<id>     # generate OpenAPI docs (‑p required: multiple plugin instances; no --clean flag in 3.8)
+npx docusaurus clean-api-docs <id> -p openapi-<id>   # remove generated OpenAPI docs for a spec
 ```
 
-Python (for the README parser): `pip install requests pandas openpyxl`. Set
-`GITHUB_PAT` to fetch READMEs from private repos.
+Python: deps are declared at the **repo root** in `pyproject.toml` + `uv.lock` (with a
+plain `requirements.txt` mirror). `uv sync` provisions the repo-root `uv` virtualenv
+(`.venv`, gitignored); run `readme_parser.py` via `../.venv/bin/python …`. The API
+helper `api_parser.py` is standard-library only — run it with plain `python3` (no
+venv). Set `GITHUB_PAT` to fetch READMEs from private repos.
 
 `onBrokenLinks` / `onBrokenMarkdownLinks` are set to `warn`, so link problems don't
 fail the build — but MDX compile errors do.
+
+The `docusaurus-plugin-umami` analytics plugin requires `UMAMI_WEBSITE_ID`,
+`UMAMI_ANALYTICS_DOMAIN`, and `UMAMI_DATA_HOST_URL` env vars; CI provides the real
+secrets. For a local verification build, prefix `npm run build` with throwaway
+placeholders (e.g. `UMAMI_WEBSITE_ID=local-verify UMAMI_ANALYTICS_DOMAIN=example.com
+UMAMI_DATA_HOST_URL=https://example.com npm run build`) — never edit the plugin config
+to dodge the missing-secret error.
 
 ## Skills
 
@@ -49,18 +59,28 @@ Three skills support this repo. All are **user-invoked** (`disable-model-invocat
 true`) — run them when the user asks, not automatically.
 
 ### `.claude/skills/icicle-tc-deploy-doc` — Component docs deploy
-Fetches a component's GitHub README, runs the bundled `readme_parser.py` to split it
-into Docusaurus docs under `my-website/docs/<Component>/`, merges (never wipes) tags
-and content, rewrites relative images→`raw.githubusercontent.com` and other relative
-links→`github.com/.../blob/...`, then builds and fixes errors. The parser
-(`readme_parser.py`) is bundled inside this skill folder. See its `SKILL.md`.
+Fetches a component's GitHub README (single repo, or a batch **Excel/CSV** — e.g. the
+release-testing catalog CSV), runs the bundled `readme_parser.py` to split it into
+Docusaurus docs under `my-website/docs/<Component>/`, merges (never wipes) tags and
+content, rewrites relative images→`raw.githubusercontent.com` and other relative
+links→`github.com/.../blob/...`, then builds and fixes errors. Batch columns are
+resolved tolerantly: `README`, a `Tags…` column, optional `Component` (the folder
+name) and `Release Dates`. In the main doc it also standardizes badges (centered
+block, GitHub + a license badge lifted from the README's License section) and, when
+`api-docs/<Component>/` exists, adds a baseUrl-aware `:::tip` link to that API
+reference page (best-effort, no ordering deadlock — re-run after API docs exist). The
+parser (`readme_parser.py`) is bundled inside this skill folder. See its `SKILL.md`.
 
 ### `.claude/skills/icicle-tc-deploy-api` — API docs deploy
-Takes a CSV of GitHub OpenAPI-spec links (with a `tags` column), a single spec link,
-or a local spec file; stages the JSON under `api_config_files/`, wires a
-`docusaurus-plugin-openapi-docs` config entry, runs `gen-api-docs`, injects the tag
-list into every generated `*.api.mdx` (gen-api-docs omits tags), then builds and
-fixes errors. GitHub sources get a Title-Cased repo-name folder. See its `SKILL.md`.
+Takes a CSV of components (the release-testing catalog CSV: `Component`, `OpenAPI JSON`,
+`Tags…`, `Release Dates` columns — only rows with an OpenAPI JSON produce docs), a
+single spec link, or a local spec file; stages the JSON under `api_config_files/`,
+wires a `docusaurus-plugin-openapi-docs` config entry, runs `gen-api-docs`, injects the
+tag list into every generated `*.api.mdx` (gen-api-docs omits tags), then builds and
+fixes errors. The `api-docs/<Name>/` folder comes from the CSV `Component` column (or a
+Title-Cased repo name for a bare GitHub link). Repetitive Python work (read CSV rows,
+stage+validate spec, print the config block, inject tags) is bundled as the
+stdlib-only `api_parser.py` next to the skill. See its `SKILL.md`.
 
 ### `icicle-readme-skill` — Generic ICICLE README scaffolder
 Scaffolds/updates a single top-level `README.md` for any `github.com/ICICLE-ai/`
@@ -85,7 +105,10 @@ release a doc was generated for. Don't invent tags — ask the user if unclear.
 
 - Run build/gen commands from `my-website/`.
 - Updating docs is **additive**: re-run the parser over an existing component folder
-  rather than deleting it — tags accumulate and content refreshes in place.
+  rather than deleting it — tags accumulate and content refreshes in place. To update
+  a subset (not the whole CSV), pass `--only "<Component>[, <Component>…]"` (comma-
+  separated, case-insensitive) to the doc parser / `api_parser.py csv-rows`; then run a
+  single global `npm run build`.
 - Edit generated files narrowly; don't reformat unrelated content.
 - **Do not commit, push, or deploy unless the user explicitly asks.** A push to
   `docusaurus-demo` triggers the live GitHub Pages deploy.

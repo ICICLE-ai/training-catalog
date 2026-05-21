@@ -1,0 +1,15 @@
+[project]
+name = "training-catalog-tools"
+version = "0.1.0"
+description = "Python helpers for the ICICLE training-catalog Docusaurus site: the README parser (.claude/skills/icicle-tc-deploy-doc/readme_parser.py) and the OpenAPI helper (.claude/skills/icicle-tc-deploy-api/api_parser.py)."
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.31",   # readme_parser.py: fetch READMEs from GitHub
+    "pandas>=2.0",      # readme_parser.py: read --csv_file / --excel_file batch tables
+    "openpyxl>=3.1",    # readme_parser.py: Excel engine for pandas (--excel_file mode)
+]
+
+# This repo is a Node/Docusaurus site; the Python here is a set of helper scripts,
+# not an installable package — tell uv to provision only the dependencies.
+[tool.uv]
+package = false

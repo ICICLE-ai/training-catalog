@@ -1,0 +1,72 @@
+---
+id: update-user-embedding-v-1-embeddings-embedding-id-put
+title: "Update User Embedding"
+description: "Update User Embedding"
+sidebar_label: "Update User Embedding"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9Vk1v4zYQ/SsETy3gxE7ak2+pG6ABNmiQdRYFDMOgpbHNjUyyJOWNYei/d4a0RMlOlG2w2BwciXrzwTdvhjxwbcAKL7W6y/mYlyYXHhalA7uA7RLyXKr1YneVXtyi9UHmi4UpPR9wI6zYggfr+Hh24Apf0F0biSCpcM0Iv8FnC/+W0gIG9baEAXfZBraCjw/c7w3ZOm/REJFe+oIWbmtnDFOtqkET5Z+LqTDSXUz1M6g6zAZEDvZDgbr+qmoenYDzf+h8T5anPjOtPChPn4QxhcwCo8OvTitaSyGNJb69BEdvDT3BUO3/XgXypIetayWoSsRZXg3qBWGt2HNioEEUBac8z7gKVtrIrBuiu/U+T9NgjF6yTameXX+mjb/vz3QS3YY0kW4UyjsxJFK9/p90hEqibEIclKlAlYtuGIF0UdFE8dCqUSzv0a1efoXM9wa6r31jnCT+rc6h+GgBkuzvg5uqOk3oFexT6GPEEtqCM1q5qLnr0Yj+5eAyKw3tGO0+l1kGzq3Kgj0ewfzDqsZW72ku6t0BDwOmH/iEEBbRjYDfwiaRWsB95wvh++CTiGI3PuQSuHrPJjJa2/zE2qZZM+Nhitbc1bx0dt3ZzmuRHiHTNj8q4/fr63MxfBGFzEOp2a212n5cCTl2gwzkNE3cBRQ663z9Dg6b9p+fDoC02U86Jhi63a37ynqPshdrSNOk5/whMtiUvlZ0yNDBR/Ba2GGBNOhfWm7OenRCXL74d2tN3MT0j7hWNVOJYoXepuLPWIK+ofHXdPpw5jDqoyuM2AIsNGY6YMJA3Wi6PdRXATzgx3y4uxqmW8Pw0L4LVAgj8TymY/X2RWxNASfH4mw0b9o/VaQ+imb10rxzegSj1pR/rV9bR5VUK90p5ORu8umW3dyxL0gUlvwz2J3MaCKeNEr87PAHJcSEypkFdAs7UTAXjdgKEX4DLHnFThLKX7JJIbGnHMOW2MkcCCUt098UrsBFprdIJw6cxOElZrDDG1aMPrr87XJE+Rvt/FaERjxeiN4qVCf9RqGkxqEphAz9UtrQsLGIM7674i32HL6MO5c6ZHqD8Ql6OCyFgydbVBUtY2UtXpZm+LgTVoolkYudnUtHz6iXlSgcnGXVzBr+y+OxHX5lfPB6trXqFWkeaS/pDR+fYX96/QwD43gr/OF5xHinF9EmIZpfETKJXi/CGEmIs6maLG7waDa+Fztv9eDD0xSxy+NFldSOi1Z8o+mCv4EdHTYZJm5Yw0Es1LqkOTjm0SX9/QdRgCOV
+sidebar_class_name: "put api-method"
+info_path: api/ICICLE Vector DB Service/icicle-ai-vector-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update User Embedding"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/v1/embeddings/{embedding_id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update User Embedding
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"embedding_id","in":"path","required":true,"schema":{"type":"string","title":"Embedding Id"}},{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"properties":{"embedding":{"anyOf":[{"items":{"type":"number"},"type":"array"},{"type":"null"}],"title":"Embedding"},"topic":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Topic"},"chunks":{"anyOf":[{"items":{"type":"string"},"type":"array"},{"type":"null"}],"title":"Chunks"},"token_ids":{"anyOf":[{"items":{"type":"integer"},"type":"array"},{"type":"null"}],"title":"Token Ids"},"metadata":{"anyOf":[{"additionalProperties":true,"type":"object"},{"type":"null"}],"title":"Metadata"},"embedding_model":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Embedding Model"}},"type":"object","title":"EmbeddingUpdate"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"id":{"type":"string","title":"Id"},"user_id":{"type":"string","title":"User Id"},"topic":{"type":"string","title":"Topic"},"created_at":{"type":"string","title":"Created At"},"updated_at":{"type":"string","title":"Updated At"},"embedding_model":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Embedding Model"}},"type":"object","required":["id","user_id","topic","created_at","updated_at"],"title":"EmbeddingRecord"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

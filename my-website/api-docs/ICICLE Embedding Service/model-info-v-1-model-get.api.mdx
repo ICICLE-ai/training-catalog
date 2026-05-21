@@ -1,0 +1,72 @@
+---
+id: model-info-v-1-model-get
+title: "Model Info"
+description: "Model Info"
+sidebar_label: "Model Info"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVU1v2zAM/SuETy2Wz26n3oo26wLse+kwoBgKxWZirbKkSbKXLPB/Hyk7STO32aWX5ZDE8hP1+MhHbRJj0YkgjZ5myXlSmAzVndQLc1eN75qnJYakl1jhRIEBnU/ObzeJpgfCf+vPhJW+PzP3qAklNS3mKDJ09OTwZykdUuDgSuwlPs2xEMn5Jglry9t9cFIvCRlkUN14df2dg3hrtEfP+85GI/7J0KdOWqZNm76UaYreL0oFn1swhUyNDqgDw4W1SqYxy+EPz3s2XS5m/gPT8IDLO85+SlI8CLrP6LbRitYyWdC3vkvDKiG+1rGkQTaEG9CRjOMpSd2E2eMkkV9GEbfAK3pfb885BnwPl4So46eXvBqNu4pdlCEnbVpNYCGkwgxOCuk9sesBrixn2YNCqIVxBf81DrTRfRG1hsAFOh08h84T54x7QuMMA3HrytquH9H1qkHsZXjZlSF2GUgPC2cKEEB5CB3AkDgOQi7oXSpThUL+R4menXUT/SqUzJpaRxLPkc2b2ezjPu427D/YC+fEmudEwMIfi96N/FAtZVJaKXzUgSN0dGPEkWOFXn9YxEF2KGvd6xir/l7vab01jU7sRD7+mLHJJmKJjGwgT0NjijDjt7GGj5aWR8RBUePkAB5QrAWG3PAE307rkNPDsBoPt2OKh3ok0QafXk4v307gYgqTYk7u/4Kukin35eExnLICZExGtGGJmm8MIjwvpSK3aFBKFKKfWtu3a6Kh4QV8+oX6ZX+y23V9ffN6ADNxjzQ7cBVA6h44DKXTHiqqvXGeLRcgJdvNETytEKtKki1zhD3brxG8pTuAC0XsdGYNFczDCa5StAGGdAmpkP8+hbZvyN4V9xQcXDGN8/mArdPbIcCGr+iyazQYDcaDEVfSGh8KER3S3oAHVThQbldvzndolZCxbUoXDdFU6Dapxly9WCNq4pzi8+pmMxceb5yqa17+WaJb0zr9rYSTYs4VvOXGbO9a7uRMen5BTbAQymOHzc7xycnn1kunsDXQ3yzvcf3I9U4KloyNPmkgFynr/eBdZ5rwJb5rz+vJjPr5Dx2D460=
+sidebar_class_name: "get api-method"
+info_path: api/ICICLE Embedding Service/icicle-ai-embed-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Model Info"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/model"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Model Info
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","title":"ModelInfoResponse","required":["model","dim","n_ctx"],"properties":{"model":{"type":"string","title":"Model"},"dim":{"type":"integer","title":"Dim"},"n_ctx":{"type":"integer","title":"N Ctx"}}}}}},"401":{"description":"Authentication failed (missing, expired, malformed, or non-access token).","content":{"application/json":{"schema":{"type":"object","title":"ErrorResponse","required":["detail"],"properties":{"detail":{"type":"string","title":"Detail"}}}}}},"403":{"description":"Token is from a tenant other than icicleai.","content":{"application/json":{"schema":{"type":"object","title":"ErrorResponse","required":["detail"],"properties":{"detail":{"type":"string","title":"Detail"}}}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"type":"object","title":"HTTPValidationError","properties":{"detail":{"type":"array","items":{"type":"object","title":"ValidationError","required":["loc","msg","type"],"properties":{"loc":{"type":"array","items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}}},"title":"Detail"}}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

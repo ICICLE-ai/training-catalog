@@ -1,0 +1,72 @@
+---
+id: rerank-v-1-rerank-post
+title: "Rerank"
+description: "Rerank"
+sidebar_label: "Rerank"
+hide_title: true
+hide_table_of_contents: true
+api: eJydV21PIzcQ/iuWP7VSXhZaVCnfaI5T0XE9GnKnSoDA2Z0kPrz21vbmiFD+e2fszb6QF1r4ANgePx4/88x49oWbAqzw0ujLjI+4xYF+elidPFT/FcZ53uOFsCIHD9bx0e0L1zhA67/7U1FI15+aJ9BoJTVOLkFkYHFk4Z9SWkBYb0vocZcuIRd89ML9uqDtzlupF2jppVe7eJvNfQQB53832Zp2vsZMjfagPS2JolAyDVcZfndG01xzZGHpol6CoxFi2vUD5DPIMnIBp6SH3LWc0yWuWr7pbSeEtWLdcvYvwmAXNQZZmuLhqYUh0blF4CIXzzIvcz46SRIcSV2NGripKdgntMxgLkrlyRIR5+DT5VuYZ4cwP9LuLuoZoWIklyY7FonP0aK1ked5YEOJfJaJXaLad2x5kzSYV3FnCzMZ/BZZk2mIoF5/mQd9dd3a9FqHKcVJFy3acDMxJRXKswvTDTpqJZMkjzASWRwIdd2yiqqqDjOz75D6FivjBoFu4VIrCxri0idY91dClcAKIa1j3rBcEPtiIaR2nvklMORdZMILtFkrIzI2l6AyFPrhIz9XWz7G670+Nk4zB8LiWRYc8urYbN0cFY5wgzt9py8E2jx1HI1Oguu4qTHhIGOPj1uQx8eux4h2rhRrCGXCAjv/8wPu8maB2gE7YOwbHeNYKjSbwehOM9ZngsWgDqNshjNjFJsby+BZpD66s7VUEh2itTuKKTPzOx4N9ihiH4dNsbjdyfiWhCah0k1iocFgEBQyWeC9onBOk4T+dJm/KdMUnJuXik0qY/7uelQ6sA/yaEZ+RROGNfr/pO/RktQtPG/UmtcVJVJEYuvUzu6tjl8o3sWlxsK+arI1uwkG7TJxCLAuBR6e/bvrCe1FjHRZ6ie372GoQQ49DOO4NQYq5M976802+fdWiLa6JZXqSOWWqPoKLTc6oqfoXeLdjtxkUoX4reO38q2ludVdI6pGL3syr0qfmHq/np7uZhuWEpmFXGIX1hr7/lTLkAypjqhWmbSz+h9UtM0TLEMHubwy0cGgC7c4nr3OiQU0gTlsGshgU1rdUP9VlIGQOsfCBMnZP7dg9j1sIWneCjRxE92v7FrBbEIUI3SYig8xBMeevT+m0+sdwKiPrjCihBrljXjdsfoljoark6Hd2pA2Jk1DefEs8kLB3obwNrmvi+dJ0iqOZ0nrLOqJmpYI25m6TDWhahqTTgMS7iL13HTiNb4cX12w80v2DfnAyN6AXckUdt79atnhL1QKEzrDxx9PBHzasRsIm8LTSe95g4oJI7QfsLGSmDqOofJXMgOywl7A/NA4A/3U5CgbfMtrPtwAPVhh9x9PTwa/DBIKMHGdi5Bv1SdBHY+Ov7XySGXDQmGvQdtLGxIxhuqWr06C3AIAsr+kQOL0y8tMOPhq1WZD0yFUOI//roSVYkbM3VLmVV8elKqZdLSAMZoL5WDHnbp48J8mlb5/Zry3301smfZ87IQmCudDIYgm44jaD/nYWOyUp2bHOTYRhT9qe9/S2/WXmykaz6qvodxktMeKH0Qc/kZvevhFVze5YQ5LmtCLkirKiEdM+vkXawXCgw==
+sidebar_class_name: "post api-method"
+info_path: api/ICICLE Vector DB Service/icicle-ai-vector-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Rerank"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/rerank"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Rerank
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"properties":{"query_embedding":{"items":{"type":"number"},"type":"array","title":"Query Embedding"},"top_k":{"type":"integer","maximum":100,"minimum":1,"title":"Top K","default":10},"fetch_k":{"type":"integer","maximum":500,"minimum":1,"title":"Fetch K","default":50},"method":{"type":"string","title":"Method","default":"mmr"},"lambda":{"type":"number","maximum":1,"minimum":0,"title":"Lambda","default":0.7},"topic":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Topic"},"filter":{"anyOf":[{"properties":{"conditions":{"additionalProperties":true,"type":"object","title":"Conditions","description":"Key-value pairs to match against the metadata payload field"}},"type":"object","title":"MetadataFilter","description":"Filter search results by metadata fields.\n\nEach key-value pair matches against the nested ``metadata`` payload field.\nAll conditions are ANDed together.  Values can be:\n  - a string/number/bool for exact match\n  - a list for \"any of\" match"},{"type":"null"}]}},"type":"object","required":["query_embedding"],"title":"RerankRequest"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"user_id":{"type":"string","title":"User Id"},"method":{"type":"string","title":"Method"},"top_k":{"type":"integer","title":"Top K"},"fetch_k":{"type":"integer","title":"Fetch K"},"results":{"items":{"properties":{"id":{"type":"string","title":"Id"},"score":{"type":"number","title":"Score"},"topic":{"type":"string","title":"Topic"},"text":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Text"},"chunks":{"items":{"type":"string"},"type":"array","title":"Chunks"},"metadata":{"additionalProperties":true,"type":"object","title":"Metadata"}},"type":"object","required":["id","score","topic","chunks","metadata"],"title":"ResultItem"},"type":"array","title":"Results"}},"type":"object","required":["user_id","method","top_k","fetch_k","results"],"title":"RerankResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,0 +1,72 @@
+---
+id: delete-user-embedding-v-1-embeddings-embedding-id-delete
+title: "Delete User Embedding"
+description: "Delete User Embedding"
+sidebar_label: "Delete User Embedding"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVV1rGzEQ/CtCTy04tpP2yW/FMTSQ0pI4oRCCke/WtpI76SLprjHH/ffuSvdpJy6EvsQ6aXZ3MjtalVxnYISTWl3FfMZjSMDBKrdgVpCuIY6l2q6K8+7DrnoHMl6tQggf8UwYkeLSWD57KLnCD8zYByNIKtzLhNvh2sBLLg1gXWdyGHEb7SAVfFZyt88o1jqDgYh00iW0sWiSMWRbVaO2yu+zpcikPVvqZ1BNmR2IGMyHCg3zVdUjJbGZVhYsxV1Mp/QTg42MzEg+DLrNowis3eQJu6nBmDLSyoFyBBdZlsjIqz15shRT9rhkhnrhZKiAap3gR//+iPs2nQbeIYQFdGhUH73WOgGhevDLGoPaNiC9foLIDVR84L6XTfku9eNhplaHqqKUXy8ujmW7F4mMvShsYYw2H9csBidk4tVzkNpjQKKjwalQ+58b79ahfuSsekciky26qHrsJBHGiH1PtWsdCJLKqd2e6scPNIjYAm+TnTA7icGWdFqRo7PcC9JawG/gSeRee2nadjW4OWn56v7ZUtIm0K9xvWZ2LQodel+Ky9CCt4o1kO/L5a+jhMEfQ2MECzFv4fbmE0dwO91NKz96cKDM+KQ4n3SDalL2Z0/lp8JGDyScX82vF+zbFbtHiij2LZhCRsAPmdTHFv9g85hQMTOA/YJCJMyGILZBhNsB67Kih4VyYzZPJLrZMjRjIWMglDRM/1G4A2eRTrGTELOO+hgZFDhIQ/Xp+Mt4Sppn2rpU+CtQz733JBrQb71BPphkiZDeqbnxVyVo98CLc4zrKODHbDC70Q47rE/QslwLC3cmqSrafsnB7HEfl4UwUqxJXLxTsbS0xk5tRGLhiFV7y/mnm9qInxkfvc228Zsit6HsOX3h8hn2h6+Mv6r18P/vPEK9w/emJUSTI0C+4WOQud7Z0SSjV6X18uXierFc4EX4CycClHg=
+sidebar_class_name: "delete api-method"
+info_path: api/ICICLE Vector DB Service/icicle-ai-vector-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete User Embedding"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/embeddings/{embedding_id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete User Embedding
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"embedding_id","in":"path","required":true,"schema":{"type":"string","title":"Embedding Id"}},{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"id":{"type":"string","title":"Id"},"user_id":{"type":"string","title":"User Id"},"deleted":{"type":"boolean","title":"Deleted"}},"type":"object","required":["id","user_id","deleted"],"title":"DeleteResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

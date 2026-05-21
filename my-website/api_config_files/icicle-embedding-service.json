@@ -1,0 +1,254 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ICICLE AI Embed Service",
+    "description": "Local embedding generator built on llama-cpp-python + Qwen3-Embedding GGUF. Takes text in, returns vectors that can be stored via the ICICLE AI Vector Service. All endpoints (except /healthz) require a valid X-Tapis-Token from the icicleai tenant.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/healthz": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "health_check_healthz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": { "type": "string" },
+                  "type": "object",
+                  "title": "Response Health Check Healthz Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/model": {
+      "get": {
+        "summary": "Model Info",
+        "operationId": "model_info_v1_model_get",
+        "parameters": [
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string", "title": "X-Tapis-Token" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ModelInfoResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed (missing, expired, malformed, or non-access token).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "403": {
+            "description": "Token is from a tenant other than icicleai.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/embed": {
+      "post": {
+        "summary": "Embed",
+        "description": "Generate embedding vectors for one or more text inputs. Pass `input_type: \"query\"` to wrap inputs with the Qwen3 retrieval-instruction template; documents are embedded as-is.",
+        "operationId": "embed_v1_embed_post",
+        "parameters": [
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string", "title": "X-Tapis-Token" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EmbedRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EmbedResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed (missing, expired, malformed, or non-access token).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "403": {
+            "description": "Token is from a tenant other than icicleai.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error (empty input, oversized list, oversized string).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmbedRequest": {
+        "type": "object",
+        "title": "EmbedRequest",
+        "required": ["input"],
+        "properties": {
+          "input": {
+            "title": "Input",
+            "description": "A single string or list of strings to embed.",
+            "anyOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" } }
+            ]
+          },
+          "input_type": {
+            "title": "Input Type",
+            "type": "string",
+            "enum": ["query", "document"],
+            "default": "document",
+            "description": "`query` wraps each input with the Qwen3 instruction template; `document` embeds the raw text."
+          },
+          "instruction": {
+            "title": "Instruction",
+            "description": "Custom task instruction for query-side inputs. Ignored when input_type='document'. Defaults to a generic retrieval prompt.",
+            "anyOf": [
+              { "type": "string", "maxLength": 2000 },
+              { "type": "null" }
+            ],
+            "default": null
+          },
+          "normalize": {
+            "title": "Normalize",
+            "type": "boolean",
+            "default": true,
+            "description": "L2-normalize the returned vectors (recommended for cosine search)."
+          }
+        }
+      },
+      "EmbedItem": {
+        "type": "object",
+        "title": "EmbedItem",
+        "required": ["index", "embedding"],
+        "properties": {
+          "index": { "type": "integer", "title": "Index" },
+          "embedding": {
+            "type": "array",
+            "items": { "type": "number" },
+            "title": "Embedding"
+          }
+        }
+      },
+      "EmbedResponse": {
+        "type": "object",
+        "title": "EmbedResponse",
+        "required": ["model", "dim", "input_type", "normalized", "data"],
+        "properties": {
+          "model": { "type": "string", "title": "Model" },
+          "dim": { "type": "integer", "title": "Dim" },
+          "input_type": {
+            "type": "string",
+            "enum": ["query", "document"],
+            "title": "Input Type"
+          },
+          "normalized": { "type": "boolean", "title": "Normalized" },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/EmbedItem" },
+            "title": "Data"
+          }
+        }
+      },
+      "ModelInfoResponse": {
+        "type": "object",
+        "title": "ModelInfoResponse",
+        "required": ["model", "dim", "n_ctx"],
+        "properties": {
+          "model": { "type": "string", "title": "Model" },
+          "dim": { "type": "integer", "title": "Dim" },
+          "n_ctx": { "type": "integer", "title": "N Ctx" }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "title": "ErrorResponse",
+        "required": ["detail"],
+        "properties": {
+          "detail": { "type": "string", "title": "Detail" }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "title": "ValidationError",
+        "required": ["loc", "msg", "type"],
+        "properties": {
+          "loc": {
+            "type": "array",
+            "items": {
+              "anyOf": [{ "type": "string" }, { "type": "integer" }]
+            },
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        }
+      },
+      "HTTPValidationError": {
+        "type": "object",
+        "title": "HTTPValidationError",
+        "properties": {
+          "detail": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "title": "Detail"
+          }
+        }
+      }
+    }
+  }
+}
