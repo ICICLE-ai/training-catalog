@@ -9,6 +9,8 @@ tags:
 
 A 7-step HPC-backed pipeline for few-shot object detection — from interactive image annotation through class support generation, proposal visualization, and Tapis-powered job execution — built to work across any research domain.
 
+Link to Smart Labeler: [https://icicleai.tapis.io/#/smart-labeler](https://icicleai.tapis.io/#/smart-labeler)
+
 <div align="center">
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/smart_labeler)
