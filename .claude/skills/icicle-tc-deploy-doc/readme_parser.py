@@ -295,6 +295,10 @@ def tag_block(tags: List[str]) -> str:
         if t not in seen:
             unique.append(t)
             seen.add(t)
+    if not unique:
+        # An empty "tags:" block is invalid YAML frontmatter (parses as null)
+        # and fails the Docusaurus build — emit no frontmatter at all instead.
+        return ""
     lines = ["---", "tags:"]
     for tag in unique:
         lines.append(f"  - {tag}")
@@ -666,6 +670,7 @@ def save_file(folder: str, fname: str, content: str, tags: List[str],
     md = tag_block(merged_tags) + body.strip() + "\n"
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(md)
+    return merged_tags
 
 def write_category_json(folder: str, project_name: str):
     """
@@ -709,7 +714,7 @@ def classify_and_write_sections(
     if release:
         main_tags.append(f"Release {release}")
 
-    save_file(
+    main_merged = save_file(
         folder=folder,
         fname=f"{project_name}.md",
         content=parts[0],
@@ -718,6 +723,11 @@ def classify_and_write_sections(
         api_doc_route=api_doc_route
     )
 
+    # Section files inherit the main file's full tag set (including tags merged
+    # from existing frontmatter) minus the per-release "Release <YYYY-MM>" markers,
+    # which belong only on the main file.
+    section_tags = [t for t in main_merged if not t.startswith("Release ")]
+
     written = set()
     for part in parts[1:]:
         assigned = False
@@ -725,7 +735,7 @@ def classify_and_write_sections(
             if out_name in written:
                 continue
             if any(p.search(part) for p in patterns):
-                save_file(folder, out_name, part, base_tags)
+                save_file(folder, out_name, part, section_tags)
                 written.add(out_name)
                 assigned = True
                 break
