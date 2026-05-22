@@ -8,6 +8,8 @@ tags:
 
 An interactive [marimo](https://marimo.io/) notebook that turns the ICICLE AI Tapis services into a hands-on RAG (retrieval-augmented generation) playground. Paste any text, ingest it into the vector store, and chat against it — the notebook chains the embed, vector, and chat services behind a single Tapis access token.
 
+Link to Chatbook: [https://icicleai.tapis.io/#/icicle-chatbook](https://icicleai.tapis.io/#/icicle-chatbook)
+
 <div align="center">
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/icicle-chatbook)
