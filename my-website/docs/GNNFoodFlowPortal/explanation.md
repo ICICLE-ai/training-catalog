@@ -2,6 +2,9 @@
 tags:
   - Smart-Foodsheds
   - AI4CI
+  - Software
+  - Visual-Analytics
+  - Digital-Agriculture
 ---
 # Explanation
 

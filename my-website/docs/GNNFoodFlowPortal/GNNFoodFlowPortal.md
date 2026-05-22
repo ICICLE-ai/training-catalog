@@ -2,6 +2,9 @@
 tags:
   - Smart-Foodsheds
   - AI4CI
+  - Software
+  - Visual-Analytics
+  - Digital-Agriculture
   - Release 2025-08
   - Release 2025-10
   - Release 2026-05
