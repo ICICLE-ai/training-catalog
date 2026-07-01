@@ -1,0 +1,46 @@
+# ICICLE component metadata — one entry describing a single ICICLE-ai component.
+# This is a single-item YAML list (note the leading "- "). Copy this file to the
+# root of the component's GitHub repo as `component-info.yaml` and replace every
+# sample value below with your component's real values.
+#
+# HARD RULE: `id` MUST be "<name-with-spaces-removed>:<componentVersion>", and the
+# version after the ":" MUST equal `componentVersion` exactly.
+#   name "My Component Name" + componentVersion 0.1.0
+#     -> id "MyComponentName:0.1.0"
+
+- id: "MyComponentName:0.1.0"
+  owner: "Component Maintainer"
+  # primaryThrust — pick one: core/Software, core/CI4AI, core/AI4CI, core/FoundationAI,
+  #                 core/PADI, core/VA, useInspired/DA, useInspired/AE, useInspired/SF
+  primaryThrust: "core/CI4AI"
+  name: "My Component Name"
+  # status — pick one: Unreleased, PrototypeRelease, AlphaRelease, BetaRelease, ProductionRelease
+  status: "BetaRelease"
+  description: "One to three sentence description of what the component does."
+  componentVersion: "0.1.0"          # semver; MUST match the suffix after ":" in id above
+  targetIcicleRelease: "2026-05"     # a real ICICLE release month (quoted YYYY-MM), or None
+
+  # Omit the entire `hasDependentComponents` key if this component has no
+  # dependencies. Otherwise add one list entry per related component: `related_to`
+  # is the other component's id ("<name>:<version>"), and relationship_type is
+  # usually DependsOn (confirm the exact term with the maintainer if it is not a
+  # plain dependency).
+  hasDependentComponents:
+    - related_to: "some-other-component:0.1.0"
+      relationship_type: "DependsOn"
+
+  licenseUrl: "https://github.com/ICICLE-ai/REPO?tab=LICENSE-ov-file"
+  publicAccess: true
+  sourceCodeUrl: "https://github.com/ICICLE-ai/REPO"
+  codeReviewConducted: true
+  testsWritten: true
+  developerDocumentationAvailable: true
+  # developerDocumentationUrl is OPTIONAL. Include it only if developer docs already
+  # exist at a stable URL. If the developer docs are the catalog's generated
+  # API-reference page, leave it out — it is filled in after the training-catalog
+  # deployment. Example (uncomment and edit):
+  # developerDocumentationUrl: "https://example.org/dev-docs"
+  trainingTutorialsAvailable: true
+  # trainingTutorialsUrl is intentionally NOT set here. It points at the
+  # training-catalog docs page, which only exists after the catalog is deployed,
+  # so it is added later — do not invent it now.

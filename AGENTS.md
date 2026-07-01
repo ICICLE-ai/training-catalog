@@ -55,7 +55,7 @@ to dodge the missing-secret error.
 
 ## Skills
 
-Three skills support this repo. All are **user-invoked** (`disable-model-invocation:
+Four skills support this repo. All are **user-invoked** (`disable-model-invocation:
 true`) — run them when the user asks, not automatically.
 
 ### `.claude/skills/icicle-tc-deploy-doc` — Component docs deploy
@@ -88,6 +88,22 @@ component repo (Diátaxis: description + tags + license + acknowledgements, then
 Tutorials / How-To / Explanation). Generic and repo-agnostic, so it's kept here as a
 distributable folder and installed globally (`~/.claude/skills/`) rather than living
 under `.claude/skills/`. See `icicle-readme-skill/SKILL.md`.
+
+### `icicle-component-info-skill` — Generic ICICLE component-catalog metadata
+Scaffolds/updates a single top-level `component-info.yaml` for any
+`github.com/ICICLE-ai/` component repo — the machine-facing sibling of the README
+skill. Produces one YAML list entry (`id`, `owner`, `primaryThrust`, `name`, `status`,
+`description`, `componentVersion`, `targetIcicleRelease`, `hasDependentComponents`,
+`licenseUrl`, `publicAccess`, `sourceCodeUrl`, and the codeReview/tests/docs/tutorials
+flags) that the ICICLE component catalog consumes. Enforces `id ==
+"<name-without-spaces>:<componentVersion>"`, validates `status` and `primaryThrust`
+against ICICLE's controlled vocabularies (see the skill), treats `targetIcicleRelease`
+as `YYYY-MM`, leaves `trainingTutorialsUrl` (and any catalog-hosted
+`developerDocumentationUrl`) out because those are filled in after catalog deployment,
+always asks about dependencies before writing `hasDependentComponents`, and never
+commits/pushes without explicit user confirmation. Generic and repo-agnostic, so like
+the README skill it's a distributable folder installed globally rather than under
+`.claude/skills/`. See `icicle-component-info-skill/SKILL.md`.
 
 ## Canonical tag list
 
