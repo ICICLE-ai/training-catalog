@@ -84,12 +84,12 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
     Sign up for a TACC account
   </a>
 
-- **FlexServe Inference**
+- **FlexServ Inference**
 
-  FlexServe is an OpenAI-compatible inference stack with a Rust gateway in front of Python serving backends, providing a unified interface for serving multiple ML models across different inference engines.
+  FlexServ is an OpenAI-compatible inference stack with a Rust gateway in front of Python serving backends, providing a unified interface for serving multiple ML models across different inference engines.
 
   <a href="https://zhangwei217245.github.io/FlexServ/" target="_blank" rel="noopener noreferrer">
-  Link to FlexServe Inference Documentation
+  Link to FlexServ Inference Documentation
   </a>
 
 - **Login to Tapis**  
