@@ -6,7 +6,7 @@ tags:
 ---
 # Explanation
 
-## Pipeline Architecture
+### Pipeline Architecture
 
 Smart Labeler is structured as a linear 7-step pipeline where each step produces outputs consumed by the next. The pipeline state is persisted in a PostgreSQL database and files are stored on Tapis-connected HPC filesystems, so work is never lost between sessions.
 
@@ -20,7 +20,7 @@ Step 6: Classification    → maps proposals to class supports, submits job
 Step 7: Results           → final labeled detections, ready to export
 ```
 
-## Few-Shot Detection Approach
+### Few-Shot Detection Approach
 
 Rather than fine-tuning a model from scratch, Smart Labeler uses a **few-shot, embedding-based** approach:
 
@@ -31,7 +31,7 @@ Rather than fine-tuning a model from scratch, Smart Labeler uses a **few-shot, e
 
 This makes the pipeline domain-agnostic: the same workflow applies to wildlife camera traps, satellite imagery, microscopy slides, or any other image dataset.
 
-## Tapis Integration
+### Tapis Integration
 
 All compute-intensive steps run as **Tapis v3 batch jobs** on HPC clusters. Smart Labeler handles:
 
@@ -40,7 +40,7 @@ All compute-intensive steps run as **Tapis v3 batch jobs** on HPC clusters. Smar
 - Secure credential injection (Hugging Face tokens via Tapis Vault)
 - File I/O through the Tapis Files API, keeping all data on the user's allocated storage
 
-## SAM3 Inference Service
+### SAM3 Inference Service
 
 SAM3 (Segment Anything Model 3) runs as an **external microservice** separate from the HPC jobs. It is called synchronously during interactive annotation in Step 1. Two modes are supported:
 
@@ -49,6 +49,6 @@ SAM3 (Segment Anything Model 3) runs as an **external microservice** separate fr
 
 Both modes optionally apply **SAHI tiling**, which partitions the image into overlapping crops before inference and merges the results — significantly improving recall for small or dense objects.
 
-## Patra Model Registry
+### Patra Model Registry
 
 Proposer and embedder models are selected from the live **ICICLE AI Patra** model catalog. This means new models can be added to the catalog without any changes to Smart Labeler itself. Full model cards are accessible in-app via the info icon next to each model entry.

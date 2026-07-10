@@ -1,15 +1,12 @@
 ---
 tags:
-  - CI4AI
   - AI4CI
   - Software
-  - Release 2026-05
+  - Release 2026-07
 ---
-# Smart Labeling Service for Object Detection
+# Intelligent Semantic Segmentation & Annotation
 
-A 7-step HPC-backed pipeline for few-shot object detection — from interactive image annotation through class support generation, proposal visualization, and Tapis-powered job execution — built to work across any research domain. Also includes a dedicated **Semantic Segmentation** pipeline for polygon and pixel-mask annotation with SAM3-assisted labeling.
-
-Link to Smart Labeler: [https://icicleai.tapis.io/#/smart-labeler](https://icicleai.tapis.io/#/smart-labeler)
+A streamlined, HPC-backed pipeline dedicated exclusively to semantic and instance image segmentation using interactive masking tools and Tapis job execution.
 
 <div align="center">
 
@@ -23,6 +20,7 @@ Link to Smart Labeler: [https://icicleai.tapis.io/#/smart-labeler](https://icicl
 
 - [Tapis v3 — HPC job execution framework](https://tapis-project.org)
 - [Patra Model Registry — ICICLE AI model catalog](https://patra.pods.icicleai.tapis.io/)
+- [SAM3 (Segment Anything Model 3) — Meta AI](https://github.com/facebookresearch/sam3)
 - [SAHI — Slicing Aided Hyper Inference for small-object detection](https://github.com/obss/sahi)
 - [COCO JSON format specification](https://cocodataset.org/#format-data)
 
