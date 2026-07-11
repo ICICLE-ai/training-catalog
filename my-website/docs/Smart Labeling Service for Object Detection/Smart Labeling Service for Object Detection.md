@@ -9,7 +9,7 @@ tags:
 
 A 7-step HPC-backed pipeline for few-shot object detection — from interactive image annotation through class support generation, proposal visualization, and Tapis-powered job execution — built to work across any research domain. Also includes a dedicated **Semantic Segmentation** pipeline for polygon and pixel-mask annotation with SAM3-assisted labeling.
 
-Link to Smart Labeler: [https://icicleai.tapis.io/#/smart-labeler](https://icicleai.tapis.io/#/smart-labeler)
+Link to the hosted service: [https://icicleai.tapis.io/#/smart-labeler](https://icicleai.tapis.io/#/smart-labeler)
 
 <div align="center">
 

@@ -20,8 +20,7 @@ ICICLE. The deployed site lives at `https://ICICLE-ai.github.io/training-catalog
 | `my-website/api_config_files/` | OpenAPI v3 spec JSON files consumed by the openapi plugin |
 | `my-website/docusaurus.config.js` | Site config; plugin instances incl. openapi-docs |
 | `my-website/Education/`, `workshops/`, `other_resources/`, `sample_docs/` | Additional content-docs plugin roots |
-| `.claude/skills/` | Project-local skills (auto-discovered by Claude in this repo) |
-| `icicle-readme-skill/` | Generic, distributable README skill (installed globally) |
+| `.claude/skills/` | Project-local skills (auto-discovered by Claude in this repo) — all six live here |
 | `.github/workflows/deploy.yml` | CI: builds and deploys to GitHub Pages on push to `docusaurus-demo` |
 
 ## Tooling & commands
@@ -55,8 +54,10 @@ to dodge the missing-secret error.
 
 ## Skills
 
-Four skills support this repo. All are **user-invoked** (`disable-model-invocation:
-true`) — run them when the user asks, not automatically.
+Six skills support this repo. All are **user-invoked** (`disable-model-invocation:
+true`) — run them when the user asks, not automatically. `icicle-release` is the
+top-level orchestrator; the rest are the building blocks it sequences (and which you
+can also run on their own).
 
 ### `.claude/skills/icicle-tc-deploy-doc` — Component docs deploy
 Fetches a component's GitHub README (single repo, or a batch **Excel/CSV** — e.g. the
@@ -82,12 +83,43 @@ Title-Cased repo name for a bare GitHub link). Repetitive Python work (read CSV 
 stage+validate spec, print the config block, inject tags) is bundled as the
 stdlib-only `api_parser.py` next to the skill. See its `SKILL.md`.
 
+### `.claude/skills/icicle-tc-deploy-resource` — Resource-listing deploy
+Adds/updates a resource link on the catalog's Resources page
+(`my-website/other_resources/0_intro.md`). Takes a CSV with a `Resource Link` column
+(plus `Component`, `Tags…`, `Release Dates`) or a single name/link, **verifies the
+link resolves**, then inserts it at the correct **alphabetical** position — either as
+a new top-level `## <Name>` product block or as a bold-bullet sub-entry inside an
+existing container section such as `TACC and Tapis Resources`. **Idempotent**
+(re-running replaces in place, never duplicates) and **never invents a version**.
+Descriptions aren't in the CSV — the caller supplies one (fetched from the page or the
+README). The stdlib-only helper `resource_parser.py` (`csv-rows`, `check-link`,
+`insert`) is bundled next to the skill. See its `SKILL.md`.
+
+### `.claude/skills/icicle-release` — Release orchestrator
+End-to-end release workflow. Given the release-testing CSV (or a single component), it
+drives the other skills **in order per component**: validate README structure
+(`icicle-readme-skill`) → deploy docs (`icicle-tc-deploy-doc`) → deploy API docs if
+there's an `OpenAPI JSON` (`icicle-tc-deploy-api`, then re-run the doc step for the
+cross-link) → add the resource link if there's a `Resource Link`
+(`icicle-tc-deploy-resource`) → validate/fill `component-info.yaml`
+(`icicle-component-info-skill`: dependencies, version, `licenseUrl`). Then one global
+site build gate, then it appends each component's catalog entry (fetched from the
+**`Component Catalog YAML File`** GitHub link) to the external CI-Components-Catalog
+repo's **`release_catalog.yml`** on its **`dev`** branch and, after an explicit
+confirmation, pushes. Catalog flow is intentionally ICICLE-specific: single-maintainer,
+direct push to `dev`, `master` unused. A final notebook/service-refresh step
+(run notebook → GraphML → push → wait → restart; **never read the password file**) is a
+**deferred Phase 2 stub**. Modular and idempotent — run it to publish or to update.
+See its `SKILL.md`.
+
 ### `icicle-readme-skill` — Generic ICICLE README scaffolder
 Scaffolds/updates a single top-level `README.md` for any `github.com/ICICLE-ai/`
 component repo (Diátaxis: description + tags + license + acknowledgements, then
-Tutorials / How-To / Explanation). Generic and repo-agnostic, so it's kept here as a
-distributable folder and installed globally (`~/.claude/skills/`) rather than living
-under `.claude/skills/`. See `icicle-readme-skill/SKILL.md`.
+Tutorials / How-To / Explanation). Generic and repo-agnostic — the `icicle-release`
+orchestrator reuses it to validate a component's upstream README before deploying.
+Lives project-locally under `.claude/skills/icicle-readme-skill/`; a copy is also kept
+installed globally (`~/.claude/skills/`) so it can be run standalone in any ICICLE-ai
+component repo — keep the two in sync when editing. See its `SKILL.md`.
 
 ### `icicle-component-info-skill` — Generic ICICLE component-catalog metadata
 Scaffolds/updates a single top-level `component-info.yaml` for any
@@ -101,9 +133,11 @@ against ICICLE's controlled vocabularies (see the skill), treats `targetIcicleRe
 as `YYYY-MM`, leaves `trainingTutorialsUrl` (and any catalog-hosted
 `developerDocumentationUrl`) out because those are filled in after catalog deployment,
 always asks about dependencies before writing `hasDependentComponents`, and never
-commits/pushes without explicit user confirmation. Generic and repo-agnostic, so like
-the README skill it's a distributable folder installed globally rather than under
-`.claude/skills/`. See `icicle-component-info-skill/SKILL.md`.
+commits/pushes without explicit user confirmation. Generic and repo-agnostic — reused
+by the `icicle-release` orchestrator. Like the README skill it lives project-locally
+under `.claude/skills/icicle-component-info-skill/`, with a global copy kept installed
+(`~/.claude/skills/`) for standalone use in any ICICLE-ai component repo — keep the two
+in sync when editing. See its `SKILL.md`.
 
 ## Canonical tag list
 
@@ -126,5 +160,12 @@ release a doc was generated for. Don't invent tags — ask the user if unclear.
   separated, case-insensitive) to the doc parser / `api_parser.py csv-rows`; then run a
   single global `npm run build`.
 - Edit generated files narrowly; don't reformat unrelated content.
+- **Release-testing CSV columns** (resolved case-insensitively / by prefix): `README`,
+  `Tags…`, `Component`, `Release Dates`, `OpenAPI JSON`, plus two consumed only by the
+  release workflow — **`Resource Link`** (→ `icicle-tc-deploy-resource`) and
+  **`Component Catalog YAML File`** (a GitHub link to the component's
+  `component-info.yaml`, → the `icicle-release` catalog step). Rows missing a given
+  column are skipped by that step.
 - **Do not commit, push, or deploy unless the user explicitly asks.** A push to
-  `docusaurus-demo` triggers the live GitHub Pages deploy.
+  `docusaurus-demo` triggers the live GitHub Pages deploy; a push to the external
+  CI-Components-Catalog `dev` branch changes the live component catalog.

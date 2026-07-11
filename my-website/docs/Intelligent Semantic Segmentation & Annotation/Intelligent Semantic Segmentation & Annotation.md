@@ -8,6 +8,8 @@ tags:
 
 A streamlined, HPC-backed pipeline dedicated exclusively to semantic and instance image segmentation using interactive masking tools and Tapis job execution.
 
+Link to the hosted service: [https://icicleai.tapis.io/#/smart-segmentation](https://icicleai.tapis.io/#/smart-segmentation)
+
 <div align="center">
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/smart_labeler)
