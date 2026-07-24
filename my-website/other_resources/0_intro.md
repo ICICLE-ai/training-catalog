@@ -30,6 +30,14 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
     Link to FEAST Website
   </a>
 
+## ICICLE Insights
+
+- ICICLE Insights collects popularity metrics for the ICICLE research project and its wider open-source ecosystem, then serves them through a REST API and an interactive dashboard.
+
+  <a href="https://insights.pods.icicleai.tapis.io/dashboard" target="_blank" rel="noopener noreferrer">
+    Link to ICICLE Insights Dashboard
+  </a>
+
 ## ICICONSOLE 0.8.0
 - ICICONSOLE is designed to provide an efficient and powerful interface to Neo4j Knowledge Graph databases hosted on HPC resources, leveraging Tapis.
 
@@ -136,5 +144,3 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
   <a href="https://pypi.org/project/TapisCL-ICICLE/" target="_blank" rel="noopener noreferrer">
     Link to TapisCL-ICICLE 1.0.11 PyPi Package
   </a>
-
-
