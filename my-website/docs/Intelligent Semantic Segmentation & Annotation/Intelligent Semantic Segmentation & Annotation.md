@@ -2,7 +2,7 @@
 tags:
   - AI4CI
   - Software
-  - Release 2026-07
+  - Release 2026-07A
 ---
 # Intelligent Semantic Segmentation & Annotation
 

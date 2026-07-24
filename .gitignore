@@ -29,9 +29,14 @@ __pycache__/
 *.xlsx
 *.xls
 
+# icicle-release shared run directory (per-release working state: brief, bundles,
+# README cache, manifest — kept locally between runs for skip-if-unchanged)
+.release-run/
+
 # OS / editor cruft
 .DS_Store
-
+.claude/skills/icicle-release/*
 # Claude Code: ignore per-user local settings, but keep shared
 # project config and skills (.claude/settings.json, .claude/skills/) tracked
 .claude/settings.local.json
+RELEASE_PROCESS.md

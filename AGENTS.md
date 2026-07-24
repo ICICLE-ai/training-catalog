@@ -109,7 +109,10 @@ repo's **`release_catalog.yml`** on its **`dev`** branch and, after an explicit
 confirmation, pushes. Catalog flow is intentionally ICICLE-specific: single-maintainer,
 direct push to `dev`, `master` unused. A final notebook/service-refresh step
 (run notebook → GraphML → push → wait → restart; **never read the password file**) is a
-**deferred Phase 2 stub**. Modular and idempotent — run it to publish or to update.
+**deferred Phase 2 stub**. Multi-agent runs coordinate through a gitignored shared run
+dir (`.release-run/<YYYY-MM>/`: `brief.md` written once, per-component
+`bundles/*.json`, README cache + skip-if-unchanged manifest) driven by the bundled
+stdlib `release_worker.py`. Modular and idempotent — run it to publish or to update.
 See its `SKILL.md`.
 
 ### `icicle-readme-skill` — Generic ICICLE README scaffolder

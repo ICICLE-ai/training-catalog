@@ -2,7 +2,7 @@
 tags:
   - CI4AI
   - Software
-  - Release 2026-07
+  - Release 2026-07A
 ---
 # Intelligent Edge Management Service
 
