@@ -1,0 +1,72 @@
+---
+id: register-user-users-post
+title: "Register User"
+description: "Register a username (idempotent)."
+sidebar_label: "Register User"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVUtv2kAQ/iurPbWSAzTqiRtNI5WqVVBC2gNC0WAP9qa2d7u7DiDk/96ZtQ2GNGnVWzmY9ew3r28e3ksPqZPjhawcWieXkUzQxVYZr3Qpx/IWU+U8WgGCESUUKN6oBAujPZb+7UBGUhu0wPhpQhq21XhgfHi4B6OdJ6DFnxU6/0EnOzney1iXbIOPYEyu4mBk+OjY8166OMMC+GQsu/AKHb91cfDZ7wz9S+etKlPy4JXPWXDfYeo66kB69YhxF4aymHRpB+DyVLnJu0mLjNR9LW8rDAJndOmaoC5HI/47Je+uimN0bl3l4rYFk/v/KW0y8/7y8nlm3yBXSUCJa2u1/fe0EvSgcj4pj4V7Dsh1fHIL5e5mTTmcs1BHB4miSFK0sl4eaQBrYdej6ouO2ywjWbj0NVa/Ug0hRXkw9jI0kCHmfEtoVZoqENJdT4OAbmK/7Zk5lKjDXTGXW//HMjI3TfgtrlfOY4maCr1MxcemBL9z1kE+zeezZwab/ijQZ5oHvx1yAz6jt2GzUCLJDXB7HPzrLRQmx9OOPtaQOFvrPmUzoHYUk6m4Aps4MZlN5fmOIplYE+2FTjAXccBBmQgKFlyG6J3YKJ+Jz9/nF7ABi8JY9QQxc/BEQTZW3g1GgxFHwHkUEJq2je6wBHlEzt339thfbcuWYq7v0OSgQgdWNoxAw11vGWfMKQn2+xU4vLd5XbOY2LS0Qhd0fAKrYMVULbjbM4SEYuTx+IG7rpVKfxF6kuF5FXrgfER5fBqNCS0t41/FLntln93czQm8apc6F4G/ArDhXqXnWIZPBGuH+Q0yGmso04qnaiwbm/z7BaX8Qz4=
+sidebar_class_name: "post api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Register User"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/users"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Register a username (idempotent).
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"properties":{"username":{"type":"string","title":"Username"}},"type":"object","required":["username"],"title":"UserRegistration"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"username":{"type":"string","title":"Username"}},"type":"object","required":["username"],"title":"UserRegistration"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

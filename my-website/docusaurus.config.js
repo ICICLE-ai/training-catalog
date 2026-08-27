@@ -210,6 +210,23 @@ const config = {
     [
       'docusaurus-plugin-openapi-docs',
       {
+        id: 'openapi-patra-knowledge-base', // Plugin ID
+        docsPluginId: 'api', // Associate it with API docs
+        config: {
+          'patra-knowledge-base': {
+            specPath: 'api_config_files/patra-knowledge-base.json',
+            outputDir: 'api-docs/Patra Knowledge Base',
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+        },
+      },
+    ],
+
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
         id: 'openapi-icicle-vector-db-service', // Plugin ID
         docsPluginId: 'api', // Associate it with API docs
         config: {

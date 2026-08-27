@@ -1,0 +1,72 @@
+---
+id: list-model-cards-modelcards-get
+title: "List Model Cards"
+description: "List all model cards. JWT bearer shows private; unauthenticated shows only public."
+sidebar_label: "List Model Cards"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1Vktv2zgQ/isEz6rjBM3FezLaIptF2s1unO6hCAJaoi22FMnwkcQw/N87Q1IyHcdpm2JPosjhN8OZbx5r6tnS0ckX2umGy9ua2cbRm4o23NVWGC+0ohN6IZwnTEoSpUiUGpG//puROWeWW+Ja/eCIseKeef4HCYoF33LlRQ3/TT7WSq6ICXMp6hGtqDbcMlRw3oAKCSpuCyPSOi2X3IO8YZZ13HOL9q6pgh+4dwcnAm28C9yu4MfyuyAsB8wFk45X1NUt7xidrClTq78X8bJfGbzsvBVqCZc69njB1dK3dHJyerqpBgkVpKQbcIgXXuLGP3SDx1m7+ybMLxiQQYXyfMkt6hVKdKGjkzG6fMGC9HHda7tC/FKhFJ3wv6WRPSaNx+Nxof+40H9aGHAR9W3QA5Y7o5XjDnFPxmP87NLkKtQ1d24RJPk3C4PGWoNy5WMAjJFICRA/+urwznrfVmYtw1cJz7uoy1ikihdJcwiiKaSHEPYWX+P5psoOOyz3Cc9BDhm61DajH6LIS5R4t0UAPGS+tq/FmqbbgHMPRBfJRa8B+pyvAxJkn/W3O6F6HeYVApH3BRCgC8hPTPLC13OtJWeqcPa5I2dRqKBZ5GoCyIXjRxCXWewZkGAaxL9l/rWPu04IZIp0r3oxPf/Ka7+TY18SBTPDCoSPWLHeQcW6Cl3HYmY+U0a5aoyGfJwQhKkIolRky8KKJAZVJDOgInsBHKHje7V9qpEIH40gaIVL61hCyRnHZ+HD3p6c7GfuZyZFE/OSfLBW219J2930bLhnQuLqQP5KXe+c/kSs+uq1udkGpq8SQ6HSyUD0TOeWL2X+R6hRbBmTP4kcFo3OIDM8RaYqE6JDBk7GDSwi/rGAGUgzVAj05eOPiYW+SeZnuTKhhxClCB12xfsUgueU9SJ/zmaXe4CJH9BiW40due+62BTp0bYdx+6z0KUfLpm3jEzPM++ml+d73Ic9sgBfFhMEYaohYAFzLefekQfhWxwq3rAHGCrSNFHjw4ZSSI9H49EYn2608x2LTMyd8Sn7n1qw3jL6/5lnsq8x0EdGMhGpGGzMheTFPGUNQ1YLj8Dd9XrOHL+2crPB7dTWMSMa4dhcFo39G1/lmeeeyYDqYp4ckMvTyc+I9nPFVvYGf6xAYbAFM6/lrIEsRMPSpSm0e1Pe2isUiDIQ6uzDDEj2HbT5jz8=
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List Model Cards"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/modelcards"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List all model cards. JWT bearer shows private; unauthenticated shows only public.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"q","in":"query","required":false,"schema":{"anyOf":[{"type":"string","maxLength":255},{"type":"null"}],"title":"Q"}},{"name":"skip","in":"query","required":false,"schema":{"type":"integer","minimum":0,"default":0,"title":"Skip"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":100,"minimum":1,"default":50,"title":"Limit"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"properties":{"uuid":{"type":"string","title":"Uuid"},"name":{"type":"string","title":"Name"},"categories":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Categories"},"author":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Author"},"version":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Version"},"short_description":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Short Description"},"is_gated":{"type":"boolean","title":"Is Gated","default":false},"is_private":{"type":"boolean","title":"Is Private","default":false},"updated_at":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Updated At"}},"type":"object","required":["uuid","name"],"title":"ModelCardSummary","description":"List endpoint: uuid, name, categories, author, version, short_description."},"title":"Response List Model Cards Modelcards Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

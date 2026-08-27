@@ -3,43 +3,46 @@ tags:
   - CI4AI
   - PADI
 ---
-
 # Tutorials
 
-### Create a Model Card
+### Building a Patra Model Card
 
-Find the descriptions of the Model Card parameters in the [schema descriptions document](https://github.com/Data-to-Insight-Center/patra-toolkit/blob/main/docs/source/schema_description.md).
+We start with essential metadata like name, version, short description, and so on.
+
+Find the descriptions of the Model Card parameters in the [schema descriptions document](https://github.com/ICICLE-ai/patra-toolkit/blob/main/docs/source/schema_description.md).
 
 ```python
 from patra_toolkit import ModelCard
 
 mc = ModelCard(
-  name="UCI Adult Data Analysis model using Tensorflow",
-  version="0.1",
+  name="UCI_Adult_Model",
+  version="1.0",
   short_description="UCI Adult Data analysis using Tensorflow for demonstration of Patra Model Cards.",
   full_description="We have trained a ML model using the tensorflow framework to predict income for the UCI Adult Dataset. We leverage this data to run the Patra model cards to capture metadata about the model as well as fairness and explainability metrics.",
   keywords="uci adult, tensorflow, explainability, fairness, patra",
-  author="Sachith Withana",
+  author="0009-0009-9817-7042",
   input_type="Tabular",
   category="classification",
-  foundational_model="None"
+  foundational_model="None",
+  citation="Becker, B. & Kohavi, R. (1996). Adult [Dataset]. UCI."
 )
 
 # Add Model Metadata
 mc.input_data = 'https://archive.ics.uci.edu/dataset/2/adult'
-mc.output_data = 'https://huggingface.co/Data-to-Insight-Center/UCI-Adult'
+mc.output_data = 'https://huggingface.co/patra-iu/neelk-uci_adult_model-1.0'
 ```
 
 ### Initialize an AI/ML Model
+Here we describe the model's ownership, license, performance metrics, etc.
 
 ```python
 from patra_toolkit import AIModel
 
 ai_model = AIModel(
-  name="UCI Adult Random Forest model",
+  name="Random Forest",
   version="0.1",
   description="Census classification problem using Random Forest",
-  owner="Sachith Withana",
+  owner="neelk",
   location="https://github.iu.edu/swithana/mcwork/randomforest/adult_model.pkl",
   license="BSD-3 Clause",
   framework="sklearn",
@@ -48,7 +51,7 @@ ai_model = AIModel(
 )
 
 # Populate Model Structure
-a i_model.populate_model_structure(trained_model)
+ai_model.populate_model_structure(trained_model)
 mc.ai_model = ai_model
 
 # Add Custom Metrics
@@ -62,6 +65,8 @@ ai_model.add_metric("Input Shape", "(26048, 100)")
 
 ### Run Fairness and Explainability Scanners
 
+Patra provides the `demographic_parity_difference` (the difference in the probability of a positive outcome between two groups) and `equalized_odds_difference` (the difference in true positive rates between two groups) using the `fairlearn` library. The explainability metrics are computed using the `shap` library.
+
 ```python
 # To assess fairness, provide the sensitive feature, test data, labels, and predictions
 mc.populate_bias(X_test, y_test, predictions, "gender", X_test['sex'], clf)
@@ -70,60 +75,97 @@ mc.populate_bias(X_test, y_test, predictions, "gender", X_test['sex'], clf)
 mc.populate_xai(X_test, x_columns, model, top_n=10)
 ```
 
-### Validate and Save the Model Card
+The Model Card is validated against the schema to ensure it meets the required structure and content. After validation, you can save the Model Card to a file in JSON format. Only the `name` field is required — every other field is optional.
 
 ```python
-# Capture Python package dependencies and versions
-mc.populate_requirements()
-
 # Verify the model card content against the schema
 mc.validate()
 mc.save(<file_path>)
 ```
 
-## Submit
+### Submit
 
-Use `mc.submit()` to either upload just a model card, an AI model along with the model card, just the artifacts, or all at once!
+The `submit()` method submits the Model Card's metadata to a [Patra server](https://github.com/Plale-Lab/patra-knowledge-base).
 
 ```python
-mc.submit(
-    patra_server_url=<patra_server_url>,
-    model=<trained_model>,
-    file_format="pt",  # or "h5"
-    model_store="huggingface",  # or "github"
-    inference_labels="labels.txt",
-    artifacts=[<artifact1_path>, <artifact2_path>],
-    token=<optional_token>  # optional authentication token
-)
+result = mc.submit(patra_server_url=<patra_server_url>)
+print(mc.uuid)  # the server-assigned identifier, also available as result["asset_uuid"]
 ```
 
-The `token` parameter is **optional**. If your hosted Patra server requires authentication, provide a valid token.
+`submit()` raises `PatraSubmissionError` on validation failure or a server/network error, and `PatraModelExistsError` if an equivalent model card (same name, version, author, and short description) already exists on the server.
 
-If a name-version conflict arises, increment `mc.version`. In case of failure, `submit()` attempts partial rollbacks to avoid orphaned uploads.
+#### Hosted Patra servers (Tapis Pods)
 
-## Authentication with TACC Credentials
+Unless you are running Patra locally, point `patra_server_url` at the hosted deployment in the
+ICICLE Tapis tenant:
 
-To authenticate against a Patra server hosted in TAPIS, use Patra's built-in `authenticate()` method to obtain an access token:
+| Service | URL |
+| ------- | --- |
+| REST API (stable) | `https://patrabackend.pods.icicleai.tapis.io` |
+| REST API (dev) | `https://patrabackend-dev.pods.icicleai.tapis.io` |
+| Patra UI | `https://patra.pods.icicleai.tapis.io` |
+| Tapis tenant | `https://icicleai.tapis.io` |
+
+```python
+PATRA_URL = "https://patrabackend.pods.icicleai.tapis.io"
+
+result = mc.submit(patra_server_url=PATRA_URL, token=tapis_token)
+ModelCard.list_model_cards(server_url=PATRA_URL)
+```
+
+Submitted cards appear in the UI at `https://patra.pods.icicleai.tapis.io`. The stable and dev
+backends share one database, so a submission to either is a submission to production.
+
+### [Optional] TAPIS Authentication
+
+Patra servers hosted as TAPIS pods require authentication using a JWT (JSON Web Token) for secure access. To generate this token, you must authenticate with your TACC credentials. If you do not already have a TACC account, you can create one at [https://accounts.tacc.utexas.edu/begin](https://accounts.tacc.utexas.edu/begin). Use the Patra `authenticate()` method to obtain an access token for TAPIS-hosted Patra servers:
 
 ```python
 from patra_toolkit import ModelCard
-
 mc = ModelCard(...)
-
 tapis_token = mc.authenticate(username="<your_tacc_username>", password="<your_tacc_password>")
-```
 
-This will print and return a valid `X-Tapis-Token` (JWT). You can then pass this token to `mc.submit()`:
-
-```python
 mc.submit(
-    patra_server_url=<tapis_hosted_patra_server_url>,
-    model=<trained_model>,
+    patra_server_url="https://patrabackend.pods.icicleai.tapis.io",
     token=tapis_token
 )
 ```
 
-## Examples
+`authenticate()` requests the token from the ICICLE tenant's OAuth2 endpoint
+(`https://icicleai.tapis.io/v3/oauth2/tokens`). Reads of public records work without a token;
+writes and private records require one.
 
-Explore the following example notebooks and model cards to learn more about how to use the Patra Model Card Toolkit:
-[Notebook Example](https://github.com/Data-to-Insight-Center/patra-toolkit/blob/main/examples/notebooks/GettingStarted.ipynb), [Model Card Example](https://github.com/Data-to-Insight-Center/patra-toolkit/blob/main/examples/model_cards/tesorflow_adult_nn_MC.json)
+### Building a Datasheet
+
+A `Datasheet` documents a dataset (title, creators, subjects, and other DataCite-style metadata) and submits the same way a Model Card does — an alternative to filling in the same fields through the Patra UI. Attach a datasheet's `uuid` to a Model Card's `training_datasheet_uuid` to record what a model was trained on.
+
+```python
+from patra_toolkit import Datasheet
+
+ds = Datasheet(publication_year=2025, version="1.0")
+ds.add_title("UCI Adult Dataset")
+ds.add_creator("Becker, B.")
+ds.add_creator("Kohavi, R.")
+ds.add_description("Predict whether income exceeds $50K/yr based on census data.", "Abstract")
+
+ds.submit(patra_server_url=<patra_server_url>)
+print(ds.uuid)
+
+mc = ModelCard(name="UCI_Adult_Model", training_datasheet_uuid=ds.uuid)
+```
+
+### Listing & Retrieving Model Cards and Datasheets
+
+```python
+from patra_toolkit import ModelCard, Datasheet
+
+# List returns summaries (uuid, name/title, and other summary fields)
+ModelCard.list_model_cards(server_url=<patra_server_url>)
+Datasheet.list_datasheets(server_url=<patra_server_url>)
+
+# Get returns the full record for a single uuid
+ModelCard.get_model_card(server_url=<patra_server_url>, uuid=<model_card_uuid>)
+Datasheet.get_datasheet(server_url=<patra_server_url>, uuid=<datasheet_uuid>)
+```
+
+Pass `token=<tapis_token>` to any of the above to include private records in list/get results.

@@ -1,0 +1,72 @@
+---
+id: get-user-experiment-summary-experiments-domain-users-user-id-summary-get
+title: "Get User Experiment Summary"
+description: "Get User Experiment Summary"
+sidebar_label: "Get User Experiment Summary"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9Vltv2jAU/iuWnzYpG7TaE2+o7TqmXVCh20OFokNiwF1utR1ahPLfd46dmKRQ2rXSXiCxv/P5XD9nyw0sNR/ccPFQCCVTkRnNZwHP8Q2MzLNRzAd8KUxYaqHCHSrUZZqC2rSWdBjGeQoyCy1Yu79QxqEHIxEPeAEKUmEQgidveYYveIizxW38GSDGrPBZibtSKoFOGFWKgOtoJVLggy03m4KstFEyWyLSSJPQwrmjqarAM9duvJn6GnkYJqSqZmSuizzTQpPFab9Pf7HQkZIF5Q3hkzKKhNaLMmFXNRjJojwzmCyCQ1EkMrJp7t1qstnuewFKwYZcNyK1ZxWKimOkO7lVEYzwiPMXHmhDCHxWXhJwwNM8Fskz8O+E6eBdATDSbPNzYYvdtaUi1StZmSScEttl+0EMyBeLtYxE7cBr6M4tQe2dNqBMCOa1ZBOyZ0NDXCY3gJlJYekqsscnseBLoY4STomEjRwJOQhrEb+VdEIkLdJCiUhq6RptjzEr0/kzhGNPUNEARID7r6S6ctbIszgJdZSrw33yAqbPJ2xi7SsqhgPl81sRmc6Q3zwalaAlC765Z4fmZeLEy9bae+/mmV0Kw+yUtMarxreWNGNOlpgFa/eHvcg8GIkwAArh0+npvpb8gkTGVinYhVK5+hch6QpGLAxIW7YnFCXJo87uC+bDN+NsV4JGt5qUfcudg1Yc9PKojqBqYs9yT3ZE1SgZbEq7Fcl7UdqENNsju4A7kXlo0fj2aHBnlMsH82wLUW6c+zWu1TC7ErkKPZ2Kc1eCQ4c1kC/T6XiP0PVHtzGONCB5Kswqr29we/HizTfgvdad3du6e7fq2Tu7t62nouppzyKzRd7O6hiMAjYcsTNQsWbD8Yg/dgvX2AIrYyeLRRYHWcwwHtArIXAk7qVZsa+/px/gHpRghZJriOi4NfrhWE4+9j/2rXLl2qRg+7q+04/H3XHGl51K3CsS+3mA46/sFLicdD+AAj7wXyM2LbSyk4smM1j8FTpG1tvtHLS4VklV0fJdKXB/cIOPa1AS5pQ3nKBYanrGiiwg0WLPUT/T/N1V3XbvGQ8OB9B0V2aTBklJb/j4R2x2n1M0pf/x1CZJVglWAmJUBQrc7Q7xg6gwLbs94SJh9017eTHFpv8L+cOkmQ==
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get User Experiment Summary"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/experiments/{domain}/users/{user_id}/summary"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get User Experiment Summary
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"domain","in":"path","required":true,"schema":{"type":"string","title":"Domain"}},{"name":"user_id","in":"path","required":true,"schema":{"type":"string","title":"User Id"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"properties":{"experiment_id":{"type":"string","title":"Experiment Id"},"user_id":{"type":"string","title":"User Id"},"model_id":{"type":"string","title":"Model Id"},"model_name":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Model Name"},"device_id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Device Id"},"start_at":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Start At"},"total_images":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Total Images"},"saved_images":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Saved Images"},"precision":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Precision"},"recall":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Recall"},"f1_score":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"F1 Score"}},"type":"object","required":["experiment_id","user_id","model_id"],"title":"ExperimentSummary"},"title":"Response Get User Experiment Summary Experiments  Domain  Users  User Id  Summary Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

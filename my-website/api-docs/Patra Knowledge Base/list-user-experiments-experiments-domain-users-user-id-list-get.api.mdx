@@ -1,0 +1,72 @@
+---
+id: list-user-experiments-experiments-domain-users-user-id-list-get
+title: "List User Experiments"
+description: "List User Experiments"
+sidebar_label: "List User Experiments"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VVFP2zAQ/iuWnzapIx3aU98qQKwT2xCU7QGh6EiujVmaBNspVFH+++7sJE1ogY1Je2kd++783XffnStpYWnk5FriY4FarTCzRt6MZE5fYFWezWI5kakyNiwN6rBnNliHcb4ClYXOyvi/UMVh6FyXaOVIFqBhhZbO6cJKZvRBsb0jHdPPhGxsQmuN96XSSHdbXeJImijBFchJJe2mYC9jtcqWZGmVTXnj2Iep61EXucHwz6GvKI4gHur6ht1NkWcGDXscjsf8F6OJtCqYLjK/LKMIjVmUqbhojClYlGeWmGJzKIpURY7d4M6wT7WLArSGDUO3uHJ3FZprYpW/ecs9Z/gC+JPO0KVA+VrQNgSPJNt8X7hiDN2ZxGYnK9NUcuJtwEv2F1PLsWJcqwgbBG8JduwCNMhWeYzpK+l8ZZuBvS/226730b5xBBJOa5bf3mFkB1K5fkJ4D+zNPq7PSPUzqhzDbE9bMQg+FE5UWwczWAuvZuGsjP+jpIV3PaVuqmsG/OnwcFd/PyBVsVOXONE6138jvqHIYrSgUl49o8I0jwanf1ADRUiWqKkMW8JbrbdMneUeoCuyWb6oB+o0WKLsgr3QCUyGmPNpzSOhKB0h7fHMbdBJZB97YToxtHZHzOWjfVUwzI2H39j1hLItka/Q81Qc+xLsu6w1+Tyfn+8E9PoYCmOv7hgj2iTnMd+OaZqTExn0xntQ+SldB268B1UzWuuAx7sbsIu8T+Y5WA1iOhNHoGMjpucz+RQN7YkFFcQ1koicHWSxoDTAJIjUBg/KJuLLz/kHeACNotBqDRGzsyYQPsrHg/HBmPkrcmNX4OTcjP/n0h3A6OrMNQ2K1L0hI1lqJ3tPxfBxHMlJ92Q5Nnhn+9Q4QqjUCeFh16q6BYNXOq1r3r4vUW9on5Zr0ApumS7ql1gZXlMVFpAa3EHZdbB8d9GI7L2Qo/3oWy1ljitIS/6i5S/cbB9c7sn/eGvLkOv7BCGmGcCJ+9MpPZmF7fntjCke251QT0/mJPHfTL3+Mw==
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List User Experiments"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/experiments/{domain}/users/{user_id}/list"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List User Experiments
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"domain","in":"path","required":true,"schema":{"type":"string","title":"Domain"}},{"name":"user_id","in":"path","required":true,"schema":{"type":"string","title":"User Id"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"properties":{"experiment_id":{"type":"string","title":"Experiment Id"},"start_at":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Start At"},"device_id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Device Id"},"model_id":{"type":"string","title":"Model Id"},"model_name":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Model Name"}},"type":"object","required":["experiment_id","model_id"],"title":"ExperimentListItem"},"title":"Response List User Experiments Experiments  Domain  Users  User Id  List Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

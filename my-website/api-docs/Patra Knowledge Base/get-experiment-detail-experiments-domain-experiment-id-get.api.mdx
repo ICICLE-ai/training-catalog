@@ -1,0 +1,72 @@
+---
+id: get-experiment-detail-experiments-domain-experiment-id-get
+title: "Get Experiment Detail"
+description: "Get Experiment Detail"
+sidebar_label: "Get Experiment Detail"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9lktv2zAMgP+KoNMGZE1arIflVvS1DGsbtNl2KAKDtZVEnW25kpw1CPzfR0quas99ISl2SWyJ/ETzIXLNLcwNH15zcV8ILTORW8OnPa7wDaxU+SjhQz4XNnoUiBJhQaaNFRNFicpA5lHUlJNJFKEq7/ECNGTCCk1nrXmOL4j1OriNP0OUsQt81uKulFrgsVaXosdNvBAZ8OGa21VBWsZqmc9R0kqb0sKRx1RVL5BbRmx9wHGgMXRHVU0JYgqVG2FIb28woL9EmFjLgryGSldlHAtjZmXKLmthRMYqt8ghcSiKVMbOyf1bQzrrhi2FphBY6U9of8/bTe3xTCUifUXpjGRa8t6NaGO+upi5kLV1ydX1Sl6mKSeXtGnnREBeIpYyFrUBm+COHKC2zljQNgK7KeyK9NmBJZZVFtAzGcy9jzs8iaGaC/0icEIQNvKQAC0wvWRMkd2WPG6QAn6uVZknEaavXUTq5lbEdttzTh2STQjJLmokHYglEhXKSCuX27gJMWwcMAieQWreg3xCnKfQuZjDe6DPAwfRGNhYGumLtQPNy+zmFeY4ACq6RGLA/Q1Rl16bPng3MrHST1fsG0gnu+zK6VP9QxHtDzYlnUHBUDtwoi/726EYAogmII+kKjeGoT4boX5FOe2FfOG0GsJ1p3GE63P61B175BohQgn7eW+v2wV+QioTd8ezY62V3rwF+KZLT9KKzHQFUhW3dt9wP4YqmD66BbSGVaM5fFfeQBcGM3+xj2C/w4uQB9gLfYqcwSa0W1F7LkrnkIftkVvAndjeNzAhZA9yh+TLe/tqWMk33vxarhHOxxD5CD3vihDu7mEPIl8nk3EH6POjnRinwrJGs67RlOl2oeqZyw1OOLMMeb8xa/XXfm6q+utWtlZuzpmpph/HYDWwgxE7BJ0YdjAe8X8NwTU2w1i4TGexkwNsBfgFYBZCWMP+SGwK335NPsEf0IIVWi4hJscscaDzlN2dwY6re7zRbQYuk+tZ7LkvbZkRQkzh7BepG+h6vNQu470X2kNqjw/D/Dhsly0Gd4FmkMZ6fQNG/NBpVdHyXSn0CtfxcQlawg15CSskkYae0e+ueXSMCzXLP1zWafWR8d7TRj9kT+5cBGlJb/j4W6weh16qwv94attBrt4XAhKsffp8L3OAA2thG9qd64mu1JCgp8cTTO2/VfkxxA==
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Experiment Detail"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/experiments/{domain}/{experiment_id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get Experiment Detail
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"domain","in":"path","required":true,"schema":{"type":"string","title":"Domain"}},{"name":"experiment_id","in":"path","required":true,"schema":{"type":"string","title":"Experiment Id"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"experiment_id":{"type":"string","title":"Experiment Id"},"model_id":{"type":"string","title":"Model Id"},"model_name":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Model Name"},"device_id":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Device Id"},"start_at":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Start At"},"total_images":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Total Images"},"total_predictions":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Total Predictions"},"total_ground_truth_objects":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Total Ground Truth Objects"},"true_positives":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"True Positives"},"false_positives":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"False Positives"},"false_negatives":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"False Negatives"},"precision":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Precision"},"recall":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Recall"},"f1_score":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"F1 Score"},"map_50":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Map 50"},"map_50_95":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Map 50 95"},"mean_iou":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Mean Iou"}},"type":"object","required":["experiment_id","model_id"],"title":"ExperimentDetail"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

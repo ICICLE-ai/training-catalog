@@ -24,7 +24,8 @@ __pycache__/
 .venv/
 .python-version
 
-# Data inputs (release-testing spreadsheets/CSVs are local-only, not committed)
+# Data inputs (release-testing spreadsheets/CSVs are local-only, not committed).
+# Covers my-website/Release.csv, the release-testing manifest.
 *.csv
 *.xlsx
 *.xls
@@ -40,3 +41,11 @@ __pycache__/
 # project config and skills (.claude/settings.json, .claude/skills/) tracked
 .claude/settings.local.json
 RELEASE_PROCESS.md
+
+# Local-only reference docs (not part of the published site)
+AGENT_ARCHITECTURE.html
+
+# Release-notes drafts and their template (icicle-release-notes skill).
+# These are reviewed and published to the website / mailing list, not committed here.
+# The glob covers both ICICLE-Release-Template.md and ICICLE-Release-<YYYY-MM>.md.
+ICICLE-Release-*.md

@@ -4,27 +4,6 @@ tags:
   - Software
   - PADI
 ---
-
 # Explanation
 
-## Features
-
-1. **Encourages Accountability**
-
-   * Incorporate essential model information (metadata, dataset details, fairness, explainability) at training time, ensuring AI models remain transparent from development to deployment.
-
-2. **Semi-Automated Capture**
-
-   * Automated *Fairness* and *Explainability* scanners compute demographic parity, equal odds, SHAP-based feature importances, etc., for easy integration into Model Cards.
-
-3. **Machine-Actionable Model Cards**
-
-   * Produce a structured JSON representation for ingestion into the Patra Knowledge Base. Ideal for advanced queries on model selection, provenance, versioning, or auditing.
-
-4. **Flexible Repository Support**
-
-   * Pluggable backends for storing models/artifacts on **Hugging Face** or **GitHub**, unifying the model publishing workflow.
-
-5. **Versioning & Model Relationship Tracking**
-
-   * Maintain multiple versions of a model with recognized edges (e.g., `revisionOf`, `alternateOf`) using embedding-based similarity. This ensures clear lineages and easy forward/backward provenance.
+The Patra Toolkit embeds transparency and governance directly into the training workflow. Integrated scanners collect essential metadata—data sources, fairness metrics, and explainability insights—during model training and then generate a machine‑actionable JSON model card. These cards plug into the Patra Knowledge Base for rich queries on provenance, version history, and auditing. Flexible back‑ends publish models and artifacts to repositories such as Hugging Face or GitHub, automatically recording lineage links to trace every model’s evolution.

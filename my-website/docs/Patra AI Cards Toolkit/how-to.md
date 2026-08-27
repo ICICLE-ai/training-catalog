@@ -4,19 +4,16 @@ tags:
   - Software
   - PADI
 ---
+# How-To Guides
 
-# How to Guides
+### Installation
 
-## Getting Started
-
-The latest version can be installed from PyPI:
-
+#### From Pip (Recommended)
 ```shell
 pip install patra-toolkit
 ```
 
-For local installation, clone the repository and install using:
-
+#### From GitHub (for the latest development version)
 ```shell
-pip install -e <local_git_dir>/patra_toolkit
+pip install git+https://github.com/Plale-Lab/patra-toolkit
 ```

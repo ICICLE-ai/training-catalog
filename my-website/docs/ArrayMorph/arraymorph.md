@@ -3,10 +3,37 @@ tags:
   - CI4AI
   - Release 2025-05
   - Release 2025-07
+  - Release 2026-08
 ---
 # ArrayMorph
 
 ArrayMorph is a software to manage array data stored on cloud object storage efficiently. It supports both HDF5 C++ API and h5py API. The data returned by h5py API is numpy arrays. By using h5py API, users can access array data stored on the cloud and feed the read data into machine learning pipelines seamlessly.
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/ArrayMorph/blob/v0.1.1/README.md)
+<div align="center">
+
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/ArrayMorph)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/ICICLE-ai/arraymorph/actions/workflows/build.yaml/badge.svg)](https://github.com/ICICLE-ai/arraymorph/actions/workflows/build.yaml)
+
+</div>
+
+
+
+## References
+
+- [HDF5 VOL connectors](https://docs.hdfgroup.org/hdf5/develop/_v_o_l.html)
+- [AWS SDK for C++](https://github.com/aws/aws-sdk-cpp)
+- [Azure SDK for C++](https://github.com/Azure/azure-sdk-for-cpp)
+- [h5py documentation](https://docs.h5py.org/en/stable/)
+- [conda-forge](https://conda-forge.org/)
+
+## Acknowledgements
+
+This project is supported by:
+
+*National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
+
+## Issue reporting
+
+  Please report issues via [GitHub Issues](https://github.com/ICICLE-ai/ArrayMorph/issues). Include your cloud
+  backend, HDF5/h5py versions, steps to reproduce, and any error logs — with cloud credentials redacted.

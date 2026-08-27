@@ -1,6 +1,6 @@
 ---
 name: icicle-component-info
-disable-model-invocation: true
+disable-model-invocation: false
 description: Scaffold or update the component-info.yaml metadata file for an ICICLE-ai component repository. Produces a single-item YAML list entry describing the component (id, owner, primaryThrust, name, status, description, componentVersion, targetIcicleRelease, dependencies, licenseUrl, publicAccess, sourceCodeUrl, and the codeReview/tests/docs/tutorials flags) that the ICICLE component catalog consumes. Enforces that id equals name-without-spaces then a colon then componentVersion, validates status and primaryThrust against the ICICLE controlled vocabularies, treats targetIcicleRelease as a YYYY-MM release month, leaves trainingTutorialsUrl (and any catalog-hosted developerDocumentationUrl) out because those are filled in after the training-catalog is deployed, always asks the maintainer whether the component depends on other components before writing hasDependentComponents, and never commits or pushes without an explicit confirmation from the user. Use this whenever the user asks to create, scaffold, fix, or update a component-info or component metadata file for an ICICLE component, or mentions the ICICLE component catalog entry. Apply automatically only when the target repo is under github.com/ICICLE-ai/; otherwise run the confirmation gate first.
 ---
 

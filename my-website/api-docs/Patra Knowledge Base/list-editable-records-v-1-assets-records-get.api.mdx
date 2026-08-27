@@ -1,0 +1,72 @@
+---
+id: list-editable-records-v-1-assets-records-get
+title: "List Editable Records"
+description: "List Editable Records"
+sidebar_label: "List Editable Records"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VttO4zAQ/ZXIzy29aHnpWwWI7dIVLBR2JYSqaTJtDc4F2yl0q/z7euwkTeiFpSv2qY19Zs545ow9K6ZhpljvnoFSqBV7aLA4QQmax9EgYD0muNJjDLiGicCxRD+WgRovOmNnUK7MULMGS0BCiBol+VyxyHwYH89mh0f0J0W5NB8Sn1Mu0fifglDYYMqfYwist2IQLS+n1lgvEzJWWvJoZoxCeB1iNNNz1useH2eNEhGlQrDMRK65FrTwg2W0nbMLHnL9gQhyrzzSOEPpiHmYhqzXabfNF4/yrwYLcAqp0Cag9pp9aPmqEfxq9ilZzUs5K+KYIwTW+QGp2Hf0KtW2EPoJb17g8n+FUdDVQxlBwlVzFD9h9PmBVMmqYUCq57Hkv63UPzuMfo0soy2JKokjhYp8dttt+glQ+ZInFtRjN6nvo1LTVHjXOdhE5sdGmJG2kSSJ4L712XpUZLPa1DFICbbeGkPLlUjqcM0ds23jscNu9lwZP6G8Ee1mjdyGB1u7pW5i7pDSIE1rJjtIbgmVlau74SP7a5AqnZTgQ4pzU9hnjXoFDnN3WnFhPD7xKBgLmKDYd5gLg/KGFmVs0iQAjcEY9KFB3DoPXt/eRAUsnjyir2vyvq8qoFLaWtEKv7XTVNjO8vfh2j4GN2kYgrll10VkhX69oXlOvALuObzy7jqeLb4qV86RAqfQv3S7m61xB4IHVvjemZSx/Ehf1PUfoAZuS7OjQUTs13b/ohpFM2QP69QXbVi+ErEPhURCNdunje/mEoCZled7fWqTUfYpj5LUJqTYHtgFs+Pr14qbUhYF7oRy+fq+dCg3LvwcV9HEukSuQrtTcepKsI2sgHwdja42HDp91IWxVV8UI5oLmOaZYk6hMYK1Fp2Wm2NasoTyaBpXk3YFWoLXH3gnQMrsXw3YW1az5k1N4sM4QOH5FgemoU24oOZIwn7heu59+zlqwgtI9BLJF+BTFhZmWHJeOkftozblKYmVDsHKNn+sdh3rzXWVp49q10oEcKuuVFp5uyPfs0Wn6G1lq+lcmcLNDSsBVqsJKLyVIsto2U1MpPeAK6Jfv4lP5mV3090CRErMtgt24Io5bI19oA/JCWwIqFny93cr25uzlv3OWGP7wR1tffjaH+g/UqyHq0+iqQ9ONRIH6ZuJIakmeeMqpKSXzXB+NjJt9AfAmBAg
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List Editable Records"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/assets/records"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List Editable Records
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"q","in":"query","required":false,"schema":{"anyOf":[{"type":"string","maxLength":255},{"type":"null"}],"title":"Q"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":100,"minimum":1,"default":20,"title":"Limit"}},{"name":"X-Asset-Org","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Asset-Org"}},{"name":"X-Asset-Api-Key","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Asset-Api-Key"}},{"name":"X-Tapis-Token","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"X-Tapis-Token"}},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"properties":{"asset_type":{"type":"string","title":"Asset Type"},"asset_id":{"type":"integer","title":"Asset Id"},"asset_uuid":{"type":"string","title":"Asset Uuid"},"title":{"type":"string","title":"Title"},"subtitle":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Subtitle"},"description":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Description"},"kind_label":{"type":"string","title":"Kind Label"},"updated_at":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Updated At"}},"type":"object","required":["asset_type","asset_id","asset_uuid","title","kind_label"],"title":"EditableRecordSummary"},"title":"Response List Editable Records V1 Assets Records Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

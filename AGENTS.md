@@ -54,8 +54,11 @@ to dodge the missing-secret error.
 
 ## Skills
 
-Six skills support this repo. All are **user-invoked** (`disable-model-invocation:
-true`) — run them when the user asks, not automatically. `icicle-release` is the
+Seven skills support this repo. The five catalog-facing ones are **user-invoked**
+(`disable-model-invocation: true`) — run them when the user asks, not automatically.
+The two generic component-repo skills (`icicle-readme-skill`,
+`icicle-component-info-skill`) are model-invokable, since they write a single file
+into a component's own repo and ask before committing. `icicle-release` is the
 top-level orchestrator; the rest are the building blocks it sequences (and which you
 can also run on their own).
 
@@ -113,6 +116,24 @@ direct push to `dev`, `master` unused. A final notebook/service-refresh step
 dir (`.release-run/<YYYY-MM>/`: `brief.md` written once, per-component
 `bundles/*.json`, README cache + skip-if-unchanged manifest) driven by the bundled
 stdlib `release_worker.py`. Modular and idempotent — run it to publish or to update.
+See its `SKILL.md`.
+
+### `.claude/skills/icicle-release-notes` — Release-notes drafter
+Writes the public release announcement for one `YYYY-MM` release, from
+`ICICLE-Release-Template.md` plus the external `release_catalog.yml` and the deployed
+`my-website/docs/`. Splits components into **New to ICICLE CI Catalog** (first ICICLE
+release) and **NSF ICICLE CI Components Changelog** (updates to components shipped
+earlier), using the same thrust groupings for both — `primaryThrust` maps onto the
+template's *Intelligent Cyberinfrastructure* / *Use Inspired Science* subheadings
+(`core/PADI` and `core/VA` are retired — such a component always carries another
+canonical tag, and that tag decides its heading). New-vs-changelog comes
+from prior `Release <YYYY-MM>` tags on the deployed doc, **not** the catalog id, which
+gets renamed between releases. Name, version, description and link (GitHub **or**
+Hugging Face) all come from the catalog entry. Output is `ICICLE-Release-<YYYY-MM>.md`
+at the repo root — gitignored, like the template. Read-only with respect to the
+release; bundles the stdlib-only `release_notes.py` (`collect`, `render`). It is a
+**sub-skill of `icicle-release`** — its final step, after the human gates — and
+re-derives nothing: every field comes from what the earlier skills already produced.
 See its `SKILL.md`.
 
 ### `icicle-readme-skill` — Generic ICICLE README scaffolder

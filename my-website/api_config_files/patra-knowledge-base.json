@@ -1,0 +1,7496 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Patra AI Cards API",
+    "description": "API for model cards and datasheets with JWT-aware privacy",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/modelcards": {
+      "get": {
+        "tags": [
+          "model_cards"
+        ],
+        "summary": "List Model Cards",
+        "description": "List all model cards. JWT bearer shows private; unauthenticated shows only public.",
+        "operationId": "list_model_cards_modelcards_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModelCardSummary"
+                  },
+                  "title": "Response List Model Cards Modelcards Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelcard/{uuid}": {
+      "get": {
+        "tags": [
+          "model_cards"
+        ],
+        "summary": "Get Model Card",
+        "description": "Get a single model card by UUID. Returns 404 if private and caller has no JWT.",
+        "operationId": "get_model_card_modelcard__uuid__get",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Model card UUID",
+              "title": "Uuid"
+            },
+            "description": "Model card UUID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelCardDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "model_cards"
+        ],
+        "summary": "Update Model Card",
+        "description": "Update a model card and its linked AI model (authenticated users only).",
+        "operationId": "update_model_card_modelcard__uuid__put",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Model card UUID",
+              "title": "Uuid"
+            },
+            "description": "Model card UUID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCardUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelCardDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelcard/{uuid}/download_url": {
+      "get": {
+        "tags": [
+          "model_cards"
+        ],
+        "summary": "Get Model Download Url",
+        "operationId": "get_model_download_url_modelcard__uuid__download_url_get",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Model card UUID",
+              "title": "Uuid"
+            },
+            "description": "Model card UUID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelDownloadURL"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modelcard/{uuid}/deployments": {
+      "get": {
+        "tags": [
+          "model_cards"
+        ],
+        "summary": "Get Model Deployments",
+        "operationId": "get_model_deployments_modelcard__uuid__deployments_get",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Model card UUID",
+              "title": "Uuid"
+            },
+            "description": "Model card UUID"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModelDeployment"
+                  },
+                  "title": "Response Get Model Deployments Modelcard  Uuid  Deployments Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasheets": {
+      "get": {
+        "tags": [
+          "datasheets"
+        ],
+        "summary": "List Datasheets",
+        "description": "List all datasheets. JWT bearer shows private; unauthenticated shows only public.\n\nSummary view flattens the first title, creator, and subject (category) per datasheet.",
+        "operationId": "list_datasheets_datasheets_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatasheetSummary"
+                  },
+                  "title": "Response List Datasheets Datasheets Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasheet/{uuid}": {
+      "get": {
+        "tags": [
+          "datasheets"
+        ],
+        "summary": "Get Datasheet",
+        "description": "Get a single datasheet by UUID. Returns 404 if private and caller has no JWT.",
+        "operationId": "get_datasheet_datasheet__uuid__get",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasheetDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "datasheets"
+        ],
+        "summary": "Update Datasheet",
+        "description": "Update a datasheet (authenticated users only).",
+        "operationId": "update_datasheet_datasheet__uuid__put",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DatasheetUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasheetDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "datasheets"
+        ],
+        "summary": "Delete Datasheet",
+        "description": "Delete a datasheet (admin only). Child rows cascade; linked model_cards.training_datasheet_id is set NULL.",
+        "operationId": "delete_datasheet_datasheet__uuid__delete",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/assets/model-cards": {
+      "post": {
+        "tags": [
+          "assets"
+        ],
+        "summary": "Create Model Card Asset",
+        "operationId": "create_model_card_asset_v1_assets_model_cards_post",
+        "parameters": [
+          {
+            "name": "X-Asset-Org",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Org"
+            }
+          },
+          {
+            "name": "X-Asset-Api-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Api-Key"
+            }
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Tapis-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetModelCardCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetIngestResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/assets/datasheets": {
+      "post": {
+        "tags": [
+          "assets"
+        ],
+        "summary": "Create Datasheet Asset",
+        "operationId": "create_datasheet_asset_v1_assets_datasheets_post",
+        "parameters": [
+          {
+            "name": "X-Asset-Org",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Org"
+            }
+          },
+          {
+            "name": "X-Asset-Api-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Api-Key"
+            }
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Tapis-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetDatasheetCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetIngestResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/assets/records": {
+      "get": {
+        "tags": [
+          "assets"
+        ],
+        "summary": "List Editable Records",
+        "operationId": "list_editable_records_v1_assets_records_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "X-Asset-Org",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Org"
+            }
+          },
+          {
+            "name": "X-Asset-Api-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Api-Key"
+            }
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Tapis-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EditableRecordSummary"
+                  },
+                  "title": "Response List Editable Records V1 Assets Records Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/assets/model-cards/{asset_id}": {
+      "patch": {
+        "tags": [
+          "assets"
+        ],
+        "summary": "Update Model Card Asset",
+        "operationId": "update_model_card_asset_v1_assets_model_cards__asset_id__patch",
+        "parameters": [
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "title": "Asset Id"
+            }
+          },
+          {
+            "name": "X-Asset-Org",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Org"
+            }
+          },
+          {
+            "name": "X-Asset-Api-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Api-Key"
+            }
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Tapis-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelCardUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetUpdateResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/assets/datasheets/{asset_id}": {
+      "patch": {
+        "tags": [
+          "assets"
+        ],
+        "summary": "Update Datasheet Asset",
+        "operationId": "update_datasheet_asset_v1_assets_datasheets__asset_id__patch",
+        "parameters": [
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "title": "Asset Id"
+            }
+          },
+          {
+            "name": "X-Asset-Org",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Org"
+            }
+          },
+          {
+            "name": "X-Asset-Api-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Api-Key"
+            }
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Tapis-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetDatasheetCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetUpdateResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-tools/schema-pool": {
+      "get": {
+        "tags": [
+          "agent-tools"
+        ],
+        "summary": "Get Schema Pool",
+        "operationId": "get_schema_pool_agent_tools_schema_pool_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SchemaPoolItem"
+                  },
+                  "type": "array",
+                  "title": "Response Get Schema Pool Agent Tools Schema Pool Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-tools/paper-schema-search": {
+      "post": {
+        "tags": [
+          "agent-tools"
+        ],
+        "summary": "Paper Schema Search",
+        "operationId": "paper_schema_search_agent_tools_paper_schema_search_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaperSchemaSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperSchemaSearchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-tools/paper-schema-search-upload": {
+      "post": {
+        "tags": [
+          "agent-tools"
+        ],
+        "summary": "Paper Schema Search Upload",
+        "operationId": "paper_schema_search_upload_agent_tools_paper_schema_search_upload_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_paper_schema_search_upload_agent_tools_paper_schema_search_upload_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperSchemaSearchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-tools/missing-column-analysis": {
+      "post": {
+        "tags": [
+          "agent-tools"
+        ],
+        "summary": "Missing Column Analysis",
+        "operationId": "missing_column_analysis_agent_tools_missing_column_analysis_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MissingColumnAnalysisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissingColumnAnalysisResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent-tools/generate-synthesized-dataset": {
+      "post": {
+        "tags": [
+          "agent-tools"
+        ],
+        "summary": "Generate Synthesized Dataset Route",
+        "operationId": "generate_synthesized_dataset_route_agent_tools_generate_synthesized_dataset_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynthesizeDatasetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SynthesizeDatasetResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Register User",
+        "description": "Register a username (idempotent).",
+        "operationId": "register_user_users_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegistration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRegistration"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ask-patra/bootstrap": {
+      "get": {
+        "tags": [
+          "ask-patra"
+        ],
+        "summary": "Ask Patra Bootstrap",
+        "operationId": "ask_patra_bootstrap_api_ask_patra_bootstrap_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AskPatraBootstrapResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ask-patra/chat": {
+      "post": {
+        "tags": [
+          "ask-patra"
+        ],
+        "summary": "Ask Patra Chat",
+        "operationId": "ask_patra_chat_api_ask_patra_chat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskPatraChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AskPatraChatResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experiments/{domain}/users": {
+      "get": {
+        "tags": [
+          "experiments"
+        ],
+        "summary": "List Experiment Users",
+        "operationId": "list_experiment_users_experiments__domain__users_get",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Domain"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExperimentUser"
+                  },
+                  "title": "Response List Experiment Users Experiments  Domain  Users Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experiments/{domain}/users/{user_id}/summary": {
+      "get": {
+        "tags": [
+          "experiments"
+        ],
+        "summary": "Get User Experiment Summary",
+        "operationId": "get_user_experiment_summary_experiments__domain__users__user_id__summary_get",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Domain"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExperimentSummary"
+                  },
+                  "title": "Response Get User Experiment Summary Experiments  Domain  Users  User Id  Summary Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experiments/{domain}/users/{user_id}/list": {
+      "get": {
+        "tags": [
+          "experiments"
+        ],
+        "summary": "List User Experiments",
+        "operationId": "list_user_experiments_experiments__domain__users__user_id__list_get",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Domain"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExperimentListItem"
+                  },
+                  "title": "Response List User Experiments Experiments  Domain  Users  User Id  List Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experiments/{domain}/{experiment_id}": {
+      "get": {
+        "tags": [
+          "experiments"
+        ],
+        "summary": "Get Experiment Detail",
+        "operationId": "get_experiment_detail_experiments__domain___experiment_id__get",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Domain"
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Experiment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperimentDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experiments/{domain}/{experiment_id}/images": {
+      "get": {
+        "tags": [
+          "experiments"
+        ],
+        "summary": "Get Experiment Images",
+        "operationId": "get_experiment_images_experiments__domain___experiment_id__images_get",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Domain"
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Experiment Id"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 500,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExperimentImage"
+                  },
+                  "title": "Response Get Experiment Images Experiments  Domain   Experiment Id  Images Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/experiments/{domain}/{experiment_id}/power": {
+      "get": {
+        "tags": [
+          "experiments"
+        ],
+        "summary": "Get Experiment Power",
+        "operationId": "get_experiment_power_experiments__domain___experiment_id__power_get",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Domain"
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Experiment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/DeploymentDetail"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get Experiment Power Experiments  Domain   Experiment Id  Power Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/hf-import/preview": {
+      "post": {
+        "tags": [
+          "hf-import"
+        ],
+        "summary": "Preview Hf Import",
+        "description": "Fetch a public Hugging Face model/dataset repo and return flat fields\nmatching the Submit form's reactive state. Never persists anything \u2014\nthe caller is expected to review/edit before creating the record.",
+        "operationId": "preview_hf_import_v1_hf_import_preview_post",
+        "parameters": [
+          {
+            "name": "X-Asset-Org",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Org"
+            }
+          },
+          {
+            "name": "X-Asset-Api-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Asset-Api-Key"
+            }
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Tapis-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HFImportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HFImportFields"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "summary": "Healthz",
+        "description": "Liveness probe: confirms the process is up.",
+        "operationId": "healthz_healthz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/readyz": {
+      "get": {
+        "summary": "Readyz",
+        "description": "Readiness probe: confirms the API can still talk to PostgreSQL.",
+        "operationId": "readyz_readyz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AIModel": {
+        "properties": {
+          "model_id": {
+            "type": "integer",
+            "title": "Model Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "owner": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Owner"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License"
+          },
+          "framework": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Framework"
+          },
+          "model_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Type"
+          },
+          "test_accuracy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Test Accuracy"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_id",
+          "name"
+        ],
+        "title": "AIModel",
+        "description": "Nested model from models table. model_id is integer per schema."
+      },
+      "AIModelUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "owner": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Owner"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License"
+          },
+          "framework": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Framework"
+          },
+          "model_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Type"
+          },
+          "test_accuracy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Test Accuracy"
+          }
+        },
+        "type": "object",
+        "title": "AIModelUpdate"
+      },
+      "AskPatraBootstrapResponse": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "starter_prompts": {
+            "items": {
+              "$ref": "#/components/schemas/AskPatraStarter"
+            },
+            "type": "array",
+            "title": "Starter Prompts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "enabled",
+          "provider"
+        ],
+        "title": "AskPatraBootstrapResponse"
+      },
+      "AskPatraChatRequest": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "maxLength": 8000,
+            "minLength": 1,
+            "title": "Message"
+          },
+          "conversation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Conversation Id"
+          },
+          "reset": {
+            "type": "boolean",
+            "title": "Reset",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "AskPatraChatRequest"
+      },
+      "AskPatraChatResponse": {
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "title": "Conversation Id"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "llm",
+              "code_fallback"
+            ],
+            "title": "Mode"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "model_used": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Used"
+          },
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/AskPatraCitation"
+            },
+            "type": "array",
+            "title": "Citations"
+          },
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/AskPatraMessage"
+            },
+            "type": "array",
+            "title": "Messages"
+          },
+          "starter_prompts": {
+            "items": {
+              "$ref": "#/components/schemas/AskPatraStarter"
+            },
+            "type": "array",
+            "title": "Starter Prompts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "answer",
+          "mode",
+          "provider"
+        ],
+        "title": "AskPatraChatResponse"
+      },
+      "AskPatraCitation": {
+        "properties": {
+          "resource_type": {
+            "type": "string",
+            "enum": [
+              "model_card",
+              "datasheet"
+            ],
+            "title": "Resource Type"
+          },
+          "resource_id": {
+            "type": "integer",
+            "title": "Resource Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "subtitle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtitle"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "route": {
+            "type": "string",
+            "title": "Route"
+          },
+          "matched_on": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched On"
+          }
+        },
+        "type": "object",
+        "required": [
+          "resource_type",
+          "resource_id",
+          "title",
+          "route"
+        ],
+        "title": "AskPatraCitation"
+      },
+      "AskPatraMessage": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system"
+            ],
+            "title": "Role"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "role",
+          "content",
+          "created_at"
+        ],
+        "title": "AskPatraMessage"
+      },
+      "AskPatraStarter": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "prompt"
+        ],
+        "title": "AskPatraStarter"
+      },
+      "AssetAIModelCreate": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "owner": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Owner"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License"
+          },
+          "framework": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Framework"
+          },
+          "model_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Type"
+          },
+          "test_accuracy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Test Accuracy"
+          },
+          "model_metrics": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Model Metrics"
+          },
+          "inference_labels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Inference Labels"
+          },
+          "model_structure": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Structure"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "AssetAIModelCreate"
+      },
+      "AssetDatasheetAlternateIdentifierCreate": {
+        "properties": {
+          "alternate_identifier": {
+            "type": "string",
+            "title": "Alternate Identifier"
+          },
+          "alternate_identifier_type": {
+            "type": "string",
+            "title": "Alternate Identifier Type"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "alternate_identifier",
+          "alternate_identifier_type"
+        ],
+        "title": "AssetDatasheetAlternateIdentifierCreate"
+      },
+      "AssetDatasheetContributorCreate": {
+        "properties": {
+          "contributor_type": {
+            "type": "string",
+            "title": "Contributor Type"
+          },
+          "contributor_name": {
+            "type": "string",
+            "title": "Contributor Name"
+          },
+          "name_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Type"
+          },
+          "given_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Given Name"
+          },
+          "family_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Family Name"
+          },
+          "name_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Identifier"
+          },
+          "name_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Identifier Scheme"
+          },
+          "name_id_scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Id Scheme Uri"
+          },
+          "affiliation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation"
+          },
+          "affiliation_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Identifier"
+          },
+          "affiliation_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Identifier Scheme"
+          },
+          "affiliation_scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Scheme Uri"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "contributor_type",
+          "contributor_name"
+        ],
+        "title": "AssetDatasheetContributorCreate"
+      },
+      "AssetDatasheetCreate": {
+        "properties": {
+          "uuid": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uuid"
+          },
+          "publication_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Year"
+          },
+          "resource_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource Type"
+          },
+          "resource_type_general": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource Type General"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "format": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Format"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "is_private": {
+            "type": "boolean",
+            "title": "Is Private",
+            "default": false
+          },
+          "publisher": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AssetPublisherCreate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "creators": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetCreatorCreate"
+            },
+            "type": "array",
+            "title": "Creators"
+          },
+          "titles": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetTitleCreate"
+            },
+            "type": "array",
+            "title": "Titles"
+          },
+          "subjects": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetSubjectCreate"
+            },
+            "type": "array",
+            "title": "Subjects"
+          },
+          "contributors": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetContributorCreate"
+            },
+            "type": "array",
+            "title": "Contributors"
+          },
+          "dates": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetDateCreate"
+            },
+            "type": "array",
+            "title": "Dates"
+          },
+          "alternate_identifiers": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetAlternateIdentifierCreate"
+            },
+            "type": "array",
+            "title": "Alternate Identifiers"
+          },
+          "related_identifiers": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetRelatedIdentifierCreate"
+            },
+            "type": "array",
+            "title": "Related Identifiers"
+          },
+          "rights_list": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetRightsCreate"
+            },
+            "type": "array",
+            "title": "Rights List"
+          },
+          "descriptions": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetDescriptionCreate"
+            },
+            "type": "array",
+            "title": "Descriptions"
+          },
+          "geo_locations": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetGeoLocationCreate"
+            },
+            "type": "array",
+            "title": "Geo Locations"
+          },
+          "funding_references": {
+            "items": {
+              "$ref": "#/components/schemas/AssetDatasheetFundingReferenceCreate"
+            },
+            "type": "array",
+            "title": "Funding References"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "AssetDatasheetCreate"
+      },
+      "AssetDatasheetCreatorCreate": {
+        "properties": {
+          "creator_name": {
+            "type": "string",
+            "title": "Creator Name"
+          },
+          "name_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Type"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          },
+          "given_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Given Name"
+          },
+          "family_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Family Name"
+          },
+          "name_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Identifier"
+          },
+          "name_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Identifier Scheme"
+          },
+          "name_id_scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Id Scheme Uri"
+          },
+          "affiliation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation"
+          },
+          "affiliation_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Identifier"
+          },
+          "affiliation_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Identifier Scheme"
+          },
+          "affiliation_scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Scheme Uri"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "creator_name"
+        ],
+        "title": "AssetDatasheetCreatorCreate"
+      },
+      "AssetDatasheetDateCreate": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date"
+          },
+          "date_type": {
+            "type": "string",
+            "title": "Date Type"
+          },
+          "date_information": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Information"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "date",
+          "date_type"
+        ],
+        "title": "AssetDatasheetDateCreate"
+      },
+      "AssetDatasheetDescriptionCreate": {
+        "properties": {
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "description_type": {
+            "type": "string",
+            "title": "Description Type"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "description",
+          "description_type"
+        ],
+        "title": "AssetDatasheetDescriptionCreate"
+      },
+      "AssetDatasheetFundingReferenceCreate": {
+        "properties": {
+          "funder_name": {
+            "type": "string",
+            "title": "Funder Name"
+          },
+          "funder_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Funder Identifier"
+          },
+          "funder_identifier_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Funder Identifier Type"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "award_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Award Number"
+          },
+          "award_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Award Uri"
+          },
+          "award_title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Award Title"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "funder_name"
+        ],
+        "title": "AssetDatasheetFundingReferenceCreate"
+      },
+      "AssetDatasheetGeoLocationCreate": {
+        "properties": {
+          "geo_location_place": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geo Location Place"
+          },
+          "point_longitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Point Longitude"
+          },
+          "point_latitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Point Latitude"
+          },
+          "box_west": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Box West"
+          },
+          "box_east": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Box East"
+          },
+          "box_south": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Box South"
+          },
+          "box_north": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Box North"
+          },
+          "polygon": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Polygon"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "AssetDatasheetGeoLocationCreate"
+      },
+      "AssetDatasheetRelatedIdentifierCreate": {
+        "properties": {
+          "related_identifier": {
+            "type": "string",
+            "title": "Related Identifier"
+          },
+          "related_identifier_type": {
+            "type": "string",
+            "title": "Related Identifier Type"
+          },
+          "relation_type": {
+            "type": "string",
+            "title": "Relation Type"
+          },
+          "related_metadata_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Related Metadata Scheme"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "scheme_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Type"
+          },
+          "resource_type_general": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource Type General"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "related_identifier",
+          "related_identifier_type",
+          "relation_type"
+        ],
+        "title": "AssetDatasheetRelatedIdentifierCreate"
+      },
+      "AssetDatasheetRightsCreate": {
+        "properties": {
+          "rights": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rights"
+          },
+          "rights_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rights Uri"
+          },
+          "rights_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rights Identifier"
+          },
+          "rights_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rights Identifier Scheme"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "AssetDatasheetRightsCreate"
+      },
+      "AssetDatasheetSubjectCreate": {
+        "properties": {
+          "subject": {
+            "type": "string",
+            "title": "Subject"
+          },
+          "subject_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subject Scheme"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "value_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value Uri"
+          },
+          "classification_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Classification Code"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "AssetDatasheetSubjectCreate"
+      },
+      "AssetDatasheetTitleCreate": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "title_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title Type"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "AssetDatasheetTitleCreate"
+      },
+      "AssetIngestResult": {
+        "properties": {
+          "asset_type": {
+            "type": "string",
+            "title": "Asset Type"
+          },
+          "asset_id": {
+            "type": "integer",
+            "title": "Asset Id"
+          },
+          "asset_uuid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Asset Uuid"
+          },
+          "organization": {
+            "type": "string",
+            "title": "Organization"
+          },
+          "created": {
+            "type": "boolean",
+            "title": "Created"
+          },
+          "duplicate": {
+            "type": "boolean",
+            "title": "Duplicate",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "asset_type",
+          "asset_id",
+          "organization",
+          "created"
+        ],
+        "title": "AssetIngestResult"
+      },
+      "AssetModelCardCreate": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "uuid": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uuid"
+          },
+          "short_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Short Description"
+          },
+          "full_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Full Description"
+          },
+          "keywords": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Keywords"
+          },
+          "author": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author"
+          },
+          "citation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation"
+          },
+          "input_data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Data"
+          },
+          "input_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Type"
+          },
+          "output_data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output Data"
+          },
+          "foundational_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Foundational Model"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "documentation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Documentation"
+          },
+          "training_datasheet_uuid": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Training Datasheet Uuid"
+          },
+          "is_private": {
+            "type": "boolean",
+            "title": "Is Private",
+            "default": false
+          },
+          "is_gated": {
+            "type": "boolean",
+            "title": "Is Gated",
+            "default": false
+          },
+          "ai_model": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AssetAIModelCreate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bias_analysis": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Bias Analysis"
+          },
+          "xai_analysis": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Xai Analysis"
+          },
+          "model_requirements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Model Requirements"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "AssetModelCardCreate"
+      },
+      "AssetPublisherCreate": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "publisher_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Identifier"
+          },
+          "publisher_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Identifier Scheme"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "AssetPublisherCreate"
+      },
+      "AssetUpdateResult": {
+        "properties": {
+          "asset_type": {
+            "type": "string",
+            "title": "Asset Type"
+          },
+          "asset_id": {
+            "type": "integer",
+            "title": "Asset Id"
+          },
+          "organization": {
+            "type": "string",
+            "title": "Organization"
+          },
+          "updated": {
+            "type": "boolean",
+            "title": "Updated",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "asset_type",
+          "asset_id",
+          "organization"
+        ],
+        "title": "AssetUpdateResult"
+      },
+      "Body_paper_schema_search_upload_agent_tools_paper_schema_search_upload_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          },
+          "document_format": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Format"
+          },
+          "top_k": {
+            "type": "integer",
+            "title": "Top K",
+            "default": 5
+          },
+          "disable_llm": {
+            "type": "boolean",
+            "title": "Disable Llm",
+            "default": true
+          },
+          "api_base": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Base"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
+          "timeout_seconds": {
+            "type": "integer",
+            "title": "Timeout Seconds",
+            "default": 60
+          },
+          "cache_dir": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cache Dir"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_paper_schema_search_upload_agent_tools_paper_schema_search_upload_post"
+      },
+      "DatasheetAlternateIdentifier": {
+        "properties": {
+          "alternate_identifier": {
+            "type": "string",
+            "title": "Alternate Identifier"
+          },
+          "alternate_identifier_type": {
+            "type": "string",
+            "title": "Alternate Identifier Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "alternate_identifier",
+          "alternate_identifier_type"
+        ],
+        "title": "DatasheetAlternateIdentifier"
+      },
+      "DatasheetContributor": {
+        "properties": {
+          "contributor_type": {
+            "type": "string",
+            "title": "Contributor Type"
+          },
+          "contributor_name": {
+            "type": "string",
+            "title": "Contributor Name"
+          },
+          "name_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Type"
+          },
+          "given_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Given Name"
+          },
+          "family_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Family Name"
+          },
+          "name_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Identifier"
+          },
+          "name_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Identifier Scheme"
+          },
+          "name_id_scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Id Scheme Uri"
+          },
+          "affiliation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation"
+          },
+          "affiliation_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Identifier"
+          },
+          "affiliation_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Identifier Scheme"
+          },
+          "affiliation_scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Scheme Uri"
+          }
+        },
+        "type": "object",
+        "required": [
+          "contributor_type",
+          "contributor_name"
+        ],
+        "title": "DatasheetContributor"
+      },
+      "DatasheetCreator": {
+        "properties": {
+          "creator_name": {
+            "type": "string",
+            "title": "Creator Name"
+          },
+          "name_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Type"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          },
+          "given_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Given Name"
+          },
+          "family_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Family Name"
+          },
+          "name_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Identifier"
+          },
+          "name_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Identifier Scheme"
+          },
+          "name_id_scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Id Scheme Uri"
+          },
+          "affiliation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation"
+          },
+          "affiliation_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Identifier"
+          },
+          "affiliation_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Identifier Scheme"
+          },
+          "affiliation_scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Scheme Uri"
+          }
+        },
+        "type": "object",
+        "required": [
+          "creator_name"
+        ],
+        "title": "DatasheetCreator"
+      },
+      "DatasheetDate": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date"
+          },
+          "date_type": {
+            "type": "string",
+            "title": "Date Type"
+          },
+          "date_information": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Information"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "date_type"
+        ],
+        "title": "DatasheetDate"
+      },
+      "DatasheetDescription": {
+        "properties": {
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "description_type": {
+            "type": "string",
+            "title": "Description Type"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "type": "object",
+        "required": [
+          "description",
+          "description_type"
+        ],
+        "title": "DatasheetDescription"
+      },
+      "DatasheetDetail": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid"
+          },
+          "publication_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Year"
+          },
+          "resource_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource Type"
+          },
+          "resource_type_general": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource Type General"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "format": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Format"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "is_private": {
+            "type": "boolean",
+            "title": "Is Private",
+            "default": false
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "creators": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetCreator"
+            },
+            "type": "array",
+            "title": "Creators",
+            "default": []
+          },
+          "titles": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetTitle"
+            },
+            "type": "array",
+            "title": "Titles",
+            "default": []
+          },
+          "publisher": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DatasheetPublisher"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "subjects": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetSubject"
+            },
+            "type": "array",
+            "title": "Subjects",
+            "default": []
+          },
+          "contributors": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetContributor"
+            },
+            "type": "array",
+            "title": "Contributors",
+            "default": []
+          },
+          "dates": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetDate"
+            },
+            "type": "array",
+            "title": "Dates",
+            "default": []
+          },
+          "alternate_identifiers": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetAlternateIdentifier"
+            },
+            "type": "array",
+            "title": "Alternate Identifiers",
+            "default": []
+          },
+          "related_identifiers": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetRelatedIdentifier"
+            },
+            "type": "array",
+            "title": "Related Identifiers",
+            "default": []
+          },
+          "rights_list": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetRights"
+            },
+            "type": "array",
+            "title": "Rights List",
+            "default": []
+          },
+          "descriptions": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetDescription"
+            },
+            "type": "array",
+            "title": "Descriptions",
+            "default": []
+          },
+          "geo_locations": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetGeoLocation"
+            },
+            "type": "array",
+            "title": "Geo Locations",
+            "default": []
+          },
+          "funding_references": {
+            "items": {
+              "$ref": "#/components/schemas/DatasheetFundingReference"
+            },
+            "type": "array",
+            "title": "Funding References",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid"
+        ],
+        "title": "DatasheetDetail",
+        "description": "Detail endpoint: DataCite-style nested structure plus selected flat fields."
+      },
+      "DatasheetFundingReference": {
+        "properties": {
+          "funder_name": {
+            "type": "string",
+            "title": "Funder Name"
+          },
+          "funder_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Funder Identifier"
+          },
+          "funder_identifier_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Funder Identifier Type"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "award_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Award Number"
+          },
+          "award_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Award Uri"
+          },
+          "award_title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Award Title"
+          }
+        },
+        "type": "object",
+        "required": [
+          "funder_name"
+        ],
+        "title": "DatasheetFundingReference"
+      },
+      "DatasheetGeoLocation": {
+        "properties": {
+          "geo_location_place": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geo Location Place"
+          },
+          "point_longitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Point Longitude"
+          },
+          "point_latitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Point Latitude"
+          },
+          "box_west": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Box West"
+          },
+          "box_east": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Box East"
+          },
+          "box_south": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Box South"
+          },
+          "box_north": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Box North"
+          },
+          "polygon": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Polygon"
+          }
+        },
+        "type": "object",
+        "title": "DatasheetGeoLocation"
+      },
+      "DatasheetPublisher": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "publisher_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Identifier"
+          },
+          "publisher_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Identifier Scheme"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "DatasheetPublisher"
+      },
+      "DatasheetRelatedIdentifier": {
+        "properties": {
+          "related_identifier": {
+            "type": "string",
+            "title": "Related Identifier"
+          },
+          "related_identifier_type": {
+            "type": "string",
+            "title": "Related Identifier Type"
+          },
+          "relation_type": {
+            "type": "string",
+            "title": "Relation Type"
+          },
+          "related_metadata_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Related Metadata Scheme"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "scheme_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Type"
+          },
+          "resource_type_general": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource Type General"
+          }
+        },
+        "type": "object",
+        "required": [
+          "related_identifier",
+          "related_identifier_type",
+          "relation_type"
+        ],
+        "title": "DatasheetRelatedIdentifier"
+      },
+      "DatasheetRights": {
+        "properties": {
+          "rights": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rights"
+          },
+          "rights_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rights Uri"
+          },
+          "rights_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rights Identifier"
+          },
+          "rights_identifier_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rights Identifier Scheme"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "type": "object",
+        "title": "DatasheetRights"
+      },
+      "DatasheetSubject": {
+        "properties": {
+          "subject": {
+            "type": "string",
+            "title": "Subject"
+          },
+          "subject_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subject Scheme"
+          },
+          "scheme_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Uri"
+          },
+          "value_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value Uri"
+          },
+          "classification_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Classification Code"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "DatasheetSubject"
+      },
+      "DatasheetSummary": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "creator": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Creator"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "is_private": {
+            "type": "boolean",
+            "title": "Is Private",
+            "default": false
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "title"
+        ],
+        "title": "DatasheetSummary",
+        "description": "List endpoint."
+      },
+      "DatasheetTitle": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "title_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title Type"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "DatasheetTitle"
+      },
+      "DatasheetUpdate": {
+        "properties": {
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "publication_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Year"
+          },
+          "is_private": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Private"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "title": "DatasheetUpdate"
+      },
+      "DeploymentDetail": {
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "title": "Experiment Id"
+          },
+          "image_generating_plugin_cpu_power_consumption": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Generating Plugin Cpu Power Consumption"
+          },
+          "image_generating_plugin_gpu_power_consumption": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Generating Plugin Gpu Power Consumption"
+          },
+          "power_monitor_plugin_cpu_power_consumption": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power Monitor Plugin Cpu Power Consumption"
+          },
+          "power_monitor_plugin_gpu_power_consumption": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power Monitor Plugin Gpu Power Consumption"
+          },
+          "image_scoring_plugin_cpu_power_consumption": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Scoring Plugin Cpu Power Consumption"
+          },
+          "image_scoring_plugin_gpu_power_consumption": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Scoring Plugin Gpu Power Consumption"
+          },
+          "total_cpu_power_consumption": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Cpu Power Consumption"
+          },
+          "total_gpu_power_consumption": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Gpu Power Consumption"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id"
+        ],
+        "title": "DeploymentDetail"
+      },
+      "DerivationDecisionModel": {
+        "properties": {
+          "target_field": {
+            "type": "string",
+            "title": "Target Field"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "directly available",
+              "derivable with provenance",
+              "not safely derivable"
+            ],
+            "title": "Status"
+          },
+          "rationale": {
+            "type": "string",
+            "title": "Rationale"
+          },
+          "source_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Source Fields"
+          },
+          "checks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Checks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_field",
+          "status",
+          "rationale"
+        ],
+        "title": "DerivationDecisionModel"
+      },
+      "EditableRecordSummary": {
+        "properties": {
+          "asset_type": {
+            "type": "string",
+            "title": "Asset Type"
+          },
+          "asset_id": {
+            "type": "integer",
+            "title": "Asset Id"
+          },
+          "asset_uuid": {
+            "type": "string",
+            "title": "Asset Uuid"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "subtitle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtitle"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "kind_label": {
+            "type": "string",
+            "title": "Kind Label"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "asset_type",
+          "asset_id",
+          "asset_uuid",
+          "title",
+          "kind_label"
+        ],
+        "title": "EditableRecordSummary"
+      },
+      "ExperimentDetail": {
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "title": "Experiment Id"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "model_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Name"
+          },
+          "device_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Device Id"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At"
+          },
+          "total_images": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Images"
+          },
+          "total_predictions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Predictions"
+          },
+          "total_ground_truth_objects": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Ground Truth Objects"
+          },
+          "true_positives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "True Positives"
+          },
+          "false_positives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "False Positives"
+          },
+          "false_negatives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "False Negatives"
+          },
+          "precision": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precision"
+          },
+          "recall": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recall"
+          },
+          "f1_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "F1 Score"
+          },
+          "map_50": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Map 50"
+          },
+          "map_50_95": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Map 50 95"
+          },
+          "mean_iou": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Iou"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id",
+          "model_id"
+        ],
+        "title": "ExperimentDetail"
+      },
+      "ExperimentImage": {
+        "properties": {
+          "image_name": {
+            "type": "string",
+            "title": "Image Name"
+          },
+          "ground_truth": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ground Truth"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "probability": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Probability"
+          },
+          "image_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Decision"
+          },
+          "flattened_scores": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Flattened Scores"
+          },
+          "image_receiving_timestamp": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Receiving Timestamp"
+          },
+          "image_scoring_timestamp": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Scoring Timestamp"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image_name"
+        ],
+        "title": "ExperimentImage"
+      },
+      "ExperimentListItem": {
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "title": "Experiment Id"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At"
+          },
+          "device_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Device Id"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "model_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id",
+          "model_id"
+        ],
+        "title": "ExperimentListItem"
+      },
+      "ExperimentSummary": {
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "title": "Experiment Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "model_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Name"
+          },
+          "device_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Device Id"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At"
+          },
+          "total_images": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Images"
+          },
+          "saved_images": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Saved Images"
+          },
+          "precision": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precision"
+          },
+          "recall": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recall"
+          },
+          "f1_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "F1 Score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id",
+          "user_id",
+          "model_id"
+        ],
+        "title": "ExperimentSummary"
+      },
+      "ExperimentUser": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Username"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id"
+        ],
+        "title": "ExperimentUser"
+      },
+      "ExtractedFieldModel": {
+        "properties": {
+          "source_name": {
+            "type": "string",
+            "title": "Source Name"
+          },
+          "canonical_name": {
+            "type": "string",
+            "title": "Canonical Name"
+          },
+          "json_type": {
+            "type": "string",
+            "title": "Json Type"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "series_kind": {
+            "type": "string",
+            "title": "Series Kind",
+            "default": "scalar"
+          },
+          "confidence": {
+            "type": "string",
+            "title": "Confidence",
+            "default": "high"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Aliases"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_name",
+          "canonical_name",
+          "json_type",
+          "description"
+        ],
+        "title": "ExtractedFieldModel"
+      },
+      "ExtractionIssueModel": {
+        "properties": {
+          "row_label": {
+            "type": "string",
+            "title": "Row Label"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          }
+        },
+        "type": "object",
+        "required": [
+          "row_label",
+          "reason"
+        ],
+        "title": "ExtractionIssueModel"
+      },
+      "ExtractionResultModel": {
+        "properties": {
+          "confidence": {
+            "type": "string",
+            "title": "Confidence"
+          },
+          "rejected": {
+            "type": "boolean",
+            "title": "Rejected"
+          },
+          "rejection_reason": {
+            "type": "string",
+            "title": "Rejection Reason",
+            "default": ""
+          },
+          "source_kind": {
+            "type": "string",
+            "title": "Source Kind",
+            "default": ""
+          },
+          "grouped_fields": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractedFieldModel"
+            },
+            "type": "array",
+            "title": "Grouped Fields"
+          },
+          "unresolved_fields": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractionIssueModel"
+            },
+            "type": "array",
+            "title": "Unresolved Fields"
+          },
+          "grouped_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Grouped Schema"
+          },
+          "machine_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Machine Schema"
+          },
+          "provenance": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Provenance"
+          }
+        },
+        "type": "object",
+        "required": [
+          "confidence",
+          "rejected"
+        ],
+        "title": "ExtractionResultModel"
+      },
+      "GeneratedArtifactSummary": {
+        "properties": {
+          "artifact_key": {
+            "type": "string",
+            "title": "Artifact Key"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "source_dataset_id": {
+            "type": "string",
+            "title": "Source Dataset Id"
+          },
+          "planner_mode": {
+            "type": "string",
+            "enum": [
+              "llm",
+              "deterministic_fallback",
+              "deterministic"
+            ],
+            "title": "Planner Mode"
+          },
+          "row_count": {
+            "type": "integer",
+            "title": "Row Count"
+          },
+          "generated_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Generated Fields"
+          },
+          "rejected_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rejected Fields"
+          },
+          "output_csv_download_url": {
+            "type": "string",
+            "title": "Output Csv Download Url"
+          },
+          "output_schema_download_url": {
+            "type": "string",
+            "title": "Output Schema Download Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "artifact_key",
+          "title",
+          "source_dataset_id",
+          "planner_mode",
+          "row_count",
+          "output_csv_download_url",
+          "output_schema_download_url"
+        ],
+        "title": "GeneratedArtifactSummary"
+      },
+      "GeneratedFieldPlan": {
+        "properties": {
+          "target_field": {
+            "type": "string",
+            "title": "Target Field"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "direct_copy",
+              "extract_year",
+              "monthly_aggregate"
+            ],
+            "title": "Mode"
+          },
+          "source_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Source Fields"
+          },
+          "date_field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Field"
+          },
+          "value_field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value Field"
+          },
+          "aggregate": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "max",
+                  "min",
+                  "sum",
+                  "mean",
+                  "identity"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aggregate"
+          },
+          "months": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Months"
+          },
+          "output_kind": {
+            "type": "string",
+            "enum": [
+              "scalar",
+              "json_array"
+            ],
+            "title": "Output Kind",
+            "default": "scalar"
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_field",
+          "mode"
+        ],
+        "title": "GeneratedFieldPlan"
+      },
+      "HFImportFields": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "author": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author"
+          },
+          "framework": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Framework"
+          },
+          "keywords": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Keywords"
+          },
+          "documentation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Documentation"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "short_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Short Description"
+          },
+          "full_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Full Description"
+          },
+          "is_gated": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Gated"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "input_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Type"
+          },
+          "model_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Type"
+          },
+          "foundational_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Foundational Model"
+          },
+          "input_data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Data"
+          },
+          "citation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "creator": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Creator"
+          },
+          "download_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Download Url"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "subjects": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subjects"
+          },
+          "publisher": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher"
+          },
+          "publication_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Year"
+          },
+          "license_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Uri"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License"
+          }
+        },
+        "type": "object",
+        "title": "HFImportFields",
+        "description": "Union of mcForm + dsForm keys we can realistically fill from Hugging Face.\n\nOnly one \"half\" of these will ever be populated for a given request\n(model_card fields vs. datasheet fields); `license` is shared by both\nforms and has the same meaning in either case."
+      },
+      "HFImportRequest": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Url"
+          },
+          "asset_type": {
+            "type": "string",
+            "enum": [
+              "model_card",
+              "datasheet"
+            ],
+            "title": "Asset Type"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "url",
+          "asset_type"
+        ],
+        "title": "HFImportRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MissingColumnAnalysisRequest": {
+        "properties": {
+          "query_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Schema"
+          },
+          "candidate_dataset_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Candidate Dataset Id"
+          },
+          "cache_dir": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cache Dir"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "query_schema",
+          "candidate_dataset_id"
+        ],
+        "title": "MissingColumnAnalysisRequest"
+      },
+      "MissingColumnAnalysisResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "rejected"
+            ],
+            "title": "Status"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "dataset_id": {
+            "type": "string",
+            "title": "Dataset Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "source_family": {
+            "type": "string",
+            "title": "Source Family"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source Url"
+          },
+          "summary": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Summary"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/DerivationDecisionModel"
+            },
+            "type": "array",
+            "title": "Rows"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "message",
+          "dataset_id",
+          "title",
+          "source_family",
+          "source_url",
+          "summary",
+          "rows"
+        ],
+        "title": "MissingColumnAnalysisResponse"
+      },
+      "ModelCardDetail": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "short_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Short Description"
+          },
+          "full_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Full Description"
+          },
+          "keywords": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Keywords"
+          },
+          "author": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author"
+          },
+          "input_data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Data"
+          },
+          "output_data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output Data"
+          },
+          "input_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Type"
+          },
+          "categories": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Categories"
+          },
+          "citation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation"
+          },
+          "foundational_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Foundational Model"
+          },
+          "training_datasheet_uuid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Training Datasheet Uuid"
+          },
+          "is_private": {
+            "type": "boolean",
+            "title": "Is Private",
+            "default": false
+          },
+          "is_gated": {
+            "type": "boolean",
+            "title": "Is Gated",
+            "default": false
+          },
+          "ai_model": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AIModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "name"
+        ],
+        "title": "ModelCardDetail",
+        "description": "Detail endpoint: matches reconstruct() format. uuid is the external PID."
+      },
+      "ModelCardSummary": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "title": "Uuid"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "categories": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Categories"
+          },
+          "author": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "short_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Short Description"
+          },
+          "is_gated": {
+            "type": "boolean",
+            "title": "Is Gated",
+            "default": false
+          },
+          "is_private": {
+            "type": "boolean",
+            "title": "Is Private",
+            "default": false
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "uuid",
+          "name"
+        ],
+        "title": "ModelCardSummary",
+        "description": "List endpoint: uuid, name, categories, author, version, short_description."
+      },
+      "ModelCardUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "short_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Short Description"
+          },
+          "full_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Full Description"
+          },
+          "keywords": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Keywords"
+          },
+          "author": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "input_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Type"
+          },
+          "input_data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Data"
+          },
+          "output_data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output Data"
+          },
+          "citation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation"
+          },
+          "documentation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Documentation"
+          },
+          "foundational_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Foundational Model"
+          },
+          "training_datasheet_uuid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Training Datasheet Uuid"
+          },
+          "is_private": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Private"
+          },
+          "is_gated": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Gated"
+          },
+          "ai_model": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AIModelUpdate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "ModelCardUpdate"
+      },
+      "ModelDeployment": {
+        "properties": {
+          "experiment_id": {
+            "type": "integer",
+            "title": "Experiment Id"
+          },
+          "device_id": {
+            "type": "string",
+            "title": "Device Id"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timestamp"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "precision": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precision"
+          },
+          "recall": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recall"
+          },
+          "f1_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "F1 Score"
+          },
+          "map_50": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Map 50"
+          },
+          "map_50_95": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Map 50 95"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id",
+          "device_id",
+          "status"
+        ],
+        "title": "ModelDeployment"
+      },
+      "ModelDownloadURL": {
+        "properties": {
+          "model_id": {
+            "type": "integer",
+            "title": "Model Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "download_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Download Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_id",
+          "name"
+        ],
+        "title": "ModelDownloadURL"
+      },
+      "PaperSchemaSearchRequest": {
+        "properties": {
+          "document_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Url"
+          },
+          "document_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Text"
+          },
+          "document_format": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Format"
+          },
+          "top_k": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Top K",
+            "default": 5
+          },
+          "disable_llm": {
+            "type": "boolean",
+            "title": "Disable Llm",
+            "default": true
+          },
+          "api_base": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Base"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
+          "timeout_seconds": {
+            "type": "integer",
+            "maximum": 300.0,
+            "minimum": 1.0,
+            "title": "Timeout Seconds",
+            "default": 60
+          },
+          "cache_dir": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cache Dir"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "PaperSchemaSearchRequest"
+      },
+      "PaperSchemaSearchResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "rejected"
+            ],
+            "title": "Status"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "query_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Schema"
+          },
+          "extraction": {
+            "$ref": "#/components/schemas/ExtractionResultModel"
+          },
+          "candidate_count": {
+            "type": "integer",
+            "title": "Candidate Count",
+            "default": 0
+          },
+          "winner_dataset_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Winner Dataset Id"
+          },
+          "ranking": {
+            "items": {
+              "$ref": "#/components/schemas/SearchCandidateModel"
+            },
+            "type": "array",
+            "title": "Ranking"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "message",
+          "extraction"
+        ],
+        "title": "PaperSchemaSearchResponse"
+      },
+      "SchemaPoolItem": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "title": "Dataset Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "source_family": {
+            "type": "string",
+            "title": "Source Family"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source Url"
+          },
+          "public_access": {
+            "type": "string",
+            "title": "Public Access"
+          },
+          "task_tags": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Task Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "title",
+          "source_family",
+          "source_url",
+          "public_access"
+        ],
+        "title": "SchemaPoolItem"
+      },
+      "SearchCandidateModel": {
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "dataset_id": {
+            "type": "string",
+            "title": "Dataset Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "source_family": {
+            "type": "string",
+            "title": "Source Family"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source Url"
+          },
+          "public_access": {
+            "type": "string",
+            "title": "Public Access"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "matched_field_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched Field Groups"
+          },
+          "derivable_field_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Derivable Field Groups"
+          },
+          "missing_field_groups": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Missing Field Groups"
+          },
+          "aligned_pairs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Aligned Pairs"
+          },
+          "derived_support": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Derived Support"
+          },
+          "type_conflicts": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Type Conflicts"
+          },
+          "tradeoffs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tradeoffs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rank",
+          "dataset_id",
+          "title",
+          "source_family",
+          "source_url",
+          "public_access",
+          "score",
+          "summary"
+        ],
+        "title": "SearchCandidateModel"
+      },
+      "SynthesisPlanModel": {
+        "properties": {
+          "planner_mode": {
+            "type": "string",
+            "enum": [
+              "llm",
+              "deterministic_fallback",
+              "deterministic"
+            ],
+            "title": "Planner Mode"
+          },
+          "group_by_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Group By Fields"
+          },
+          "direct_fields": {
+            "items": {
+              "$ref": "#/components/schemas/GeneratedFieldPlan"
+            },
+            "type": "array",
+            "title": "Direct Fields"
+          },
+          "derived_fields": {
+            "items": {
+              "$ref": "#/components/schemas/GeneratedFieldPlan"
+            },
+            "type": "array",
+            "title": "Derived Fields"
+          },
+          "rejected_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rejected Fields"
+          },
+          "planner_notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Planner Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "planner_mode"
+        ],
+        "title": "SynthesisPlanModel"
+      },
+      "SynthesizeDatasetRequest": {
+        "properties": {
+          "query_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Schema"
+          },
+          "candidate_dataset_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Candidate Dataset Id"
+          },
+          "selected_fields": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selected Fields"
+          },
+          "use_llm_plan": {
+            "type": "boolean",
+            "title": "Use Llm Plan",
+            "default": true
+          },
+          "submitted_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Submitted By"
+          },
+          "api_base": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Base"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
+          "timeout_seconds": {
+            "type": "integer",
+            "maximum": 300.0,
+            "minimum": 1.0,
+            "title": "Timeout Seconds",
+            "default": 60
+          },
+          "cache_dir": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cache Dir"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "query_schema",
+          "candidate_dataset_id"
+        ],
+        "title": "SynthesizeDatasetRequest"
+      },
+      "SynthesizeDatasetResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "rejected"
+            ],
+            "title": "Status"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "artifact": {
+            "$ref": "#/components/schemas/GeneratedArtifactSummary"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/SynthesisPlanModel"
+          },
+          "validation_issues": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationIssueModel"
+            },
+            "type": "array",
+            "title": "Validation Issues"
+          },
+          "preview_rows": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Preview Rows"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "message",
+          "artifact",
+          "plan"
+        ],
+        "title": "SynthesizeDatasetResponse"
+      },
+      "UserRegistration": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "Username"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username"
+        ],
+        "title": "UserRegistration"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "ValidationIssueModel": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "info",
+              "warning",
+              "error"
+            ],
+            "title": "Severity"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field",
+          "severity",
+          "message"
+        ],
+        "title": "ValidationIssueModel"
+      }
+    }
+  }
+}

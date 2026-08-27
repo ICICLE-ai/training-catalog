@@ -1,0 +1,72 @@
+---
+id: get-model-card-modelcard-uuid-get
+title: "Get Model Card"
+description: "Get a single model card by UUID. Returns 404 if private and caller has no JWT."
+sidebar_label: "Get Model Card"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFV01v2zgQ/SuETi2QOm6Qk29B0s16t22M1ukegsIYS2OLLS2q/EhiGP7vnSElWf5IspAD9JLQ4szjcPj4OLNKHMxtMrhLFjpDNUnBZDb5fpJkaFMjSyd1kQySa3QChJXFXKEIloItxXQpbm+HVz3xBZ03hRXn/XMhZ6I08h4cCigyMlQKjcjBikKLf/4b95KTRJdogMGHGcHP0U0268dhGE28l/SX5smnBAMLdGg43lVS0A/yZQualBxmCS6nscFfXhokZGc8niQ2zXEByWCVuGXJPtYZ2gpZzrRZgNugbO/602ajvEuad9IpBrhl8/VL9uvvHIstdWHR8vJn/T7/2/b66tMUrZ15RVmMxrRSqguHhWNzKEsl05Ct0x+WfVatLZWGc+lkXCHs48BGdwOPyXva7jPPk909ZVvGJaFY3sxC5red1ifNl8IrFXZdw3yr3AnJ5tq4ydbWu2F+ZSBx1QIidMqeeg3wv+jDLvZPXD5ovhYdMf+t/QkLvKPwuyJdRO810730lE1w0BVryAjiihEIT3t3LOBNgGgQY4TR+JgIxzxLeHQBcK5NxfMueJcbBMaTDo5hymXtz+zTvsjCL1BRvTrzr4Ukgp4wvjMgC3IN52NzJLmsL3qXRcYVXDirACdqXZB2Uml3Sx2mWiuEoiUPQytGlRmL4Ay8IqmagbIYQeY0lb0EcR2MDgCAPJTFbaWL78WW2kmSzDma1iJRkYd/SPJeQY92pEg/FNhZPW6CM6EonR5F/Y+1P2PJFPnF6gpVufMl4tedhPJn57vTABBapMcx8hO5U8uPQ+smkKbeQLo8CFn4xTTk95mLRyDiogZZM2y01NMfmLqt0uVuw/CKu+2HYBi1YbcC+UwLYFZVaDOjF3FohYOpwp6oIYW0orotgu6UiOVE70DwLwVZFU67AYbwLqkSukIHcj/Q+FlgkZWaAhkIKsMoBisMUuVDp+NT9+atiPVZT/AqHLPLUeAjlYAsjyMqPCmJHOH52dl+YfUNlIxaKj4Yo033qiqLm6CRdLiw+wZ0o7Zm/wffarGiFDcZBmNgmRy+aAs7f069PlEJCfNI1Yr0T5mGZDTEDu90MG8/u+GFdI8tmOb0mweQc/noXqQx5yaGX9m1xbI5onhCT6ei4tGhxWqTv8fj0R5g5Ae1DbmuOo3QSVCfMEhOm0bjdMUMW4c+Yqbb2RgBPb7iYiiYzFZcjIZ7XKZvTNRWX2RD49M81lY8SJdz6/MOHsBgbI9S3l7z2CTve/1enxNQausWEPhYtTjcfUU14iB2119tWP36fVqVaz7o01JR2cARehPuQsxipVNpjGwQ9IBOOKdd8ORqNQWLt0at1/z5l0dD8nlHw3swklUpXJNMWh5nVQ3wzBbffKm49VYc6M8OhVszqggJB+X5VxLq+rrzC5cwR8j4daVw4hQpNZau5bSnGSzuDbeuP4yJb78BaY46kA==
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Model Card"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/modelcard/{uuid}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get a single model card by UUID. Returns 404 if private and caller has no JWT.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"uuid","in":"path","required":true,"schema":{"type":"string","format":"uuid","description":"Model card UUID","title":"Uuid"},"description":"Model card UUID"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"uuid":{"type":"string","title":"Uuid"},"name":{"type":"string","title":"Name"},"version":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Version"},"short_description":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Short Description"},"full_description":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Full Description"},"keywords":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Keywords"},"author":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Author"},"input_data":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Input Data"},"output_data":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Output Data"},"input_type":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Input Type"},"categories":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Categories"},"citation":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Citation"},"foundational_model":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Foundational Model"},"training_datasheet_uuid":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Training Datasheet Uuid"},"is_private":{"type":"boolean","title":"Is Private","default":false},"is_gated":{"type":"boolean","title":"Is Gated","default":false},"ai_model":{"anyOf":[{"properties":{"model_id":{"type":"integer","title":"Model Id"},"name":{"type":"string","title":"Name"},"version":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Version"},"description":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Description"},"owner":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Owner"},"location":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Location"},"license":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"License"},"framework":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Framework"},"model_type":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Model Type"},"test_accuracy":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Test Accuracy"}},"type":"object","required":["model_id","name"],"title":"AIModel","description":"Nested model from models table. model_id is integer per schema."},{"type":"null"}]}},"type":"object","required":["uuid","name"],"title":"ModelCardDetail","description":"Detail endpoint: matches reconstruct() format. uuid is the external PID."}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

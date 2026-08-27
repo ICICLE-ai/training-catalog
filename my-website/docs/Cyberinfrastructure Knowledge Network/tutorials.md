@@ -4,12 +4,13 @@ tags:
   - Software
   - PADI
 ---
+# Tutorials
 
-# Tutorial
+### Create a Custom CKN Plug-in
 
 #### 1. Create a CKN Topic
 
-We will create a CKN topic named `temperature-sensor-data` to store temperature events. The CKN topics and their details are mentioned [here](https://github.com/Data-to-Insight-Center/cyberinfrastructure-knowledge-network/blob/main/docs/topics.md).
+We will create a CKN topic named `temperature-sensor-data` to store temperature events. The CKN topics and their details are mentioned [here](https://github.com/ICICLE-ai/cyberinfrastructure-knowledge-network/blob/main/docs/topics.md).
 
 Update `docker-compose.yml` (root directory) and add the topic to the broker environment:
 
@@ -63,36 +64,38 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic temperature-sen
 
 #### 3. Connect to a Data Sink
 
-Create the connector configuration `neo4jsink-temperature-connector.json` and place the file in `ckn_broker/connectors/` (or your chosen directory).
+Create the connector configuration `pgsink-temperature-connector.json` and place it in `ckn_broker/`,
+following the existing `pgsink-*.json` configs (Postgres is the supported sink for new pipelines —
+see `ckn_broker/setup_connector.sh`).
 
 ```json
 {
-  "name": "Neo4jSinkConnectorTemperature",
+  "name": "PgSinkConnectorTemperature",
   "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "topics": "temperature-sensor-data",
-    "connector.class": "streams.kafka.connect.sink.Neo4jSinkConnector",
-    "errors.retry.timeout": "-1",
-    "errors.retry.delay.max.ms": "1000",
-    "errors.tolerance": "all",
-    "errors.log.enable": true,
-    "errors.log.include.messages": true,
-    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "key.converter.schemas.enable": false,
+    "connection.url": "jdbc:postgresql://postgres:5432/d2i",
+    "connection.user": "d2i",
+    "connection.password": "d2i",
     "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "value.converter.schemas.enable": false,
-    "neo4j.server.uri": "bolt://neo4j:7687",
-    "neo4j.authentication.basic.username": "neo4j",
-    "neo4j.authentication.basic.password": "PWD_HERE",
-    "neo4j.topic.cypher.temperature-sensor-data": "MERGE (sensor:Sensor {id: event.sensor_id}) MERGE (reading:TemperatureReading {timestamp: datetime(event.timestamp)}) SET reading.temperature = event.temperature MERGE (sensor)-[:REPORTED]->(reading)"
+    "table.name.format": "temperature_sensor_data",
+    "value.converter.schemas.enable": true,
+    "delete.enabled": false,
+    "auto.create": true,
+    "auto.evolve": false,
+    "errors.tolerance": "all",
+    "errors.log.enable": true
   }
 }
 ```
 
 #### 4. Register the connector
 
+Add the `curl` registration call to `ckn_broker/setup_connector.sh` alongside the other JDBC sinks:
+
 ```bash
 curl -X POST -H "Content-Type: application/json" \
-     --data @/app/neo4jsink-temperature-connector.json \
+     --data @/app/pgsink-temperature-connector.json \
      http://localhost:8083/connectors
 ```
 
@@ -105,5 +108,5 @@ make up
 python produce_temperature_events.py
 ```
 
-Open [neo4j browser](http://localhost:7474/browser/) and log in with the credentials mentioned in the docker-compose file to view the streamed data. 
+Query the `temperature_sensor_data` table in Postgres to view the streamed data.
 You have successfully set up a temperature‑monitoring plugin with CKN!

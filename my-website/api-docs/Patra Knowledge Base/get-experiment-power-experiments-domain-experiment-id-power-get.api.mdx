@@ -1,0 +1,72 @@
+---
+id: get-experiment-power-experiments-domain-experiment-id-power-get
+title: "Get Experiment Power"
+description: "Get Experiment Power"
+sidebar_label: "Get Experiment Power"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9Vt9P2zAQ/lcsP21SRzu0p76hFrFOQ6ug2x4QitzETc0c29gOUEX533cXp2nSXzANeGkd+3zf5+/O5yuoZ6mjwxvKnwy3IuPKO3rboxq+mBdaTRI6pCn30cYgMvqR29aEi6JEZ0yoKGqbiSSqTWE/7VHDLMu45xYBC6rgA3yHnbAMP0Ow8UsYW36fC8sB29uc96iLlzxjdFhQvzK4y3krVAqWXniJE+Pgpix7jecOlf8GOG+8EdCkLG/RiTNaOe5w3+lggH8Jd7EVBqWDTdd5HHPnFrkkV7UxuIy18uAHzZkxUsSV0v07h3uKFhemVj8WlVjGYkS8CFjdk72cNGiQsZRDPFQVXpVGRuYpBC42eR0rIOfyrD5Am0KNofJszi1FnZsZKSnqsUadIAi5aEDItAIhI5OTKYKQUQvkCKv0PVhdHGIVkDOthNf2TYQKsJcB4VmV9vJ5VYn28jmoT4iai7V920S6DggvzKItPm+QQlt8DurjtWfydQWZocvDCgTEVz1yQDxwRoQM+/T8jse+U1hvtspUy+mYG6lXuDDmngl5lMG6cMLV9aRV0AKfzYQjJDwChJBO3SO1KewHykj6y+npbq3+xaRIqkpMzq3V9l8Kdbc8J+FQMBKeZ27XQOq4s7oTmLqQt2QRwCTFWN1uRGfWslWr2n/XgSCmQubSYw/DJbxKkMu0cXbkDUExyAxX8ZIpk1eCNHeimoCV2D+13DQJsbYboZZP/tmkQW0C/dqulQqbEIUIHZZinVd7wNYmX2ez6Y7DkB/dxNiXd0iR+6Wuu6Oqu4HGYkj7rbaoX4TmpuwXnatQ9k3tQ6iFbos5Zd4ycjYhI2YTR86mE7rNBubIAgKS6YRLEld2TCUEjsHcknO4B4/CL8m337NP7JFZTowVDyxGdR6g9wpePp8MTgbhUXE+Y1U6123TgeN2WDRhxpD2jaxarx7NbZX1QYpuT9mjw6bTG253ZkEOCPQS2ODOopgzx39aWZY4fZ9zu4J5GD4wK9gcxYLbkgiHYwjCgknHd0g295d+uKpT7COhvf3k15mkKqWYzPELhn/4atOm4o18R9SuUNXdX3KWgFh4/GBzBi2m8a3dO6UKq2mTrRfnM0jzvzPHNrk=
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Experiment Power"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/experiments/{domain}/{experiment_id}/power"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get Experiment Power
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"domain","in":"path","required":true,"schema":{"type":"string","title":"Domain"}},{"name":"experiment_id","in":"path","required":true,"schema":{"type":"string","title":"Experiment Id"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"anyOf":[{"properties":{"experiment_id":{"type":"string","title":"Experiment Id"},"image_generating_plugin_cpu_power_consumption":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Image Generating Plugin Cpu Power Consumption"},"image_generating_plugin_gpu_power_consumption":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Image Generating Plugin Gpu Power Consumption"},"power_monitor_plugin_cpu_power_consumption":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Power Monitor Plugin Cpu Power Consumption"},"power_monitor_plugin_gpu_power_consumption":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Power Monitor Plugin Gpu Power Consumption"},"image_scoring_plugin_cpu_power_consumption":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Image Scoring Plugin Cpu Power Consumption"},"image_scoring_plugin_gpu_power_consumption":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Image Scoring Plugin Gpu Power Consumption"},"total_cpu_power_consumption":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Total Cpu Power Consumption"},"total_gpu_power_consumption":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Total Gpu Power Consumption"}},"type":"object","required":["experiment_id"],"title":"DeploymentDetail"},{"type":"null"}],"title":"Response Get Experiment Power Experiments  Domain   Experiment Id  Power Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

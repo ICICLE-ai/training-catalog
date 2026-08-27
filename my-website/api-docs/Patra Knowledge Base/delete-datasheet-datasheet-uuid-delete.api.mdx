@@ -1,0 +1,72 @@
+---
+id: delete-datasheet-datasheet-uuid-delete
+title: "Delete Datasheet"
+description: "Delete a datasheet (admin only). Child rows cascade; linked model_cards.training_datasheet_id is set NULL."
+sidebar_label: "Delete Datasheet"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VEtP20AQ/iurPYGUJhRxSk8oidRUaYtoaA8oigbvJF5Ye83uGogs//fOrJ3YEOixuWS8883rm0clA2y9HN9KBQF8ihi8XA2kQp84XQRtczmWUzQYUIA4gMQJqEznwuZmdzoUk1QbJZx99iIBn4DCL8Lo/AGVyKxCs07AKT8MDnSu8+364GetldBeePL442axGMqBtAU64MBzRaFVDN0z6KR1WWq1XjcIMizAQUai43oqmdMHOWAQKTXXUUBISXb4WGqH5D64EgfSJylmIMeVDLuCbXxwlCUhN9ZlEDovQQfDgBv+rOsV+/KFzT16Nj8/u+C/1+T9KpMEvd+URly3YFkP5MX5+TH2NxitYvFi5px1FDKxecA8MBaKwugkqkf3ng2qXu6FY+aCblJRGEAblnTAzB8DjE1eaSHf/dxE4l6TUA8OL5oy2aKT9Yryb9/AOdj1mFnYJkEuMfPb90jdQ78TK7CNZDSQj6GRDLFkbc29LMpIyF49jw+kScJLz429u8ck9NxMmMsXQnb5HzDdUNxGbpr0W9yq89G1qOnQx1RMmxa8F2wP+bpcXh055B9Fx5DabgPifNP0juXosAGjiseyjtO9sX1CroBWTVzOxYT3TlxezeXbnaY3QePd7KeI+ykgV92Ke/GsQyq+/Vl+gmdwKAqnnyDhCp9oxxovn4dnwzPmoLA+ZBBHsl289mhM9/7eZlB1o/1/D0zbDJ6EUWHIgPMvXVyWhuPeNST8OC4/jUBKNbKyqu7A440zdc3PjyW6Hb2T+AROwx23gPZIac8y9XADxuM/yj+5bofvVHyU337G8sg/mJK/SHzA3f48xbVMkbhxMX6juqTrU4Se0dEV4TN2mLbpbDFbzmgI/wK0nRZU
+sidebar_class_name: "delete api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete Datasheet"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/datasheet/{uuid}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a datasheet (admin only). Child rows cascade; linked model_cards.training_datasheet_id is set NULL.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"uuid","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Uuid"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Successful Response"},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

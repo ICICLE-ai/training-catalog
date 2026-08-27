@@ -1,0 +1,72 @@
+---
+id: get-model-deployments-modelcard-uuid-deployments-get
+title: "Get Model Deployments"
+description: "Get Model Deployments"
+sidebar_label: "Get Model Deployments"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVk1vGjEQ/SuWT61EA0TNodyikKZUjYoCtIcIoWHXgJP9cGwvBaH9752xd5fdAEmbXJLFfjPzPPPG4x23sDS8d8/jNBTRLAAdGj5t8VQJDVamySDkPb4UduYBoVBRuo1FYo1fIYvZLMsk/q1voglvcQUaYmGFphg7nuAPdEdo3JQJfiuwK/zW4imTWmAwqzPR4iZYiRh4b8ftVpGNsVomS0QuUh2D3XsJhQm0VMQVF2+JEyNSbDIZ9HHfShuRgwnB89fweatiaR6lKlk+ZUJvGzQXEJljPGVixVJoxMYykXEW816Hgi4gi6z7LgmNyH9eCxjJWNp3RYSNj9jtdGrxu7X4FzUCP1y8PJ9SFKPSxAhDfs87HfrXTNQoCwJhzCKL2F0BxohBisETS3BQKpKB00z7wZDN7pAraA10KmlF7GIpTUqz0kcWG/whSUAzLNaxI5bcryskGxRlXctANM0qzZRWfQcqLCyaGwuxcuyT7c+F02jTlspTrCRZFHFKVultXDlAb/hhM/NS8JFHIFZpEUgjfY4OIidZPMezvhR5WDnIqXYB4P4bXd15a/Sz6M5MkGrxVk9fu2zk7HNSoppddN7q6RYUQ+vKz+zLxftcMXSQU8k9Kp0/iMA2muv+mfbqgqqKW/dL90a/uu+8nsqM+vZgN8Iyf7/sgcavuAuH0ZXEGptogkSJ6ufz88Mm/AWRDF2LsWutU/0/HdjstFBYkE40J1oxSoPG7j80SNml+XSf6rLhqzsn9QRdcc3ypX65xesGlk5OHnIa6pLBxrSb0/2pMpeQcnvgFnAnsJuam0oGJe6Kcrmxr0qFcuPpF7iaMPYl8hU6nYq+L8GxYCXk23g8PHDo9dEUxlGpEUdhV2kxwd04xmHb4+1qcrd3NEXzdtiwkskiredvCFYDuxywK3oesMvh4GDu4hrDycziap4aBknIkDmYlRCo7T/Srtj33+NP8Ae0YErLNQSUkDU+D7yX7lnnzPW9So2NwSm4GI6nTtigUZWWythWEUgntEw7pfvTF08doojmveoVsXeK1VxhfILudnMwYqKjPKdlP5SpCUJpYB7VxvKj2O7fDGuIMqLhuuMEtJz2e+yUfmhJ4OMxnp21an3+4a5Q50d25AF0LCWlJpNtnULJzSXFtfFKQIgtTXT81iU+A1Sd98GtQ+eodHdzPUbF/gUxlYXz
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Model Deployments"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/modelcard/{uuid}/deployments"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get Model Deployments
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"uuid","in":"path","required":true,"schema":{"type":"string","format":"uuid","description":"Model card UUID","title":"Uuid"},"description":"Model card UUID"},{"name":"skip","in":"query","required":false,"schema":{"type":"integer","minimum":0,"default":0,"title":"Skip"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":100,"minimum":1,"default":50,"title":"Limit"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"properties":{"experiment_id":{"type":"integer","title":"Experiment Id"},"device_id":{"type":"string","title":"Device Id"},"timestamp":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Timestamp"},"status":{"type":"string","title":"Status"},"precision":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Precision"},"recall":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Recall"},"f1_score":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"F1 Score"},"map_50":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Map 50"},"map_50_95":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Map 50 95"}},"type":"object","required":["experiment_id","device_id","status"],"title":"ModelDeployment"},"title":"Response Get Model Deployments Modelcard  Uuid  Deployments Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

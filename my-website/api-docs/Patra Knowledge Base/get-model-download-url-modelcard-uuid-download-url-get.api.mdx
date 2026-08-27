@@ -1,0 +1,72 @@
+---
+id: get-model-download-url-modelcard-uuid-download-url-get
+title: "Get Model Download Url"
+description: "Get Model Download Url"
+sidebar_label: "Get Model Download Url"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVd9P2zAQ/lcsP21SR7tqT31DFLFOsCHWsgdUVdfEbcyS2NgOUEX533dnJ2mywJh4aV3fdz/8fXfXkjvYWz6745mKRbqJwMSWr0dcaWHASZUvYj7je+E2ARCrpzxVEG8Kk4YrctlsikLiZ8+KTnzENRjIhBOGspQ8xx8YkOBolDmeNbgEz0Y8FNIITOdMIUbcRonIgM9K7g6afKwzMt8jcqdMBu4YJRY2MlJTtXh5RUUxqoqtVos52p10KQVYEbx6C1+tqRarVW6FpfTTyYS++l4/iygS1u6KlN3UYMwUqdyJ3BEctE5l5Ckc31vyKTtP0oYIdjJkCNRiccfHSgy0F6ZTfahz4V8QWBwy02C/kx1xj0i7DLkhP/zYeQn6TtWovcmLNPXPb8Lc1u7EWUfZ94ab1zHYCmNUGLQGqu29iFyvBe6OnNSvXf/FRBNsdXOJsSjal+l0qNMtpDL2KrBzY5R5v0ixcCD926UTmR0CUhX1rP9BUaNytT6yAcbAoaPlpQoFkgqZ3f9L9ivsSNh75QPkdagngy3JWtEc6sIT0pgX/gItkXvuhGmVanBnxOWze1NN4iaUX+O6XdZKFBR6nYp5kOClZA3k63J5PQgY+qPfGBfCsTBSvbbEIoVLVL30/P7C7TTj43bXjUtaO9W4NxFE4U51GbwGZ4CdLtgZrVR2er0YbCq8Y7jLWNZuIMsgjxnWDjYRwln2JF3Cvv1afoInMIJpIx8hIkrayeafTyYnEyJNK+sy8D1cb9lX39iro1WXlBzrFKTvtXrQw/vreaQa0X3WLN4uBahoghUQtiy3YAWmqiq6fiiEOeA9Hh/BSNgSQTgWsbR0Rq53kFoxKKsdVP7hpu6lj+yF9f5S9U0H5Z4sSAv6hcff4tD8cfihSwTEOIBUTjCd4l7XruM02BG00tomuThfYn/9AVBTe5w=
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Model Download Url"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/modelcard/{uuid}/download_url"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get Model Download Url
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"uuid","in":"path","required":true,"schema":{"type":"string","format":"uuid","description":"Model card UUID","title":"Uuid"},"description":"Model card UUID"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"model_id":{"type":"integer","title":"Model Id"},"name":{"type":"string","title":"Name"},"version":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Version"},"download_url":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Download Url"}},"type":"object","required":["model_id","name"],"title":"ModelDownloadURL"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

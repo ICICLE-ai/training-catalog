@@ -1,0 +1,72 @@
+---
+id: get-experiment-images-experiments-domain-experiment-id-images-get
+title: "Get Experiment Images"
+description: "Get Experiment Images"
+sidebar_label: "Get Experiment Images"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1Vk1vEzEQ/SuWTyAtTVrBJbeqLaWoQNUGOKBo5exOEoP3o7a3bRTtf2fGjjdekhRo4dJm7fF74zcfnhW3Ym746BuHhxq0LKC0hk8SXuGXsLIqL3I+4nOw6cYglYWYg4lWTJrmVSFkmaY9uzwNtojAE14LLQqwoIlyxUv8QHR/FLfxzwht7AJ/a7htpAZkt7qBhJtsAYXgoxW3y5pOGatlOUdLK62ihVMP07ZJh9zz5dkEZx0aQ1ViHvND1gH+tgG97OHPhDK7CGRpYQ4abQtZyqIp+GiY8BxmolHW/Q7MN4QfEypZSPssRvHgGd8MhxH/YcR/OIw8uHSEbTshGlNXpQFDwEfDIf3LwWRa1pQw5G6TZWDMrFHsem2MlFmF7KUlc1HXSmYuvwbfDZ1ZbTsrtBZ0LWmhcFy1pqy00jO7xEq9HvtjdkFW7CNZtQmf66op8xQDjilAfpTLTzOXiv3zpPR6pWyU4nTtgHjuMNjYYSCmElNQTwW7dIcRBe82FVOppF3uxCqbYoqBewzrKoJARK9PDpk00iv8FAe9fqcBBXFnSliMI+SpySrtY/EU5LcBh914nM5nDRnIOzyfWqw2Y0VRP8/96wDIxh1gx0a3+IdcNx4uZkKq9Zlq+h0y2yvVb3EiT3Y1G4dL/oatUFPsHCyLm5JrtdGKYcw3RcZ6djkLtoiA/pGHr4+Otgv5i1Ayd2XKzrSu9N9Ucb9ac7BCujLZU86qynq7fxCB0M3ayUbh0DS6Aqu8g6RfYeaPtYoP2LKC0s7kkZeAxGBj2qU8KuvGCdJlglvAncw+RDBd9IPdCWn5YH+bIaSNd39tF+XJJkQ+QvulOPUh2EUWTN6Nx1dbgD4/+omxM/PIR7CLaj0xuPee+iwfRJPCYOWf+3aw6r3O7UAGEFnOqljOK2G1YMcX7ETo3LDjqwv+qz+4xmYYkqLKQbHM2Qns0ngRYRYAWAr30i7Y+6/jV+JeaGC1lnciI33ucBzxKIcHw4Oh68aVsYVwCb1+cPdduOdGF2mK6qBWbhxJeKNd4nsx+pNWwkfd9DPamlY8CQZ7gf7Q0dVqKgx81qptadk//FQjuTRiqqKn/wcsN3PJnVANueWKZ49pmCg2thP60JKMd3P8cveuM/AX1+vkfcl4sluTkKPlMuYMzqw12enu/2Pt6++6ygJEjh2Gru9tjnGyqWOdtpog6daVwfnZGAvoJ89I584=
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Experiment Images"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/experiments/{domain}/{experiment_id}/images"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get Experiment Images
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"domain","in":"path","required":true,"schema":{"type":"string","title":"Domain"}},{"name":"experiment_id","in":"path","required":true,"schema":{"type":"string","title":"Experiment Id"}},{"name":"skip","in":"query","required":false,"schema":{"type":"integer","minimum":0,"default":0,"title":"Skip"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":500,"minimum":1,"default":100,"title":"Limit"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"properties":{"image_name":{"type":"string","title":"Image Name"},"ground_truth":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Ground Truth"},"label":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Label"},"probability":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Probability"},"image_decision":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Image Decision"},"flattened_scores":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Flattened Scores"},"image_receiving_timestamp":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Image Receiving Timestamp"},"image_scoring_timestamp":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Image Scoring Timestamp"}},"type":"object","required":["image_name"],"title":"ExperimentImage"},"title":"Response Get Experiment Images Experiments  Domain   Experiment Id  Images Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

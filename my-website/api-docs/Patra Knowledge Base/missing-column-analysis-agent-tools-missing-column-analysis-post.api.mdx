@@ -1,0 +1,72 @@
+---
+id: missing-column-analysis-agent-tools-missing-column-analysis-post
+title: "Missing Column Analysis"
+description: "Missing Column Analysis"
+sidebar_label: "Missing Column Analysis"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVsFu2zAM/RVB53Ttip1665IO67BhWZJth6EwWFtJtMqSJ8lJjcL/PlKyEztN3KI9NLZMUtR7jxSfuIeV41d/OKyE9mfeGOX43YibQljw0ujbjF/xXDon9SpJjSpznYAGVTnpkuCUBKfklE1hnOcjbsW/Ujj/0WQVv3riqdEefekRikLJNGx2/tcZTWsuXYsc6KmwlIqXwtEbxrBVsv8KWSbJEdS0Y+dtKUbcV4XA3M39X5FSBl56RQs/KAabxxj1iKegM5mBFwn+Ayd8IjOK3fg7b/FY6J9L/VXolV/zq/f7aOPWm02iN0PEQlTcIMmkDWnq6vsSUT4MWo92K7pUitd33cAYgE0wQI3hjh90CcodOSlhLa3IiNceYicO29n1W2RxHEi8bjicRe4wkbobnGAOC64w2kWCLi8u6CcTLrWyoIwx6LxMU+HcslRs1hhTKm+TgPPgS3eMIKHLnI5sHgIGBIboHW4eXTHnHNNB8R6LskOiMUHrYV20Dn3+m9XT5ovwi5bOlDYVyRJyqaohj3kwZJ+i4d6ztOoVbj/RinzKPAdbvbV45o078W62gQbpRe6e8+TBrhCzpRRqELZFsGOfgh0l+CK/WFSYlKoYbEAquFekpkxYuaFntpV+zTCXjdCgU/qmjWcOlgJddmbHdRF7HgwzN9sZddij9PtwHJZ6uwDWQnWE1hiBWsdapA9vizWOrnU93BR63Owg7x6/g84kQEYfJiKVDn+/mUyogSxmpIyXctht2tZir87aYIfl0RP9Xs2NGl9uZE33qUMr+3B5+bxZ/QJFDRJf2I21xr69U2XCoz4HSkSZtPf1FdeExExWAu+Eu9PwfzUxwdDo3OqVTS6anDYNYLAFfUVrqYsyANJ+vg0LpF7/2AnzrIGMCctH/6I8CJuYfmPX4XZPUWToNBSTSMGxzVqTz4vF9FnAqI++MBpFsSgp1moqKNivDc1JzaxTAA0J/LwzU50349FZHI/OYO9NMprtp6ObR8iL2IAOpp2Ts8qerM7U0WkWUi9Nl6speAvs+paNwWaOXU9v+eFhcY0tke+cSp2lwQ73ZmHbtRDexT775ffiDLZgBXZc7BIpgb8R1sUo799dvLugDAiYHEK1aMjFIJq9RHZCItGcFwpkkHVz5UWg+8PriJ+CGhW0JoLQ4enpHtHDK7GuaTkAjev4uAErw/2Ab7jRWgBeGaEmH0TV6hc3C4VA5qoMwjvsC1Sz0eMah5/CD9redTQ0/T5foPF9MygTAbhqYRv68xafOY3n5B2aRljDXgJ6VYaRhseY9PcfXkIhFg==
+sidebar_class_name: "post api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Missing Column Analysis"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/agent-tools/missing-column-analysis"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Missing Column Analysis
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"properties":{"query_schema":{"additionalProperties":true,"type":"object","title":"Query Schema"},"candidate_dataset_id":{"type":"string","minLength":1,"title":"Candidate Dataset Id"},"cache_dir":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Cache Dir"}},"additionalProperties":false,"type":"object","required":["query_schema","candidate_dataset_id"],"title":"MissingColumnAnalysisRequest"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"status":{"type":"string","enum":["ok","rejected"],"title":"Status"},"message":{"type":"string","title":"Message"},"dataset_id":{"type":"string","title":"Dataset Id"},"title":{"type":"string","title":"Title"},"source_family":{"type":"string","title":"Source Family"},"source_url":{"type":"string","title":"Source Url"},"summary":{"additionalProperties":true,"type":"object","title":"Summary"},"rows":{"items":{"properties":{"target_field":{"type":"string","title":"Target Field"},"status":{"type":"string","enum":["directly available","derivable with provenance","not safely derivable"],"title":"Status"},"rationale":{"type":"string","title":"Rationale"},"source_fields":{"items":{"type":"string"},"type":"array","title":"Source Fields"},"checks":{"items":{"type":"string"},"type":"array","title":"Checks"}},"type":"object","required":["target_field","status","rationale"],"title":"DerivationDecisionModel"},"type":"array","title":"Rows"}},"type":"object","required":["status","message","dataset_id","title","source_family","source_url","summary","rows"],"title":"MissingColumnAnalysisResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

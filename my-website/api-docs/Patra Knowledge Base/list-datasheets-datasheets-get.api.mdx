@@ -1,0 +1,74 @@
+---
+id: list-datasheets-datasheets-get
+title: "List Datasheets"
+description: "List all datasheets. JWT bearer shows private; unauthenticated shows only public."
+sidebar_label: "List Datasheets"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVktvGzkM/iuCTi3gdZxgc3FPQVp0s8hisxunPbRBQM/QHrUaaaJHEsPwfy+peViJ6/R16mlmpI8fKfKjOGsZYOnl9IMsIYCvEIOX1yNZoi+caoKyRk7lufJBgNZiCxqLv9/PxBzBoRO+svdeNE7dQcBXIhqIoUITVEHfZbdtjV6JJs61KsYfzUdzGesa3ErcKbwXCw0hoPGC7MRCOfIXVNA4EoVDCNaNBBhiivNPWATxgomX1q1eiob8D2GN5UhaWgEO/Kyk0DWFfrMNO39dYiB4Aw5qDOg4C2tp6IPMbmlH8dFvI7oVfTi8jcohUS5AexxJX1RYg5yuJZjVv4tkHFYNG/vglFmSUQ0P52iWoZLTo+PjzWhAmKi13FCe0yFp4T+54e3Ou/+smh8IoCNVhnKCjv0qo+pYy+mEK7mAqEN6771dMn/uUKtahV/yCA+tx8PJJPN/mPk/zgI4T/42nAGHvrHGo2feo8mEH4/VdxmLAr1fRC3+78DksbDk3IRUgKbRLDWCH3zybLPejRWcAz6VClgnX41jpQTVeo5RlRl6KGEf8RXvb4bv/cBZehKyE+5zCnlOEaedOTN1Yv9pqt6euJS/6fo0O8TcWo1gslOceXHRwbISJh0QSWxKbuwbCD8b0lXLIE5YBaMeZlN3P5Leh7YyvWVG8brv5O4ikV+9tdCUjSWdjrPiyV5GIkEGIp+/vkUOjYP78+hoV5TvQKsySU68cc66H1HkY+WVGEBpftsjTW2LR7vfke++MTfX2+T2DTD0oG0D5MTUfvmcpv+h9oNlUnUL2Q9NyRAz3mW1mSamhAy6Sgus6fCQ0QyFHyTLuXz4tjg4N234HS4TyLZEbYX2p+J1W4KvOeshf81mFzuErT5oelSWZ00/UPi+lwfZQOVELGyehwsIDsTJmTgFV3pxcnG2I19aEwvKZW1L1KJIOJ6BW15xr0LFc/gPuKc53A7ggg92R+OsZTkcT8YTPnpjfaghKbG79J+I/2kA662gf68fgK6ErJ+DRoNKCo8utVhbnKd/OxXlhlfX6zl4vHJ6s+HldhByo5XKw1xno/Azrrq/hDvQkd2l9tuD6+b590D7SbzFXvOHUwymWLihK4SSmpsDa41OaEA2udXO/cMsg07fvpmRdr8AFOJqog==
+sidebar_class_name: "get api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List Datasheets"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/datasheets"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List all datasheets. JWT bearer shows private; unauthenticated shows only public.
+
+Summary view flattens the first title, creator, and subject (category) per datasheet.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"q","in":"query","required":false,"schema":{"anyOf":[{"type":"string","maxLength":255},{"type":"null"}],"title":"Q"}},{"name":"skip","in":"query","required":false,"schema":{"type":"integer","minimum":0,"default":0,"title":"Skip"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":100,"minimum":1,"default":50,"title":"Limit"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"array","items":{"properties":{"uuid":{"type":"string","title":"Uuid"},"title":{"type":"string","title":"Title"},"creator":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Creator"},"category":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Category"},"is_private":{"type":"boolean","title":"Is Private","default":false},"updated_at":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Updated At"}},"type":"object","required":["uuid","title"],"title":"DatasheetSummary","description":"List endpoint."},"title":"Response List Datasheets Datasheets Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

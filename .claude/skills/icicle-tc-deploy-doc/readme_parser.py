@@ -214,6 +214,32 @@ def _split_url_and_title(inner: str) -> Tuple[str, str]:
     return parts[0], " " + parts[1]
 
 
+# `<https://example.com>` is valid Markdown but MDX 3 reads the `<h` as the start of a
+# JSX tag and dies on the `/` in `https://` ("Unexpected character `/` before local
+# name"). It's a build-breaking error, not a warning, so normalize autolinks to
+# `[url](url)`. Applied outside fenced code blocks only.
+AUTOLINK_PATTERN = re.compile(r"<((?:https?://|mailto:)[^ >\n]+)>")
+
+# MDX treats `{...}` in prose as a JSX expression and tries to evaluate it, so a README
+# sentence like `append "/{your config name}"` or `/${JobUUID}` fails the build with
+# "Could not parse expression with acorn". Braces inside fenced blocks and inline code
+# spans are safe (MDX doesn't evaluate code), so only prose braces get escaped.
+INLINE_CODE_PATTERN = re.compile(r"(`+)(?:.|\n)*?\1")
+
+
+def escape_mdx_braces(segment: str) -> str:
+    """Backslash-escape `{`/`}` in prose, leaving inline code spans untouched."""
+    out, last = [], 0
+    for m in INLINE_CODE_PATTERN.finditer(segment):
+        prose = segment[last:m.start()]
+        out.append(prose.replace("{", r"\{").replace("}", r"\}"))
+        out.append(m.group(0))
+        last = m.end()
+    tail = segment[last:]
+    out.append(tail.replace("{", r"\{").replace("}", r"\}"))
+    return "".join(out)
+
+
 def rewrite_relative_links(text: str, user: str, repo: str, branch: str, readme_dir: str) -> str:
     """Rewrite relative image/link targets in README text to absolute GitHub URLs."""
     raw_base = f"https://raw.githubusercontent.com/{user}/{repo}/{branch}"
@@ -257,6 +283,8 @@ def rewrite_relative_links(text: str, user: str, repo: str, branch: str, readme_
         seg = MD_LINK_PATTERN.sub(repl_md_link, seg)
         seg = HTML_SRC_PATTERN.sub(repl_html_src, seg)
         seg = HTML_HREF_PATTERN.sub(repl_html_href, seg)
+        seg = AUTOLINK_PATTERN.sub(lambda m: f"[{m.group(1)}]({m.group(1)})", seg)
+        seg = escape_mdx_braces(seg)
         out.append(seg)
     return "".join(out)
 
@@ -522,12 +550,40 @@ def move_top_badges_after_description(
     if not ordered:
         return "\n".join(lines).strip()
 
-    # Insertion point: after the first non-empty paragraph (the short description).
-    idx = 0
-    while idx < len(lines) and not lines[idx].strip():
-        idx += 1
-    if idx < len(lines) and re.match(r"^\s*#\s+.+$", lines[idx]):
-        idx += 1
+    # Locate the H1 *anywhere* in the head of the doc, not just at line 0. Some READMEs
+    # wrap a logo and the title together in a `<div align="center">`, so the title is
+    # several lines down; scanning from line 0 would otherwise treat the opening `<div>`
+    # as the description and emit the badges above the title.
+    h1 = next((k for k, l in enumerate(lines) if re.match(r"^\s{0,3}#\s+\S", l)), None)
+
+    if h1 is not None:
+        # If the README already has a badge run right after the title, splice ours into
+        # the front of it rather than opening a second centered block. This keeps the
+        # GitHub badge inline with the existing License badge, immediately after the
+        # heading, and leaves any surrounding <div>/logo markup untouched.
+        j = h1 + 1
+        while j < len(lines) and not lines[j].strip():
+            j += 1
+        run_end = j
+        while run_end < len(lines) and (is_badge_line(lines[run_end])
+                                        or not lines[run_end].strip()):
+            run_end += 1
+        existing_run = [l for l in lines[j:run_end] if is_badge_line(l)]
+        if existing_run:
+            merged = []
+            if github_badge:
+                merged.append(github_badge)
+            # Only add our standardized License badge if the run doesn't already carry one.
+            if license_badge and not any(is_license_badge(l) for l in existing_run):
+                merged.append(license_badge)
+            merged = [b for b in merged if b.strip() and b.strip() not in
+                      {e.strip() for e in existing_run}]
+            if not merged:
+                return "\n".join(lines).strip()
+            return "\n".join(lines[:j] + merged + lines[j:]).strip()
+
+    # Otherwise: after the first non-empty paragraph following the title.
+    idx = (h1 + 1) if h1 is not None else 0
     while idx < len(lines) and not lines[idx].strip():
         idx += 1
     insert_at = len(lines)
@@ -687,6 +743,30 @@ def write_category_json(folder: str, project_name: str):
 # Processing pipeline
 # -----------------------------
 
+def truncate_at_heading(readme_text: str, stop_at: Optional[str]) -> str:
+    """Drop everything from the first heading whose text matches `stop_at` onwards.
+
+    Used to keep repo-facing tail sections (Contributing, Security Policy, Changelog)
+    out of the published docs. Matching is case-insensitive on the heading text, at any
+    heading level, and ignores fenced code so a `#` comment inside a code block can
+    never trigger it.
+    """
+    if not stop_at:
+        return readme_text
+    needle = stop_at.strip().lower()
+    out, in_fence = [], False
+    for line in readme_text.splitlines():
+        s = line.strip()
+        if s.startswith("```") or s.startswith("~~~"):
+            in_fence = not in_fence
+        if not in_fence:
+            m = re.match(r"^\s{0,3}#{1,6}\s+(.*?)\s*$", line)
+            if m and m.group(1).strip().lower() == needle:
+                break
+        out.append(line)
+    return "\n".join(out)
+
+
 def split_sections(readme_text: str) -> List[str]:
     """
     Split README text into sections using lines that contain only '---'.
@@ -709,15 +789,53 @@ def classify_and_write_sections(
     - For the remaining sections, detect headings and save into tutorials.md, how-to.md, explanation.md.
       If a section matches multiple categories (unlikely), first match wins.
     """
-    # First part → main file; add Release tag if provided
+    # Assign every part to a bucket first, then write each file once.
+    #
+    # Two things this has to get right:
+    #  1. A `---` line is both the section delimiter AND an ordinary horizontal rule, so
+    #     one section often spans several parts (a Tutorials section with a rule between
+    #     each step). A part matching no heading is a *continuation* of whichever section
+    #     opened most recently — append it rather than dropping it.
+    #  2. The matching heading can appear partway through a part, with unrelated content
+    #     above it. Split there: the text before the heading still belongs to the
+    #     previous section, and the new file must *start* with its `# Tutorials` heading
+    #     or Docusaurus titles the page from the filename ("tutorials", lowercase).
+    MAIN = "__main__"
+    buckets: Dict[str, List[str]] = {MAIN: [parts[0]]}
+    order: List[str] = []
+    current = MAIN
+    for part in parts[1:]:
+        matched, at = None, 0
+        for out_name, patterns in HEADING_MAP.items():
+            for p in patterns:
+                m = p.search(part)
+                if m:
+                    matched, at = out_name, m.start()
+                    break
+            if matched:
+                break
+
+        if matched:
+            head, tail = part[:at].strip(), part[at:].strip()
+            if head:                       # content above the heading stays behind
+                buckets[current].append(head)
+            current = matched
+            if current not in buckets:
+                buckets[current] = []
+                order.append(current)
+            if tail:
+                buckets[current].append(tail)
+        else:
+            buckets[current].append(part)
+
+    # Main file first: add the Release tag here only.
     main_tags = list(base_tags)
     if release:
         main_tags.append(f"Release {release}")
-
     main_merged = save_file(
         folder=folder,
         fname=f"{project_name}.md",
-        content=parts[0],
+        content="\n\n---\n\n".join(buckets[MAIN]),
         tags=main_tags,
         github_link=repo_link_for_badge,
         api_doc_route=api_doc_route
@@ -728,19 +846,8 @@ def classify_and_write_sections(
     # which belong only on the main file.
     section_tags = [t for t in main_merged if not t.startswith("Release ")]
 
-    written = set()
-    for part in parts[1:]:
-        assigned = False
-        for out_name, patterns in HEADING_MAP.items():
-            if out_name in written:
-                continue
-            if any(p.search(part) for p in patterns):
-                save_file(folder, out_name, part, section_tags)
-                written.add(out_name)
-                assigned = True
-                break
-        # If not assigned, you could choose to skip or dump to 'extras.md'
-        # Here we skip silently.
+    for out_name in order:
+        save_file(folder, out_name, "\n\n---\n\n".join(buckets[out_name]), section_tags)
 
 def process_single_repo(
     repo_link: str,
@@ -749,7 +856,8 @@ def process_single_repo(
     tags: List[str],
     release: Optional[str],
     session: requests.Session,
-    api_docs_dir: Optional[str] = None
+    api_docs_dir: Optional[str] = None,
+    stop_at: Optional[str] = None
 ):
     """
     Process a single repo:
@@ -775,6 +883,8 @@ def process_single_repo(
     if parsed_raw:
         gh_user, gh_repo, gh_branch, readme_dir = parsed_raw
         readme_text = rewrite_relative_links(readme_text, gh_user, gh_repo, gh_branch, readme_dir)
+
+    readme_text = truncate_at_heading(readme_text, stop_at)
 
     parts = split_sections(readme_text)
 
@@ -942,6 +1052,14 @@ def parse_args() -> argparse.Namespace:
     )
     # Auth
     parser.add_argument("--github_pat", type=str, help="Optional GitHub PAT (overrides GITHUB_PAT env var).")
+    parser.add_argument(
+        "--stop-at",
+        dest="stop_at",
+        default=None,
+        help=("Drop everything from the first heading whose text matches this, onwards. "
+              "Case-insensitive, any heading level, fenced code ignored. Keeps repo-facing "
+              "tail sections out of the docs, e.g. --stop-at 'Contributing to Foo'."),
+    )
     return parser.parse_args()
 
 def main():
@@ -987,7 +1105,8 @@ def main():
                 tags=row_tags,
                 release=args.release or row_release,  # CLI release wins, else per-row release
                 session=session,
-                api_docs_dir=args.api_docs_dir
+                api_docs_dir=args.api_docs_dir,
+                stop_at=args.stop_at
             )
     else:
         # Single repo path
@@ -998,7 +1117,8 @@ def main():
             tags=args.tags,
             release=args.release,
             session=session,
-            api_docs_dir=args.api_docs_dir
+            api_docs_dir=args.api_docs_dir,
+            stop_at=args.stop_at
         )
 
 if __name__ == "__main__":

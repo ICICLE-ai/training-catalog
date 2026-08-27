@@ -1,0 +1,72 @@
+---
+id: ask-patra-chat-api-ask-patra-chat-post
+title: "Ask Patra Chat"
+description: "Ask Patra Chat"
+sidebar_label: "Ask Patra Chat"
+hide_title: true
+hide_table_of_contents: true
+api: eJydV9Fu2zoM/RVDz+mSFnsY8pbbDbi5WNEgze4eisBgbCXWKlueJKcNCv/7SMl27MRxhu5hcWWKIs85Iul3ZmFn2PSZgXm5ycFqYOsRUznXYIXK5jGb0qvQvQqjBGwIuQhPlnJlLBsxzX8X3Nh/VHxg03cWqczyzNIj5LkUkXM5/mVURmsmSngK9JRrOtAKbuivlBsDO06P9pDjLzNWi2yHB6Tw9p1nO5uw6ZfJZIILIqsXbkfMCivJ/qHyUI4ohj3Xxp0citjFkh0et5jyoPvbuy/lqLHICilZuT6ecN9yGyBIJSVvuG0FvVFKcsjYcdPSWYxYzLdQSLTdgjS8xL0Qx4JcgVy0oHCvR7U/tfnFoxploXlMrNVYtUKbmZcFMXOPxCw9Iawsy/Y+qwvuI85VZjzqd5MJ/cTcRFrkFAz6eiqiCE/YFjJYVsZs9FFee6g4JWAAXsjMK9dDm2beAm1TFffKh2dFSqhJmbo0Yh4ixnID0UsbwQfajm4w/L2Ihw9d1DbVsTIsDB+U2ZCs6GQZ/CAPpF1hHQIOPWF5as5BRQ5VoSMeepeXc/bBRaBjUiBYMAlHNa478nSughW58PrwvjtkCSR/hwn3bPRMVcuXMVu5X7Q0xaYx/ghcT/X+ctQV7sfcfW25oPRVYQfzWDoDIh4saj4O/dENU6cn1wugNRxafh789uARjy2H73uX7i5FtcM68r6aUClqIJj7RnSUmC8vgwJU/WTXusPrQFoBY4SxkFFC5mDQV0d6StbVuq4sA6XBmZC15mARdhje4K2Cmb2OrpLt+tY5oQfNVpu5xGyNH4ndgrZchwhfmtshSP/+AnlfV+oTWVzLvFZO5bAn2Scf/kCylUWwqBK8duZpP2hqfFXAWwX4YnurelLpGtznu7vzFvY/SBH7RvJNa6U/3r9ibkHIAd6kijpv/6IG1cW0XF/G9buKmkubmt0Q22eKvGzqwGhKvcjywra0x+ZugS6ZfWu5aYjsXMe36wIjbHz4lV2L0iNFnqHLUHz1FPQdVpv8u1otzhx6fXSFgUIKnJICkhIFx22iaN6tplmcb3EQZGOcd8fNdDyOvDGJZXkcd7+9QZr7S9uMr0fMzyaf46tqavSTIPGwVW0afICzeXCPjdsEs8WcneWxmAdbpNI1+CBydpDFQdPjTfAqbBL893N1A6+geZBrsYeIcKWovJfbT5NPE1dSMPkU3EXIIOV9QJ202ooJksE4lyCcUAvtborHEL8ucuGaQP2NgZgkvqgmBDZavL9vwPAfWpYlLSOyGj8invFxD1rAhuB4pluScHAzGV6rF344doSblW+Je5CF087p1aZr53fMcKrN7aDtuqWHxePTCo031WeNny6ZhlfiD/+fMkafTM2o5tawHEC2K7wSvE/69wfPNpw8
+sidebar_class_name: "post api-method"
+info_path: api/Patra Knowledge Base/patra-ai-cards-api
+custom_edit_url: null
+tags: [API, CI4AI, PADI, Release 2026-08]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Ask Patra Chat"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/ask-patra/chat"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Ask Patra Chat
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"properties":{"message":{"type":"string","maxLength":8000,"minLength":1,"title":"Message"},"conversation_id":{"anyOf":[{"type":"string","maxLength":128},{"type":"null"}],"title":"Conversation Id"},"reset":{"type":"boolean","title":"Reset","default":false}},"additionalProperties":false,"type":"object","required":["message"],"title":"AskPatraChatRequest"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"conversation_id":{"type":"string","title":"Conversation Id"},"answer":{"type":"string","title":"Answer"},"mode":{"type":"string","enum":["llm","code_fallback"],"title":"Mode"},"provider":{"type":"string","title":"Provider"},"model_used":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Model Used"},"citations":{"items":{"properties":{"resource_type":{"type":"string","enum":["model_card","datasheet"],"title":"Resource Type"},"resource_id":{"type":"integer","title":"Resource Id"},"title":{"type":"string","title":"Title"},"subtitle":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Subtitle"},"description":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Description"},"route":{"type":"string","title":"Route"},"matched_on":{"items":{"type":"string"},"type":"array","title":"Matched On"}},"type":"object","required":["resource_type","resource_id","title","route"],"title":"AskPatraCitation"},"type":"array","title":"Citations"},"messages":{"items":{"properties":{"role":{"type":"string","enum":["user","assistant","system"],"title":"Role"},"content":{"type":"string","title":"Content"},"created_at":{"type":"string","title":"Created At"}},"type":"object","required":["role","content","created_at"],"title":"AskPatraMessage"},"type":"array","title":"Messages"},"starter_prompts":{"items":{"properties":{"title":{"type":"string","title":"Title"},"prompt":{"type":"string","title":"Prompt"}},"type":"object","required":["title","prompt"],"title":"AskPatraStarter"},"type":"array","title":"Starter Prompts"}},"type":"object","required":["conversation_id","answer","mode","provider"],"title":"AskPatraChatResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      
