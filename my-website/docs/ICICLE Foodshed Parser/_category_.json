@@ -1,6 +1,7 @@
 {
   "label": "ICICLE Foodshed Parser",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This repository contains tools and instructions for reproducing the experiments in the paper"
   }
 }

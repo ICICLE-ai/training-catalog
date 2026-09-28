@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Species Classification using Multimodal Heterogeneous Context: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Species Classification using Multimodal Heterogeneous Context. We present a species classification model that utilizes heterogeneous image…"
 ---
 
 # How-To Guides

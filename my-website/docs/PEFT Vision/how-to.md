@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "PEFT Vision: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for PEFT Vision. Parameter-efficient fine-tuning (PEFT) has attracted significant attention lately due to the increasing size of pre-trained…"
 ---
 
 

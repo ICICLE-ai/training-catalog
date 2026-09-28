@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - Software
   - PADI
+title: "Patra AI Cards Toolkit: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Patra AI Cards Toolkit. The Patra Toolkit is a component of the Patra AI Cards framework designed to simplify the process of creating and…"
 ---
 # Explanation
 

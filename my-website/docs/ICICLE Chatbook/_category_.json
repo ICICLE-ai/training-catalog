@@ -1,6 +1,7 @@
 {
   "label": "ICICLE Chatbook",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "An interactive marimo notebook that turns the ICICLE AI Tapis services into a hands-on RAG (retrieval-augmented generation) playground."
   }
 }

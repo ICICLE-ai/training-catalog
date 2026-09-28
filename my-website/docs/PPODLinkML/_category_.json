@@ -1,6 +1,7 @@
 {
   "label": "PPODLinkML",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This repository contains a LinkML schema for a version of the PPOD (Persons-Projects-Organizations-Datasets) data pattern that describes resources being…"
   }
 }

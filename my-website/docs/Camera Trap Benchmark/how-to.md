@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Camera Trap Benchmark: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Camera Trap Benchmark. ICICLE benchmark for camera trap image analysis with adaptive learning capabilities."
 ---
 
 # How-To Guides

@@ -1,6 +1,10 @@
 ---
 tags:
   - Animal-Ecology
+title: "AI-Driven Animal Ecology Workload Model v1.0: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for AI-Driven Animal Ecology Workload Model v1.0. This repo provides instructions for extracting workload information from AI-Driven Animal…"
 ---
 
 # How-To Guides

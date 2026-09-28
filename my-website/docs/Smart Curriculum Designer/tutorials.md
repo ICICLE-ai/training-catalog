@@ -4,6 +4,10 @@ tags:
   - CI4AI
   - Foundation-AI
   - Visual-Analytics
+title: "Smart Curriculum Designer: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Smart Curriculum Designer. An AI-driven educational framework that integrates automated curriculum generation with an end-to-end computer vision…"
 ---
 # Tutorials
 

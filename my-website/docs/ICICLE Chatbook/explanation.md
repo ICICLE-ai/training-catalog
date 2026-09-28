@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "ICICLE Chatbook: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for ICICLE Chatbook. An interactive marimo notebook that turns the ICICLE AI Tapis services into a hands-on RAG (retrieval-augmented generation)…"
 ---
 # Explanation
 

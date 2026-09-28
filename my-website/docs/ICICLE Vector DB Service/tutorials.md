@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - AI4CI
   - Software
+title: "ICICLE Vector DB Service: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for ICICLE Vector DB Service. FastAPI + Qdrant vector storage and retrieval service for the ICICLE AI Tapis tenant."
 ---
 # Tutorials
 

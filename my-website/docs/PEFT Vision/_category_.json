@@ -1,7 +1,7 @@
 {
-    "label": "PEFT Vision",
-    "link": {
-      "type": "generated-index"
-    }
+  "label": "PEFT Vision",
+  "link": {
+    "type": "generated-index",
+    "description": "Parameter-efficient fine-tuning (PEFT) has attracted significant attention lately due to the increasing size of pre-trained models and the need to fine-tune…"
+  }
 }
-  

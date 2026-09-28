@@ -1,6 +1,10 @@
 ---
 tags:
   - Food-Access
+title: "Agricultural Routing Synthetic Data Generation: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Agricultural Routing Synthetic Data Generation. This repository provides a python script to generate synthetic location and vehicle data (csv…"
 ---
 
 # Explanation

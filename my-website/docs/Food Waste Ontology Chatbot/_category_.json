@@ -1,6 +1,7 @@
 {
   "label": "Food Waste Ontology Chatbot",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This project provides an interactive chatbot interface to explore and build structured ontologies for food waste."
   }
 }

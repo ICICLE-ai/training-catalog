@@ -1,6 +1,7 @@
 {
   "label": "ML Field Planner",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "The ML Field Planner is a framework for analyzing ML pipelines and studying edge-to-center tradeoffs regarding function placement of ML."
   }
 }

@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "Smart Compiler: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Smart Compiler. This project introduces an agentic approach for high-level and multi-purpose compilers"
 ---
 
 # How-To Guides

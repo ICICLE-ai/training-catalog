@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Plug-and-Play Speech Interfaces v0.2: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Plug-and-Play Speech Interfaces v0.2."
 ---
 
 # How-To Guides

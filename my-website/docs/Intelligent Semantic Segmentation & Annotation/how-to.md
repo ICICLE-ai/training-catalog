@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "Intelligent Semantic Segmentation & Annotation: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Intelligent Semantic Segmentation & Annotation. A streamlined, HPC-backed pipeline dedicated exclusively to semantic and instance image…"
 ---
 # How-To Guides
 

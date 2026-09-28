@@ -1,6 +1,7 @@
 {
   "label": "No-Code Workflow Studio",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "A browser-based workflow builder for the full ML lifecycle: wire up a pipeline in a drag-and-drop canvas — data sources, pre-processing, annotation, training…"
   }
 }

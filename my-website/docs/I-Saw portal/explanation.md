@@ -3,6 +3,10 @@ tags:
   - Software
   - Animal-Ecology
   - Visual-Analytics
+title: "I-Saw portal: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for I-Saw portal. A public-facing web portal for I-SAW: Infrastructure for Sensing and Analytics on Wildlife — a plug-and-play, edge-networked…"
 ---
 # Explanation
 

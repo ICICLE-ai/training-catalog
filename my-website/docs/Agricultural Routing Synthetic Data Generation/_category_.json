@@ -1,6 +1,7 @@
 {
   "label": "Agricultural Routing Synthetic Data Generation",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This repository provides a python script to generate synthetic location and vehicle data (csv files) for developers and researchers aiming to model and solve…"
   }
 }

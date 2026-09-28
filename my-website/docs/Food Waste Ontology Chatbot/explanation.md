@@ -1,6 +1,10 @@
 ---
 tags:
   - Smart-Foodsheds
+title: "Food Waste Ontology Chatbot: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Food Waste Ontology Chatbot. This project provides an interactive chatbot interface to explore and build structured ontologies for food waste."
 ---
 # Explanation
 

@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - Visual-Analytics
   - Software
+title: "Earth Data Hub: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Earth Data Hub. A browser-based geospatial data discovery and collection interface for selecting an area of interest, checking satellite…"
 ---
 # How-To Guides
 

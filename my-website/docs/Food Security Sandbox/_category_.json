@@ -1,6 +1,7 @@
 {
   "label": "Food Security Sandbox",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "A collaborative machine learning platform for agricultural data analysis and model training with privacy-preserving features."
   }
 }

@@ -1,6 +1,7 @@
 {
   "label": "Intelligent Edge Management",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "The Intelligent Edge Management Service (IEMS) is ICICLE's fleet control plane for deploying and operating AI workloads on edge devices."
   }
 }

@@ -1,6 +1,7 @@
 {
   "label": "AutoSDT",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "Scaling Data-Driven Discovery Tasks Toward Open Co-Scientists. AutoSDT is an automatic pipeline for collecting high-quality coding tasks from real-world…"
   }
 }

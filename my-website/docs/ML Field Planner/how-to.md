@@ -3,6 +3,10 @@ tags:
   - Software
   - CI4AI
   - Animal Ecology
+title: "ML Field Planner: How-To Guide"
+sidebar_label: "How-To Guide"
+pagination_label: "How-To Guide"
+description: "How-To Guide for ML Field Planner. The ML Field Planner is a framework for analyzing ML pipelines and studying edge-to-center tradeoffs regarding function…"
 ---
 # How-To Guide
 

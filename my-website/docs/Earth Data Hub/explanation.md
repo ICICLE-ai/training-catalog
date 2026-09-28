@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - Visual-Analytics
   - Software
+title: "Earth Data Hub: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Earth Data Hub. A browser-based geospatial data discovery and collection interface for selecting an area of interest, checking satellite scene…"
 ---
 # Explanation
 

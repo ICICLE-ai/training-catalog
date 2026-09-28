@@ -2,6 +2,10 @@
 tags:
   - PADI
   - Digital Agriculture
+title: "Food Security Sandbox: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Food Security Sandbox. A collaborative machine learning platform for agricultural data analysis and model training with privacy-preserving…"
 ---
 
 # Tutorials

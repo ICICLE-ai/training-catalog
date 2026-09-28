@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - Visual-Analytics
   - Software
+title: "No-Code Image Lab: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for No-Code Image Lab. A browser-based OpenCV pipeline builder: build an image pre-processing pipeline in an interactive editor with live preview…"
 ---
 # Explanation
 

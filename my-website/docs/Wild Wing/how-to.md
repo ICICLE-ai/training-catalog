@@ -3,6 +3,10 @@ tags:
   - Animal-Ecology
   - AI4CI
   - Software
+title: "Wild Wing: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Wild Wing. An open-source, autonomous and affordable UAS for animal behaviour video monitoring using Parrot Anafi drones to track…"
 ---
 # How-To Guides
 

@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Plug-N-Play Speech Interfaces v1.0: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Plug-N-Play Speech Interfaces v1.0. Speech is the new essential fuel for human-computer interaction."
 ---
 
 # How-To Guides

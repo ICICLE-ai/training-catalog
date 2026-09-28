@@ -1,6 +1,10 @@
 ---
 tags:
   - Smart-Foodsheds
+title: "Organization-SIC-Classifier-for-Smart-Foodsheds: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Organization-SIC-Classifier-for-Smart-Foodsheds. This repository contains code for training and evaluating models that classify organizations…"
 ---
 
 # Explanation

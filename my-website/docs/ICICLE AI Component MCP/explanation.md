@@ -1,6 +1,10 @@
 ---
 tags:
   - Software
+title: "ICICLE AI Component MCP: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for ICICLE AI Component MCP. ICICLE AI Component MCP lets developers use AI-powered IDEs to explore ICICLE components and then implement…"
 ---
 # Explanation
 

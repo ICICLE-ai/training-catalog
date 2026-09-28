@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - AI4CI
   - Software
+title: "ICICLE Embedding Service: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for ICICLE Embedding Service. FastAPI service that turns text into embedding vectors using Qwen3-Embedding-0.6B (GGUF quantized) via…"
 ---
 # Explanation
 

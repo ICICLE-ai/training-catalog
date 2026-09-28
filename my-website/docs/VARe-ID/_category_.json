@@ -1,6 +1,7 @@
 {
   "label": "VARe-ID",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This work presents a modular software pipeline and end-to-end workflow for video-based animal re-identification, which assigns consistent individual IDs by…"
   }
 }

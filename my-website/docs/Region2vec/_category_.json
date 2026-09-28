@@ -1,6 +1,7 @@
 {
   "label": "Region2vec",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "Region2vec: Community Detection on Spatial Networks Using Graph Embedding with Node Attributes and Spatial Interactions"
   }
 }

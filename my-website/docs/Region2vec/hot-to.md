@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Region2vec: How-To Guide"
+sidebar_label: "How-To Guide"
+pagination_label: "How-To Guide"
+description: "How-To Guide for Region2vec. Region2vec: Community Detection on Spatial Networks Using Graph Embedding with Node Attributes and Spatial Interactions"
 ---
 
 # How-To Guide

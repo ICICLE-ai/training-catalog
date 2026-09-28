@@ -1,6 +1,10 @@
 ---
 tags:
   - Digital-Agriculture
+title: "Harvest: Tutorial"
+sidebar_label: "Tutorial"
+pagination_label: "Tutorial"
+description: "Tutorial for Harvest. Harvest is a tool designed to allow multiple types of stake holders in the digital agriculture space further their own unique goals from…"
 ---
 
 # Tutorial

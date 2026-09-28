@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "Smart Compiler: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Smart Compiler. This project introduces an agentic approach for high-level and multi-purpose compilers"
 ---
 
 # Explanation

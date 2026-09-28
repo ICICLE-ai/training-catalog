@@ -9,6 +9,8 @@ import pandas as pd  # required only if --excel_file is used
 from urllib.parse import urlparse, quote
 from typing import List, Optional, Tuple, Dict
 
+from seo_meta import apply_folder as apply_seo_meta  # sibling module: page titles/descriptions
+
 """
 README parser modes:
 1) Single repo mode:
@@ -905,6 +907,8 @@ def process_single_repo(
         )
 
     write_category_json(project_folder, repo_name)
+    # Unique <title>s and meta descriptions for search engines / LLM crawlers.
+    apply_seo_meta(project_folder)
 
 # -----------------------------
 # Batch (Excel / CSV) helpers

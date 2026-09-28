@@ -1,6 +1,7 @@
 {
   "label": "Organization-SIC-Classifier-for-Smart-Foodsheds",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This repository contains code for training and evaluating models that classify organizations into Standard Industrial Classification (SIC) codes based on…"
   }
 }

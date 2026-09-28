@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - AI4CI
   - Software
+title: "Smart Labeling Service for Object Detection: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Smart Labeling Service for Object Detection. A 7-step HPC-backed pipeline for few-shot object detection — from interactive image annotation…"
 ---
 # Explanation
 

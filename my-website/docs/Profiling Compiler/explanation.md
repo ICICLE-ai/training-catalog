@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "Profiling Compiler: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Profiling Compiler. Cetus Source to Source compiler improvements are being done at the University of Delaware."
 ---
 
 # Explanation

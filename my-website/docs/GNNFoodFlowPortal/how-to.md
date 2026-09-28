@@ -5,6 +5,10 @@ tags:
   - Software
   - Visual-Analytics
   - Digital-Agriculture
+title: "GNNFoodFlowPortal: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for GNNFoodFlowPortal. The GNN Food Flow Portal is a Streamlit web app for exploring county-level U.S."
 ---
 # How-To Guides
 

@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - AI4CI
+title: "iSpLib: How-To Guide"
+sidebar_label: "How-To Guide"
+pagination_label: "How-To Guide"
+description: "How-To Guide for iSpLib. iSpLib is an accelerated sparse kernel library with PyTorch interface. This library has an auto-tuner which generates optimized…"
 ---
 
 # How-To Guide

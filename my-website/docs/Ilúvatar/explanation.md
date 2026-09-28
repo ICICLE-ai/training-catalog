@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "Ilúvatar: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Ilúvatar. Ilúvatar is an open Serverless platform built with the goal of jumpstarting and streamlining FaaS research."
 ---
 
 # Explanation

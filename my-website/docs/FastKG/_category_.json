@@ -1,6 +1,7 @@
 {
   "label": "FastKG",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "FastKG is a knowledge graph embedding training library. Knowledge Graph (KG) embeddings are a way to represent entities and relationships from a KG in a…"
   }
 }

@@ -1,6 +1,7 @@
 {
   "label": "CAN Benchmark",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "A curated ICICLE benchmark for evaluating the performance of pre-trained models and fostering the development of adaptation algorithms in the camera trap…"
   }
 }

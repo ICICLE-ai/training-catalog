@@ -2,6 +2,10 @@
 tags:
   - Software
   - Animal-Ecology
+title: "Smartfield-Backpack: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Smartfield-Backpack. A field-deployable multimodal data infrastructure that integrates autonomous sensing, edge computing, and drone-based…"
 ---
 
 # Explanation

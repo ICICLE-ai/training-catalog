@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "Proof of Thought: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Proof of Thought. LLM-based reasoning using Z3 theorem proving with multiple backend support (SMT2 and JSON)."
 ---
 # How-To Guides
 

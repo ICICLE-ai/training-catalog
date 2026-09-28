@@ -3,6 +3,10 @@ tags:
   - Software
   - CI4AI
   - Animal Ecology
+title: "ML Field Planner: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for ML Field Planner. The ML Field Planner is a framework for analyzing ML pipelines and studying edge-to-center tradeoffs regarding function…"
 ---
 # Explanation
 

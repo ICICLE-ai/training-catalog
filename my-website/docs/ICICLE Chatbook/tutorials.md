@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "ICICLE Chatbook: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for ICICLE Chatbook. An interactive marimo notebook that turns the ICICLE AI Tapis services into a hands-on RAG (retrieval-augmented generation)…"
 ---
 # Tutorials
 

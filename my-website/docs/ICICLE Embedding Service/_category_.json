@@ -1,6 +1,7 @@
 {
   "label": "ICICLE Embedding Service",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "FastAPI service that turns text into embedding vectors using Qwen3-Embedding-0.6B (GGUF quantized) via llama-cpp-python, designed for the ICICLE AI Tapis…"
   }
 }

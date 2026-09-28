@@ -1,6 +1,7 @@
 {
   "label": "HARP",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "Researchers use high-performance computing (HPC) cyberinfrastructures (CI) like the Ohio Supercomputer (OSC) or Texas Advanced Computing Center (TACC) to…"
   }
 }

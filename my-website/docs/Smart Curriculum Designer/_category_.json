@@ -1,6 +1,7 @@
 {
   "label": "Smart Curriculum Designer",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "An AI-driven educational framework that integrates automated curriculum generation with an end-to-end computer vision pipeline, enabling learning for high…"
   }
 }

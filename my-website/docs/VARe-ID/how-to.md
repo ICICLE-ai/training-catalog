@@ -2,6 +2,10 @@
 tags:
   - Software
   - Animal Ecology
+title: "VARe-ID: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for VARe-ID. This work presents a modular software pipeline and end-to-end workflow for video-based animal re-identification, which assigns…"
 ---
 
 # How-To Guides

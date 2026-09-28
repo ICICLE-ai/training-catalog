@@ -1,6 +1,10 @@
 ---
 tags:
   - AI4CI
+title: "Distributed Training Estimator of LLMs: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Distributed Training Estimator of LLMs. This component implements a time cost estimator for distributed training of large language models (LLMs)."
 ---
 
 # Tutorials

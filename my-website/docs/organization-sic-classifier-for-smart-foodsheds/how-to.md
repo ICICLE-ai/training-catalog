@@ -1,6 +1,10 @@
 ---
 tags:
   - Smart-Foodsheds
+title: "Organization-SIC-Classifier-for-Smart-Foodsheds: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Organization-SIC-Classifier-for-Smart-Foodsheds. This repository contains code for training and evaluating models that classify…"
 ---
 
 # How-To Guides

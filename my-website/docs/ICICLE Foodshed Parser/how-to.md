@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "ICICLE Foodshed Parser: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for ICICLE Foodshed Parser. This repository contains tools and instructions for reproducing the experiments in the paper"
 ---
 
 # How-To Guides

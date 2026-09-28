@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "Smart Compiler: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Smart Compiler. This project introduces an agentic approach for high-level and multi-purpose compilers"
 ---
 
 # Tutorials

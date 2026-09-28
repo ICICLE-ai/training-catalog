@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Science Agents v1.0: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Science Agents v1.0. Language agents for data-driven scientific discovery tasks."
 ---
 
 # Explanation

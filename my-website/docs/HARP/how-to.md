@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - AI4CI
+title: "HARP: How-To Guide"
+sidebar_label: "How-To Guide"
+pagination_label: "How-To Guide"
+description: "How-To Guide for HARP. Researchers use high-performance computing (HPC) cyberinfrastructures (CI) like the Ohio Supercomputer (OSC) or Texas Advanced…"
 ---
 
 # How-To Guide

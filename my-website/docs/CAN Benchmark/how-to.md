@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "CAN Benchmark: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for CAN Benchmark. A curated ICICLE benchmark for evaluating the performance of pre-trained models and fostering the development of adaptation…"
 ---
 # How-To Guides
 

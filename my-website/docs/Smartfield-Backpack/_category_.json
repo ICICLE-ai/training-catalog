@@ -1,6 +1,7 @@
 {
   "label": "Smartfield-Backpack",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "A field-deployable multimodal data infrastructure that integrates autonomous sensing, edge computing, and drone-based platforms to address critical data…"
   }
 }

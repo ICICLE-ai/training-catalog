@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - Software
   - PADI
+title: "Patra Knowledge Base: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Patra Knowledge Base. The Patra Knowledge Base is a system designed for managing AI model cards, datasheets, and agent cards throughout the…"
 ---
 # How-To Guides
 

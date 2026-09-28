@@ -1,6 +1,7 @@
 {
   "label": "OpenPass",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "The Decentralized Microservice Drone System for Digital Agriculture is a distributed, scalable platform designed to orchestrate autonomous drone operations…"
   }
 }

@@ -1,7 +1,7 @@
 {
-    "label": "HLO Feature Dataset for AI Resource Estimation",
-    "link": {
-      "type": "generated-index"
-    }
+  "label": "HLO Feature Dataset for AI Resource Estimation",
+  "link": {
+    "type": "generated-index",
+    "description": "A dataset designed to support AI-driven resource estimation like runtime prediction to support HPC scheduling optimization by leveraging compiler-level…"
+  }
 }
-  

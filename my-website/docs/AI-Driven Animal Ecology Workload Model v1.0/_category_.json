@@ -1,6 +1,7 @@
 {
   "label": "AI-Driven Animal Ecology Workload Model v1.0",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This repo provides instructions for extracting workload information from AI-Driven Animal Ecology (ADAE) studies."
   }
 }

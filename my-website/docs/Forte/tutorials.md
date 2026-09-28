@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Forte: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Forte. The Forte library provides robust out-of-distribution (OOD) detection capabilities through the ForteOODDetector class."
 ---
 
 # Tutorials 

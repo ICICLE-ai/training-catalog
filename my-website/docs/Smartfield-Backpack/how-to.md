@@ -2,6 +2,10 @@
 tags:
   - Software
   - Animal-Ecology
+title: "Smartfield-Backpack: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Smartfield-Backpack. A field-deployable multimodal data infrastructure that integrates autonomous sensing, edge computing, and drone-based…"
 ---
 
 # How-To Guides

@@ -1,6 +1,7 @@
 {
   "label": "No-Code Image Lab",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "A browser-based OpenCV pipeline builder: build an image pre-processing pipeline in an interactive editor with live preview, then run it at scale as a Tapis…"
   }
 }

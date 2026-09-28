@@ -1,6 +1,7 @@
 {
   "label": "GNNFoodFlowPortal",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "The GNN Food Flow Portal is a Streamlit web app for exploring county-level U.S. food-flow predictions from the GNN FoodFlow Model."
   }
 }

@@ -1,7 +1,7 @@
 {
-    "label": "Smart Compiler",
-    "link": {
-      "type": "generated-index"
-    }
+  "label": "Smart Compiler",
+  "link": {
+    "type": "generated-index",
+    "description": "This project introduces an agentic approach for high-level and multi-purpose compilers"
+  }
 }
-  

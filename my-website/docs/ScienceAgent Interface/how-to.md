@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "ScienceAgent Interface: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for ScienceAgent Interface. ScienceAgent Interface provides a web interface for conducting data-driven scientific tasks using ScienceAgent."
 ---
 # How-To Guides
 

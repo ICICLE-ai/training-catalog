@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "CAN Benchmark: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for CAN Benchmark. A curated ICICLE benchmark for evaluating the performance of pre-trained models and fostering the development of adaptation…"
 ---
 # Explanation
 ### Dataset Structure

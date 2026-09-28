@@ -1,6 +1,7 @@
 {
   "label": "ICICLE-Playgrounds",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "ICICLE Playgrounds is a Python SDK designed for working with AI plug-n-play frameworks powered by Tapis Workflows."
   }
 }

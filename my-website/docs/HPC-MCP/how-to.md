@@ -2,6 +2,10 @@
 tags:
   - Software
   - AI4CI
+title: "HPC-MCP: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for HPC-MCP. HPC-MCP is a service-based ICICLE software component that gives HPC users a natural-language interface to backend HPC utilities."
 ---
 # How-To Guides
 

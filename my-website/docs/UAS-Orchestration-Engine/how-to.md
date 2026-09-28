@@ -1,6 +1,10 @@
 ---
 tags:
    - Digital-Agriculture
+title: "UAS-Orchestration-Engine: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for UAS-Orchestration-Engine. This project provides an open-source orchestration engine designed to automate and scale the transformation of raw…"
 ---
 # How-To Guides
 

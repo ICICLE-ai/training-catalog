@@ -1,6 +1,7 @@
 {
   "label": "Science Agents v1.0",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "Language agents for data-driven scientific discovery tasks. The agent features the self-debug mechanism and shows the best performance on ScienceAgentBench."
   }
 }

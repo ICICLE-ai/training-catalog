@@ -1,6 +1,10 @@
 ---
 tags:
   - AI4CI
+title: "AutoSDT: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for AutoSDT. Scaling Data-Driven Discovery Tasks Toward Open Co-Scientists. AutoSDT is an automatic pipeline for collecting high-quality coding…"
 ---
 # How-To Guides
 ## Installation

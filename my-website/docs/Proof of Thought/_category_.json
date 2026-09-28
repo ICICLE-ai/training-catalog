@@ -1,6 +1,7 @@
 {
   "label": "Proof of Thought",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "LLM-based reasoning using Z3 theorem proving with multiple backend support (SMT2 and JSON)."
   }
 }

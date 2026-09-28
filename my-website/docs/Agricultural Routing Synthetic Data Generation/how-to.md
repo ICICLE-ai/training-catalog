@@ -1,6 +1,10 @@
 ---
 tags:
   - Food-Access
+title: "Agricultural Routing Synthetic Data Generation: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Agricultural Routing Synthetic Data Generation. This repository provides a python script to generate synthetic location and vehicle data…"
 ---
 
 # How-To Guides

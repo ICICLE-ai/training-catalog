@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "Intelligent Semantic Segmentation & Annotation: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Intelligent Semantic Segmentation & Annotation. A streamlined, HPC-backed pipeline dedicated exclusively to semantic and instance image…"
 ---
 # Explanation
 

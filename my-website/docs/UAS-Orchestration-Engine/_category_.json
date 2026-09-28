@@ -1,6 +1,7 @@
 {
   "label": "UAS-Orchestration-Engine",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This project provides an open-source orchestration engine designed to automate and scale the transformation of raw Unmanned Aerial Systems (UAS) imagery into…"
   }
 }

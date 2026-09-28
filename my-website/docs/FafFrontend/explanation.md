@@ -2,6 +2,10 @@
 tags:
   - Food-Access
   - Smart-Foodsheds
+title: "FafFrontend: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for FafFrontend. This is intended as a helpful front end to a REST API to the US Bureau of Transportation Statistics (BTS) Feight Analysis…"
 ---
 
 # Explanation

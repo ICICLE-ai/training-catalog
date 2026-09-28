@@ -1,6 +1,10 @@
 ---
 tags:
   - Software
+title: "ICICLE AI Component MCP: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for ICICLE AI Component MCP. ICICLE AI Component MCP lets developers use AI-powered IDEs to explore ICICLE components and then implement…"
 ---
 # How-To Guides
 

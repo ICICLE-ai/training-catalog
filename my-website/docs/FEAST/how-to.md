@@ -2,6 +2,10 @@
 tags:
   - Food-Access
   - Smart-Foodsheds
+title: "FEAST: How To Guide"
+sidebar_label: "How To Guide"
+pagination_label: "How To Guide"
+description: "How To Guide for FEAST. The Food Equity Access Simulation Technology (FEAST) tool — previously known as the Food Access and Strategy Simulation (FASS) tool —…"
 ---
 
 # How To Guide

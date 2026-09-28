@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - AI4CI
   - Software
+title: "ICICLE Vector DB Service: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for ICICLE Vector DB Service. FastAPI + Qdrant vector storage and retrieval service for the ICICLE AI Tapis tenant."
 ---
 # Explanation
 

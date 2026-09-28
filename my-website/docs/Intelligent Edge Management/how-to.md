@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - Software
+title: "Intelligent Edge Management: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Intelligent Edge Management. The Intelligent Edge Management Service (IEMS) is ICICLE's fleet control plane for deploying and operating AI…"
 ---
 # How-To Guides
 

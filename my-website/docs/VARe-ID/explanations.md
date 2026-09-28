@@ -2,6 +2,10 @@
 tags:
   - Software
   - Animal Ecology
+title: "VARe-ID: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for VARe-ID. This work presents a modular software pipeline and end-to-end workflow for video-based animal re-identification, which assigns…"
 ---
 
 # Explanation

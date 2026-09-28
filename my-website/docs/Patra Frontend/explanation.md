@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - PADI
+title: "Patra Frontend: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Patra Frontend. Vue 3 + Vite web interface for the Patra Knowledge Base — the frontend component of the Patra AI Cards framework."
 ---
 # Explanation
 

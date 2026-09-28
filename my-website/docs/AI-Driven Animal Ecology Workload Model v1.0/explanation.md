@@ -1,6 +1,10 @@
 ---
 tags:
   - Animal-Ecology
+title: "AI-Driven Animal Ecology Workload Model v1.0: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for AI-Driven Animal Ecology Workload Model v1.0. This repo provides instructions for extracting workload information from AI-Driven Animal…"
 ---
 
 # Explanation

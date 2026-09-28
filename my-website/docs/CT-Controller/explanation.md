@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - Animal-Ecology
+title: "CT-Controller: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for CT-Controller. The ctcontroller tool can be used to manage the provisioning and releasing of edge hardware as well as running and shutting…"
 ---
 # Explanation
 

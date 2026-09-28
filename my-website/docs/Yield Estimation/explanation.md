@@ -2,6 +2,10 @@
 tags:
   - Digital-Agriculture
   - Foundation-AI
+title: "Yield Estimation: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Yield Estimation. A Hugging Face custom pipeline using Transformers model for county-level corn yield estimation using multi-temporal weather…"
 ---
 # Explanation
 

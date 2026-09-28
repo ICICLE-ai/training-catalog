@@ -18,6 +18,9 @@ const config = {
     mermaid: true,   // <-- ENABLE MERMAID SUPPORT
   },
   customFields: {
+    // Meta description for the home page and the summary line of build/llms.txt.
+    siteDescription:
+      'Tutorials, how-to guides, explanations and API references for NSF ICICLE AI Institute software, plus education and workshop materials.',
     heroHeading: 'Welcome to the Official Documentation Hub for ICICLE AI Institute',
     heroDescription:`
         <p>
@@ -46,7 +49,7 @@ const config = {
   // baseUrl: '/',
 
 
-  url: 'https://ICICLE-ai.github.io', // Your GitHub Pages root
+  url: 'https://icicle-ai.github.io', // Your GitHub Pages root (lowercase so canonical links match the sitemap)
   baseUrl: '/training-catalog/', // The repository name, with a trailing slash
   organizationName: 'ICICLE-ai', // Your GitHub organization name
   projectName: 'training-catalog', // Your GitHub repository name
@@ -83,6 +86,16 @@ const config = {
       'classic',
       {
         docs: false,
+        sitemap: {
+          // Contributor templates stay browsable but out of search results
+          // (src/plugins/llms-txt.js also marks them noindex).
+          ignorePatterns: [
+            '/training-catalog/sample_docs/**',
+            '/training-catalog/api/Sample APIs/**',
+            '/training-catalog/api/Sample%20APIs/**',
+            '/training-catalog/api/tags/sample-api',
+          ],
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -96,6 +109,7 @@ const config = {
   ],
 
   plugins: [
+    require.resolve('./src/plugins/llms-txt.js'), // llms.txt, llms-full.txt, noindex on templates
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -299,7 +313,7 @@ const config = {
     navbar: {
       title: 'ICICLE AI Institute Training Catalog',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'ICICLE AI Institute logo',
         src: 'img/ICICLE_logo.jpg',
       },
       items: [

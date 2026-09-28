@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "Proof of Thought: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Proof of Thought. LLM-based reasoning using Z3 theorem proving with multiple backend support (SMT2 and JSON)."
 ---
 # Tutorials
 

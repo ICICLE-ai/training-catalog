@@ -3,6 +3,10 @@ tags:
   - AI4CI
   - Software
   - Visual-Analytics
+title: "HLO Feature Dataset for AI Resource Estimation: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for HLO Feature Dataset for AI Resource Estimation. A dataset designed to support AI-driven resource estimation like runtime prediction to…"
 ---
 
 # How-To Guides

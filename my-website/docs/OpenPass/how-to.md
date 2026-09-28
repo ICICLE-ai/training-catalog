@@ -3,6 +3,10 @@ tags:
   - Software
   - Digital-Agriculture
   - Animal-Ecology
+title: "OpenPass: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for OpenPass. The Decentralized Microservice Drone System for Digital Agriculture is a distributed, scalable platform designed to orchestrate…"
 ---
 
 # How-To Guides

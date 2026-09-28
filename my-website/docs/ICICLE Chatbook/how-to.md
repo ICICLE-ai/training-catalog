@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "ICICLE Chatbook: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for ICICLE Chatbook. An interactive marimo notebook that turns the ICICLE AI Tapis services into a hands-on RAG (retrieval-augmented generation)…"
 ---
 # How-To Guides
 

@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - Software
   - PADI
+title: "Cyberinfrastructure Knowledge Network: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Cyberinfrastructure Knowledge Network. The Cyberinfrastructure Knowledge Network (CKN) is an extensible and portable distributed framework…"
 ---
 # Explanation
 

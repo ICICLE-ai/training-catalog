@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - PADI
+title: "Patra AI Cards Toolkit: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Patra AI Cards Toolkit. The Patra Toolkit is a component of the Patra AI Cards framework designed to simplify the process of creating and…"
 ---
 # Tutorials
 

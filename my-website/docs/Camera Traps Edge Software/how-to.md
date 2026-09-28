@@ -3,6 +3,10 @@ tags:
   - Software
   - CI4AI
   - Animal-Ecology
+title: "Camera Traps Edge Software: How-To Guide"
+sidebar_label: "How-To Guide"
+pagination_label: "How-To Guide"
+description: "How-To Guide for Camera Traps Edge Software. The Camera Traps application is both a simulator and IoT device software for utilizing machine learning on the…"
 ---
 # How-To Guide
 

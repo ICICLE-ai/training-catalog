@@ -1,6 +1,7 @@
 {
   "label": "Patra Frontend",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "Vue 3 + Vite web interface for the Patra Knowledge Base — the frontend component of the Patra AI Cards framework."
   }
 }

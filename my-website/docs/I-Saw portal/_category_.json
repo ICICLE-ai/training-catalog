@@ -1,6 +1,7 @@
 {
   "label": "I-Saw portal",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "A public-facing web portal for I-SAW: Infrastructure for Sensing and Analytics on Wildlife — a plug-and-play, edge-networked wildlife sensing platform built…"
   }
 }

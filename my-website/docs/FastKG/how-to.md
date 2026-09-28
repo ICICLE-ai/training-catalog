@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "FastKG: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for FastKG. FastKG is a knowledge graph embedding training library. Knowledge Graph (KG) embeddings are a way to represent entities and…"
 ---
 
 # How-To Guides

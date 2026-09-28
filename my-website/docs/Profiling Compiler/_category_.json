@@ -1,6 +1,7 @@
 {
   "label": "Profiling Compiler",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "Cetus Source to Source compiler improvements are being done at the University of Delaware. In this release, we release cetus base plus an static profiling…"
   }
 }

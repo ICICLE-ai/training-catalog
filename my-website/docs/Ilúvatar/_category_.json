@@ -1,6 +1,7 @@
 {
-  "label": "Il\u00favatar",
+  "label": "Ilúvatar",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "Ilúvatar is an open Serverless platform built with the goal of jumpstarting and streamlining FaaS research."
   }
 }

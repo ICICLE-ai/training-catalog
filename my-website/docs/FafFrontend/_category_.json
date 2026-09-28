@@ -1,6 +1,7 @@
 {
   "label": "FafFrontend",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This is intended as a helpful front end to a REST API to the US Bureau of Transportation Statistics (BTS) Feight Analysis Framework (FAF) dataset."
   }
 }

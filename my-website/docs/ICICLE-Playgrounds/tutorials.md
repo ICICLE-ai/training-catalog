@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "ICICLE-Playgrounds: Tutorial"
+sidebar_label: "Tutorial"
+pagination_label: "Tutorial"
+description: "Tutorial for ICICLE-Playgrounds. ICICLE Playgrounds is a Python SDK designed for working with AI plug-n-play frameworks powered by Tapis Workflows."
 ---
 
 # Tutorial

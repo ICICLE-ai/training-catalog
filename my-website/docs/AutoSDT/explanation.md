@@ -1,6 +1,10 @@
 ---
 tags:
   - AI4CI
+title: "AutoSDT: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for AutoSDT. Scaling Data-Driven Discovery Tasks Toward Open Co-Scientists. AutoSDT is an automatic pipeline for collecting high-quality coding…"
 ---
 # Explanation
 AutoSDT is designed to maximize ecological validity of scientific programming tasks while minimizing manual curation cost.

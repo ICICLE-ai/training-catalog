@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - Software
   - PADI
+title: "Cyberinfrastructure Knowledge Network: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Cyberinfrastructure Knowledge Network. The Cyberinfrastructure Knowledge Network (CKN) is an extensible and portable distributed framework…"
 ---
 # Tutorials
 

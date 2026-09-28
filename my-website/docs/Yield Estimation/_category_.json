@@ -1,6 +1,7 @@
 {
   "label": "Yield Estimation",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "A Hugging Face custom pipeline using Transformers model for county-level corn yield estimation using multi-temporal weather observations and static soil…"
   }
 }

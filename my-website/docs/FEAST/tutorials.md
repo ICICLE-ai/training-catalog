@@ -3,6 +3,10 @@ tags:
   - Food-Access
   - Smart-Foodsheds
   - Video
+title: "FEAST: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for FEAST. The Food Equity Access Simulation Technology (FEAST) tool — previously known as the Food Access and Strategy Simulation (FASS) tool — is…"
 ---
 # Tutorials
 <!-- [Click here](https://youtu.be/kltZCvLqHp0) for the video tutorial. -->

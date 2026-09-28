@@ -1,6 +1,10 @@
 ---
 tags:
   - Smart-Foodsheds
+title: "PPODLinkML: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for PPODLinkML. This repository contains a LinkML schema for a version of the PPOD (Persons-Projects-Organizations-Datasets) data pattern that…"
 ---
 
 # Explanation

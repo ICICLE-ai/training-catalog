@@ -1,7 +1,7 @@
 {
-    "label": "Multi-Scale Food Flow Prediction using Graph Neural Networks",
-    "link": {
-      "type": "generated-index"
-    }
+  "label": "Multi-Scale Food Flow Prediction using Graph Neural Networks",
+  "link": {
+    "type": "generated-index",
+    "description": "A project leveraging Graph Neural Networks (GNNs) to predict food flows between counties and FAF zones for economic planning, infrastructure development, and…"
+  }
 }
-  

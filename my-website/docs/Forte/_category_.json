@@ -1,7 +1,7 @@
 {
-    "label": "Forte",
-    "link": {
-      "type": "generated-index"
-    }
+  "label": "Forte",
+  "link": {
+    "type": "generated-index",
+    "description": "The Forte library provides robust out-of-distribution (OOD) detection capabilities through the ForteOODDetector class."
+  }
 }
-  

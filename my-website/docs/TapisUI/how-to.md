@@ -5,6 +5,10 @@ tags:
   - Digital-Agriculture
   - Animal-Ecology
   - Smart-Foodsheds
+title: "TapisUI: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for TapisUI. This tapis ui extension enables additional icicle specific branding and tabs on tapisui."
 ---
 # How-To Guides
 

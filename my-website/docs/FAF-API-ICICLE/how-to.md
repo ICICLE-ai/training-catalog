@@ -2,6 +2,10 @@
 tags:
   - Food-Access
   - Smart-Foodsheds
+title: "FAF-API-ICICLE: How-to Guides"
+sidebar_label: "How-to Guides"
+pagination_label: "How-to Guides"
+description: "How-to Guides for FAF-API-ICICLE. This is a hosted REST API to the US Bureau of Transportation Statistics (BTS) Freight Analysis Framework (FAF) dataset."
 ---
 
 # How-to Guides

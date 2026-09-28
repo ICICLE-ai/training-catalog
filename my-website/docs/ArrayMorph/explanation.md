@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "ArrayMorph: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for ArrayMorph. ArrayMorph is a software to manage array data stored on cloud object storage efficiently."
 ---
 # Explanation
 

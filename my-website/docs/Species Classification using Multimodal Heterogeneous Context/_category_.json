@@ -1,6 +1,7 @@
 {
   "label": "Species Classification using Multimodal Heterogeneous Context",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "We present a species classification model that utilizes heterogeneous image contexts organized in a multimodal knowledge graph."
   }
 }

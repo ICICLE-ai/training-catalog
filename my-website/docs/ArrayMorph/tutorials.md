@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "ArrayMorph: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for ArrayMorph. ArrayMorph is a software to manage array data stored on cloud object storage efficiently. It supports both HDF5 C++ API and h5py API."
 ---
 # Tutorials
 

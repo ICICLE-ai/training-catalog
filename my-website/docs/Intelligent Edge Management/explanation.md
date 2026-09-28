@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - Software
+title: "Intelligent Edge Management: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Intelligent Edge Management. The Intelligent Edge Management Service (IEMS) is ICICLE's fleet control plane for deploying and operating AI…"
 ---
 # Explanation
 

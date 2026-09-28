@@ -1,6 +1,7 @@
 {
   "label": "Earth Data Hub",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "A browser-based geospatial data discovery and collection interface for selecting an area of interest, checking satellite scene availability, configuring…"
   }
 }

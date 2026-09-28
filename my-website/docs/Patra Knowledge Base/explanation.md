@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - PADI
+title: "Patra Knowledge Base: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Patra Knowledge Base. The Patra Knowledge Base is a system designed for managing AI model cards, datasheets, and agent cards throughout the…"
 ---
 # Explanation
 

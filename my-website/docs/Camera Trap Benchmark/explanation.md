@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Camera Trap Benchmark: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Camera Trap Benchmark. ICICLE benchmark for camera trap image analysis with adaptive learning capabilities."
 ---
 
 # Explanation

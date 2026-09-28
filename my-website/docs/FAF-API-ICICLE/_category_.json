@@ -1,6 +1,7 @@
 {
   "label": "FAF-API-ICICLE",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This is a hosted REST API to the US Bureau of Transportation Statistics (BTS) Freight Analysis Framework (FAF) dataset."
   }
 }

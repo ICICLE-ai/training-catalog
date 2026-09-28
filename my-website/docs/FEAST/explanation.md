@@ -2,6 +2,10 @@
 tags:
   - Food-Access
   - Smart-Foodsheds
+title: "FEAST: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for FEAST. The Food Equity Access Simulation Technology (FEAST) tool — previously known as the Food Access and Strategy Simulation (FASS) tool —…"
 ---
 
 # Explanation

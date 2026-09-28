@@ -1,6 +1,7 @@
 {
   "label": "Wild Wing",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "An open-source, autonomous and affordable UAS for animal behaviour video monitoring using Parrot Anafi drones to track group-living animals."
   }
 }

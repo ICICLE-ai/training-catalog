@@ -1,6 +1,7 @@
 {
   "label": "Patra AI Cards Toolkit",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "The Patra Toolkit is a component of the Patra AI Cards framework designed to simplify the process of creating and documenting AI/ML models."
   }
 }

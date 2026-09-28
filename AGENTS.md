@@ -42,6 +42,11 @@ plain `requirements.txt` mirror). `uv sync` provisions the repo-root `uv` virtua
 helper `api_parser.py` is standard-library only — run it with plain `python3` (no
 venv). Set `GITHUB_PAT` to fetch READMEs from private repos.
 
+The build also writes `llms.txt` / `llms-full.txt` (an index and full text of the
+component docs for LLM crawlers) and marks the `sample_docs` / `Sample APIs` template
+pages `noindex` — see `my-website/src/plugins/llms-txt.js`; those templates are also
+excluded from the sitemap in `docusaurus.config.js`.
+
 `onBrokenLinks` / `onBrokenMarkdownLinks` are set to `warn`, so link problems don't
 fail the build — but MDX compile errors do.
 
@@ -73,7 +78,9 @@ name) and `Release Dates`. In the main doc it also standardizes badges (centered
 block, GitHub + a license badge lifted from the README's License section) and, when
 `api-docs/<Component>/` exists, adds a baseUrl-aware `:::tip` link to that API
 reference page (best-effort, no ordering deadlock — re-run after API docs exist). The
-parser (`readme_parser.py`) is bundled inside this skill folder. See its `SKILL.md`.
+parser (`readme_parser.py`) is bundled inside this skill folder, together with
+`seo_meta.py` (unique page titles + meta descriptions, run automatically by the parser).
+See its `SKILL.md`.
 
 ### `.claude/skills/icicle-tc-deploy-api` — API docs deploy
 Takes a CSV of components (the release-testing catalog CSV: `Component`, `OpenAPI JSON`,

@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="ICICLE AI Institute.">
+      description={siteConfig.customFields.siteDescription}>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

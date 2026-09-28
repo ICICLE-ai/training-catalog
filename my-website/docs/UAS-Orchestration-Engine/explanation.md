@@ -1,6 +1,10 @@
 ---
 tags:
   - Digital-Agriculture
+title: "UAS-Orchestration-Engine: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for UAS-Orchestration-Engine. This project provides an open-source orchestration engine designed to automate and scale the transformation of raw…"
 ---
 # Explanation
 

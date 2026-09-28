@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Forte: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Forte. The Forte library provides robust out-of-distribution (OOD) detection capabilities through the ForteOODDetector class."
 ---
 
 # How-To Guides

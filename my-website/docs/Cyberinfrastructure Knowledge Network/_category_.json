@@ -1,6 +1,7 @@
 {
   "label": "Cyberinfrastructure Knowledge Network",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "The Cyberinfrastructure Knowledge Network (CKN) is an extensible and portable distributed framework designed to optimize AI at the edge—particularly in…"
   }
 }

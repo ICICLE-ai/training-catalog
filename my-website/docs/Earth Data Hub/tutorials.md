@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - Visual-Analytics
   - Software
+title: "Earth Data Hub: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Earth Data Hub. A browser-based geospatial data discovery and collection interface for selecting an area of interest, checking satellite scene…"
 ---
 # Tutorials
 

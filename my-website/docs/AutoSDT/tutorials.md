@@ -1,6 +1,10 @@
 ---
 tags:
   - AI4CI
+title: "AutoSDT: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for AutoSDT. Scaling Data-Driven Discovery Tasks Toward Open Co-Scientists. AutoSDT is an automatic pipeline for collecting high-quality coding…"
 ---
 # Tutorials
 ### Quickstart Tutorial

@@ -1,6 +1,10 @@
 ---
 tags:
   - Smart-Foodsheds
+title: "Food Waste Ontology Chatbot: How to Guide"
+sidebar_label: "How to Guide"
+pagination_label: "How to Guide"
+description: "How to Guide for Food Waste Ontology Chatbot. This project provides an interactive chatbot interface to explore and build structured ontologies for food waste."
 ---
 
 # How to Guide

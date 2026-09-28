@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "Profiling Compiler: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Profiling Compiler. Cetus Source to Source compiler improvements are being done at the University of Delaware."
 ---
 
 # How-To Guides

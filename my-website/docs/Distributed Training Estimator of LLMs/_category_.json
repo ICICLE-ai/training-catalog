@@ -1,6 +1,7 @@
 {
   "label": "Distributed Training Estimator of LLMs",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This component implements a time cost estimator for distributed training of large language models (LLMs)."
   }
 }

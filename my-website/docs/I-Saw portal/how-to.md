@@ -3,6 +3,10 @@ tags:
   - Software
   - Animal-Ecology
   - Visual-Analytics
+title: "I-Saw portal: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for I-Saw portal. A public-facing web portal for I-SAW: Infrastructure for Sensing and Analytics on Wildlife — a plug-and-play, edge-networked…"
 ---
 # How-To Guides
 

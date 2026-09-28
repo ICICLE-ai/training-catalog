@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "Ilúvatar: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Ilúvatar. Ilúvatar is an open Serverless platform built with the goal of jumpstarting and streamlining FaaS research."
 ---
 
 # How-To Guides

@@ -2,6 +2,10 @@
 tags:
   - Smart-Foodsheds
   - AI4CI
+title: "Multi-Scale Food Flow Prediction using Graph Neural Networks: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Multi-Scale Food Flow Prediction using Graph Neural Networks. A project leveraging Graph Neural Networks (GNNs) to predict food flows between…"
 ---
 
 # Explanation

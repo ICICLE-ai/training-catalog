@@ -13,6 +13,15 @@ The script that does the parsing — `readme_parser.py` — lives **next to this
 file** (`.claude/skills/icicle-tc-deploy-doc/readme_parser.py`). The skill's job
 is to drive it correctly and then guarantee a clean build.
 
+After writing a component, the parser calls the sibling stdlib module
+`seo_meta.py`, which gives each section page a unique title
+(`<Component>: How-To Guides`, sidebar/next-prev labels unchanged) plus a meta
+description, and gives the category page a description, all taken from the README's
+description paragraph. It is idempotent; to backfill by hand:
+`python3 .claude/skills/icicle-tc-deploy-doc/seo_meta.py my-website/docs [--only "<Component>"]`.
+The build then turns those descriptions into `build/llms.txt` / `llms-full.txt`
+(`my-website/src/plugins/llms-txt.js`).
+
 ## Scope
 
 Run this only inside the `training-catalog` repo (it writes into `my-website/docs/`

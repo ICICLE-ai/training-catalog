@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - PADI
+title: "Patra Frontend: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Patra Frontend. Vue 3 + Vite web interface for the Patra Knowledge Base — the frontend component of the Patra AI Cards framework."
 ---
 # How-To Guides
 

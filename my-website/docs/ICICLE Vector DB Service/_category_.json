@@ -1,6 +1,7 @@
 {
   "label": "ICICLE Vector DB Service",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "FastAPI + Qdrant vector storage and retrieval service for the ICICLE AI Tapis tenant. Clients provide their own pre-computed embeddings — the service handles…"
   }
 }

@@ -1,6 +1,7 @@
 {
   "label": "ScienceAgent Interface",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "ScienceAgent Interface provides a web interface for conducting data-driven scientific tasks using ScienceAgent."
   }
 }

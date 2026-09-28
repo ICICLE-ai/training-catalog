@@ -1,6 +1,7 @@
 {
   "label": "ArrayMorph",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "ArrayMorph is a software to manage array data stored on cloud object storage efficiently. It supports both HDF5 C++ API and h5py API."
   }
 }

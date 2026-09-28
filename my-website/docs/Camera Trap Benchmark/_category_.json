@@ -1,6 +1,7 @@
 {
   "label": "Camera Trap Benchmark",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "ICICLE benchmark for camera trap image analysis with adaptive learning capabilities."
   }
 }

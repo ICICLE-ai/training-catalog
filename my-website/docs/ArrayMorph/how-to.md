@@ -1,6 +1,10 @@
 ---
 tags:
   - CI4AI
+title: "ArrayMorph: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for ArrayMorph. ArrayMorph is a software to manage array data stored on cloud object storage efficiently."
 ---
 # How-To Guides
 

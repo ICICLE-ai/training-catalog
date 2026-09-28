@@ -1,6 +1,7 @@
 {
   "label": "HPC-MCP",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "HPC-MCP is a service-based ICICLE software component that gives HPC users a natural-language interface to backend HPC utilities."
   }
 }

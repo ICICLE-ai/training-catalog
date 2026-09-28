@@ -1,6 +1,7 @@
 {
   "label": "Patra Knowledge Base",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "The Patra Knowledge Base is a system designed for managing AI model cards, datasheets, and agent cards throughout the life of the objects that they describe…"
   }
 }

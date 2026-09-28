@@ -1,6 +1,10 @@
 ---
 tags:
   - Foundation-AI
+title: "Science Agents v1.0: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for Science Agents v1.0. Language agents for data-driven scientific discovery tasks."
 ---
 
 # How-To Guides

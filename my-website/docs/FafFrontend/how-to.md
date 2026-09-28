@@ -2,6 +2,10 @@
 tags:
   - Food-Access
   - Smart-Foodsheds
+title: "FafFrontend: How-To Guides"
+sidebar_label: "How-To Guides"
+pagination_label: "How-To Guides"
+description: "How-To Guides for FafFrontend. This is intended as a helpful front end to a REST API to the US Bureau of Transportation Statistics (BTS) Feight Analysis…"
 ---
 
 # How-To Guides

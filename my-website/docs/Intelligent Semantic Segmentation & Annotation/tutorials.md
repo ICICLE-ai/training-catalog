@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "Intelligent Semantic Segmentation & Annotation: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Intelligent Semantic Segmentation & Annotation. A streamlined, HPC-backed pipeline dedicated exclusively to semantic and instance image…"
 ---
 # Tutorials
 

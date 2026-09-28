@@ -3,6 +3,10 @@ tags:
   - Animal-Ecology
   - AI4CI
   - Software
+title: "Wild Wing: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Wild Wing. An open-source, autonomous and affordable UAS for animal behaviour video monitoring using Parrot Anafi drones to track group-living…"
 ---
 # Explanation
 

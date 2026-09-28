@@ -2,6 +2,10 @@
 tags:
   - CI4AI
   - Animal-Ecology
+title: "CT-Controller: How-To Guide"
+sidebar_label: "How-To Guide"
+pagination_label: "How-To Guide"
+description: "How-To Guide for CT-Controller. The ctcontroller tool can be used to manage the provisioning and releasing of edge hardware as well as running and shutting…"
 ---
 # How-To Guide
 

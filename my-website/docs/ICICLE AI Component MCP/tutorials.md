@@ -1,6 +1,10 @@
 ---
 tags:
   - Software
+title: "ICICLE AI Component MCP: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for ICICLE AI Component MCP. ICICLE AI Component MCP lets developers use AI-powered IDEs to explore ICICLE components and then implement…"
 ---
 # Tutorials
 

@@ -3,6 +3,10 @@ tags:
   - CI4AI
   - AI4CI
   - Software
+title: "ICICLE Embedding Service: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for ICICLE Embedding Service. FastAPI service that turns text into embedding vectors using Qwen3-Embedding-0.6B (GGUF quantized) via…"
 ---
 # Tutorials
 

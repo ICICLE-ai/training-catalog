@@ -5,6 +5,10 @@ tags:
   - Digital-Agriculture
   - Animal-Ecology
   - Smart-Foodsheds
+title: "TapisUI: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for TapisUI. This tapis ui extension enables additional icicle specific branding and tabs on tapisui."
 ---
 # Explanation
 TapisUI provides a research oriented frontend to interact with Tapis and tenant components. In this case, the ICICLE extension extends TapisUI with custom branding 

@@ -2,6 +2,10 @@
 tags:
   - AI4CI
   - Software
+title: "Proof of Thought: Explanation"
+sidebar_label: "Explanation"
+pagination_label: "Explanation"
+description: "Explanation for Proof of Thought. LLM-based reasoning using Z3 theorem proving with multiple backend support (SMT2 and JSON)."
 ---
 # Explanation
 

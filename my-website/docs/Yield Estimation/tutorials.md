@@ -2,6 +2,10 @@
 tags:
   - Digital-Agriculture
   - Foundation-AI
+title: "Yield Estimation: Tutorials"
+sidebar_label: "Tutorials"
+pagination_label: "Tutorials"
+description: "Tutorials for Yield Estimation. A Hugging Face custom pipeline using Transformers model for county-level corn yield estimation using multi-temporal weather…"
 ---
 # Tutorials
 

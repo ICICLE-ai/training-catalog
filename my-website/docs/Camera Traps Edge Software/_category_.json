@@ -1,6 +1,7 @@
 {
   "label": "Camera Traps Edge Software",
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "The Camera Traps application is both a simulator and IoT device software for utilizing machine learning on the edge in field research."
   }
 }
