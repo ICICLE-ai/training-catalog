@@ -16,8 +16,6 @@ Vue 3 + Vite web interface for the [Patra Knowledge Base](https://github.com/Pla
 
 
 
-For guidance on what How-To Guides and Explanation content covers, see [Diátaxis](https://diataxis.fr/).
-
 ## References
 
 - [Patra Knowledge Base](https://github.com/Plale-Lab/patra-knowledge-base)

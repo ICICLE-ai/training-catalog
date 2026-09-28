@@ -26,8 +26,6 @@ This component exposes an HTTP API — see its [API documentation](/api/Patra%20
 The Patra Knowledge Base is a system designed for managing AI model cards, datasheets, and agent cards throughout the life of the objects that they describe (AI/ML models, datasets, AI agents).  The Patra Knowledge Base is the backend engine of the Patra AI Cards framework. It is currently deployed in the ICICLE infrastructure to raise the accountability of AI research carried out on ICICLE platforms.
 
 
-For guidance on what How-To Guides and Explanation content covers, see [Diátaxis](https://diataxis.fr/).
-
 ## References
 
 - [Patra ModelCards paper](https://ieeexplore.ieee.org/document/10678710)

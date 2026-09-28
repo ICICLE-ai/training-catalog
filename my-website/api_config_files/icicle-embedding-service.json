@@ -3,8 +3,18 @@
   "info": {
     "title": "ICICLE AI Embed Service",
     "description": "Local embedding generator built on llama-cpp-python + Qwen3-Embedding GGUF. Takes text in, returns vectors that can be stored via the ICICLE AI Vector Service. All endpoints (except /healthz) require a valid X-Tapis-Token from the icicleai tenant.",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
+  "servers": [
+    {
+      "url": "https://icicleaiembedserver.pods.icicleai.tapis.io",
+      "description": "Production (ICICLE AI Tapis pod)"
+    },
+    {
+      "url": "http://localhost:8000",
+      "description": "Local development"
+    }
+  ],
   "paths": {
     "/healthz": {
       "get": {
@@ -16,7 +26,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": { "type": "string" },
+                  "additionalProperties": {
+                    "type": "string"
+                  },
                   "type": "object",
                   "title": "Response Health Check Healthz Get"
                 }
@@ -35,7 +47,10 @@
             "name": "X-Tapis-Token",
             "in": "header",
             "required": true,
-            "schema": { "type": "string", "title": "X-Tapis-Token" }
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
           }
         ],
         "responses": {
@@ -43,7 +58,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ModelInfoResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/ModelInfoResponse"
+                }
               }
             }
           },
@@ -51,7 +68,9 @@
             "description": "Authentication failed (missing, expired, malformed, or non-access token).",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
               }
             }
           },
@@ -59,7 +78,9 @@
             "description": "Token is from a tenant other than icicleai.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
               }
             }
           },
@@ -67,7 +88,9 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -84,14 +107,19 @@
             "name": "X-Tapis-Token",
             "in": "header",
             "required": true,
-            "schema": { "type": "string", "title": "X-Tapis-Token" }
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/EmbedRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/EmbedRequest"
+              }
             }
           }
         },
@@ -100,7 +128,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/EmbedResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/EmbedResponse"
+                }
               }
             }
           },
@@ -108,7 +138,9 @@
             "description": "Authentication failed (missing, expired, malformed, or non-access token).",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
               }
             }
           },
@@ -116,7 +148,9 @@
             "description": "Token is from a tenant other than icicleai.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
               }
             }
           },
@@ -124,7 +158,9 @@
             "description": "Validation Error (empty input, oversized list, oversized string).",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -137,20 +173,32 @@
       "EmbedRequest": {
         "type": "object",
         "title": "EmbedRequest",
-        "required": ["input"],
+        "required": [
+          "input"
+        ],
         "properties": {
           "input": {
             "title": "Input",
             "description": "A single string or list of strings to embed.",
             "anyOf": [
-              { "type": "string" },
-              { "type": "array", "items": { "type": "string" } }
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
             ]
           },
           "input_type": {
             "title": "Input Type",
             "type": "string",
-            "enum": ["query", "document"],
+            "enum": [
+              "query",
+              "document"
+            ],
             "default": "document",
             "description": "`query` wraps each input with the Qwen3 instruction template; `document` embeds the raw text."
           },
@@ -158,8 +206,13 @@
             "title": "Instruction",
             "description": "Custom task instruction for query-side inputs. Ignored when input_type='document'. Defaults to a generic retrieval prompt.",
             "anyOf": [
-              { "type": "string", "maxLength": 2000 },
-              { "type": "null" }
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
             ],
             "default": null
           },
@@ -174,12 +227,20 @@
       "EmbedItem": {
         "type": "object",
         "title": "EmbedItem",
-        "required": ["index", "embedding"],
+        "required": [
+          "index",
+          "embedding"
+        ],
         "properties": {
-          "index": { "type": "integer", "title": "Index" },
+          "index": {
+            "type": "integer",
+            "title": "Index"
+          },
           "embedding": {
             "type": "array",
-            "items": { "type": "number" },
+            "items": {
+              "type": "number"
+            },
             "title": "Embedding"
           }
         }
@@ -187,19 +248,39 @@
       "EmbedResponse": {
         "type": "object",
         "title": "EmbedResponse",
-        "required": ["model", "dim", "input_type", "normalized", "data"],
+        "required": [
+          "model",
+          "dim",
+          "input_type",
+          "normalized",
+          "data"
+        ],
         "properties": {
-          "model": { "type": "string", "title": "Model" },
-          "dim": { "type": "integer", "title": "Dim" },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "dim": {
+            "type": "integer",
+            "title": "Dim"
+          },
           "input_type": {
             "type": "string",
-            "enum": ["query", "document"],
+            "enum": [
+              "query",
+              "document"
+            ],
             "title": "Input Type"
           },
-          "normalized": { "type": "boolean", "title": "Normalized" },
+          "normalized": {
+            "type": "boolean",
+            "title": "Normalized"
+          },
           "data": {
             "type": "array",
-            "items": { "$ref": "#/components/schemas/EmbedItem" },
+            "items": {
+              "$ref": "#/components/schemas/EmbedItem"
+            },
             "title": "Data"
           }
         }
@@ -207,35 +288,70 @@
       "ModelInfoResponse": {
         "type": "object",
         "title": "ModelInfoResponse",
-        "required": ["model", "dim", "n_ctx"],
+        "required": [
+          "model",
+          "dim",
+          "n_ctx"
+        ],
         "properties": {
-          "model": { "type": "string", "title": "Model" },
-          "dim": { "type": "integer", "title": "Dim" },
-          "n_ctx": { "type": "integer", "title": "N Ctx" }
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "dim": {
+            "type": "integer",
+            "title": "Dim"
+          },
+          "n_ctx": {
+            "type": "integer",
+            "title": "N Ctx"
+          }
         }
       },
       "ErrorResponse": {
         "type": "object",
         "title": "ErrorResponse",
-        "required": ["detail"],
+        "required": [
+          "detail"
+        ],
         "properties": {
-          "detail": { "type": "string", "title": "Detail" }
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
         }
       },
       "ValidationError": {
         "type": "object",
         "title": "ValidationError",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "properties": {
           "loc": {
             "type": "array",
             "items": {
-              "anyOf": [{ "type": "string" }, { "type": "integer" }]
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
             },
             "title": "Location"
           },
-          "msg": { "type": "string", "title": "Message" },
-          "type": { "type": "string", "title": "Error Type" }
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
         }
       },
       "HTTPValidationError": {
@@ -244,7 +360,9 @@
         "properties": {
           "detail": {
             "type": "array",
-            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
             "title": "Detail"
           }
         }

@@ -19,7 +19,7 @@ Every request (except `/healthz`) requires a valid **ICICLE AI tenant** Tapis ac
 
 ### How to get your access token
 
-Log in to the [ICICLEaaS Portal](https://icicleai.tapis.io), click your username in the bottom-left corner, and select **Copy Access Token**.
+Log in to the [ICICLE AI Portal](https://icicleai.tapis.io), click your username in the bottom-left corner, and select **Copy Access Token**.
 
 
 | Scenario                   | Status | Response                                                                        |
@@ -133,19 +133,6 @@ curl -X POST http://localhost:8000/v1/embeddings \
 
 For retrieval, embed the query with `input_type: "query"` and POST the resulting vector to `/v1/retrieve` on the vector service.
 
-## How to Pick a Quant
-
-All files live in [`Qwen/Qwen3-Embedding-0.6B-GGUF`](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF). Drop the filename into `MODEL_FILE`.
-
-
-| File                              | Size    | RAM     | Quality vs fp16 | When to use                                       |
-| --------------------------------- | ------- | ------- | --------------- | ------------------------------------------------- |
-| `Qwen3-Embedding-0.6B-Q8_0.gguf`  | ~650 MB | ~800 MB | ~99.9%          | Default. Tight fidelity, low memory.              |
-| `Qwen3-Embedding-0.6B-f16.gguf`   | ~1.2 GB | ~1.5 GB | 100%            | Reference / benchmarking.                         |
-
-
-For larger Qwen variants, swap `MODEL_REPO` to `Qwen/Qwen3-Embedding-4B-GGUF` (dim 2560) or `Qwen/Qwen3-Embedding-8B-GGUF` (dim 4096) and pick a matching quant file.
-
 ## Troubleshooting
 
 - **"Failed to initialise embedder" at startup**: the service exits if it can't load the model. Check `MODEL_PATH` (file exists?) or that you have network access to Hugging Face on first boot.
@@ -153,5 +140,7 @@ For larger Qwen variants, swap `MODEL_REPO` to `Qwen/Qwen3-Embedding-4B-GGUF` (d
 - **`422` "input list exceeds max_inputs_per_request"**: split the request, or raise `MAX_INPUTS_PER_REQUEST` if your deployment can absorb it.
 - **`422` "input exceeds max_chars_per_input"**: chunk the text on the client; this service does no chunking.
 - **Slow first request**: model load happens at startup, but the first embedding triggers JIT compilation of the compute graph. Subsequent requests are much faster.
+- **Slow embeddings in a container**: set `N_THREADS` to the container's CPU limit. If it is left at `0`, llama.cpp sizes its thread pool from the host's cores and oversubscribes the CPU.
+- **Redis or MLflow unreachable**: requests keep working. The cache and metrics fail open and log a warning. Check `REDIS_URL` / `MLFLOW_TRACKING_URI` and network access from the pod.
 - **High RAM**: lower `N_CTX` (e.g. `2048`) or move from f16 to Q8_0.
 - **No GPU acceleration on Mac**: confirm `llama-cpp-python` was installed on Apple Silicon Python, not under Rosetta. `python -c "import platform; print(platform.machine())"` should print `arm64`.

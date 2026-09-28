@@ -71,25 +71,48 @@ listener 1883 0.0.0.0
 allow_anonymous true
 ```
 
+## Using the Image Upload Plugin
+
+The image upload plugin automatically uploads images to a remote Tapis Files system. To enable it, set `deploy_uploader: true` in your installer configuration YAML file.
+
+The plugin requires the following environment variables to be configured:
+
+| Variable | Description |
+|----------|-------------|
+| `JWT` | Tapis access token for authentication |
+| `SYSTEM_ID` | The Tapis system ID (e.g., `ascend-tapis`) |
+| `DEST_DIR` | Destination path on the Tapis system (e.g., `users/you/inbox`) |
+
+Optionally, you can configure upload thresholds in `/traps-upload.toml` to only upload images that meet certain confidence scores:
+
+```toml
+[thresholds]
+"dog" = 0.7
+"cat" = 0.75
+```
+
+The plugin uses smart batching to efficiently upload multiple files and automatically deletes local files after successful upload.
+
 ## Developer Information
 
 ### Using Flatbuffers
 
 In-memory representations of events are translated into flatbuffer binary streams plus a leading two byte sequence that identifies the event type.  These statically defined byte sequences are specified in the [events.rs](https://github.com/tapis-project/camera-traps/blob/main/src/events.rs) source file and repeated here for convenience.
 
-Each event is assigned a binary prefix that zqm uses to route incoming binary streams to all of the event's subscribers.
+Each event is assigned a binary prefix that zqm uses to route incoming binary streams to all of the event's subscribers.<br/>
 ```
-pub const NEW_IMAGE_PREFIX:           [u8; 2] = [0x01, 0x00];
-pub const IMAGE_RECEIVED_PREFIX:      [u8; 2] = [0x02, 0x00];
-pub const IMAGE_SCORED_PREFIX:        [u8; 2] = [0x03, 0x00];
-pub const IMAGE_STORED_PREFIX:        [u8; 2] = [0x04, 0x00];
-pub const IMAGE_DELETED_PREFIX:       [u8; 2] = [0x05, 0x00];
-pub const PLUGIN_STARTED_PREFIX:      [u8; 2] = [0x10, 0x00];
-pub const PLUGIN_TERMINATING_PREFIX:  [u8; 2] = [0x11, 0x00];
-pub const PLUGIN_TERMINATE_PREFIX:    [u8; 2] = [0x12, 0x00];
-pub const MONITOR_POWER_START_PREFIX: [u8; 2] = [0x20, 0x00];
-pub const MONITOR_POWER_STOP_PREFIX:  [u8; 2] = [0x21, 0x00];
+pub const NEW_IMAGE_PREFIX:           [u8; 2] = [0x01, 0x00];<br/>
+pub const IMAGE_RECEIVED_PREFIX:      [u8; 2] = [0x02, 0x00];<br/>
+pub const IMAGE_SCORED_PREFIX:        [u8; 2] = [0x03, 0x00];<br/>
+pub const IMAGE_STORED_PREFIX:        [u8; 2] = [0x04, 0x00];<br/>
+pub const IMAGE_DELETED_PREFIX:       [u8; 2] = [0x05, 0x00];<br/>
+pub const PLUGIN_STARTED_PREFIX:      [u8; 2] = [0x10, 0x00];<br/>
+pub const PLUGIN_TERMINATING_PREFIX:  [u8; 2] = [0x11, 0x00];<br/>
+pub const PLUGIN_TERMINATE_PREFIX:    [u8; 2] = [0x12, 0x00];<br/>
+pub const MONITOR_POWER_START_PREFIX: [u8; 2] = [0x20, 0x00];<br/>
+pub const MONITOR_POWER_STOP_PREFIX:  [u8; 2] = [0x21, 0x00];<br/>
 ```
+
 Each event sent or received begins with its two byte prefix followed by its serialized form as defined in the camera-traps flatbuffer definition file ([events.fbs](https://github.com/tapis-project/camera-traps/blob/main/resources/events.fbs)).  The following section describes how to generate Rust source code from this definition file, a similar process can be used for any language supported by flatbuffers.
 
 ### Updating the flatbuffers messages
@@ -129,10 +152,10 @@ The instructions in this section assume [Docker](https://docs.docker.com/get-doc
 From the top-level camera-traps directory, issue the following command to build the application's Docker images:
 
 make build
-See [Makefile](https://github.com/tapis-project/camera-traps/blob/main/Makefile) for details.  Use the installer [install script](installer/install.sh) to create a run directory. See the installer [README](https://github.com/tapis-project/camera-traps/blob/main/installer/README.md) for more details. Then, navigate to the new run directory. Issue the following command to run the application, including the external plugins for which it's configured:
+See [Makefile](https://github.com/tapis-project/camera-traps/blob/main/Makefile) for details.  Use the installer [install script](https://github.com/tapis-project/camera-traps/blob/main/installer/install.sh) to create a run directory. See the installer [README](https://github.com/tapis-project/camera-traps/blob/main/installer/README.md) for more details. Then, navigate to the new run directory. Issue the following command to run the application, including the external plugins for which it's configured:
 
 docker-compose up
-See [docker-compose.yaml](installer/templates/docker-compose.yml) for details.  From the same release directory, issue the following command to stop the application:
+See [docker-compose.yaml](https://github.com/tapis-project/camera-traps/blob/main/installer/templates/docker-compose.yml) for details.  From the same release directory, issue the following command to stop the application:
 
 docker-compose down
 

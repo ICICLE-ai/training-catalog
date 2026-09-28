@@ -19,8 +19,6 @@ Link to the hosted service: [https://icicleai.tapis.io/#/intelligent-edge-manage
 
 
 
-For guidance on what to include in Tutorials, How-To Guides, Explanation, and Reference, see [Diátaxis](https://diataxis.fr/).
-
 ## References
 
 - [ICICLE Edge Fleet Control Plane — System Overview](https://github.com/ICICLE-ai/intelligent-edge-management-service/blob/main/edge_fleet_control_plane/deploy/SYSTEM_OVERVIEW.md)

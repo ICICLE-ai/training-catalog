@@ -44,13 +44,14 @@ The output README **must** contain, in order:
 1. `# {{ProjectName}}` — H1 title.
 2. A short project description (1–3 sentences).
 3. **At least one tag** chosen from the canonical list below. *(Mandatory for ICICLE-ai repos. For a non-ICICLE repo this is governed by the confirmation gate — required only if the user opted into canonical tags; otherwise omit the line or use their tags.)*
-4. (Optional) Diátaxis reference link.
-5. `### License` — license badge or text.
-6. `## References` — links and definitions.
-7. `## Acknowledgements` — **must** include the ICICLE NSF acknowledgement line verbatim (see below). Other funding sources go above it.
-8. `## Issue reporting` — how users report issues (GitHub Issues URL, support email, etc.).
-9. A `---` horizontal-rule delimiter.
-10. **At least one** of `# Tutorials`, `# How-To Guides`, `# Explanation`. Including all three is preferred but not mandatory; if the user only has material for one or two, include only those. Each included section is separated from the next by a `---` delimiter.
+4. `### License` — license badge or text.
+5. `## References` — links and definitions.
+6. `## Acknowledgements` — **must** include the ICICLE NSF acknowledgement line verbatim (see below). Other funding sources go above it.
+7. `## Issue reporting` — how users report issues (GitHub Issues URL, support email, etc.).
+8. A `---` horizontal-rule delimiter.
+9. **At least one** of `# Tutorials`, `# How-To Guides`, `# Explanation`. Including all three is preferred but not mandatory; if the user only has material for one or two, include only those. Each included section is separated from the next by a `---` delimiter.
+
+Do **not** add a "For guidance on what to include in Tutorials, How-To Guides, Explanation, and Reference, see Diátaxis" sentence (or any variant) — remove it if an existing README has one.
 
 ### Canonical tag list (pick at least one)
 

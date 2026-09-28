@@ -1,0 +1,75 @@
+---
+id: bulk-delete-v-1-embeddings-bulk-delete-post
+title: "Delete many embeddings in one collection"
+description: "Delete by explicit ids, by topic/metadata predicate, or everything in the collection."
+sidebar_label: "Delete many embeddings in one collection"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: api/ICICLE Vector DB Service/icicle-ai-vector-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05, Release 2026-09]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete many embeddings in one collection"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/embeddings/bulk-delete"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete by explicit ids, by topic/metadata predicate, or everything in the collection.
+
+Uses POST rather than DELETE because the selector is a request body, which
+DELETE cannot carry portably. Only the caller's own points are ever removed.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"properties":{"collection":{"type":"string","title":"Collection"},"ids":{"anyOf":[{"items":{"type":"string"},"type":"array","maxItems":1000},{"type":"null"}],"title":"Ids","description":"Explicit embedding ids, at most 1000."},"topic":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Topic"},"filter":{"anyOf":[{"properties":{"conditions":{"additionalProperties":true,"type":"object","title":"Conditions","description":"Key-value pairs to match against the metadata payload field"}},"type":"object","title":"MetadataFilter","description":"Filter results by metadata fields.\n\nEach key-value pair matches against the nested ``metadata`` payload field.\nAll conditions are ANDed together. Values can be:\n  - a string/number/bool for exact match\n  - a list for \"any of\" match\n\nKeys are namespaced under ``metadata.`` when translated to Qdrant, so this\ncannot be used to address a top-level payload field such as ``user_id``."},{"type":"null"}]},"all":{"type":"boolean","title":"All","default":false}},"type":"object","required":["collection"],"title":"BulkDeleteRequest","description":"Delete many of the caller's embeddings in one collection.\n\nExactly one selector must be given: explicit ``ids``, or a\n``topic``/``filter`` predicate. ``all=true`` deletes every point the caller\nowns in the collection."}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"user_id":{"type":"string","title":"User Id"},"collection":{"type":"string","title":"Collection"},"deleted":{"type":"integer","title":"Deleted"},"collection_dropped":{"type":"boolean","title":"Collection Dropped","description":"True when the underlying Qdrant collection was removed because no points from any user remained. Always false unless the deployment sets DROP_EMPTY_COLLECTIONS=true.","default":false}},"type":"object","required":["user_id","collection","deleted"],"title":"BulkDeleteResponse"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

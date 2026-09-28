@@ -4,10 +4,11 @@ tags:
   - AI4CI
   - Software
   - Release 2026-05
+  - Release 2026-09
 ---
 # ICICLE AI Vector Service
 
-FastAPI + Qdrant vector storage and retrieval service for the **ICICLE AI** Tapis tenant. Clients provide their own pre-computed embeddings — the service handles storage, search, and reranking.
+FastAPI + Qdrant vector storage and retrieval service for the **ICICLE AI** Tapis tenant. Clients provide their own pre-computed embeddings — the service handles storage, filtered search, and reranking.
 
 <div align="center">
 
@@ -21,6 +22,8 @@ This component exposes an HTTP API — see its [API documentation](/api/ICICLE%2
 :::
 
 
+
+Every request is authenticated with a Tapis access token, and `user_id` is taken from the token's `tapis/username` claim — never from the request body. Each user's collections are separate Qdrant collections, so users cannot see or affect each other's data, and each can choose their own embedding model and vector dimension.
 
 
 ## References

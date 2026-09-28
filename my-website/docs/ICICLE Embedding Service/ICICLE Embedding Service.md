@@ -4,6 +4,7 @@ tags:
   - AI4CI
   - Software
   - Release 2026-05
+  - Release 2026-09
 ---
 # ICICLE AI Embed Service
 

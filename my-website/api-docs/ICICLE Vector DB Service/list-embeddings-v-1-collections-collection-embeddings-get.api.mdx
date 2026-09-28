@@ -1,0 +1,72 @@
+---
+id: list-embeddings-v-1-collections-collection-embeddings-get
+title: "List your embeddings in a collection"
+description: "Cursor-paginated listing. Returns metadata only — never vectors."
+sidebar_label: "List your embeddings in a collection"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: api/ICICLE Vector DB Service/icicle-ai-vector-service
+custom_edit_url: null
+tags: [API, CI4AI, AI4CI, Software, Release 2026-05, Release 2026-09]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List your embeddings in a collection"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/collections/{collection}/embeddings"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Cursor-paginated listing. Returns metadata only — never vectors.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"collection","in":"path","required":true,"schema":{"type":"string","title":"Collection"}},{"name":"limit","in":"query","required":false,"schema":{"type":"integer","maximum":500,"minimum":1,"description":"Page size","default":50,"title":"Limit"},"description":"Page size"},{"name":"offset","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"Cursor from a previous page's next_offset","title":"Offset"},"description":"Cursor from a previous page's next_offset"},{"name":"topic","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"Only embeddings with this topic","title":"Topic"},"description":"Only embeddings with this topic"},{"name":"X-Tapis-Token","in":"header","required":true,"schema":{"type":"string","title":"X-Tapis-Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"properties":{"user_id":{"type":"string","title":"User Id"},"collection":{"type":"string","title":"Collection"},"count":{"type":"integer","title":"Count"},"next_offset":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Next Offset","description":"Pass as ?offset= to fetch the next page. Null on the last page."},"embeddings":{"items":{"properties":{"id":{"type":"string","title":"Id"},"user_id":{"type":"string","title":"User Id"},"collection":{"type":"string","title":"Collection"},"topic":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Topic"},"vector_dim":{"type":"integer","title":"Vector Dim"},"created_at":{"type":"string","title":"Created At"},"updated_at":{"type":"string","title":"Updated At"},"embedding_model":{"type":"string","title":"Embedding Model"}},"type":"object","required":["id","user_id","collection","vector_dim","created_at","updated_at","embedding_model"],"title":"EmbeddingRecord"},"type":"array","title":"Embeddings"}},"type":"object","required":["user_id","collection","count","embeddings"],"title":"EmbeddingListResponse","description":"A page of the caller's embeddings in one collection (metadata only)."}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"},"input":{"title":"Input"},"ctx":{"type":"object","title":"Context"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -2,13 +2,17 @@
   "openapi": "3.1.0",
   "info": {
     "title": "ICICLE AI Vector Service",
-    "description": "Vector storage and retrieval service for the ICICLE AI tenant. Clients provide their own pre-computed embeddings.",
-    "version": "0.3.0"
+    "description": "Vector storage and retrieval service for the ICICLE AI tenant. Clients provide\ntheir own pre-computed embeddings; the service handles storage, filtered search\nand reranking.\n\n**Collections** are broad domains (e.g. `biology`, `chemistry`), each backed by\nits own Qdrant collection and HNSW index. **Topics** are optional sub-categories\nwithin a collection (e.g. `human`, `plant`).\n\n**User isolation.** Every request is authenticated with a Tapis access token via\nthe `X-Tapis-Token` header, and `user_id` is taken from the token's\n`tapis/username` claim — never from the request body. Each user's collections are\nseparate Qdrant collections, so users cannot see or affect each other's data, and\neach user chooses their own embedding model and vector dimension per collection.\n",
+    "version": "1.0.0"
   },
   "paths": {
     "/healthz": {
       "get": {
+        "tags": [
+          "health"
+        ],
         "summary": "Health Check",
+        "description": "Liveness/readiness probe. The only endpoint that needs no token.",
         "operationId": "health_check_healthz_get",
         "responses": {
           "200": {
@@ -16,11 +20,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "type": "object",
-                  "title": "Response Health Check Healthz Get"
+                  "$ref": "#/components/schemas/HealthResponse"
                 }
               }
             }
@@ -30,7 +30,10 @@
     },
     "/v1/embeddings": {
       "post": {
-        "summary": "Store Embedding",
+        "tags": [
+          "embeddings"
+        ],
+        "summary": "Store an embedding",
         "operationId": "store_embedding_v1_embeddings_post",
         "parameters": [
           {
@@ -74,12 +77,143 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
+      }
+    },
+    "/v1/embeddings/bulk-delete": {
+      "post": {
+        "tags": [
+          "embeddings"
+        ],
+        "summary": "Delete many embeddings in one collection",
+        "description": "Delete by explicit ids, by topic/metadata predicate, or everything in the collection.\n\nUses POST rather than DELETE because the selector is a request body, which\nDELETE cannot carry portably. Only the caller's own points are ever removed.",
+        "operationId": "bulk_delete_v1_embeddings_bulk_delete_post",
+        "parameters": [
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkDeleteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
       }
     },
     "/v1/embeddings/{embedding_id}": {
+      "get": {
+        "tags": [
+          "embeddings"
+        ],
+        "summary": "Get one embedding",
+        "operationId": "read_embedding_v1_embeddings__embedding_id__get",
+        "parameters": [
+          {
+            "name": "embedding_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Embedding Id"
+            }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Collection the embedding belongs to",
+              "title": "Collection"
+            },
+            "description": "Collection the embedding belongs to"
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmbeddingRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
+      },
       "put": {
-        "summary": "Update User Embedding",
+        "tags": [
+          "embeddings"
+        ],
+        "summary": "Update an embedding",
         "operationId": "update_user_embedding_v1_embeddings__embedding_id__put",
         "parameters": [
           {
@@ -90,6 +224,17 @@
               "type": "string",
               "title": "Embedding Id"
             }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Collection the embedding belongs to",
+              "title": "Collection"
+            },
+            "description": "Collection the embedding belongs to"
           },
           {
             "name": "X-Tapis-Token",
@@ -132,10 +277,18 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
       },
       "delete": {
-        "summary": "Delete User Embedding",
+        "tags": [
+          "embeddings"
+        ],
+        "summary": "Delete an embedding",
         "operationId": "delete_user_embedding_v1_embeddings__embedding_id__delete",
         "parameters": [
           {
@@ -146,6 +299,17 @@
               "type": "string",
               "title": "Embedding Id"
             }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Collection the embedding belongs to",
+              "title": "Collection"
+            },
+            "description": "Collection the embedding belongs to"
           },
           {
             "name": "X-Tapis-Token",
@@ -178,12 +342,386 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
+      }
+    },
+    "/v1/collections": {
+      "get": {
+        "tags": [
+          "collections"
+        ],
+        "summary": "List your collections",
+        "operationId": "list_collections_v1_collections_get",
+        "parameters": [
+          {
+            "name": "detail",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "basic",
+                "full"
+              ],
+              "type": "string",
+              "description": "'basic' returns names, point counts and dimensions. 'full' also derives topics and embedding models, at two extra Qdrant calls per collection.",
+              "default": "basic",
+              "title": "Detail"
+            },
+            "description": "'basic' returns names, point counts and dimensions. 'full' also derives topics and embedding models, at two extra Qdrant calls per collection."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Page size",
+              "default": 25,
+              "title": "Limit"
+            },
+            "description": "Page size"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Collections to skip",
+              "default": 0,
+              "title": "Offset"
+            },
+            "description": "Collections to skip"
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionList"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "collections"
+        ],
+        "summary": "Delete ALL your embeddings across every collection",
+        "description": "Irreversible: removes every point the caller owns, in every collection.\n\nOther users' data is untouched. Requires ``?confirm=true`` so that a stray\n``DELETE /v1/collections`` cannot wipe an account by accident.",
+        "operationId": "purge_all_v1_collections_delete",
+        "parameters": [
+          {
+            "name": "confirm",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Must be true. Guards against an accidental unqualified DELETE.",
+              "default": false,
+              "title": "Confirm"
+            },
+            "description": "Must be true. Guards against an accidental unqualified DELETE."
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PurgeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
+      }
+    },
+    "/v1/collections/{collection}": {
+      "get": {
+        "tags": [
+          "collections"
+        ],
+        "summary": "Get one collection's stats",
+        "operationId": "read_collection_v1_collections__collection__get",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Collection"
+            }
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "collections"
+        ],
+        "summary": "Delete your embeddings in one collection",
+        "description": "Removes every point the caller owns in this collection.\n\nOther users keep theirs. The Qdrant collection is dropped only if it is left\nempty for everyone — reported as ``collection_dropped``.",
+        "operationId": "delete_collection_v1_collections__collection__delete",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Collection"
+            }
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
+      }
+    },
+    "/v1/collections/{collection}/embeddings": {
+      "get": {
+        "tags": [
+          "collections"
+        ],
+        "summary": "List your embeddings in a collection",
+        "description": "Cursor-paginated listing. Returns metadata only — never vectors.",
+        "operationId": "list_embeddings_v1_collections__collection__embeddings_get",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Collection"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 500,
+              "minimum": 1,
+              "description": "Page size",
+              "default": 50,
+              "title": "Limit"
+            },
+            "description": "Page size"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Cursor from a previous page's next_offset",
+              "title": "Offset"
+            },
+            "description": "Cursor from a previous page's next_offset"
+          },
+          {
+            "name": "topic",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only embeddings with this topic",
+              "title": "Topic"
+            },
+            "description": "Only embeddings with this topic"
+          },
+          {
+            "name": "X-Tapis-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-Tapis-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmbeddingListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
       }
     },
     "/v1/retrieve": {
       "post": {
-        "summary": "Retrieve",
+        "tags": [
+          "search"
+        ],
+        "summary": "Vector similarity search",
         "operationId": "retrieve_v1_retrieve_post",
         "parameters": [
           {
@@ -227,12 +765,47 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
+      }
+    },
+    "/v1/rerank/methods": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "List available rerank methods",
+        "description": "What this deployment can actually do.\n\n``available`` is false for 'cross_encoder' when the optional model\ndependencies were not installed in the image.",
+        "operationId": "rerank_methods_v1_rerank_methods_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RerankMethodList"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
       }
     },
     "/v1/rerank": {
       "post": {
-        "summary": "Rerank",
+        "tags": [
+          "search"
+        ],
+        "summary": "Rerank search results",
         "operationId": "rerank_v1_rerank_post",
         "parameters": [
           {
@@ -276,12 +849,221 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "TapisToken": []
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
+      "BulkDeleteRequest": {
+        "properties": {
+          "collection": {
+            "type": "string",
+            "title": "Collection"
+          },
+          "ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 1000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ids",
+            "description": "Explicit embedding ids, at most 1000."
+          },
+          "topic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic"
+          },
+          "filter": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MetadataFilter"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "all": {
+            "type": "boolean",
+            "title": "All",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection"
+        ],
+        "title": "BulkDeleteRequest",
+        "description": "Delete many of the caller's embeddings in one collection.\n\nExactly one selector must be given: explicit ``ids``, or a\n``topic``/``filter`` predicate. ``all=true`` deletes every point the caller\nowns in the collection."
+      },
+      "BulkDeleteResponse": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "collection": {
+            "type": "string",
+            "title": "Collection"
+          },
+          "deleted": {
+            "type": "integer",
+            "title": "Deleted"
+          },
+          "collection_dropped": {
+            "type": "boolean",
+            "title": "Collection Dropped",
+            "description": "True when the underlying Qdrant collection was removed because no points from any user remained. Always false unless the deployment sets DROP_EMPTY_COLLECTIONS=true.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "collection",
+          "deleted"
+        ],
+        "title": "BulkDeleteResponse"
+      },
+      "CollectionInfo": {
+        "properties": {
+          "collection": {
+            "type": "string",
+            "title": "Collection"
+          },
+          "points": {
+            "type": "integer",
+            "title": "Points"
+          },
+          "vector_dim": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vector Dim"
+          },
+          "topics": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topics",
+            "description": "Null unless detail=full. Capped at 100 distinct values."
+          },
+          "embedding_models": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Embedding Models",
+            "description": "Null unless detail=full. Capped at 100 distinct values."
+          },
+          "truncated": {
+            "type": "boolean",
+            "title": "Truncated",
+            "description": "True when topics or embedding_models hit the 100-value cap and the list is incomplete.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection",
+          "points"
+        ],
+        "title": "CollectionInfo",
+        "description": "A collection as seen by the requesting user.\n\n``points`` counts only the caller's own points, never every user's, so this\ncannot be used to infer how much data other users hold."
+      },
+      "CollectionList": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "Collections you own, ignoring pagination."
+          },
+          "detail": {
+            "type": "string",
+            "enum": [
+              "basic",
+              "full"
+            ],
+            "title": "Detail"
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "Pass as ?offset= for the next page. Null on the last page."
+          },
+          "collections": {
+            "items": {
+              "$ref": "#/components/schemas/CollectionInfo"
+            },
+            "type": "array",
+            "title": "Collections"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "count",
+          "total",
+          "detail",
+          "collections"
+        ],
+        "title": "CollectionList"
+      },
       "DeleteResponse": {
         "properties": {
           "id": {
@@ -314,8 +1096,19 @@
             "type": "array",
             "title": "Embedding"
           },
-          "topic": {
+          "collection": {
             "type": "string",
+            "title": "Collection"
+          },
+          "topic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Topic"
           },
           "chunks": {
@@ -338,6 +1131,34 @@
             "title": "Metadata"
           },
           "embedding_model": {
+            "type": "string",
+            "title": "Embedding Model"
+          }
+        },
+        "type": "object",
+        "required": [
+          "embedding",
+          "collection",
+          "chunks",
+          "embedding_model"
+        ],
+        "title": "EmbeddingCreate"
+      },
+      "EmbeddingListResponse": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "collection": {
+            "type": "string",
+            "title": "Collection"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "next_offset": {
             "anyOf": [
               {
                 "type": "string"
@@ -346,16 +1167,26 @@
                 "type": "null"
               }
             ],
-            "title": "Embedding Model"
+            "title": "Next Offset",
+            "description": "Pass as ?offset= to fetch the next page. Null on the last page."
+          },
+          "embeddings": {
+            "items": {
+              "$ref": "#/components/schemas/EmbeddingRecord"
+            },
+            "type": "array",
+            "title": "Embeddings"
           }
         },
         "type": "object",
         "required": [
-          "embedding",
-          "topic",
-          "chunks"
+          "user_id",
+          "collection",
+          "count",
+          "embeddings"
         ],
-        "title": "EmbeddingCreate"
+        "title": "EmbeddingListResponse",
+        "description": "A page of the caller's embeddings in one collection (metadata only)."
       },
       "EmbeddingRecord": {
         "properties": {
@@ -367,9 +1198,24 @@
             "type": "string",
             "title": "User Id"
           },
-          "topic": {
+          "collection": {
             "type": "string",
+            "title": "Collection"
+          },
+          "topic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Topic"
+          },
+          "vector_dim": {
+            "type": "integer",
+            "title": "Vector Dim"
           },
           "created_at": {
             "type": "string",
@@ -380,14 +1226,7 @@
             "title": "Updated At"
           },
           "embedding_model": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Embedding Model"
           }
         },
@@ -395,9 +1234,11 @@
         "required": [
           "id",
           "user_id",
-          "topic",
+          "collection",
+          "vector_dim",
           "created_at",
-          "updated_at"
+          "updated_at",
+          "embedding_model"
         ],
         "title": "EmbeddingRecord"
       },
@@ -496,6 +1337,36 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "qdrant": {
+            "type": "string",
+            "title": "Qdrant",
+            "description": "'ok' when Qdrant answered, 'unreachable' otherwise."
+          },
+          "cross_encoder": {
+            "type": "boolean",
+            "title": "Cross Encoder",
+            "description": "Whether cross-encoder reranking is installed in this deployment."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "version",
+          "qdrant",
+          "cross_encoder"
+        ],
+        "title": "HealthResponse"
+      },
       "MetadataFilter": {
         "properties": {
           "conditions": {
@@ -507,7 +1378,111 @@
         },
         "type": "object",
         "title": "MetadataFilter",
-        "description": "Filter search results by metadata fields.\n\nEach key-value pair matches against the nested ``metadata`` payload field.\nAll conditions are ANDed together.  Values can be:\n  - a string/number/bool for exact match\n  - a list for \"any of\" match"
+        "description": "Filter results by metadata fields.\n\nEach key-value pair matches against the nested ``metadata`` payload field.\nAll conditions are ANDed together. Values can be:\n  - a string/number/bool for exact match\n  - a list for \"any of\" match\n\nKeys are namespaced under ``metadata.`` when translated to Qdrant, so this\ncannot be used to address a top-level payload field such as ``user_id``."
+      },
+      "PurgeResponse": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "deleted": {
+            "type": "integer",
+            "title": "Deleted"
+          },
+          "collections_affected": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Collections Affected"
+          },
+          "collections_dropped": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Collections Dropped"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "deleted",
+          "collections_affected",
+          "collections_dropped"
+        ],
+        "title": "PurgeResponse",
+        "description": "Result of deleting everything the caller owns, across all collections."
+      },
+      "RerankMethodInfo": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "mmr",
+              "cosine_rescore",
+              "cross_encoder"
+            ],
+            "title": "Name"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind",
+            "description": "'vector' (embedding math) or 'cross-encoder' (model)."
+          },
+          "available": {
+            "type": "boolean",
+            "title": "Available",
+            "description": "False when the method's dependencies are missing from this deployment."
+          },
+          "requires_query_text": {
+            "type": "boolean",
+            "title": "Requires Query Text"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "kind",
+          "available",
+          "requires_query_text",
+          "description"
+        ],
+        "title": "RerankMethodInfo"
+      },
+      "RerankMethodList": {
+        "properties": {
+          "methods": {
+            "items": {
+              "$ref": "#/components/schemas/RerankMethodInfo"
+            },
+            "type": "array",
+            "title": "Methods"
+          },
+          "default_model": {
+            "type": "string",
+            "title": "Default Model"
+          },
+          "allowed_models": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowed Models"
+          }
+        },
+        "type": "object",
+        "required": [
+          "methods",
+          "default_model",
+          "allowed_models"
+        ],
+        "title": "RerankMethodList"
       },
       "RerankRequest": {
         "properties": {
@@ -518,31 +1493,9 @@
             "type": "array",
             "title": "Query Embedding"
           },
-          "top_k": {
-            "type": "integer",
-            "maximum": 100.0,
-            "minimum": 1.0,
-            "title": "Top K",
-            "default": 10
-          },
-          "fetch_k": {
-            "type": "integer",
-            "maximum": 500.0,
-            "minimum": 1.0,
-            "title": "Fetch K",
-            "default": 50
-          },
-          "method": {
+          "collection": {
             "type": "string",
-            "title": "Method",
-            "default": "mmr"
-          },
-          "lambda": {
-            "type": "number",
-            "maximum": 1.0,
-            "minimum": 0.0,
-            "title": "Lambda",
-            "default": 0.7
+            "title": "Collection"
           },
           "topic": {
             "anyOf": [
@@ -564,11 +1517,68 @@
                 "type": "null"
               }
             ]
+          },
+          "query_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query Text",
+            "description": "Raw query string. Required for method='cross_encoder', which scores the query against each candidate's text. Ignored by the vector-only methods ('mmr', 'cosine_rescore')."
+          },
+          "top_k": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Top K",
+            "default": 10
+          },
+          "fetch_k": {
+            "type": "integer",
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Fetch K",
+            "default": 50
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "mmr",
+              "cosine_rescore",
+              "cross_encoder"
+            ],
+            "title": "Method",
+            "default": "mmr"
+          },
+          "rerank_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rerank Model",
+            "description": "Cross-encoder model to use. Must be one of the models the deployment allows (see GET /v1/rerank/methods). Defaults to the service's configured model. Only used by method='cross_encoder'."
+          },
+          "lambda": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Lambda",
+            "description": "MMR relevance/diversity trade-off. Only used by method='mmr'.",
+            "default": 0.7
           }
         },
         "type": "object",
         "required": [
-          "query_embedding"
+          "query_embedding",
+          "collection"
         ],
         "title": "RerankRequest"
       },
@@ -580,7 +1590,24 @@
           },
           "method": {
             "type": "string",
+            "enum": [
+              "mmr",
+              "cosine_rescore",
+              "cross_encoder"
+            ],
             "title": "Method"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model",
+            "description": "Reranker model used. Null for the vector-only methods."
           },
           "top_k": {
             "type": "integer",
@@ -592,7 +1619,7 @@
           },
           "results": {
             "items": {
-              "$ref": "#/components/schemas/ResultItem"
+              "$ref": "#/components/schemas/RerankedItem"
             },
             "type": "array",
             "title": "Results"
@@ -608,6 +1635,71 @@
         ],
         "title": "RerankResponse"
       },
+      "RerankedItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          },
+          "collection": {
+            "type": "string",
+            "title": "Collection"
+          },
+          "topic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "chunks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Chunks"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "rerank_score": {
+            "type": "number",
+            "title": "Rerank Score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "score",
+          "collection",
+          "chunks",
+          "metadata",
+          "rerank_score"
+        ],
+        "title": "RerankedItem",
+        "description": "A result carrying both the vector score and the reranker's score.\n\n``score`` stays the original cosine similarity from the vector search so\nclients can compare the two rankings; ``rerank_score`` is what the ordering\nis actually based on."
+      },
       "ResultItem": {
         "properties": {
           "id": {
@@ -618,8 +1710,19 @@
             "type": "number",
             "title": "Score"
           },
-          "topic": {
+          "collection": {
             "type": "string",
+            "title": "Collection"
+          },
+          "topic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Topic"
           },
           "text": {
@@ -650,7 +1753,7 @@
         "required": [
           "id",
           "score",
-          "topic",
+          "collection",
           "chunks",
           "metadata"
         ],
@@ -665,12 +1768,9 @@
             "type": "array",
             "title": "Query Embedding"
           },
-          "top_k": {
-            "type": "integer",
-            "maximum": 100.0,
-            "minimum": 1.0,
-            "title": "Top K",
-            "default": 10
+          "collection": {
+            "type": "string",
+            "title": "Collection"
           },
           "topic": {
             "anyOf": [
@@ -692,11 +1792,19 @@
                 "type": "null"
               }
             ]
+          },
+          "top_k": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Top K",
+            "default": 10
           }
         },
         "type": "object",
         "required": [
-          "query_embedding"
+          "query_embedding",
+          "collection"
         ],
         "title": "RetrieveRequest"
       },
@@ -766,6 +1874,42 @@
         ],
         "title": "ValidationError"
       }
+    },
+    "securitySchemes": {
+      "TapisToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Tapis-Token",
+        "description": "ICICLE AI tenant Tapis access token. The username is read from the tapis/username claim and used to isolate your data."
+      }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://icicleaivecserver.pods.icicleai.tapis.io",
+      "description": "Production (ICICLE AI Tapis pod)"
+    },
+    {
+      "url": "http://localhost:8000",
+      "description": "Local development"
+    }
+  ],
+  "tags": [
+    {
+      "name": "health",
+      "description": "Liveness and readiness. No token required."
+    },
+    {
+      "name": "embeddings",
+      "description": "Create, read, update and delete embeddings, individually or in bulk."
+    },
+    {
+      "name": "collections",
+      "description": "Discover your collections and delete them, one at a time or all at once."
+    },
+    {
+      "name": "search",
+      "description": "Vector similarity search and reranking."
+    }
+  ]
 }

@@ -4,8 +4,6 @@
 
 **Tags:** {{Pick at least one from: Software, CI4AI, AI4CI, Foundation-AI, PADI, Visual-Analytics, Digital-Agriculture, Animal-Ecology, Smart-Foodsheds, Food-Access}}
 
-For guidance on what to include in Tutorials, How-To Guides, Explanation, and Reference, see [Diátaxis](https://diataxis.fr/).
-
 ### License
 
 [![License](https://img.shields.io/badge/License-{{LICENSE_NAME}}-yellow.svg)]({{LICENSE_URL}})

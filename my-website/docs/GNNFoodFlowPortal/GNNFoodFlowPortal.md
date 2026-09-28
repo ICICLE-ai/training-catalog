@@ -24,8 +24,6 @@ The GNN Food Flow Portal is a Streamlit web app for exploring county-level U.S. 
 **Live portal:** https://gnnfoodflowportal.pods.icicleai.tapis.io/
 
 
-For guidance on the Tutorials, How-To Guides, Explanation, and References organization used in this README, see [Diátaxis](https://diataxis.fr/).
-
 ## References
 
 - [GNN FoodFlow Model](https://github.com/GeoDS/GNNFoodFlow): related model repository.

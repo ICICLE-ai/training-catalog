@@ -23,8 +23,6 @@ tags:
 The **Cyberinfrastructure Knowledge Network (CKN)** is an extensible and portable distributed framework designed to optimize AI at the edge—particularly in dynamic environments where workloads may change suddenly (for example, in response to motion detection). CKN enhances edge–cloud collaboration by using historical data, graph representations, and adaptable deployment of AI models to satisfy changing accuracy‑and‑latency demands on edge devices. It integrates with the [Patra Knowledge Base](https://github.com/Plale-Lab/patra-knowledge-base) to provide end-to-end model provenance from training through edge deployment.
 
 
-For guidance on what Tutorials, How-To Guides, and Explanation content covers, see [Diátaxis](https://diataxis.fr/).
-
 ## References
 
 - [Documentation](https://cyberinfrastructure-knowledge-network.readthedocs.io/en/latest/)
