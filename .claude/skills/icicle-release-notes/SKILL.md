@@ -134,7 +134,7 @@ Exactly as the template:
 Replace every `YYYY-MM` in the template with the release month, including:
 
 - the `# ICICLE Release YYYY-MM` title
-- `***YYYY-MM** release of ICICLE CI components`
+- `**YYYY-MM** release of ICICLE CI components`
 - the training-catalog tag link:
   `https://icicle-ai.github.io/training-catalog/docs/tags/release-<YYYY-MM>`
 
