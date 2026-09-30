@@ -122,7 +122,7 @@ Below you’ll find links to additional ICICLE resources—access portals, docum
     Browse the Tapis Live Docs
   </a>
 
-- **Tapis ML-Hub v0.2.0**
+- **Tapis ML-Hub v26Q.2.3**
 
   Hosted, browser-based user interface for interacting with HuggingFace models, datasets, and inference servers.
 
