@@ -16,15 +16,15 @@ description: "How-To Guides for Smart Labeling Service for Object Detection. A 7
 2. Choose **Browse** to upload a local file, or enter a remote Tapis filesystem path.
 3. Select the file format (**COCO JSON** or **Default JSON**) using the Format Switch.
 
-![Import Annotations](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images/annotator/import_annotations.png)
+![Import Annotations](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/import_annotations.png)
 
 ### How to Save and Download Annotations
 
 Click **Save Annotations** to write to a remote Tapis path, or **Download** to export to your local machine.
 
-![Save Annotations](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images/annotator/save_annotations.png)
+![Save Annotations](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/save_annotations.png)
 
-![Download Annotations](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images/annotator/download_annotations.png)
+![Download Annotations](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/download_annotations.png)
 
 Both options support **COCO JSON** and **Default JSON** formats via the Format Switch.
 
@@ -32,25 +32,25 @@ Both options support **COCO JSON** and **Default JSON** formats via the Format S
 
 From the **Dashboard**, use the search or filter controls to locate your pipeline. Click **Goto** to re-enter at the last completed step.
 
-![Existing Pipelines](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images2/dashboard_existing_pipeline_sl.png)
+![Existing Pipelines](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images2/dashboard_existing_pipeline_sl.png)
 
-![Search and Select Pipeline](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images/create-select-job.png)
+![Search and Select Pipeline](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/create-select-job.png)
 
 ### How to Check Job Status and Logs
 
 The **pipeline status bar** appears at the top of every step. Right-click any step chip to open the context menu.
 
-![Status Bar](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images/status_bar/status_bar.png)
+![Status Bar](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/status_bar/status_bar.png)
 
-![Status Bar Options](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images/status_bar/status_bar_options.png)
+![Status Bar Options](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/status_bar/status_bar_options.png)
 
 - Select **Get Status** to poll the Tapis job and view status, condition, and last message.
 
-![Get Status Modal](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images/status_bar/status_bar_get_status.png)
+![Get Status Modal](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/status_bar/status_bar_get_status.png)
 
 - Select **Get Tapis Logs** to fetch and display `tapisjob.out` from the HPC run.
 
-![Application Logs](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images/status_bar/status_bar_application_logs.png)
+![Application Logs](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/status_bar/status_bar_application_logs.png)
 
 ### How to Use SAHI Tiling for Small Objects
 
@@ -107,8 +107,8 @@ With your token ready, add it to your ICICLE/Tapis credentials so it can be inje
 
 1. Log in to your ICICLE/Tapis account.
 2. Navigate to the **Settings** section indicated by 3 dots on the dashboard.
-![Settings](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images2/hf/dashboard_settings.png)
+![Settings](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images2/hf/dashboard_settings.png)
 3. Click on Access Key.
 4. Paste your token and save.
 5. Click on Revoke token to permanently delete the token.
-![Add or revoke token](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/doc/images2/hf/add_or_revoke_hf.png)
+![Add or revoke token](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images2/hf/add_or_revoke_hf.png)

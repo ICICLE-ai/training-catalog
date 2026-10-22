@@ -73,8 +73,11 @@ release-testing catalog CSV), runs the bundled `readme_parser.py` to split it in
 Docusaurus docs under `my-website/docs/<Component>/`, merges (never wipes) tags and
 content, rewrites relative images→`raw.githubusercontent.com` and other relative
 links→`github.com/.../blob/...`, then builds and fixes errors. Batch columns are
-resolved tolerantly: `README`, a `Tags…` column, optional `Component` (the folder
-name) and `Release Dates`. In the main doc it also standardizes badges (centered
+resolved tolerantly: `README`, an optional `Tags…` column, optional `Component`
+(the folder name) and `Release Dates`. **Tags come from the README's `**Tags:**`
+line** (canonical only); the CSV `Tags…` column is only a fallback, and a component
+with neither is flagged and skipped (`readme_tags.py`, shared by the doc, API and
+release helpers). In the main doc it also standardizes badges (centered
 block, GitHub + a license badge lifted from the README's License section) and, when
 `api-docs/<Component>/` exists, adds a baseUrl-aware `:::tip` link to that API
 reference page (best-effort, no ordering deadlock — re-run after API docs exist). The
@@ -192,8 +195,8 @@ release a doc was generated for. Don't invent tags — ask the user if unclear.
   single global `npm run build`.
 - Edit generated files narrowly; don't reformat unrelated content.
 - **Release-testing CSV columns** (resolved case-insensitively / by prefix): `README`,
-  `Tags…`, `Component`, `Release Dates`, `OpenAPI JSON`, plus two consumed only by the
-  release workflow — **`Resource Link`** (→ `icicle-tc-deploy-resource`) and
+  `Tags…` (fallback only — the README's `**Tags:**` line wins), `Component`,
+  `Release Dates`, `OpenAPI JSON`, plus two consumed only by the release workflow — **`Resource Link`** (→ `icicle-tc-deploy-resource`) and
   **`Component Catalog YAML File`** (a GitHub link to the component's
   `component-info.yaml`, → the `icicle-release` catalog step). Rows missing a given
   column are skipped by that step.

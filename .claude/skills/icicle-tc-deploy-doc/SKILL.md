@@ -159,8 +159,10 @@ OpenAPI spec also changed, also run `icicle-tc-deploy-api` for it.
      Columns are resolved case-insensitively and tolerantly:
      - **README** *(required)* — GitHub repo / blob / raw README URL. Rows with an
        empty README are skipped.
-     - **Tags** *(required)* — comma-separated tags. Matched by **prefix**, so the
-       catalog's `Tags: Training Catalog` header resolves here.
+     - **Tags** *(optional fallback)* — comma-separated tags. Matched by **prefix**,
+       so the catalog's `Tags: Training Catalog` header resolves here. Used only
+       when the README has no `**Tags:**` line (see "Where tags come from" below).
+       May be dropped from the CSV eventually.
      - **Component** *(optional but used as the folder name)* — the component's
        `my-website/docs/<Component>/` folder is named from this column. If absent,
        the folder is derived from the repo URL.
@@ -169,10 +171,16 @@ OpenAPI spec also changed, also run `icicle-tc-deploy-api` for it.
      - Other columns (OpenAPI JSON, Version, Source Code, …) are ignored — the
        OpenAPI column is handled by the `icicle-tc-deploy-api` skill.
 
-   If the user gives tags, they should come from the canonical ICICLE tag list
-   (see the `icicle-readme-skill`): `Software, CI4AI, AI4CI, Foundation-AI, PADI,
+   **Where tags come from.** The README's `**Tags:**` line (the
+   `icicle-readme-skill` template) is the source of truth. The parser
+   (`readme_tags.py`, shared with `api_parser.py` and `release_worker.py`) keeps
+   only canonical tags from it — `Software, CI4AI, AI4CI, Foundation-AI, PADI,
    Visual-Analytics, Digital-Agriculture, Animal-Ecology, Smart-Foodsheds,
-   Food-Access`. Don't invent tags — ask if unclear.
+   Food-Access` — and prints any it drops. Only if the README names no canonical
+   tag does it fall back to the CSV Tags cell (batch) or `--tags` (single). With
+   neither, the component is **FLAGGED and skipped** (nothing written); the rest of
+   the batch still runs and the parser exits 1 listing the flagged components. Fix
+   a flag upstream by adding a `**Tags:**` line to the README. Don't invent tags.
 
 3. **Run the parser** from `my-website/`, pointing output at `docs`.
 
@@ -213,7 +221,8 @@ OpenAPI spec also changed, also run `icicle-tc-deploy-api` for it.
      --release 2026-05 \
      --output_folder docs
    ```
-   (In batch mode do **not** pass `--tags` — tags come from the table's Tags column.
+   (In batch mode do **not** pass `--tags` — tags come from each README, with the
+   table's Tags column as the per-row fallback.
    Omit `--release` to take the per-row `Release Dates` column instead.)
 
 4. **Sanity-check the output.** Open the generated `docs/<Component>/<Component>.md`
@@ -271,9 +280,9 @@ OpenAPI spec also changed, also run `icicle-tc-deploy-api` for it.
 |------|---------|
 | `--repo_link` | GitHub repo / blob / raw README URL (single mode) |
 | `--project_name` | Folder + main filename; derived from URL if omitted |
-| `--excel_file` | Batch mode (Excel); columns README, Tags*, optional Component, Release Dates |
+| `--excel_file` | Batch mode (Excel); column README, optional Tags* (fallback), Component, Release Dates |
 | `--csv_file` | Batch mode (CSV); same columns as `--excel_file` |
-| `--tags` | Base tags (single mode only) |
+| `--tags` | Fallback tags (single mode only) — used only if the README has no `**Tags:**` line |
 | `--release` | `YYYY-MM`; added as `Release <value>` to main file(s); overrides per-row Release in batch |
 | `--output_folder` | Output root — use `docs` from `my-website/` |
 | `--only` | Batch mode: process only the row(s) whose Component matches (case-insensitive, **comma-separated**) — targeted subset update |

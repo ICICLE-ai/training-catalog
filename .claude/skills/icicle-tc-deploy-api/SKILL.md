@@ -71,8 +71,11 @@ Ask which input they have (do not guess):
    - **Component** *(used as the folder name)* — the `api-docs/<Component>/` folder
      and display label come from this column (e.g. `ICICLE Vector DB Service`). The
      spec filename / config key is a lowercase-hyphenated slug of it.
-   - **Tags** *(required)* — comma-separated tags. Matched by prefix, so the catalog's
-     `Tags: Training Catalog` header resolves here.
+   - **README** *(used for tags)* — the component's README; its `**Tags:**` line is
+     where the tags come from.
+   - **Tags** *(optional fallback)* — comma-separated tags. Matched by prefix, so the
+     catalog's `Tags: Training Catalog` header resolves here. Used only when the
+     README has no `**Tags:**` line.
    - **Release Dates** *(optional)* — `YYYY-MM`, added as a `Release <value>` tag.
    Ask for the path to the CSV, then enumerate the spec-bearing rows with the helper
    (it already applies the column rules above and skips rows with no spec):
@@ -81,7 +84,9 @@ Ask which input they have (do not guess):
      csv-rows --csv "../Release Testing(2026-05).csv"
    ```
    Each row in the JSON gives `name` (folder), `slug`, `source` (spec URL), `tags`,
-   and `release` — drive Steps 3–6 from that.
+   `tags_source` (`readme`, `csv`, or `missing`), and `release` — drive Steps 3–6 from
+   that. A `missing` row is **flagged**: skip it and report it (no tags in the README or
+   CSV).
 2. **Single link** to an OpenAPI v3 spec JSON. Also ask for the **tags** (from the
    canonical list below) and, if the link is not a GitHub repo, a **name** for the
    API (used as the folder/spec name).
@@ -93,8 +98,11 @@ Tags come from the canonical ICICLE tag list (same as the `icicle-readme-skill`)
 `Software, CI4AI, AI4CI, Foundation-AI, PADI, Visual-Analytics, Digital-Agriculture,
 Animal-Ecology, Smart-Foodsheds, Food-Access`. Every API also gets the literal tag
 `API`. A `Release <YYYY-MM>` tag is added from the row's **Release Dates** column (or
-a release the user gives). For a CSV the tags come from the row's **Tags** column; for
-single/local input, ask the user to pick from the list. Don't invent tags.
+a release the user gives). For a CSV, the tags come from the component README's
+`**Tags:**` line (canonical tags only), falling back to the row's **Tags** column only
+when the README has none, and flagged when neither has any. `csv-rows` does this
+resolution for you. For single/local input, read the component README's Tags line if
+there is one, otherwise ask the user to pick from the list. Don't invent tags.
 
 ## Step 2 — Determine the folder/spec name
 
@@ -193,8 +201,8 @@ python3 ../.claude/skills/icicle-tc-deploy-api/api_parser.py \
   inject-tags --dir "api-docs/<Name>" --tags API CI4AI AI4CI Software "Release 2026-05"
 ```
 
-- Always pass `API` first, then the canonical tags chosen for this spec (CSV **Tags**
-  column, or what the user picked), plus `Release <YYYY-MM>` from the row's **Release
+- Always pass `API` first, then the canonical tags chosen for this spec (`tags` from
+  `csv-rows` — README first, CSV fallback — or what the user picked), plus `Release <YYYY-MM>` from the row's **Release
   Dates** column (or the release given). Result, e.g.:
   `tags: [API, Food-Access, Smart-Foodsheds, Release 2026-05]`.
 - The `*.info.mdx` does not need tags (the FAF example has none) — the helper only

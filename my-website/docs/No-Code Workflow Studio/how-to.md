@@ -42,7 +42,7 @@ into a config field — put it in the vault instead:
 2. Enter a **key** (e.g. `WANDB_API_KEY`), the **value**, and an optional
    description, then **Add secret**.
 
-![Secrets menu](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/img width="1919" height="1025" alt="Screenshot 2026-08-14 201113" src="https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/https:/github.com/user-attachments/assets/5652e8d3-ee19-4e1d-8d9b-88988258d85a" )
+![Secrets menu](https://github.com/user-attachments/assets/5652e8d3-ee19-4e1d-8d9b-88988258d85a)
 
 Secrets are shared across your team and **write-only** — the list never returns a
 value again. A step field of type `secret` then offers a dropdown of keys, and

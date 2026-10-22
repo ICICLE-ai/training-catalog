@@ -10,7 +10,9 @@ resolve. Subcommands mirror the skill's steps:
   csv-rows        Read the release-testing CSV and print, as JSON, only the rows
                   that have an OpenAPI JSON link — each with component name, slug,
                   spec source URL, tags, and release. (Not every component has a
-                  spec; the rest are skipped.)
+                  spec; the rest are skipped.) Tags come from the row's README
+                  `**Tags:**` line, with the CSV Tags column only as a fallback;
+                  `tags_source` is "readme", "csv" or "missing" (flag it).
   stage           Download (GitHub blob->raw) or copy a spec into
                   api_config_files/<slug>.json and validate it is OpenAPI v3.
   config-snippet  Print the docusaurus-plugin-openapi-docs plugin block to paste
@@ -34,6 +36,11 @@ import re
 import shutil
 import sys
 import urllib.request
+
+# README-first tag resolution, shared with the doc skill (stdlib-only module).
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                os.pardir, "icicle-tc-deploy-doc"))
+from readme_tags import resolve_tags  # noqa: E402
 
 
 # -----------------------------
@@ -66,8 +73,25 @@ def blob_to_raw(url: str) -> str:
     return url.strip()
 
 
-def parse_tags(cell) -> list:
-    return [t.strip() for t in str(cell or "").split(",") if t.strip()]
+def fetch_readme_text(link: str) -> str:
+    """README text for a README blob URL or bare repo URL ('' if unreachable)."""
+    link = (link or "").strip()
+    if not link or link.lower() == "nan":
+        return ""
+    m = re.match(r"https?://github\.com/([^/]+)/([^/#?]+)/?$", link)
+    urls = ([f"https://raw.githubusercontent.com/{m[1]}/{m[2]}/{b}/README.md"
+             for b in ("main", "master")] if m else [blob_to_raw(link)])
+    headers = {"User-Agent": "icicle-api-parser"}
+    if os.environ.get("GITHUB_PAT"):
+        headers["Authorization"] = f"token {os.environ['GITHUB_PAT']}"
+    for url in urls:
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return resp.read().decode("utf-8", "replace")
+        except Exception:
+            continue
+    return ""
 
 
 def find_column(fieldnames, *candidates, prefix=False):
@@ -98,6 +122,7 @@ def cmd_csv_rows(args):
         api_c = find_column(fn, "OPENAPI JSON", "OpenAPI JSON Link", "OpenAPI JSON",
                             "OpenAPI", prefix=True)
         tags_c = find_column(fn, "Tags", prefix=True)
+        readme_c = find_column(fn, "README")
         rel_c = find_column(fn, "Release Dates", "Release", prefix=True)
         if not api_c:
             sys.exit("CSV has no OpenAPI JSON column (looked for a column starting "
@@ -115,12 +140,17 @@ def cmd_csv_rows(args):
                 name = title_case_repo(repo) if repo else "api"
             if only and name.strip().lower() not in only:
                 continue  # --only filter: skip components not requested
+            readme = fetch_readme_text(r.get(readme_c)) if readme_c else ""
+            tags, tags_source, tags_note = resolve_tags(readme, r.get(tags_c) if tags_c else "")
+            if tags_note:
+                print(f"{name}: {tags_note}", file=sys.stderr)
             rows.append({
                 "component": name,
                 "name": name,
                 "slug": slugify(name),
                 "source": src,
-                "tags": parse_tags(r.get(tags_c)) if tags_c else [],
+                "tags": tags,
+                "tags_source": tags_source,
                 "release": (r.get(rel_c) or "").strip() if rel_c else "",
             })
     json.dump(rows, sys.stdout, indent=2)

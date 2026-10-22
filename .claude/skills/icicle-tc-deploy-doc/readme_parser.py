@@ -10,18 +10,24 @@ from urllib.parse import urlparse, quote
 from typing import List, Optional, Tuple, Dict
 
 from seo_meta import apply_folder as apply_seo_meta  # sibling module: page titles/descriptions
+from readme_tags import resolve_tags  # sibling module: README Tags line first, CSV fallback
 
 """
 README parser modes:
 1) Single repo mode:
    - uses --repo_link (+ optional --project_name, --tags, --release)
+   - tags come from the README's `**Tags:**` line (canonical tags only); --tags is
+     only a fallback for a README without one
 2) Batch mode (Excel via --excel_file, or CSV via --csv_file):
    - reads metadata per row from a table
    - column resolution is case-insensitive and tolerant of the catalog's
      release-spreadsheet headers:
      * README        : GitHub repo URL or README blob URL          (required)
-     * Tags          : comma-separated tags (e.g. "AI4CI, Software")(required)
-                       matched by prefix, so "Tags: Training Catalog" also works
+     * Tags          : comma-separated tags (e.g. "AI4CI, Software") (optional
+                       FALLBACK — the README's `**Tags:**` line wins). Matched by
+                       prefix, so "Tags: Training Catalog" also works. A row with
+                       tags in neither place is FLAGGED and skipped; the rest of
+                       the batch still runs and the exit code is 1.
      * Component     : project/folder name (optional; if missing/empty, derived
                        from the repo URL). When present it is the folder name.
      * Release Dates : YYYY-MM (optional); used per row when --release is absent
@@ -862,22 +868,32 @@ def process_single_repo(
     stop_at: Optional[str] = None
 ):
     """
-    Process a single repo:
-      - fetch README
+    Process a single repo. Returns False (writing nothing) when neither the README
+    nor the fallback has tags — the caller flags it. Otherwise:
+      - fetch README, resolve tags (README first, then `tags` fallback)
       - split into sections
       - write markdown files and category json
       - cross-link to the component's API docs if they already exist on the site
     """
     repo_name = project_name or derive_project_name(repo_link)
     project_folder = os.path.join(output_folder, repo_name)
+
+    readme_text, raw_url = fetch_raw_readme(repo_link, session)
+
+    # README Tags line is the source of truth; table/CLI tags are only a fallback.
+    tags, tag_source, tag_note = resolve_tags(readme_text, ", ".join(tags))
+    if tag_note:
+        print(f"{repo_name}: {tag_note}")
+    if tag_source == "missing":
+        return False
+    print(f"{repo_name}: tags from {tag_source}: {', '.join(tags)}")
+
     os.makedirs(project_folder, exist_ok=True)
 
     # Default api-docs to the sibling of the docs output root (my-website/api-docs).
     if api_docs_dir is None:
         api_docs_dir = os.path.join(os.path.dirname(os.path.abspath(output_folder)), "api-docs")
     api_doc_route = find_api_doc_route(repo_name, api_docs_dir)
-
-    readme_text, raw_url = fetch_raw_readme(repo_link, session)
 
     # Rewrite relative images/links to absolute GitHub URLs so they survive
     # being deployed outside GitHub.
@@ -909,6 +925,7 @@ def process_single_repo(
     write_category_json(project_folder, repo_name)
     # Unique <title>s and meta descriptions for search engines / LLM crawlers.
     apply_seo_meta(project_folder)
+    return True
 
 # -----------------------------
 # Batch (Excel / CSV) helpers
@@ -932,43 +949,34 @@ def find_column(df: "pd.DataFrame", *candidates: str, prefix: bool = False) -> O
                 return c
     return None
 
-def parse_tags_cell(tags_cell, row_number: int) -> List[str]:
+def parse_tags_cell(tags_cell) -> List[str]:
     """
-    Parse comma-separated tags from a single table cell. Required in batch mode.
+    Parse comma-separated tags from a table cell — the fallback for a README with
+    no Tags line, so an empty cell is fine here ([]).
     """
-    if pd.isna(tags_cell):
-        raise ValueError(f"Row {row_number}: tags column is required and cannot be empty.")
-    raw = str(tags_cell).strip()
-    if not raw or raw.lower() == "nan":
-        raise ValueError(f"Row {row_number}: tags column is required and cannot be empty.")
-    parsed_tags = [t.strip() for t in raw.split(",") if t.strip()]
-    if not parsed_tags:
-        raise ValueError(f"Row {row_number}: tags must contain at least one comma-separated tag.")
-    return parsed_tags
+    if tags_cell is None or pd.isna(tags_cell):
+        return []
+    return [t.strip() for t in str(tags_cell).split(",")
+            if t.strip() and t.strip().lower() != "nan"]
 
 def read_repos_from_table(df: "pd.DataFrame", source_desc: str) -> List[Tuple[str, Optional[str], List[str], Optional[str]]]:
     """
     Resolve catalog columns from a DataFrame (Excel or CSV) and return a list of:
       (repo_link, project_name_opt, row_tags, row_release_opt)
-    Required (resolved case-insensitively): README, a Tags* column.
-    Optional: Component (folder name), Release Dates (per-row release).
+    Required (resolved case-insensitively): README.
+    Optional: a Tags* column (fallback for READMEs without a Tags line),
+    Component (folder name), Release Dates (per-row release).
     Rows with an empty README are skipped, so blank trailing rows don't break a batch.
     """
     readme_col = find_column(df, "README")
     if not readme_col:
         raise ValueError(f"{source_desc} is missing the required 'README' column.")
     tags_col = find_column(df, "Tags", prefix=True)
-    if not tags_col:
-        raise ValueError(
-            f"{source_desc} is missing a tags column "
-            "(a column named 'Tags' or beginning with 'Tags', e.g. 'Tags: Training Catalog')."
-        )
     component_col = find_column(df, "Component")
     release_col = find_column(df, "Release Dates", "Release", prefix=True)
 
     repos: List[Tuple[str, Optional[str], List[str], Optional[str]]] = []
-    for idx, row in df.iterrows():
-        row_number = idx + 2  # +2: DataFrame is 0-based and row 1 is the header
+    for _, row in df.iterrows():
         link = str(row[readme_col]).strip()
         if not link or link.lower() == "nan":
             continue  # skip rows without a README
@@ -979,7 +987,7 @@ def read_repos_from_table(df: "pd.DataFrame", source_desc: str) -> List[Tuple[st
             if proj and proj.lower() == "nan":
                 proj = None
 
-        row_tags = parse_tags_cell(row[tags_col], row_number)
+        row_tags = parse_tags_cell(row[tags_col]) if tags_col is not None else []
 
         row_release = None
         if release_col is not None and not pd.isna(row[release_col]):
@@ -1012,8 +1020,9 @@ def parse_args() -> argparse.Namespace:
         "--excel_file",
         type=str,
         help=(
-            "Path to an Excel file. Required columns: README, Tags (matched by "
-            "prefix). Optional: Component (folder name), Release Dates."
+            "Path to an Excel file. Required column: README. Optional: Tags "
+            "(matched by prefix; fallback when the README has no Tags line), "
+            "Component (folder name), Release Dates."
         ),
     )
     parser.add_argument(
@@ -1030,7 +1039,8 @@ def parse_args() -> argparse.Namespace:
         "--tags",
         nargs="+",
         default=[],
-        help="Base tags (single mode only). Ignored in batch mode because tags come from the table's Tags column.",
+        help="Fallback tags (single mode only), used only when the README has no "
+             "**Tags:** line. In batch mode the table's Tags column is the fallback.",
     )
     parser.add_argument(
         "--release",
@@ -1080,7 +1090,8 @@ def main():
     if batch_file:
         if args.tags:
             raise SystemExit(
-                "In batch mode, do not pass --tags. Tags come from the table's Tags column per row."
+                "In batch mode, do not pass --tags. Tags come from each README, "
+                "with the table's Tags column as the per-row fallback."
             )
         repos = read_repos_from_csv(args.csv_file) if args.csv_file else read_repos_from_excel(args.excel_file)
         if not repos:
@@ -1101,8 +1112,9 @@ def main():
             if missing:
                 print(f"warning: --only names not found, skipped: {', '.join(sorted(missing))}")
             repos = filtered
+        flagged = []
         for repo_link, proj_name, row_tags, row_release in repos:
-            process_single_repo(
+            ok = process_single_repo(
                 repo_link=repo_link,
                 project_name=proj_name or args.project_name,  # CLI override, else table Component, else derived
                 output_folder=args.output_folder,
@@ -1112,9 +1124,13 @@ def main():
                 api_docs_dir=args.api_docs_dir,
                 stop_at=args.stop_at
             )
+            if not ok:
+                flagged.append(proj_name or derive_project_name(repo_link))
+        if flagged:
+            raise SystemExit(f"FLAGGED (no tags in README or table, skipped): {', '.join(flagged)}")
     else:
         # Single repo path
-        process_single_repo(
+        ok = process_single_repo(
             repo_link=args.repo_link,
             project_name=args.project_name,
             output_folder=args.output_folder,
@@ -1124,6 +1140,8 @@ def main():
             api_docs_dir=args.api_docs_dir,
             stop_at=args.stop_at
         )
+        if not ok:
+            raise SystemExit("FLAGGED: no tags in the README's **Tags:** line and no --tags fallback.")
 
 if __name__ == "__main__":
     main()
