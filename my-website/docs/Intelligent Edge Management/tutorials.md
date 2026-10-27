@@ -2,6 +2,7 @@
 tags:
   - CI4AI
   - Software
+  - AI4CI
 title: "Intelligent Edge Management: Tutorials"
 sidebar_label: "Tutorials"
 pagination_label: "Tutorials"
@@ -63,3 +64,26 @@ This walkthrough starts the Edge Fleet Control Plane on your laptop for developm
 ### Expected result
 
 The dashboard loads, you can browse devices, model cards, and deployments. SQLite stores data under `data/edge_control_plane.db`.
+
+---
+
+## Tutorial: Access IEMS from the ICICLE portal (TapisUI)
+
+The ICICLE TapisUI extension embeds the control plane in an iframe and passes the user's Tapis JWT via a `postMessage` handshake.
+
+### Prerequisites
+
+- A running TapisUI dev instance or access to `https://icicleai.tapis.io`
+- Valid ICICLE tenant credentials
+- Control plane deployed with `TAPIS_PORTAL_ORIGINS` including your TapisUI origin
+
+### Steps
+
+1. Log in to TapisUI on an ICICLE tenant (`https://icicleai.tapis.io` or local dev with `VITE_TAPIS_BASE_URL` set to an ICICLE URL).
+2. Open the sidebar entry **Intelligent Edge Management Service**.
+3. The portal iframe loads `https://edgecontrolplane.pods.icicleai.tapis.io` and exchanges a signed auth token with the parent window.
+4. You are signed in to the control plane without a separate login prompt.
+
+### Expected result
+
+The full control plane UI appears inside TapisUI. If you see "Invalid JWT", log out of TapisUI and log back in to refresh the token.

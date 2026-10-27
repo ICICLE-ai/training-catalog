@@ -4,6 +4,7 @@ tags:
   - Digital-Agriculture
   - Software
   - Release 2026-08
+  - Release 2026-10
 ---
 # No-Code Workflow Studio
 
@@ -29,6 +30,8 @@ on HPC, and watch every step's status, config and logs live on the same canvas.
 - [docs/adding-a-step-form.md](https://github.com/ICICLE-ai/workflow-orchestrator/blob/main/docs/adding-a-step-form.md) — add a new step whose settings UI is auto-generated from its schema.
 - [docs/adding-a-step-custom-ui.md](https://github.com/ICICLE-ai/workflow-orchestrator/blob/main/docs/adding-a-step-custom-ui.md) — add a step with a custom interactive panel (map, labeler, live preview).
 - [frontend/app/pages/README.md](https://github.com/ICICLE-ai/workflow-orchestrator/blob/main/frontend/app/pages/README.md) — the step settings page contract (`StepPanelProps`).
+- [docs/local-deployment.md](https://github.com/ICICLE-ai/workflow-orchestrator/blob/main/docs/local-deployment.md) — technical details of running a workflow on your own machine.
+- [CHANGELOG.md](https://github.com/ICICLE-ai/workflow-orchestrator/blob/main/CHANGELOG.md) — what's new.
 
 ## Acknowledgements
 

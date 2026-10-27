@@ -1,0 +1,7 @@
+{
+  "label": "Video Segmentation and Tracking",
+  "link": {
+    "type": "generated-index",
+    "description": "Segment objects in a video by annotating a few keyframes, then track every object through the whole video with the SAM3 Video Service running on a GPU node."
+  }
+}

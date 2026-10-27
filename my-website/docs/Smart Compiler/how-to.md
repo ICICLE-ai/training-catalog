@@ -4,7 +4,7 @@ tags:
 title: "Smart Compiler: How-To Guides"
 sidebar_label: "How-To Guides"
 pagination_label: "How-To Guides"
-description: "How-To Guides for Smart Compiler. This project introduces an agentic approach for high-level and multi-purpose compilers"
+description: "How-To Guides for Smart Compiler. This project introduces an agentic approach for high-level and multi-purpose compilers."
 ---
 
 # How-To Guides
@@ -94,17 +94,40 @@ In order to activate these server environment varibles , we must type :
 we can aslo do it with: export $(cat .env | xargs) on Linux to load the env variables or just source in Windows
 
 
-## Running the project
+## Option 1:  Running the project without Docker
 For running the project, once all dependencies and configurations are set, run the following command:
 
-### SERVER
+### Cetus compiler
 
-Run the server
+SMART uses Cetus as a separate compiler. Get it from the [Cetus project](https://github.com/PAROT-Udel/The-Cetus-Project). To clone and build it, run:
 
 ```bash
-python src/run_server.py
-
+git clone https://github.com/PAROT-Udel/The-Cetus-Project.git
+cd The-Cetus-Project
+./build.sh bin
 ```
+
+If you download an archive instead, extract it and run `./build.sh bin` from the extracted project root (the directory containing `build.sh`).
+
+The build creates the Cetus launcher at `bin/cetus`. Set `CETUS` to the absolute path of that executable, for example `/path/to/The-Cetus-Project/bin/cetus`. Keep the checkout intact because the launcher uses supporting files from the same Cetus directory.
+
+### SERVER (without Docker)
+
+Before starting SMART, set `CETUS` to the absolute path of the `bin/cetus` executable built above, and set `CETUS_PROFILES_FILE` to the SMART-COMPILER profile file. Both variables are required for optimization requests; `CETUS_TIMEOUT_SECONDS` is optional and defaults to 300 seconds.
+
+```bash
+export CETUS="/path/to/The-Cetus-Project/bin/cetus"
+export CETUS_PROFILES_FILE="/path/to/SMART-COMPILER/config/profiles.json"
+export CETUS_TIMEOUT_SECONDS=300
+
+# Confirm both configured paths exist and are usable.
+test -x "$CETUS" || { echo "Cetus is missing or not executable: $CETUS"; exit 1; }
+test -r "$CETUS_PROFILES_FILE" || { echo "Profiles file is missing or unreadable: $CETUS_PROFILES_FILE"; exit 1; }
+
+python src/run_server.py
+```
+
+Replace the example paths with paths on the machine running SMART. Do not rely on a checked-in Cetus location. Docker Compose has its own host-path setup below.
 
 ### CLIENT
 Run the client.
@@ -118,13 +141,79 @@ python src/run_client.py
 
 ```
 
-Then the smart compiler will ask the user to provide the folder of the project that the user will be working on. Please provide a path example : /home/directory/projectAI
+The client displays `You:` and accepts a natural-language request directly. It does not prompt separately for a project folder or file name. When asking it to optimize a file, include that C file's absolute path and the optimization profile. Replace `/path/to/SMART-COMPILER` in these examples with the location of your checkout.
 
-Then the smart compiler will ask which specific file will the smart compiler work on: type the name fo the file, exmaple : api_server.py
+Examples:
 
-Then the smart compiler will ask which specific task to do: Profile or Optimize. Type what you would like to do with the program.
+- **Parallelization:** `Please optimize the C file at /path/to/SMART-COMPILER/Testing_Examples/01_vector_scale.c using the parallel profile.`
+- **Tiling:** `Please optimize the C file at /path/to/SMART-COMPILER/Testing_Examples/03_matrix_multiply.c using the paw_tiling_nt profile.`
+- **Loop interchange:** `Please optimize the C file at /path/to/SMART-COMPILER/Testing_Examples/05_loop_interchange.c using the loop_interchange profile.`
+
+To profile a code snippet, include its C source in the request, for example:
+
+```text
+Profile this C program and summarize its performance:
+<paste C source here>
+```
 
 
+## Option 2: Cetus optimizer runtime (Docker Compose)
+
+The server image includes a Java runtime for Cetus. Before starting Compose, set the host paths to the built Cetus checkout and SMART-COMPILER profile JSON. The checkout is mounted read-only at the absolute path embedded in its generated `bin/cetus` launcher; set `CETUS_CONTAINER_DIR` to that path. The profile file is mounted read-only into the server container. These values are supplied at runtime rather than baked into the image.
+
+```bash
+export CETUS_HOST_DIR="/path/on/host/The-Cetus-Project"
+export CETUS_CONTAINER_DIR="/path/embedded/The-Cetus-Project"
+export CETUS="$CETUS_CONTAINER_DIR/bin/cetus"
+export CETUS_PROFILES_HOST_FILE="/path/on/host/SMART-COMPILER/config/profiles.json"
+docker compose up -d --build
+```
+
+Replace the example paths with locations on your machine. `CETUS_CONTAINER_DIR` must match the checkout path embedded in the Cetus launcher. These shell exports do not modify an existing `.env` file or other user configuration. Compose passes `CETUS` and mounts the profile file as `CETUS_PROFILES_FILE` inside the server container.
+
+The server keeps uploaded inputs, transformed outputs, and task records in named volumes mounted at `/app/files` and `/app/db`, so they survive container recreation.
+
+## Invoking the Cetus optimizer
+
+The optimizer accepts C source and applies one named profile from `SMART-COMPILER/config/profiles.json`. Available profiles are `parallel`, `paw_tiling_nt`, `paw_tiling_lrw`, `paw_tiling_fixed32`, `reuse_analysis`, and `loop_interchange`.
+
+### MCP
+
+Call the `optimize_code_snippet` tool with the C source and a profile. For example:
+
+```json
+{
+  "code_snippet": "#include <stdio.h>\nint main(void) { return 0; }\n",
+  "optimization_profile": "parallel"
+}
+```
+
+The tool returns the transformed C source as text.
+
+### REST API
+
+Upload a `.c` file to `POST /tasks` as multipart form data. For example:
+
+```bash
+curl --fail -X POST http://localhost:8000/tasks \
+  -F "task_type=optimize" \
+  -F "language=c" \
+  -F "optimization_profile=paw_tiling_nt" \
+  -F "file=@input.c"
+```
+
+The response includes `task_id` and `task_status`. Poll `GET /tasks/{id}` until the status is `completed` or `failed`. On success, use `task_result.file_path` to download the transformed source:
+
+```bash
+FILE_PATH="<copy task_result.file_path from the response>"
+curl --fail --get http://localhost:8000/files/download \
+  --data-urlencode "file_path=${FILE_PATH}" \
+  --output optimized.c
+```
+
+If the task fails, inspect `task_result.error` in the response.
+
+`Regression-Test` checks transformed code against expected output and builds/runs benchmark programs for correctness. It does not measure execution speed or select the fastest profile; compare benchmark timings separately when evaluating performance.
 
 ## Option A: Running from a single container
 ### Building image.

@@ -1,0 +1,7 @@
+{
+  "label": "KaiAir",
+  "link": {
+    "type": "generated-index",
+    "description": "KaiAir is predictable per-packet power control and scheduling implemented in the OCUDU 5G stack."
+  }
+}

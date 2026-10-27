@@ -1,0 +1,7 @@
+{
+  "label": "Cascade Configuration Service",
+  "link": {
+    "type": "generated-index",
+    "description": "A Streamlit-based demo for the Cascade Configuration Service."
+  }
+}

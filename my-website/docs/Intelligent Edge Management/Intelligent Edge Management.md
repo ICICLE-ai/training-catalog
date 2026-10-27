@@ -3,12 +3,12 @@ tags:
   - CI4AI
   - Software
   - Release 2026-07A
+  - AI4CI
+  - Release 2026-10
 ---
 # Intelligent Edge Management Service
 
 The Intelligent Edge Management Service (IEMS) is ICICLE's fleet control plane for deploying and operating AI workloads on edge devices. It provides a browser dashboard and REST API to enroll devices, publish model cards, deploy containers to Jetsons and similar hardware, monitor heartbeats, and manage live camera streams. The service integrates with Tapis for authentication and hosting, Patra for model provenance, and the ICICLE TapisUI extension for portal access.
-
-Link to the hosted service: [https://icicleai.tapis.io/#/intelligent-edge-management-service](https://icicleai.tapis.io/#/intelligent-edge-management-service)
 
 <div align="center">
 
@@ -22,6 +22,7 @@ Link to the hosted service: [https://icicleai.tapis.io/#/intelligent-edge-manage
 ## References
 
 - [ICICLE Edge Fleet Control Plane — System Overview](https://github.com/ICICLE-ai/intelligent-edge-management-service/blob/main/edge_fleet_control_plane/deploy/SYSTEM_OVERVIEW.md)
+- [Release notes](https://github.com/ICICLE-ai/intelligent-edge-management-service/blob/main/docs/RELEASES.md)
 - [Deploy on Tapis Pods](https://github.com/ICICLE-ai/intelligent-edge-management-service/blob/main/edge_fleet_control_plane/deploy/DEPLOY.md)
 - [Tapis OAuth integration guide](https://github.com/ICICLE-ai/intelligent-edge-management-service/blob/main/edge_fleet_control_plane/deploy/TAPIS_OAUTH_GUIDE.md)
 - [Live streaming architecture](https://github.com/ICICLE-ai/intelligent-edge-management-service/blob/main/edge_fleet_control_plane/deploy/STREAMING.md)

@@ -18,6 +18,14 @@ description: "How-To Guides for Smart Labeling Service for Object Detection. A 7
 
 ![Import Annotations](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/import_annotations.png)
 
+After the import, a summary dialog reports how many images, annotations and labels the file contains, and how many of them landed on the images currently loaded:
+
+- **Annotations imported** — the file matched your loaded images.
+- If some entries belong to folders you have not opened yet, the dialog lists those folders' full paths. Paste one into **Source Image Directory** in the File Explorer and its annotations are applied.
+- **Nothing to import** or **Import failed** — the dialog explains why, including when the file looks like the other format, with sample image paths from the file and from the explorer so a path mismatch is easy to spot.
+
+You can import several files in one session. Each import is layered on top of the previous ones (later files win for the same image), and saving keeps the annotations for folders you never opened. The format of the pipeline's own annotation file is detected from its contents when the annotator opens, so a file saved in a different format still loads. An import you start yourself is never overwritten by the pipeline's annotation file loading late.
+
 ### How to Save and Download Annotations
 
 Click **Save Annotations** to write to a remote Tapis path, or **Download** to export to your local machine.
@@ -28,13 +36,19 @@ Click **Save Annotations** to write to a remote Tapis path, or **Download** to e
 
 Both options support **COCO JSON** and **Default JSON** formats via the Format Switch.
 
+In **Save As**, click **Browse** to pick a folder on the system. The filename is filled in as `annotation_<YYYYMMDD-HHMMSS>.json` (or `.coco.json` in COCO mode). Switching the format updates the extension of a generated name but leaves a name you typed yourself alone. The annotation file can be on a different system from the images; Smart Labeler reads it back from the system it was saved to.
+
+If a save fails, the message says why and names the folder and system — most often a **403**, meaning you do not have write access to that folder, so pick another one. The Save As dialog stays open on a failed save, and the pipeline is not pointed at a file that was never created.
+
 ### How to Resume a Pipeline
 
 From the **Dashboard**, use the search or filter controls to locate your pipeline. Click **Goto** to re-enter at the last completed step.
 
 ![Existing Pipelines](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images2/dashboard_existing_pipeline_sl.png)
 
-![Search and Select Pipeline](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/create-select-job.png)
+### How to Delete a Pipeline
+
+From the **Dashboard**, click the delete icon on the pipeline card. The pipeline is deleted immediately — there is no confirmation step. If the pipeline cannot be deleted, a **Pipeline not deleted** message explains why (with the error code, or that the server could not be reached) and the pipeline stays in the list.
 
 ### How to Check Job Status and Logs
 
@@ -112,3 +126,24 @@ With your token ready, add it to your ICICLE/Tapis credentials so it can be inje
 4. Paste your token and save.
 5. Click on Revoke token to permanently delete the token.
 ![Add or revoke token](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images2/hf/add_or_revoke_hf.png)
+
+---
+
+### How to Use a Gated Hugging Face Model
+
+Some models (e.g. DinoV3, certain SAM variants) require a Hugging Face token.
+
+![Add token](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images2/hf/gated_model_support.png)
+
+1. When selecting a model in the Patra catalog, a prompt appears asking for your HF token.
+2. Enter the token — it is stored securely in **Tapis Vault** and never exposed in logs.
+3. On subsequent submissions the token is retrieved automatically from Vault and injected as `HF_TOKEN`.
+4. Click **How to create one** to know how to create a Hugging Face token.
+5. Click on the Request access link to be redirected to the exact model link.
+
+### How to Export Results
+
+1. In **Step 7**, click the **Download** icon in the results panel.
+2. Choose **COCO JSON** for compatibility with tools like CVAT, Roboflow, or MMDetection.
+3. Choose **Default JSON** for re-importing into a Smart Labeler pipeline.
+4. Optionally save directly to a remote Tapis path instead of a local download.

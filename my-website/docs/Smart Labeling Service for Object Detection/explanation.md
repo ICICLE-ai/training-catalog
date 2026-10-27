@@ -44,6 +44,14 @@ All compute-intensive steps run as **Tapis v3 batch jobs** on HPC clusters. Smar
 - Secure credential injection (Hugging Face tokens via Tapis Vault)
 - File I/O through the Tapis Files API, keeping all data on the user's allocated storage
 
+### Job Submission Checks
+
+HPC jobs fail minutes after submission, long after you have moved on, so Smart Labeler catches the common problems before anything is sent:
+
+- **Paths are checked first.** Each input path must exist and be accessible to you. An output directory may be missing (the job creates it), but one that exists must be accessible. The message says, for each path, whether it *does not exist* or *you do not have access*, and suggests the **Browse** button to pick a valid one.
+- **A failed submission is reported as one.** A job is only shown as submitted when Tapis returns a job ID. Otherwise you see the reason from Tapis (bad path, no allocation, expired sign-in) and stay on the current step.
+- **Checks never block on an outage.** If Tapis itself cannot be reached during the check, the submission goes ahead rather than being blocked by a problem on our side.
+
 ### SAM3 Inference Service
 
 SAM3 (Segment Anything Model 3) runs as an **external microservice** separate from the HPC jobs. It is called synchronously during interactive annotation in Step 1. Two modes are supported:
@@ -56,3 +64,5 @@ Both modes optionally apply **SAHI tiling**, which partitions the image into ove
 ### Patra Model Registry
 
 Proposer and embedder models are selected from the live **ICICLE AI Patra** model catalog. This means new models can be added to the catalog without any changes to Smart Labeler itself. Full model cards are accessible in-app via the info icon next to each model entry.
+
+Calls to Patra and to the Tapis Vault (for Hugging Face tokens) go through the Smart Labeler backend rather than straight from the browser, so they are not affected by those services' CORS settings.

@@ -2,6 +2,7 @@
 tags:
   - CI4AI
   - Software
+  - AI4CI
 title: "Intelligent Edge Management: Explanation"
 sidebar_label: "Explanation"
 pagination_label: "Explanation"
