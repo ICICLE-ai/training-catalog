@@ -163,6 +163,10 @@ EXTERNAL_PREFIXES = ("http://", "https://", "mailto:", "tel:", "ftp://", "data:"
 FENCE_PATTERN = re.compile(r"(```.*?```|~~~.*?~~~)", re.DOTALL)
 MD_IMAGE_PATTERN = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
 MD_LINK_PATTERN = re.compile(r"(?<!!)\[([^\]]*)\]\(([^)]+)\)")
+# A badge is an image wrapped in a link: `[![alt](img)](target)`. MD_LINK_PATTERN can't
+# see the outer link (its label contains `]`), so its target needs its own pattern —
+# otherwise e.g. a License badge pointing at `LICENSE` stays relative and 404s.
+MD_LINKED_IMAGE_PATTERN = re.compile(r"\[(!\[[^\]]*\]\([^)]+\))\]\(([^)]+)\)")
 HTML_SRC_PATTERN = re.compile(r"(\bsrc\s*=\s*[\"'])([^\"']+)([\"'])", re.IGNORECASE)
 HTML_HREF_PATTERN = re.compile(r"(\bhref\s*=\s*[\"'])([^\"']+)([\"'])", re.IGNORECASE)
 
@@ -288,6 +292,7 @@ def rewrite_relative_links(text: str, user: str, repo: str, branch: str, readme_
             out.append(seg)
             continue
         seg = MD_IMAGE_PATTERN.sub(repl_md_image, seg)
+        seg = MD_LINKED_IMAGE_PATTERN.sub(repl_md_link, seg)
         seg = MD_LINK_PATTERN.sub(repl_md_link, seg)
         seg = HTML_SRC_PATTERN.sub(repl_html_src, seg)
         seg = HTML_HREF_PATTERN.sub(repl_html_href, seg)
