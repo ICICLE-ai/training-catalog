@@ -54,34 +54,42 @@ SUB_ORDER = [v[1] for v in THRUST_MAP.values()]
 
 
 # ---------------------------------------------------------------- catalog parsing
+def _join(lines, wrap_indent):
+    """Fold pending lines; an inline (possibly quoted) value also loses its quotes."""
+    text = " ".join(lines).strip()
+    return text if wrap_indent is None else text.strip('"\'')
+
+
 def parse_catalog(path):
     """Line-based read of release_catalog.yml.
 
     The file is uniformly `  - id: <x>` followed by `    key: value` lines, so a
     full YAML parser isn't needed (and would pull in a third-party dependency).
-    Block scalars (`>` / `|`) are folded into one line.
+    Block scalars (`>` / `|`) are folded into one line, as is a plain or quoted
+    value that wraps onto lines indented deeper than its key.
     """
     entries = []
     cur = None
     pending_key = None
     pending = []
+    wrap_indent = None  # set while an inline value may wrap; its key's indent
     for raw in pathlib.Path(path).read_text(encoding="utf-8").splitlines():
         m_id = re.match(r"^\s*-\s+id:\s*(.+?)\s*$", raw)
         if m_id:
             if cur is not None:
                 if pending_key:
-                    cur[pending_key] = " ".join(pending).strip()
+                    cur[pending_key] = _join(pending, wrap_indent)
                 entries.append(cur)
             cur = {"id": m_id.group(1).strip().strip('"\'')}
-            pending_key, pending = None, []
+            pending_key, pending, wrap_indent = None, [], None
             continue
         if cur is None:
             continue
         m_kv = re.match(r"^\s{2,}([A-Za-z][\w]*):\s*(.*)$", raw)
         if m_kv:
             if pending_key:
-                cur[pending_key] = " ".join(pending).strip()
-                pending_key, pending = None, []
+                cur[pending_key] = _join(pending, wrap_indent)
+                pending_key, pending, wrap_indent = None, [], None
             key, val = m_kv.group(1), m_kv.group(2).strip()
             # Block scalars (`>` / `|`) AND a bare `key:` with the value on the
             # following indented line (a plain multi-line scalar) both continue.
@@ -89,12 +97,19 @@ def parse_catalog(path):
             if val in (">", "|", ">-", "|-", ""):
                 pending_key, pending = key, []
             else:
-                cur[key] = val.strip('"\'')
+                # A plain or quoted value may wrap onto deeper-indented lines.
+                pending_key, pending = key, [val]
+                wrap_indent = len(raw) - len(raw.lstrip())
         elif pending_key and raw.strip():
-            pending.append(raw.strip())
+            line = raw.strip()
+            if wrap_indent is None:
+                pending.append(line)
+            elif (len(raw) - len(raw.lstrip()) > wrap_indent
+                  and not line.startswith(("#", "- "))):
+                pending.append(line)
     if cur is not None:
         if pending_key:
-            cur[pending_key] = " ".join(pending).strip()
+            cur[pending_key] = _join(pending, wrap_indent)
         entries.append(cur)
     return entries
 
@@ -118,8 +133,8 @@ def doc_frontmatter_tags(docs_dir, component):
 
 
 def prior_releases(tags, release):
-    """The `Release YYYY-MM` tags other than this release's."""
-    found = [re.match(r"Release (\d{4}-\d{2})$", t) for t in tags]
+    """The `Release YYYY-MM` tags (incl. split releases like `2026-07A`) other than this release's."""
+    found = [re.match(r"Release (\d{4}-\d{2}[A-Za-z]?)$", t) for t in tags]
     return sorted({m.group(1) for m in found if m and m.group(1) != release})
 
 

@@ -2,6 +2,6 @@
   "label": "Smart Compiler",
   "link": {
     "type": "generated-index",
-    "description": "This project introduces an agentic approach for high-level and multi-purpose compilers."
+    "description": "SMART Compiler lets you request C optimization and C/Python profiling in natural language. Its conversational client connects a tool-capable language model to…"
   }
 }
