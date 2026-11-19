@@ -1,0 +1,72 @@
+---
+id: validate-api-execution-agent-session-validate-post-post
+title: "Validate"
+description: "Validate"
+sidebar_label: "Validate"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVt9v4kYQ/ldW+9IXGwgkXMs9kShSUa+6NHBtpQhFa3sMe1l73d11ACH+987s2oDD3al9y4sx6/n1fTPz2XvuxMryyRO/0+UrGCuc1KXly4jrCoz/N8v4hL8KJTPh4FlU8hm2kNb06FmsoHTPFqylf0ejSlvnLzziBv6pwbpbne34ZM9TXTr0oVtRVUqmPkf/q9Ulndl0DYWgu8pQBU6C9badRDKjM7erAEuzzshyhZlybQqBkXldo0HEnXSKDKbky+bBlyGcwyFqnXXyFdK2TGkgIy4uki1Pwf5sMDbhMNbh3NmZGvyBrZDHUPtwMKCfDGxqZEVwMc68TlMMkdeKPTbGWMV/Zefg014Pri4D/y6xsHIVMdhWVBPThsnSt4bVFgxz+gXK3v9I9kOuwBhtiKBuv8LxRZM88w2T92RyxN4iGl0iegwTxD4buZIlk5aV2jGhlN5A9m6BXH8XCPVkU+IVp0TXJgW2EQFTruvy3SIaDi8RzZrBapb8XZaODy3qlZEOBehpzxcoYfZO6xeJ9k/LA2bpgmpXHGsqwK016V8jZpVwa/zXxxD9owr2O3rRfz2547qRqPq0tVHkyd9m+2KBuTWwDCqldzgViUhxQWlvadx7nApsAcyJvcBFB8aRETz8DXaYRFLsNDyOeCkKevp37L3iBUnARSVTFprpbYJWCC9SQTKYramfVOHOVzy7m919umfrOun5FlCLH09qf78VRaXg2+rNR7n4+SYfX8c3H64+xNc342GcjPI0Hqa/jEf5eCxyMeYHwpFrj6/p7zyVUOLKBFGfPswuYHQtfl0sHsgMd8s0yBAU7pljMkMDJDXyWOOwk+n5ezBiD9j3lYH5H5+YcE6k6wJ9MAT2x4LCwUWX+YilOLcUTCiGE5tLBbbHpjWyhIdhAyiJ9bx1usBCj6KgaewWhEHe1yAyMD12a/SG+pAi75S3qFEHZZmqOoOzpKEgTIC/rTA2ctlreDhOa6jjL0jmGufMRSywlwAhqgS+80HtMAfbxhtIrDeyH5l0R+EtA6nHD4QemzttsMenIz8+Hqw4kQDhBfST7VDX8OURIHYSRdxq/9RpH8KGhsZ+ivroALncYtLwBmWV2CktMss2Epe1JhYzSJWgd19QG4xZCESETcctyT6yTHskOFs041kmqWbsXS5BYaDc6IJgQlG5HWvf5U0w0jiakDBsg95Vb0BzSgJRCC9xzbKdyUhnQI+76mDr+pXCyiiA14d9ozBPtMjoeOwa3neWiIpo46M+rEme0Gu/T4SFL0YdDnSMu2hI9JZkbaRIVJA8dPAD5oXpBfViQt9/JNvxgmrzweugJ28k/BC1HlOkv3I/tF2eKejD5/kCjZPmO7DQGfkYsSHpx+uEc/roDN+faODP9lyJclUjdHweYpLS0FB1Re/Fi15zQ6jaR+XurMK3+heA0JVgfdNlvw+SioS29uHRdz0aaltr6u4Sq/4XwGn/RQ==
+sidebar_class_name: "post api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Validate"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/execution/agent_session/validate"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Validate
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"properties":{"agent_session_id":{"type":"string","format":"uuid","title":"Agent Session Id"}},"type":"object","required":["agent_session_id"],"title":"ValidateSession"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"Request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"Requested owned resource was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

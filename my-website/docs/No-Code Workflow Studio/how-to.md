@@ -31,7 +31,16 @@ path, and downstream steps receive the full `tapis://system/path` URI rather tha
 a bare path.
 
 Available systems: `pitzer-tapis`, `cardinal-tapis`, `ascend-tapis`,
-`expanse-tapis`, `expanse-tapis-static`.
+`expanse-tapis`, `expanse-tapis-static`, `aws-tapis`.
+
+A field with no system chosen yet shows the system from your
+[run defaults](./tutorials.md#set-your-run-defaults-once). Once you pick a path, the system
+shown is saved with it, so the step keeps pointing at the same place even if you
+change your defaults later.
+
+Inputs on the same filesystem as the step's job are mounted into its container,
+not copied, so large image folders don't slow the job's start. See
+[How inputs reach a job](./explanation.md#how-inputs-reach-a-job).
 
 ![Path field](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/path_field.png)
 
@@ -55,7 +64,7 @@ A path ending in `/` always opens that folder, even in a file field.
 **Data that's only on your own machine.** Choose **My node (not on Tapis)** in the
 system dropdown and type the path as it is on your machine. Browse is off for
 these. A workflow using one can only run with
-[Deploy to my node](#run-the-workflow-on-your-own-machine); launching it on Tapis
+[Deploy to my node](./tutorials.md#run-the-workflow-on-your-own-machine); launching it on Tapis
 explains this instead of starting a run that can't reach your data.
 
 ## Find a template or run
@@ -64,10 +73,107 @@ Both lists have a search box, a filter and a sort order:
 
 | List | Search by | Filter by | Sort by |
 | --- | --- | --- | --- |
-| **Templates** | name or description | category | name (A–Z, Z–A), newest or oldest |
+| **Templates** | name or description | category; All / Mine / Shared with me / Public | name (A–Z, Z–A), newest or oldest |
 | **Past Runs** | workflow name or run number | status | newest or oldest, name (A–Z, Z–A) |
 
 ![Templates search, filter and sort](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/templates_search_filter.png)
+
+## Share a workflow
+
+A new workflow is **private**: only you can see it. To share it:
+
+1. Save the workflow. Only a saved workflow can be shared.
+2. Click **Share** in the canvas header, or the share icon on the workflow's card
+   in the Templates list.
+
+   ![Share button](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/share_button.png)
+
+3. Choose who can see it:
+
+   | Option | Who can see it |
+   | --- | --- |
+   | **Private** | Only you. |
+   | **Specific people** | The groups and people you pick. |
+   | **Public** | Every signed-in user. |
+
+4. For **Specific people**, pick from **Groups** (only groups you belong to are
+   listed) and add people by username under **People**. Remove someone with the
+   ✕ on their name.
+5. Click **Save**.
+
+![Share dialog](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/share_dialog.png)
+
+Good to know:
+
+- **Every version is shared,** including the versions you save later. You don't
+  need to share again after editing.
+- **People appear in the picker once they've signed in** to the Studio at least
+  once. Ask a colleague to sign in first if you can't find them.
+- **Switching to Public keeps your list.** The groups and people you picked are
+  kept, so switching back to **Specific people** restores them.
+- **Only you can change the sharing.** People you share with can't re-share it.
+- **To stop sharing,** open **Share** again and choose **Private**, or remove the
+  person or group. They lose access straight away. Copies they already made stay
+  theirs.
+
+### What people you share with can do
+
+| Action | Owner (you) | Shared with them / Public |
+| --- | --- | --- |
+| Open it and look at every step's settings | ✓ | ✓ |
+| Run it | ✓ | ✓, as themselves |
+| Set up a webhook for it | ✓ | ✓, their own webhook, firing as them |
+| Save a new version | ✓ | ✗, they use **Save as my copy** |
+| Change who it's shared with | ✓ | ✗ |
+| See the other person's runs | ✗ | ✗ |
+
+A run always belongs to the person who launched it. It uses **their** Tapis
+login, **their** charge account and **their** [run
+defaults](./tutorials.md#set-your-run-defaults-once), and appears only in **their** *Past
+Runs*. Sharing a workflow never shares your allocation or your runs.
+
+### Use a workflow shared with you
+
+Open **Templates** and filter by **Shared with me** (or **Public**). Each card
+shows who shared it.
+
+![Shared with me filter](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/templates_shared_with_me.png)
+
+When you open it, a banner says it was shared with you and that you can view and
+run it.
+
+
+- **Run it as it is:** click **Run Workflow**. If you changed something on the
+  canvas, you're asked to either **Run the published version as-is** (your
+  changes are ignored) or cancel and make a copy.
+- **Change it:** click **Save as my copy**. You get version 1 of a new workflow
+  that you own, copied from the last saved version. Your copy starts **private**,
+  whatever the original was, and later changes to the original don't affect it.
+
+### Badges in the Templates list
+
+| Badge | On | Means |
+| --- | --- | --- |
+| **Private** | Your workflow | Only you can see it. |
+| **Shared** | Your workflow | Shared with specific people or groups. |
+| **Public** | Any workflow | Every signed-in user can see it. |
+| **Shared with you** | Someone else's | Someone shared it with you, or with a group you're in. Hover to see who. |
+
+## Create a user group
+
+Groups let you share with a whole team at once. Click **Groups** in the top
+navigation, then **New Group**. You become the group's first admin.
+
+![Groups page](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/groups_page.png)
+
+- **Admins** can rename or delete the group, add and remove members, and make
+  other members admins.
+- **Members** can see who's in the group, share their own workflows with it,
+  and leave it.
+
+A group always keeps at least one admin, so the last admin has to promote
+someone else before leaving. Deleting a group, or leaving it, removes access to
+workflows that were shared only through that group.
 
 ## Switch between light and dark mode
 
@@ -119,13 +225,18 @@ CPU steps on OSC still writes all its artifacts to one place.
 | 2. Where each step runs | **CPU steps: System, Queue** | Where steps with no GPU requirement run. Queues are loaded live from the system, with each queue's limits shown. The system also becomes the default archive system. |
 | | **GPU steps: System, Queue** | Where steps declaring a GPU requirement run. Only shown when the canvas has one. |
 | 3. Charge account | **Charge account** | The allocation to charge (e.g. `PAS2699`). Prefilled from the template's allocation account. |
-| Storage & archive | **Work dir** | Derived from the CPU system, charge account and your Tapis username. Read-only. |
+| Storage & archive | **Work dir** | Base dir on the system. Taken from your run defaults; otherwise derived from the CPU system, charge account and your Tapis username. Editable. |
 | | **Archive system** | Where step outputs are archived, unless a sink node says otherwise. |
 | | **Archive dir (optional)** | Base directory on the archive system. Blank derives it from *Work dir*. |
+| | **Containers dir (optional)** | Folder on the exec system holding the step container images. A step that ships its image as an input uses the copy found here instead of downloading it each run. |
 
 Whatever you choose, each step archives under
 `.../{run_id}/{step_type_key}/{node_id}`, so one run's artifacts never collide
 with another's.
+
+Every field starts from your [run defaults](./tutorials.md#set-your-run-defaults-once). The
+settings you launch with are remembered for this workflow, and used the next time
+you open its drawer.
 
 ## Run a whole pipeline as one Tapis job
 
@@ -266,13 +377,19 @@ full surface.
 
 | Field | Default | Meaning |
 | --- | --- | --- |
-| **Execution system** | `expanse-tapis-static` | Pin this step to its own system. Clear it to follow the run's CPU or GPU target. |
-| **Queue** | `tapisShared` (GPU steps: `tapisGPUShared`) | Only selectable once a system is pinned. |
+| **Execution system** | Your run defaults' system, else `expanse-tapis-static` | Pin this step to its own system. Clear it to follow the run's CPU or GPU target. |
+| **Queue** | Your default CPU or GPU queue, else `tapisShared` (GPU steps: `tapisGPUShared`) | Only selectable once a system is pinned. Picking `aws-tapis` selects `cpu-partition`, or `a10g-partition` for a GPU step. |
+| **Job working directory** | Your run defaults' work dir, else the system's own | Where the job runs on that system. Each job gets its own subfolder. |
 | **Node count** | 1 | Nodes requested. |
 | **Cores per node** | 8 | Cores per node requested. |
-| **Memory (MB)** | 800 | Memory requested. |
-| **Max runtime (minutes)** | 30 | Wall-clock limit. |
+| **Memory (MB)** | 16000 | Memory requested. |
+| **Max runtime (minutes)** | 45 | Wall-clock limit. |
 | **GPUs** | 0 (GPU steps: 1) | Becomes a `-G <n>` scheduler request. `0` on a GPU step removes it. |
+
+Defaults apply only to a step whose Run Configuration has never been saved. Once
+you save it, the step keeps those values.
+
+![Run Configuration dialog](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/run_configuration_modal.png)
 
 These override whatever the step type's own job template specifies. When a queue
 is pinned, over-requesting against its published limits is flagged here rather

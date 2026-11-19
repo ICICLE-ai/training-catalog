@@ -2,6 +2,7 @@
 tags:
   - AI4CI
   - Software
+  - CI4AI
 title: "Intelligent Semantic Segmentation & Annotation: Tutorials"
 sidebar_label: "Tutorials"
 pagination_label: "Tutorials"

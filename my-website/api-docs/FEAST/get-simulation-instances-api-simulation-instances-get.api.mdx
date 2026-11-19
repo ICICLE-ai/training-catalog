@@ -1,0 +1,79 @@
+---
+id: get-simulation-instances-api-simulation-instances-get
+title: "Get Simulation Instances"
+description: "Get the simulation instances visible to the caller."
+sidebar_label: "Get Simulation Instances"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVE1v2zAM/SuETiuQpF2xU24plm4F+oU1GzA0RaPYtK1VkTRJ7uYF+e8jZTdO1g7YgB3ni22KfKQeybcWUZZBjG/F5ORC3A1EjiHzykVljRiLdxghVghBrWot2QjKhChNhgEeVVBLjRBt8smk1uhHczM3lxYWi0kdK+vVjxQ2hhOUHv1iARXKHD14jLU3oYWv6CwHVy+1ysBZq+fm1WJhvxn09yqHsxu4/Hh+vlgcjGACj1KTLdoHNFuUq8vzzzulcWQOy2ZuYiVjVxoMh08pek9KDJdXM7Jkus4xT/V/aFHHcwP05CqLY8rLb7qK9A1k1kSpjDIlSNAqRLDFiySNxEBYhz6Zz3KitMR433vebz3vpVMvH1AEoTjp5Qojeu7WWhj6ITS5SzJ5Ke5ayzD9efxaK2JWjAupAw5EyCpcSTFeC2maqyIhxcYxUoieriM2g63F1FqLDc1EVFGzYa+jYsNHHoOzJmBgzOOjI37tj9BNndElQlFr+NA5U2VMIJqYKnGOWpIwD78Ejln3dW7oGYg3x8fPgT/xGLR0T723/i9QhfPclKjaunOkZmr+UhFX4bmDttne6R+Qp6iSkpqwuaP6O5v0Xjai5/PcZh2VA7EKJSPv4/WuF0ShLFFswX7vmsiAGZ9u+tx2+QWzuDcTt+leberOb6fZPb0tu7+/xtuWvpeSPbm8n82unwG2vaWZrmy3GGnMY0U/h7QNh/02DLfbkGa8sImADvzU2nw4SVM2vLA5aphcn4lfpexEZiQYOZ9BQQSx7nAkTImP2EALADf9Es8wq4zVtmzg1el0cjM7AGqBicOlDKQuK041egogKansN8gqaUr6ViYlKDiBT/yAliYPmXQIsiiIHvKvA1ZW562bTAWMYGpyZ2l8Wm0qva0dZasNiybTwpLySDLQXuto9Hp0xM1xNsSVTHPeaQOL9851znYo3KNm3e/Nf8H/F4LfbUHE7/HQaQrj/tQ+KUw737ekT4o8X5xwWsKKmsle6zXP2kevNxs2f63RN2Snz0fplVzy/N+ywnSSz5L0gA1rNU2T44Ui8uq0tb8KIsv3dvneTWe0kD8BVhLT+Q==
+sidebar_class_name: "get api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Simulation Instances"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/simulation-instances"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get the simulation instances visible to the caller.
+
+No ``Authorization: Bearer`` header returns the shared public pool
+(``owner_id IS NULL``). A valid token returns ONLY instances owned by
+that caller -- public instances are NOT included.
+
+Returns:
+    dict: A dictionary containing a list of simulation instances.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

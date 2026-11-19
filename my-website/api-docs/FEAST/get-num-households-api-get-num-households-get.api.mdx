@@ -1,0 +1,79 @@
+---
+id: get-num-households-api-get-num-households-get
+title: "Get Num Households"
+description: "Gets the number of households in the model"
+sidebar_label: "Get Num Households"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVktv2zgQ/isETwlgO9mgJ99cxG0NbLZB4t1LEhiMOJLYUiRLUm1dQ/99ZyjZ8kPppuh1fYhDcp7fzHzjDY+iCHz6wGdvb/jTiEsImVcuKmv4lL+HGFgsgZm6egbPbM5KWwcorZaBKZPeKitBP5pHcyu8qCCCD9NHw/ATVFVrQbZWyoQoTAYrJdlZiP58ypaou7gmm2Sll2VbWRYtKyC+HEBu/YmjEMGxM2Vi5yGdO+1X2Xs0dxBrb7ZJSJXFKbvGv2he+DX7pmL5OlD4iFsHPgW2kIgnel+h1qqXXwmnVgPXeIXabocolmjDDR7QylG2KKeoWF9q8Gs8ePhSKw/oL/oaRjxkJVSCTzc8rh3pIzhQgOfH1b7vS9DZjSpqOHy5p5fmv1Sb0VC0e03wy0FjzyhT/CzmXdssrodDX+wE5E8z2De0l4ioY2m9+pGEtvGXIGSCsk8gFzocZCDM+mOeCniYC9nubkytNW+e+rBnB84aevIQnDUBAtm8urykr6Mc6iyDEPJas7tOGCPLLNbbxBSJc1plyebFp0A6m1Ok7fMnyKj7hJQqNb2+9dTHUbW+j9qo6aPeemVIHOyvumIf+sGYOTV0jVeYXoNG3lxdnab0j9BKtmWZe2/9r+TjDqKWEIXS9J+KUIVTAW2zg9dXlG0HwROB0N4J78V6rwH/tFlXxBGvQjHU0lvRGyyeKIDvjL0smsBgS3ptet+70vXd+JDyal13cntt1sPbovtyGtctfEPOtiIflsvbE4NtbZHEStsxYOK1WOLhAsnvAm/GSH7jnvzSbOU2pd+ZfmetHM9Sd49viFrZ7HZxQgZvRfYZjKQ34vJExKTJ5ohGXLPWANsb9SVkpbHaFmt29m4+u1+eMyyAieNnEUC2LD7ZKkBAov/GslKYAnZMn5MDn9BhWhgZMuGAiTxHcPrF0IqJFMCEzY10FpsnMOGBFd7WDr3VBqmEESgTTO0rsn6b1uXkj8kllcbZECuRurzjpNOBOgZl08/L/+v8t9d51/oRvscLp4VKU137RCttUz8gKSmUHGhrnLsSK0gymw012N9eNw1dt1uQqEaqIJ713hp5sZhnd92Mn7OBxT0U52dYD/56+Cp0TdKJ2X43gKMt/Ko4Dn8X9OE80cErigfBIY7t1i0h1VqhkXZxT+tkJZCVHf28ny+Rkv4FlBnXEQ==
+sidebar_class_name: "get api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Num Households"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/get-num-households"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets the number of households in the model
+
+Parameters:
+    simulation_instance_id (str): The ID of the simulation instance to get the number of households for
+    simulation_step (int): The step number to get the number of households for
+
+Returns:
+    dict: Dictionary with the number of households in the model
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"simulation_step","in":"query","required":true,"schema":{"type":"integer","description":"Simulation step","title":"Simulation Step"},"description":"Simulation step"},{"name":"simulation_instance_id","in":"query","required":true,"schema":{"type":"string","description":"Simulation instance ID","title":"Simulation Instance Id"},"description":"Simulation instance ID"},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":{"type":"integer"},"title":"Response Get Num Households Api Get Num Households Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

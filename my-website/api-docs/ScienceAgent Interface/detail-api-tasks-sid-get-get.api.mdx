@@ -1,0 +1,72 @@
+---
+id: detail-api-tasks-sid-get-get
+title: "Detail"
+description: "Detail"
+sidebar_label: "Detail"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVk2P2zYQ/SsEL20B+SPbnJyTs120RlN0u3bQAgvDoKWxzZgWVZJa2xD03/uGlLxxnBx6ywJrS+J8vZl5T25kUFsvJ89yofzey2UmbUVOBW3LWSEnsqCgtFmpSq8CW6xWXher1ZYC/8tMVsqpAwVyHKWRJW7gBiOc6RKXlQo7XDv6t9aOEDO4mjLp8x0dlJw0Mpyr6BKcLrew3Fh3UAFP6jpGCToYNpjjrm2XHMpXtvTk2ftuPOavgnzudMV1s2md5+T9pjbiqTNGoNyWgcrA5qqqjM4jzNEnzz7Na0Ut/jL5dvzmNvAf2ntUmQk6VYxGWCd0+aKMLkTtyYlg91QO/0eyHr5df6I8XDXqWZJz1vFQKsdjCTphTo9vWsdV9816YJML9h7R21tET0hHPjCUY4lPNNfWLidxVF6UNoiNrcvie0V0d3eLaNbNwyVk32XpOPSU106Hc6TNAgTz99buNeyfl7zl16B+iTxEReDazjIze/qBXRM5gv8oEnTUgHut5PjupWdl7QwbyS+jfvQkwo5EQZWxZ0x/rXLsL6+13mrsMRfSFzrnLiXMV+VekOPh73TueZ+n46yXhH8G0WuwYIbcVDIVaWjRJlFJRQ4nRglf89y4wnOseHY/u//wIHb1ehhbrcuNjaX0YpFrKrHF0y3mLqaPs5uM1xa/LRaPbIZ1d10RyI/VD0IXMAD+LJY1SDTBRnF34x75TDxaH7aO5n99ECoEle8O8EEItNKTwS7BZf6zyLFKHEwZgSXaaEN+KKY1AOFhWkpO4iPEq4aJ1M4sUlKJ96QcWrQjVZAbivfOHrllOVrEeQ+1R91lbuqCPkuaCkICfAtljD2irD/TqLs+0AnTfq3jb1rPLVYiZCJ1b02MiEU/kDkjhzgNjrT20ci/Exp5k24gRWzq5X0yFPNgndrS66M46QhWvTaBkpT+4K9a1/UrIgB21ikQLZ4GG0P4NNCBYiAjONBGn5A0vQtEpc7GqsKLowaDau5iQblRrOJJABDzoIAIQ8dCF+9EYSMS7BavY1Forhmz22gyCLRx9sAw6VCFs+jfSl0wlh3ekLRs4+Gb4VhiTyssykFF1el4cWH21XpeSBXoFEaVQV3sHoncdKx/ZsbxCzK+ujM54bcuCLtDDj5tmrXy9NGZtuXHUEPHaoPLF+W0WjNRIA6F9nwNTdlgReimkIt4yh+fOjn8SXDarxXYS0HJOgBK13yHyz2EIf0saJcwS4sb06eTKYZUhc98bnSapegifr8+LGDLS3OtP/uoP90FR/9qPV9KUSqBP9vsGy5Nk9StbS/26eibHh3E3prbs4Tw/wdFk0fA
+sidebar_class_name: "get api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Detail"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/tasks/{sid}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Detail
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"sid","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Sid"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"Requested owned resource was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

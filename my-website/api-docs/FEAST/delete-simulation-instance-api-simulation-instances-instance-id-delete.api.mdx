@@ -1,0 +1,78 @@
+---
+id: delete-simulation-instance-api-simulation-instances-instance-id-delete
+title: "Delete Simulation Instance"
+description: "Delete a simulation instance by ID."
+sidebar_label: "Delete Simulation Instance"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVctu2zAQ/JUFTwngRxr0pJsDO6iBBA0St5ckMGiJkpjQJENSaVVB/94lJVlybBftsb6Iopa7w9mdcUUczSyJHsns6pY8j0jCbGy4dlxJEpE5E8wxoGD5thDU7wKX1lEZM9iUsJxPnuSTvKOGbjHQ2OhJAv66mDVP4Mw6cx7BKmcYDioFh6tj+ZyCJNQLOe+ZK4zsEiY8dhHMwhMPUVPiOXzBFDIDW8Qxs3ZCRkRpZkLeZYL4m3zrvtp6h4xqfmzfrtcD8Ot1kwET690dka2KSHzBAoNYjOGeM01djmvD3gpuGKJwpmAjYuOcbSmJKuJK7Y8iLYgdIx13wm8sOyIQel2PdjVo4XJl+K8AtKuSM5ows1cnpcLuFaKy/JoGtPslfe52RxZCkPq5BzHbK1b7T4ZZraRl1ue8vLjwj/0xeWj4TwsB920wIouVdEy6gERrEZql5PTF+jNVj7PG34h8vrw8TPydCp40Y7IwRpl/yEq08bPgeIM7YY5y4Vfcsa09DBAq3vv6F+RxRJJhE+pnxN/uUWNoOWjqjYpbKkdka7M/9f8WKaQZI7tkp0MDGbDyX+u+ttq8sNjtzcRjuFdTuo0bNLunt2H39DXmDX3HinUhX1aru4OETW9RN7nq9RjUhCKJyBRVOO1VON6pcFoNlFWHoU9VYKStdq1UMp6FsRvfKswLs7sl+ehfVzR+ZTLx3yBFxrz1+JOwQIJcCU0CeOjdaMXiXCqhshLOrhezh9U5YE+kG2+oZQlsfalJd4BZyNUPiHMqM1xzGQqkvoAJhIGgMrEx1eihaYp8YXxhWa5E0oTRxrhgIROtcJ4sUMMgM6rQWK2QqHHwJHlre0fvaa51Mfk0ufDd0sq6LQ2D35pF69iDG3W28pGcqpfSf+jz7RQ69tNNtaA8CKwwQeHNcD2iP3CMPDZeuB0NrRs1kSOV/lBV+U5/M6Ku/fZbwUyJ+7h8p4bTjZ8+NIWEW7/ubfckt2f3rRrP4RTuTnTSS+6disK/4fKVlR/+Y4LVtN7vYTQRfoy1G5w9cEbv4zsVzhc3i9UCxfkb2GTGfQ==
+sidebar_class_name: "delete api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete Simulation Instance"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/simulation-instances/{instance_id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a simulation instance by ID.
+
+Parameters:
+    instance_id (str): The ID of the simulation instance to delete.
+
+Returns:
+    dict: A dictionary indicating success.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"instance_id","in":"path","required":true,"schema":{"type":"string","title":"Instance Id"}},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -79,7 +79,12 @@ Or use **Text Prompt** mode to run prediction over the whole image from a comma-
 
 The **Detection Confidence** and **Mask Precision** set in the SAM3 dialog are applied to both Single Click and Text Prompt requests.
 
-When finished, click **Save Annotations** and choose a remote Tapis path to store the annotation file. See [How to Save and Download Annotations](#how-to-save-and-download-annotations).
+Or use **Exemplar Prompts** mode to first draw a box or a mask and click on find similar to run prediction over the image to find objects similar to it.
+
+![Exemplar Prompt](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/SAM3-exemplar-prompts.png)
+![Exemplar Prompt - Find Similar](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/SAM3-exemplar-find-similar.png)
+
+When finished, click **Save Annotations** and choose a remote Tapis path to store the annotation file. See [How to Save and Download Annotations](./how-to.md#how-to-save-and-download-annotations).
 
 #### Step 2 — Generate Class Supports
 
@@ -89,7 +94,7 @@ Open **Step 2 — Generate Class Supports**.
 
 Enter a job name, select Proposer and Embedder models from the Patra catalog, and set crop/patch sizes (e.g. `[2048, 1024, 512]`). Click **Submit** and monitor job progress in the pipeline status bar.
 
-Before the job is sent to HPC, Smart Labeler checks with Tapis that the image and annotation paths exist and that you can read them, and that you have access to the output directory (it does not need to exist yet). If any path is unusable, the job is **not submitted** and one message lists every path that is wrong. See [Job Submission Checks](#job-submission-checks).
+Before the job is sent to HPC, Smart Labeler checks with Tapis that the image and annotation paths exist and that you can read them, and that you have access to the output directory (it does not need to exist yet). If any path is unusable, the job is **not submitted** and one message lists every path that is wrong. See [Job Submission Checks](./explanation.md#job-submission-checks).
 
 #### Step 3 — Optimize Patch Size
 

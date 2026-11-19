@@ -1,0 +1,78 @@
+---
+id: get-step-number-api-get-step-number-get
+title: "Get Step Number"
+description: "Gets the current step number the model is at"
+sidebar_label: "Get Step Number"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVUtvGyEQ/iuIUyL51agn3xzFSS01rZW4vSSRhZfZXRIMBNikrrX/vQOs33aVXuvLGviYmW8eH0vqWeFo/4EOLm/pU4tycJkVxgutaJ/egHfEl0CyylpQnjgPhqhqPgMb9+eagyTCEeYf1aMaM8vm4MG6/qMi+HNiXkkWrE2Fcp6pDKaCkzPn7XmfTNDC6IroPNraYMkKS7wmBfh0vOU61za4uwNfWbXyxUXm+2QQv2iE2QV5F748FT9tUW3ARocjjmTR0TScT9P5lBkx3d/DNd4za5qYuSVVuMD7x7kiXIRUvlZgF7iw8FoJC+jQ2wpa1GUlzBntL6lfmGjGW6EKul+K+yPZGV0hzAsvYRcwWgM4rT9oqG6tibDKl9qK3xG0ir8ExmPSNgRyJt0OA6YW3/OYkl0uwXazoyopaf20CXuw46wORxac0cqBCzYver3w2eNQZRk4l1eS3DVgjCzTymORYyTGSJFFm91nF+4sDzOtZ8+QhXoyzkVsGTm2oSe8SL4bnECzBXKvN1GvvBKcEHIfmupb6syBEQd7uEZiNV7/fHFxSOYnk4Knggyt1fZfmJideDl4JmT4JzzM3SFA6mzn9AMFW5N/CvTTHrOWLbZa76vOmvK16NwVx5p5Bb3FsrEC6NrYaWhMBpmE03rje120TR8+RF7JdYPbarBNelN2T9O4Suk75mwF+TKZjA8MptqiIJS60ZGoEb7ERRdVpIs77aAi7bXyCJXryL2xe601bw9iU7dvo6YOxqMDDbhk2QsoHs6CBEZlCzfJEFPhFyQZIFsTPoGsVFrqYkHOroeD+8k5wewr354xBzzJd2d1ARwp9TvJSqYK/C9UdJAHBzamhkimuMuYAcLyHDOD+MpBqSVPMBYD6JCh4kZj5+C7YIEUVlcGvVUKFYSEjHSQ2hvKZ6LV63zq9EJdjHZ+zmKLN1K0N0r7GVluJuV/f6uajvTwy3eNZCIOW2XjtKdee0CtEIjc7zachRITGwDLZaj7DyvrOmynNymMPxeOzeSWqJ9M89ldM3fn5PSTdCzWF1j87ZF8Y7IKl+Lj8MasCPFgbEF2mrcnBJqshEY3fuvWgUoGK+uJvBlOcEr/ABqSHGA=
+sidebar_class_name: "get api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Step Number"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/get-step-number"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets the current step number the model is at
+
+Parameters:
+    simulation_instance_id (str): The ID of the simulation instance to get the step number for
+
+Returns:
+    dict: A dictionary with the current step number
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"simulation_instance_id","in":"query","required":true,"schema":{"type":"string","description":"Simulation instance ID","title":"Simulation Instance Id"},"description":"Simulation instance ID"},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":{"type":"integer"},"title":"Response Get Step Number Api Get Step Number Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

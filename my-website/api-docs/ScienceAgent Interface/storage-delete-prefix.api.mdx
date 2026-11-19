@@ -1,0 +1,72 @@
+---
+id: storage-delete-prefix
+title: "Delete Prefix"
+description: "Recursively delete folder contents across all listing pages. Deleting the science-agent/ root is forbidden. A non-success response can indicate partial deletion; refresh before retrying. The browser requires user confirmation."
+sidebar_label: "Delete Prefix"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV01v4zYQ/SuELt0Csp3Nbg9NTt4kRYOmaDb2ogWCYEFJI5sbmdSSVBzB8H/vG1LyR5ws0JuB5hBb4pCcN2/mzXiVeDlzydl9MvHGyhklD2liarLSK6Ovi+QscXHha0EVefpaWyrVc5ImtbRygTeWt68SjQdYb5aVxtP3hmyLB0vfG2UJx3nbUJq4fE4LmZytEt/WFC6xSs9g6ZWv+MVtPGe9fuDdrjbakeMNpycn/FGQy62q2UtYT5o8J+fKphJ3nTHOyo32pD2by7quVB5Ajb453rPaOrHGX5p8fO3ga/0kK1WILgiiln4ujBUOwcg9FaK2plQVDf/DdT1mk33DGXvRuU/IWmOZBBwMGryKqOPrg3ix333Erthkg77H9P4Q05/KOWxOBT3XfC3jUR3OxpEV3jySPlpEH16h/4OQIQFEQVpFROwCOS/+smqmtFBOaOOFrCqzpOJowX08BDed0zbdgDRr8kfyOxAZb/BNLGVEWZpGHy/GXw8xjjUjy3EhvFWy6stKLBpQmO0EALCbupD8FaxOyHtc6o4V6+np25LSsXekrv9y8orr4GjTG0QpQVBXar6xOjCSm0XNbQLvXFN5NxS/maqApoTuwdsWsmVC0T2Y6HMYykJ45HhwFEulsbzd2xZ+Hm10XlGhl4VKuqiN0p61p9HyCfGS2ZG2Ciw6yhurfBu6+VTWyl0Y86hgf//AXXgf7B1bO/VEVRu5JahOYLrD5iDJ1kCSIbmiUo7rFKzPCDlxGZIBz8y7yxXpnAZY0n4krDEhYkiDTBXQg6EYQ9T0wMUeL/ppQOQSsq4LDt4mnzZ5xolVwnR+kFGCecqsWXKr6+LpYuOD66Wyi0AG04TxZm54BooIw9Dj53geITyjbiYYbUYeHPHUj0ONrdgueRm3L3CcURdUV6ZFomQScq65jrhPDRMOdU/FhPMgsrpHyIZbvPyD2n7ayuNy2s9i/wzCrsGU+/mBJ2MRdSjYRPxdEw39X7iGM5M9bIPH1xfXFzdXYt5kw5BMSpcmuNIl1STyKMbMoxjfXh/cuG/x+3R6y2bMdOcE7kfnAv2hDfg2DW4NzJLFBeRwdAM5LhW3xvmZpcnnGyG9l/l8EZMOodwtwsOegvwbNwCEl7Hs+BIXIO4FTMRwpnFuEJ9IWoRoDrkiOxSfugTKESK+NzQq6F/VFLRzaXQIF+CzHz66kWTYxYGewfbWj78pmxju8KmI0cuIEfG07bnY0PWeB0vKXDBy50L5zXCjY1A3Gj0U3VS/fRWYDmDlNggUB7+f3F7o+h7MCGSoIJaSsOrNa6UbCwGXdpVay7YysnBiqVBHDUexoLySPHNGicOZCwlEIB0JXZyLwgQkyC1Ox6JQ7DO4KxVVOKi0ZsEwaVH7dqsE8TCuWM6QmGwnw/fDkwR5WiNRFjLoalcXl1Gvbvu63cvS1Vac/x8i10mJp2c/qiuwwUEL8rXq5O6edYb1rfuJmPa/8iBVc0SXLVarTDr6Yqv1ml/HH34shIVy3PWgoiXKgX4Q7Xd3XXP7Wbzl1iPEbuc3JgSsYaMgmk/SKr4p9Cs4Fgo1uBB3jRHZ2u/sOui8fMpG8i+vbq6mVzDnOtmX3Mcgud0XvqBf0u3O8S/VN3rB/9fpG1tWqyjoiGFvH5fe3NGh7K05Sg/o5v8CWpKSfQ==
+sidebar_class_name: "delete api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete Prefix"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/storage/prefix"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Recursively delete folder contents across all listing pages. Deleting the science-agent/ root is forbidden. A non-success response can indicate partial deletion; refresh before retrying. The browser requires user confirmation.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"prefix","in":"query","required":true,"schema":{"type":"string","title":"Prefix"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"400":{"description":"Invalid storage path or selected profile.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"S3 access denied or request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"The selected S3 bucket or requested object was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"409":{"description":"An S3 credential profile must be selected or updated in Settings.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"502":{"description":"S3 operation failed or returned incomplete results. Folder deletion may be partial; read the error before retrying.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"503":{"description":"The selected S3 endpoint is unavailable.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

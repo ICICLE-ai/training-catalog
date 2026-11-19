@@ -2,6 +2,6 @@
   "label": "ScienceAgent Interface",
   "link": {
     "type": "generated-index",
-    "description": "ScienceAgent Interface provides a web interface for conducting data-driven scientific tasks using ScienceAgent."
+    "description": "Science Agent helps researchers carry out tasks using ICICLE services and resources through natural language."
   }
 }

@@ -35,6 +35,7 @@ import os
 import re
 import shutil
 import sys
+import urllib.parse
 import urllib.request
 
 # README-first tag resolution, shared with the doc skill (stdlib-only module).
@@ -59,18 +60,42 @@ def title_case_repo(repo: str) -> str:
 
 
 def repo_name_from_url(url: str):
-    """Pull the <repo> out of a github.com / raw.githubusercontent.com URL."""
-    m = re.search(r"github(?:usercontent)?\.com/([^/]+)/([^/]+)", url)
+    """Pull the <repo> out of a github.com / raw.githubusercontent.com / huggingface.co URL."""
+    m = (re.search(r"github(?:usercontent)?\.com/([^/]+)/([^/]+)", url)
+         or re.search(r"huggingface\.co/(?:datasets/|spaces/)?([^/]+)/([^/?#]+)", url))
     return m.group(2) if m else None
 
 
+HF_HOSTS = ("huggingface.co", "www.huggingface.co")
+GITHUB_HOSTS = ("github.com", "raw.githubusercontent.com", "api.github.com")
+
+
+def _host(url: str) -> str:
+    return urllib.parse.urlparse(url.strip()).netloc.lower()
+
+
+def auth_headers(url: str, user_agent: str) -> dict:
+    """GITHUB_PAT only for GitHub hosts, HF_TOKEN only for Hugging Face."""
+    headers = {"User-Agent": user_agent}
+    host = _host(url)
+    if host in GITHUB_HOSTS and os.environ.get("GITHUB_PAT"):
+        headers["Authorization"] = f"token {os.environ['GITHUB_PAT']}"
+    elif host in HF_HOSTS and os.environ.get("HF_TOKEN"):
+        headers["Authorization"] = f"Bearer {os.environ['HF_TOKEN']}"
+    return headers
+
+
 def blob_to_raw(url: str) -> str:
-    """github.com/<u>/<r>/blob/<b>/<path> -> raw.githubusercontent.com/<u>/<r>/<b>/<path>."""
-    m = re.match(r"https?://github\.com/([^/]+)/([^/]+)/blob/(.+)$", url.strip())
+    """github.com/<u>/<r>/blob/<b>/<path> -> raw.githubusercontent.com/<u>/<r>/<b>/<path>;
+    huggingface.co/…/blob/<b>/<path> -> huggingface.co/…/resolve/<b>/<path>."""
+    url = url.strip()
+    m = re.match(r"https?://github\.com/([^/]+)/([^/]+)/blob/(.+)$", url)
     if m:
         user, repo, rest = m.groups()
         return f"https://raw.githubusercontent.com/{user}/{repo}/{rest}"
-    return url.strip()
+    if _host(url) in HF_HOSTS and "/blob/" in url:
+        return url.replace("/blob/", "/resolve/", 1)
+    return url
 
 
 def fetch_readme_text(link: str) -> str:
@@ -79,14 +104,18 @@ def fetch_readme_text(link: str) -> str:
     if not link or link.lower() == "nan":
         return ""
     m = re.match(r"https?://github\.com/([^/]+)/([^/#?]+)/?$", link)
-    urls = ([f"https://raw.githubusercontent.com/{m[1]}/{m[2]}/{b}/README.md"
-             for b in ("main", "master")] if m else [blob_to_raw(link)])
-    headers = {"User-Agent": "icicle-api-parser"}
-    if os.environ.get("GITHUB_PAT"):
-        headers["Authorization"] = f"token {os.environ['GITHUB_PAT']}"
+    hf = re.match(r"https?://(?:www\.)?huggingface\.co/((?:datasets/|spaces/)?[^/?#]+/[^/?#]+)/?$",
+                  link, re.IGNORECASE)
+    if m:
+        urls = [f"https://raw.githubusercontent.com/{m[1]}/{m[2]}/{b}/README.md"
+                for b in ("main", "master")]
+    elif hf:
+        urls = [f"https://huggingface.co/{hf[1]}/resolve/main/README.md"]
+    else:
+        urls = [blob_to_raw(link)]
     for url in urls:
         try:
-            req = urllib.request.Request(url, headers=headers)
+            req = urllib.request.Request(url, headers=auth_headers(url, "icicle-api-parser"))
             with urllib.request.urlopen(req, timeout=30) as resp:
                 return resp.read().decode("utf-8", "replace")
         except Exception:
@@ -163,7 +192,8 @@ def cmd_stage(args):
     src = args.source
     if re.match(r"https?://", src):
         url = blob_to_raw(src)
-        with urllib.request.urlopen(url) as resp:  # noqa: S310 (trusted GitHub URLs)
+        req = urllib.request.Request(url, headers=auth_headers(url, "icicle-api-parser"))
+        with urllib.request.urlopen(req) as resp:  # noqa: S310 (trusted GitHub/HF URLs)
             data = resp.read()
         with open(out, "wb") as f:
             f.write(data)

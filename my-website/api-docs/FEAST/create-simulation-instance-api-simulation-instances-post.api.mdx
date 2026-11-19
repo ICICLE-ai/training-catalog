@@ -1,0 +1,84 @@
+---
+id: create-simulation-instance-api-simulation-instances-post
+title: "Create Simulation Instance"
+description: "Create a new simulation instance."
+sidebar_label: "Create Simulation Instance"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVk1v2zgQ/SsD7mEdwHbcYE/uYgFn10UDJG2QuHuxA5uWKIstRWpJKolr6L93hpIt+aPZtkBv1cGWyJk35JvhG26Y5yvHhlM2urxhD10WCxdZmXtpNBuyv63gXgAHLZ7AyaxQnGZAaue5jkR/pmd6kgqIuFLC/u6gcMKCjKGTWJPBYjEqfGqs/Bz8hnApuEWDP735JPRfi8UZSAeIleUinmmpvUEf86SFnct4sXhNoU0vWNcxIAprcjiTF0slo91iZrrT9oV3H66vz7qQcR+lUq/A4zpzK3q/vRpcgEtxIXEvN0bBUqT8URobdnPLLc+EF9YNZxrw0fgJHedtF0zghauzIdCmw4xJAvBpcsi/xegxzGhv+n+xUoP8pkbFcyUz6aGDjB0tK+PPCJCBLrIl8oWgOzcHSPBKIEWU1sTYF+LN9J3whdVbHmIZ+bBg/Kdwdg2R0Z5LvSU3Fvil3HYbVaLik/Csy0xOq8DRqxgrrTKeN7bzre2c5/LUuJvnxnkEyncZwzreMMoKAvJ24aGVpHpOBY+FxS8r/iskFgAbJlw50WUuSkXG2XDDuF6/TwKSX+eEhDnDHbKyuxvRhVKsxNPipVc0sFflrKQpiiCcvzTxmlCJKqF9CJDnWLbB9Pyjo3O2aYXPLRHjpXD0VW3mxxb1jnzLLjsompNwWEdihcy8hPd2iwPXAadE7NrWLD+KiHKxtaVtz384p2VJ2Fa43GhXEXExGNDfvjzdFxH6uKRQcFcb4xq+leoqyh8XF8fA/3Il46pkx9Ya+x2oBwmszgS9SS8yd2ygTLQ3+w2Z3iXrockAt5avWwm4NlFdjF2WuRUh7+M1pjdIIV+FUqlMvm4ayIAJzZ7KfnOqpmFfVejarlVJDb0Vu1/fxj8VfS+V2tvJ5PYIsMotqkJqSF12SuFT/DrH6jtvqq+3qz40oXzeNUd3/IytSYnmKDacHB2rQUkqk5hAYL24N8bEvVGo0t6NiYWC0e0VO2yzlzzCBhfT3E6UyRPGyKdfQwUA942QTkSUaqPMag2dN+PR/eQMMIXa95bcoeRmFKq/dcBmmZoniFKuV/gudQiQUAAb+AXFdewinmOrTxKkt+kYlRkPC+jDWMe5wfLD7msFrKwpsG9DoVFUgVglXX9EIa62Nei/6g8ouUR/xnWLxfpi0drRVZ2EQ3Ja0vnrOvLrOvLTriO1vHjx7M9zhTBUuIUN0l3pxhSFX6LlSeV4IEFAkUGrzYYO4QerypKGUUssXgGm+PrIreRLEoYpSXd9GyGt/yTWVN9VpfeCwJK5KoIoHvYb6gWVBylD7l+0fWjp4O37+wkaL+tLCckEjlr+ROKNv0MWLmbkHZpRGMMehcJRUIsYsgqTni+bEVDh
+sidebar_class_name: "post api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create Simulation Instance"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/simulation-instances"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a new simulation instance.
+
+The caller's user id (from ``Authorization: Bearer <token>``) is stamped
+into ``owner_id``; a no-token caller creates a public instance
+(``owner_id`` NULL), matching the pre-#102 shared-pool behavior.
+
+Parameters:
+    name (str, optional): The name of the simulation instance.
+    description (str, optional): A description of the simulation instance.
+    household_limit (int, optional): The maximum number of households to generate for the simulation instance.
+
+Returns:
+    dict: A dictionary containing the details of the created simulation instance.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"properties":{"name":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Name"},"household_limit":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Household Limit"}},"type":"object","title":"Body_create_simulation_instance_api_simulation_instances_post"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

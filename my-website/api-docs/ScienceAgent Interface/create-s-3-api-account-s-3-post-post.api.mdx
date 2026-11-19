@@ -1,0 +1,72 @@
+---
+id: create-s-3-api-account-s-3-post-post
+title: "Create S3"
+description: "Save a named profile without selecting it. Secret keys are not returned."
+sidebar_label: "Create S3"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVktvGzcQ/isEL72sJKfqyTnZgoEYTWHXUtAAhiBQy5HEmEtuSa6lxUL/vTPkrlavFimQQ3yQpeG855uPbHgQa89vX/ldntvKBD7PuC3BiaCseZT8lucORICFHy9EqRYiqdHP0voQP3jGHfjSGg/oquG/3nygfxJ87lRJjtDNtMpz8H5VafbSKqNdbk0AjIrqoiy1ymPc0TdPNg33+QYKgd/2+Jfx325uLh0/mnehlWSYp0RXSmhWOrtSGob/IwAPdQnozS6/QZ4q+rtS6JJ6A85ZR51Bx9iboFKdSdzb+uCUWXPKNKigSfRAKod6uyqutOcP5T0aZwx2JYVl1jHVVlZ5cCzYNzA/bUXjy4peMBz4wJ6cWivDlGfGBia0tluQP2UheOghr5wKNbpu+AwB7yfWvinUf53v5yk0FnVvZU3e+0yCq+AHlWREQasBRpZWGTpdVvkbJLU1NTfjIi7T4g3qhZI85u0gLHrxZUui28uOHAW6OMzORvppNnuesukYwRlnulVhYyscKitF2BBkoViClHC8jX5IQdoSrsVvi7p2dFrmlfy2OCx4MrpOE9hf68R3mB3BYjqeHFKfROprQX5GZ+IdsG5qquz45tAPDxrHiqGYCkM2jRkxTMUz4SCuAQoqZ9IeFIBWxLQtl1Iv8dcI0Tdq6Xbkx3HI7h2cj9isnCadixF98cDCBpiEUtsac1sKbLyR7chwFvMe5VPCY0LHCdYPDUPh79jBjCvynafjrIUS/zqIVoMZUdNFJncssVfUSRyWhpKojPmKNoQyrGPGj5PHyecHtqmWw7intDQv/bo97ERRauiR3E+zB3Av6/DWSzqY9ZIzdPUHVzB0BEplVjb2qENMrsDkwO7WiBp29/x40YpTDdoiUmMrXJjUnXbMTEXghTqL/RrYraFVsobGHqnEZ+wZUbJ2MP3zMxMhiHxToA26wBkn3KEJrujldeiH7K7CTqMw8RIF8bH3J5Nkac5Z4mt2DwhaxzYgJLghu3d2S7PMcXYUt6iQ45XJdSXheOtjQhgA/3ek314Fw7YPsEMY9nn8BcuppaFlLHUPmQQrKgW+RUDXGIPtBltY+qjkP+JuHS4Vk5p6eLjg0gXrxBp6UYRgLFb0TYB0uf7iT1rXrTNVQAuLjxscfjwNNrrwaaADQYWM0ABWaodB0xsH2bDWVkh/RJASci3oXk93APosBFaEQ8dNkx+ZtLESxBbtiZSKcsbZrRRodLRytqAyoShDzbrXVuuMSIQQksB2M/wwvCGcEp0UwhxtTOIzLPEcoU1/c/1IZmtZJMAujEqN9VJakbmaluVeiWLSKsbXJ+7emK6uDVEhnjbNUnj44vR+T2JkA0d3M359F06JpU43MxpEeEZqTPs6SQUNZpQDqesqMdrZtbzPOgt8AUMZ/lN3fsTWz0/TGRFN+xQorCQbJ7bENfh5yzk9pSP24luBZA3XwqwrxA2eJ5/EdQTJU9p9i7TbfqGquiNTH2V4zsCpEPqksq6aNE0idWxop5+O/tWibW2nTVOcY9b/AIsdRmM=
+sidebar_class_name: "post api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create S3"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/account/s3"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Save a named profile without selecting it. Secret keys are not returned.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["name","endpoint","bucket","region","access_key_id","secret_access_key"],"properties":{"name":{"type":"string"},"endpoint":{"type":"string","description":"HTTPS S3 origin without a path or embedded credentials."},"bucket":{"type":"string"},"region":{"type":"string"},"access_key_id":{"type":"string","writeOnly":true},"secret_access_key":{"type":"string","writeOnly":true}},"title":"S3CredentialCreate"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"400":{"description":"Invalid credential profile.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"Request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

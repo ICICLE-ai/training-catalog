@@ -1,0 +1,72 @@
+---
+id: update-s-3-api-account-s-3-profile-id-put-put
+title: "Update S3"
+description: "Save a named profile without selecting it. Secret keys are not returned."
+sidebar_label: "Update S3"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNV9tu4zYQ/RVCL20B2c4m+5R9SoIANbpF0thBCwSGQUtjmxtJVEkqtiH43/cMKVm+ZdEC+5AAsWVyZjhnLmeoOnJyYaPrl+gmSXRVuGgSR7okI53SxTCNrqOqTKWjqb2aylJNZRDjn9PS6LnKaKpSPFeO/6M4KqWROTkybLaOCvyAlU4WIqrgFemWeDb0b6UM4SRnKoojmywpl9F1HblNyZrWGVUsIDnXJpeOPaq8FadcxgKPwbSAt9vthC3aUheWLBu5vLjgr5RsYlTJoKAxqpKErJ1XmXhqhGEv0YUjRADisiwzlfgYDL5Z1qk7x7b4i6PP5wwPizeZqVQkAARTSmaiAd7/Hwe0yPXsGyXuIEYvERmjDWcJhpEnpwLOsHwSNfa0jdM9i+zwtig+naL4U1kL5VjQuuRjhTZCNcgqS0Y4/UrFh0V0dYroCceRdeLBqIUqhLKi0E7ILNMrSj8skM/vAuGcrAp8otZ1ZRISKxkwzdGdHxbR5eX7LWMCsg/pOjYtJZVRbuM5bQwmtHdavyrIv0wC6Xj3b3W6YevHrPZTIHkqjSMq0lKrgndnVfJKQWzB4TyBG9j3BO2ekTNEe5ig38fjx5EYXYEFfPOslFvqCt0jmMGZGyifUZrSPu3ZPh/SuHfu/Mbhc1vSk/P0lTY8Lc74t0Ii6KHINiG6ITuG3LTT/C9q22OkD7lyYqYBChbEXFGWWnAdStNJAKe1sg6meNf2xXAukqUsFu1KzFT/plLyJvp7A2p0dbcLzLOfpk1DHE0l+UaIKqcsbcfGLtqWMhQEn6VcX4w8Xn+skIZ852OhMkWgM8zfpebh3Y5kjNrraICyHTQDfGCvBnU3lLcRB9G8tVO7MhkrnBTDsyXhliRSKjO9gZ8ziRQXaVMcyPqk65URV3Wow4OO2aUGi38gV82FIAnbcXtl+KfntXpjnjYnntyIwBteJoylkP4wnYStuM/Yw433eHg3vPt6L5bVrO+7nVvvqWva+7XMy4y6nunqpmuVbq2t7G6lLehu5aiOu40z1bpX/qqYax+jtnoSRQUY/maBChI3j8OTUBxKcL+yGEaBaaLT5FwoX4RuE/t49cIIATVx2j0hoYgftXULQ6O/vgrpnEyWOXRgAjkONQgVkMHpDQctcVMh0lgM7MaHWB/7g0yKkOc4jGBxSyhgI5YkUzJ9cWv0inOZIHd8bl5hbKsiySo01h6/eIdwAL7bOd5M934TB1qjDDs//qbZSHPSYhGiB84CIr6tOso2OEOseyuaWS9kv6DPdveEIgR1dy9GAzpt5IK6JV+CHqzsgkDhvvSLPQhd29qMgJsXMxzJ97sgGzZhQ0J7koEMoEBztcah4doK3t1kWoKbOipOKckkX9XCJIHNnCkLSUenpV9Eqj0S1Bb3SZoq9hm5a0hubnTOMCkv3Ua0F+jGGBMKV0gotov+p/4F12mJQsllsdcxgdsA8bhC627+/UyWa1jE0doNygx42S3PXHVDeS9MMaEV/csNeo+du957GwFfLYGEZet6Ji09m2y75WVwg+F5j8c3aZSccTuCG1Nl+RktPUch0g+w/vrUTO/fxHvutkxYMA2C0Sr+hcfACnt+bieQDl3ivQgCd+Gs3pjNdAZO7hjbuNXAex6V7oeyk70B8vg8ZrprrjW5TlnFyBUzHj69r9pD9zzv1+oow1ysUL3YDyaZcbkxDsn/1ZN/88CgzkbjeA4EHPzJqM6q1HUYLdvtTj5svavRRLaV5uRM4PV3AjVIAA==
+sidebar_class_name: "put api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update S3"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/api/account/s3/{profile_id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Save a named profile without selecting it. Secret keys are not returned.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"profile_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Profile Id"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["name","endpoint","bucket","region"],"properties":{"name":{"type":"string"},"endpoint":{"type":"string","description":"HTTPS S3 origin without a path or embedded credentials."},"bucket":{"type":"string"},"region":{"type":"string"},"access_key_id":{"type":"string","writeOnly":true},"secret_access_key":{"type":"string","writeOnly":true}},"description":"Omit both key fields to retain existing keys. If changing keys, provide both.","title":"S3CredentialUpdate"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"400":{"description":"Invalid credential profile.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"Request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"Requested owned resource was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

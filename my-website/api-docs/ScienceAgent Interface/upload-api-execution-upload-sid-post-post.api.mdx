@@ -1,0 +1,72 @@
+---
+id: upload-api-execution-upload-sid-post-post
+title: "Upload"
+description: "Upload"
+sidebar_label: "Upload"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVl1v2zYU/SsEX7YBsp2kfVn65AQdFqxFs9rFBgRGQEvXNhtJ1EgqjmHov/dcUpLtyh22t7zYkni/zv04l3vp1drJ6wc59V6lm4JK7+QikaYiq7w25V0mr2Vd5UZlj6rSj/RCac0Hj+3HR6fxUxnnw49MZKWsKsiTZcN7WeIFNiCGM13isVJ+g2dL/9TaEhx4W1MiXbqhQsnrvfS7Kqh4q8s1JFfGFspzIHWw4rXPWWCGt6ZZRFPk/I3Jdqz/veXUlB7I+Kioc68RoZ+w0VGmfPB48F1Zxu41OX5baXY0jKi1+JEyrebxTFVVrtOQtIlJPfkRpEkVR/H+xtaaJunMmeVXSv1JKh6iy8VBiUE9/rcKwDZbt+QqU7qI4Origv8ycqnVFetx4uo0JedWdS4+t8LyJE3HYL461jnKUfTy9uJyaPijdg4ZSgS9VAxIGCt0+axynYnakRXePFE5/h/O/jVXZK2xnKzTqsXPg7KFzLdZfc8iPfYO0Zshos+xtcQnq9e6FNqJ0nih8txsKXu1QN7+EAjXZFviF11iapuS2KqIaWXq8vUi+nWIaCraueeq2LosYQko0GQbfACKZ3BQiP21oro803BfwlRjgFKizAELMZSVXtc8T7kutH+tcK6uhnDu2ulvS/UqQ8ehA6la7XdhZc3Bs+7WmCcN+YcFb5hzNUJE2HMbwyuy331YbddyAgOTnqgnkagnexB1I9mXfe62Y21zlpcDD45C6TOC7g6FX6oUzMmEyjw0lhxUF/SMMxbxn4TeZwEf/6Bdt3/TeJx0q/nvUdAazZmbB5FMRSxgkIkkrsL2iFwuXM015Ah3IeK727vbD+/Fpl6OQ9p1uTIhlG5pp5pK0M50jR4Q0/u7gcdTid/n83sWC5Mdg4B/cBXGPoMA8CchrFHkteO5d4m4R2HWlmZ/fhDqcMcRCql0lKOvoDJ7I1K0FRtTuUBD8Q52YzGtAQgfY4OykziPJwkTMZ1J3AvihpRFijakMrJjcWPNllOWIkXst6iZrso0rzM6choDggP8d8ulXTnjNg99O8U4/qLlzKAlfCJi9pbEiPjy5SnfwYd4GW1p6YKQeye075dXGZPaX/LGYuaNVWs6fAqVDmDVIQkUl/hP7iR1bb4CAmDnxYKhC6feBBMuFnSkGMgECrTSL3AabyGiUjueDye2GtNUcxYzSnPFfBfJADYLBUQoOho6eycyE5Cgt7gds0xzzKjdSlMOQytrCoZJReV3orsPtcaYgrhDYrNdjC/HFxJ9yhNcqMBA7Vz0U37Snv1QeXrxkypHXKweBnnfEsADTxwU+5rhue6sXfNVGNO7YcqA6H6/VI6+2Lxp+DNo0jIN4fFZWa2WPDVgikw7fgbZrNAvNIiqZ1X58+eWJ38RMjkfbccLJZMC5rvmNzw+gSXiXb1ZQCx2cXAfT26jk1G48x40z92qm6RTmqLMlT8SH7A+k1lPpfefZnMIL9vLfGEy1mHDwW5yeGRuTiQ36CnXPQWuax84+LNwv6e9GCz/cuhnVfb7yKRN08vHox9qtBnspDn7Cyycb08stlw=
+sidebar_class_name: "post api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Upload"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/execution/upload/{sid}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Upload
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"sid","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Sid"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"multipart/form-data":{"schema":{"properties":{"file":{"type":"string","contentMediaType":"application/octet-stream","title":"File"}},"type":"object","required":["file"],"title":"Body_upload_api_execution_upload__sid__post"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"Request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"Requested owned resource was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"409":{"description":"A request is running for this conversation.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"413":{"description":"Upload exceeds the configured limit.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

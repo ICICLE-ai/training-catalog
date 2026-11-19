@@ -273,6 +273,40 @@ const config = {
     ],
 
     [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: 'openapi-scienceagent-interface', // Plugin ID
+        docsPluginId: 'api', // Associate it with API docs
+        config: {
+          'scienceagent-interface': {
+            specPath: 'api_config_files/scienceagent-interface.json',
+            outputDir: 'api-docs/ScienceAgent Interface',
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+        },
+      },
+    ],
+
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: 'openapi-feast', // Plugin ID
+        docsPluginId: 'api', // Associate it with API docs
+        config: {
+          'feast': {
+            specPath: 'api_config_files/feast.json',
+            outputDir: 'api-docs/FEAST',
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+        },
+      },
+    ],
+
+    [
       "@dipakparmar/docusaurus-plugin-umami",
         /** @type {import('@dipakparmar/docusaurus-plugin-umami').Options} */
         ({

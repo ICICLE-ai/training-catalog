@@ -1,0 +1,72 @@
+---
+id: delete-api-execution-agent-session-sid-delete-delete
+title: "Delete"
+description: "Delete"
+sidebar_label: "Delete"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVltvGkcU/iujeWkrrYE4eSl5Ig5SUF3VNUStZCE07B5g4mVmOzNrjBD/vd+Z2V1DiB/yZh7YuZzbdy7f7kEGtfZy+CBvrHki51XQ1ng5z6StyMXdpJBDWVBJgRaq0gt6przmi4VakwkLT97zbuF1sVg0gukhM1kpp7ZYOvZykAYbmIMo7rTBslJhg7Wj/2rtCL6CqymTPt/QVsnhQYZ9FVWC02YNyZV1WxVwUtfRStChZIEpdsfjnE35CiDIs/b1YMCPgnzudMVhs2id54h6VZfivhGGodyaAEAsrqqq1HmE3//mWefwEtERv0x+GLy7NPynRi7MOhP0XDEaYZ3Q5kmVuhC1JyeCfSTT+wlnLXy7/EZ5OEvUgyTnrONiVY7LFXTCnI4vUsdRt8kas0iHvUX0/hLRPdyRD+Ivp9faCO2FsUGosrQ7Kt4skA+vAuGa7Az+0SW2djmJnUqYVrY2bxfR75eIRsI1xUFVXG0MLAEFmmyDg/xkoN8qquvrS1STZlwabG8ydFx6kKDTYR9ZbQZe9DfWPmrIP8yZhM5BfW7pEFS4sS+EGgkS/DeUfZjod9TaP6PW/gF8eZTs1D21TFq7ktXk966+ekIDkCioKu0ejb5UOTiHqYgnuCc5ujb6KacuJeIMQ5cOHP5B+5ar83SdtTT+71XUupoxq11EMhKpklEm0Z+KvJtYUPiai8kR7mPEk5vJze1YbOplL+Zfm5WNobQEn2syGNgR50aM7iYXHs8lvsxmdywWZyIFAf+YcgxMAQHgz2JYV4kRTifGZ+LO+rB2NP37VqgQVL7ZQgcmkEqP4uVMJdP3Ikd/sTFVCnTWSpfke2JUAxAOU6eyEx8hniVMpHRmiVHFJ1IOKdqQKsj1xCdnd5yyHCliv9uaB93kZV3QidMUEBzg2dJyQ9a9Jg9dV6U4/qHl1KIlQiZS9pbEiPhFHajcw4d4vtrR0kch/1Ho0NG+SUntvg16YhqsQ7O+HMVKR7DqJQmUXn+/+LPUNfmKCICdKRnTF2+DjSZ8KuhVHIc+FGiln+E0vb9FpfalVYUXO42xqjmLBeWl4jdvYgXY3CogQtHR0MVHUdiIBL3F7VgUmmNG7VaaShhaObtlmLStwl60XxKNMeYi7pDUbIPeu95Aok8rNMpWRSpq5qIb97P27IYq0HPoVyXiYvU4yIeGBx544qDY1QzrMy7AfshfTxjiDfyyxuGwVJ6+uvJ45GPQpmNawvJJOa2WPDwgjEJ7XoN8VmgbugiuY1n5633Dm78J/r76UdAtPRjmBox5zTssH0EW6fPuOIdYauboPt2MULgqnOhcEDrTU8eSn8e349mYc1Bzdk5p6THSUrNgBz8M6XuGSlHw/zF7ReVwSKR3PHby6epVjQZlK80ZmuMl8T8ObPfl
+sidebar_class_name: "delete api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/execution/agent_session/{sid}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"sid","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Sid"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"Request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"Requested owned resource was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"409":{"description":"A request is running for this conversation.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

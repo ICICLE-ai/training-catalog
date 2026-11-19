@@ -1,0 +1,80 @@
+---
+id: remove-store-api-stores-delete
+title: "Remove Store"
+description: "Removes a store from a model given a store_id, simulation_instance_id, and simulation_step"
+sidebar_label: "Remove Store"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVk1v2zgQ/SuETgngOGmwJ99c2MUaaNAgdveSBAEtUhZbimRJKl3X0H/fGVKyJEsu0kUvC6wvFsmZ4Zs3Xzwknu5cMntM5u/vkudJwrhLrTBeaJXMkgde6FfuCCXOa8tJZnUBi0IzLslOvHLVHL0INiFOFKWkqPsilPNUpXGfKtY9c56bJ/Wk7qmlBffcutmTIvBrLJEL5+3ljGxyTlYLojPi4StC8JpsObEBGKvVRq89Y+QoSxpZNBntda5BTwfWETi5EMrXZsNalcWW258YeVIP3JdWNV4ykfoZmYd/sErtvgFXGkY9Z1HbAcCwG9mmjnznMvzjZk1AFE0miTbcBpArBnGLpy+RT2pE/HIvYAj4BnFzpB5if0gULECt4R8EBIb/W8ntHhaWfyuF5WDZ25JPEpfmvKDJ7JD4vYmKVqhdcpo+I7E7IvDCS1RdhxNAXb1du5q0kPvR+WXkEEy+43YAfd3mSW33CLg9WePJAPep6jjaTqb+LrrXI7m9WoxDXx0FRpg/Y6jjCC19rq34EYQa/DmnLFDZOpBR6XoeULX/lIWc6/uCtusdVUqZVM8t7HnvsgqPIJmNVo47tHl7c4N/Jz6Uacqdy0pJHmphQJZqiLfyAYkxUqTB5vUXhzqHIdN6+4WnHhQpYyJUq7y3WGtexLtrOWotxdAJzws31K+q1psGDYnNlcQCmBsRvxxZ1EleodYft7dD3/6iUrAYn6W12v6KY6YHn3FPhcSvI/K+gNRp7/QN8WtKqnpGr/v8NCR81GkdzUlSuN1YbjeidxBFusOir0XOiwYyyAZPq/buYwzbtHwMfsWra7lOvrX0RnbPu7GI9I1d1oj8udncDwzG2EIDzjW2605b9jmsr6FlX8eWHWor08Hr2uIHrdnVPGT31V2YDfP71aAZvKfpVw5zF85IBqxgH0VNsgQS/J5EA6RT6hue5kpLvduTiw/L+XpzSYB35a+21MGkCWNo2ihAnub6O0lzqnbtqMrwAhtIIRKmvkup4YRmGXAC8qXjuZYsitEAYEqWihkNOQOvDKiDndWlgdtKBa2EIBFTcO0VBlV062b6bnqDETHa+YKG5K57UreeTuk4tAXy/6PmP/OoqWvK87/9tZFUhHZR2tCvYqk8QrcTIFkXCxRxDnmB+4cDpu1nK6sKt+Nsxb7FhKNb2RlOZxPl4qFuGJdjAWtfMmMov/J9/0H1SmWJYqFT/isMI0+Sn9w8eBf9VgAn74s34ei/eFo4z7iwAvFAgHBo1A8JjFa0gs3K+I7WYMahlWM/XSw/LjdLaLP/APyefPM=
+sidebar_class_name: "delete api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Remove Store"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/stores"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Removes a store from a model given a store_id, simulation_instance_id, and simulation_step
+
+Parameters:
+    store_id (str): The ID of the store to be removed
+    simulation_instance_id (str): The ID of the simulation instance to remove the store from
+    simulation_step (int): The step number to remove the store from
+
+Returns:
+    dict: A dictionary of the updated stores in the model as well as the removed store
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"store_id","in":"query","required":true,"schema":{"type":"string","description":"ID of the store to delete","title":"Store Id"},"description":"ID of the store to delete"},{"name":"simulation_step","in":"query","required":true,"schema":{"type":"integer","description":"Simulation step","title":"Simulation Step"},"description":"Simulation step"},{"name":"simulation_instance_id","in":"query","required":true,"schema":{"type":"string","description":"Simulation instance ID","title":"Simulation Instance Id"},"description":"Simulation instance ID"},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":{"type":"array","items":{"type":"object"}},"title":"Response Remove Store Api Stores Delete"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

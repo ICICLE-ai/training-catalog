@@ -1,0 +1,72 @@
+---
+id: download-upload-api-execution-upload-sid-filename-get-get
+title: "Download Upload"
+description: "Download Upload"
+sidebar_label: "Download Upload"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVsFu4zYQ/RWCl7aAbGfTPXlP3jRtjW7RNHbQAoFh0NLY5kYSVZKKbQj6974hJWW9zhZFD8UebNPkkPPmcd6TGunVzsnpo5x5r9J9QaV3cpVIU5FVXptynsmpzMyhzI3K1nUVflSl13SktOaIfnLtNL7WW51TqQpar3fk+SMTWSmLGU+WUzWSl3Eq4rGmSwwr5fcYW/qr1paQ0tuaEunSPRVKThvpT1XY4q0ud4jcGlsoj5m6Dqd47XMOWOBf2yZDjh7Nf07UH/xjf1Dbrni/q0zpyPGW66sr/snIpVZXTAnif7N6p0uVi8gOZWJz8uTeiRtTerA8WiKRyKiiMnPClMLvSThvAEow6DFypzGUD1dVles03MjEpJ78CAhJFbz2L1jaAIo9ATu4kW+v3lzi/VU7h02JoGPFzAhjhS6fVa4zUTuywpsnKv8B1UfH57yCxmw+UurPSH+UZK2x3GiV5VbzOlIZpy8qYdT9RdxyyH3H/1DR28uK7pGOnOdSDiW+cWemtimJg3KiNF5sTV1mX2tF19eXFc27+7Cxsq8SOhYdjMFqfwpaX8Ir3I0xTxrxjysWz3lRP3TeIh6CUAANTrE3bDu9eUCyUznBQZPBdCZRVpMGJtJOml7mreT09rl3mtrmvFV+nvTBURAc9JebE4tTpWhv7nqW7Vgyzr6OBZMYKTmrZiAGk7/QqbeYNC4nvQX9OQq7RksW0AWSmYh3GmKi0lSaknNRcMLVfK3BPgLi+c385sOt2NebcbgJXW5NgNIbYKqpRJPPdmgLMbubX2Q8j/h5ubzjMKjBdiCQH8rwQmcIQP1JgDWKKkLDMbuhzVwi7ozzO0uL3z8I9fIEEQpUOsrRatiy+F6k6DQ+DH6IHuPbcmMxq1EQJmPPchIXSjwjTEQ6k6BYJd6TsqBoT7BUOxbvrTkwZSko4rxF7YC7TPM6o0+SRkBIgF+h8twcACs69LjjYeisiOMP2iwMWsInIrK3Ia6IH2Se8hNyiOPoQBsXgmDrGnmjrSBFIHV4hI7FAr6udvQyFW46FKteSKDotN+4M+o6vkIFqJ1tDDoMq97Ep0a80JHiQibYQFt9RNI69lGlTiwVJw4auqqZxYzSXLHJR3/AmYVCRbh0NHT2TmQmVILe4nbMMs2YcXdbTTkO2lpTcJlUVP4k+mdhdxi7EndIbLar8ZvxlUSfVmiUQgVT6nRxKfyzPh3U5enoJ1UOgHxOUHTTmcIjSw8bh8vDuO5Pm8b3i+nwCgBJ74GCtzXNRjl6sHnb8jTs1LJdYfisrFYblhLsI9OOx/CiLZqILhAO7iu/ve/89DvBLw2vIe/NomSngOhr/ofhE6wjvgzxe8v/mHIgpl0hNkoqlB2XZ2ifyn+y8YvvIGyWg2n/dLvEHm7rc4d8Cg7ZDTjLq+A+N8sIhb+ZnFe3NE3037Yd4uPSF3d0pfbRzNUKT66/Ab9k1/8=
+sidebar_class_name: "get api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Download Upload"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/execution/upload/{sid}/{filename}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Download Upload
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"sid","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Sid"}},{"name":"filename","in":"path","required":true,"schema":{"type":"string","title":"Filename"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Original uploaded bytes; Content-Type depends on the stored file.","content":{"application/octet-stream":{"schema":{"type":"string","format":"binary"}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"Requested owned resource was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

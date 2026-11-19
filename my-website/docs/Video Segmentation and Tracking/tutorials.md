@@ -17,7 +17,7 @@ A complete walkthrough from a raw video to tracked masks in 5 steps.
 #### Prerequisites
 
 - A Tapis account with a valid Slurm account to charge
-- A running SAM3 Video Service, reachable either through the deployment's auth gateway or an SSH tunnel to a GPU node (see [How to Connect to the SAM3 Video Service](#how-to-connect-to-the-sam3-video-service))
+- A running SAM3 Video Service, reachable either through the deployment's auth gateway or an SSH tunnel to a GPU node (see [How to Connect to the SAM3 Video Service](./how-to.md#how-to-connect-to-the-sam3-video-service))
 - A video file (MP4 recommended) on your computer or on a Tapis-connected HPC system
 - (Optional) A Hugging Face token with SAM3 access, if your deployment downloads the model on your behalf — see [How to Set Up Hugging Face Access](https://github.com/ICICLE-ai/smart_labeler/blob/main/SEGMENTATION_README.md#how-to-set-up-hugging-face-access)
 
@@ -100,6 +100,17 @@ Scrub to a frame where the object is clearly visible, then draw it with either t
 If an object is selected in the **Objects** panel, the new mask goes straight to that object. Otherwise the **Assign this region** dialog opens: pick an existing object, create a new one by typing a label (e.g. `torch`, `weld_pool`), or click **Discard region**.
 
 ![Assign Region Dialog](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images_video_segmentation/ai_assisted_annotation.png)
+
+Or use **Text Prompt** mode to run prediction over the whole image from a comma-separated label list.
+
+![SAM3 Text Prompt](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/SAM3-text-prompt.png)
+
+The **Detection Confidence** and **Mask Precision** set in the SAM3 dialog are applied to both Single Click and Text Prompt requests.
+
+Or use **Exemplar Prompts** mode to first draw a box or a mask and click on find similar to run prediction over the image to find objects similar to it.
+
+![Exemplar Prompt](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/SAM3-exemplar-prompts.png)
+![Exemplar Prompt - Find Similar](https://raw.githubusercontent.com/ICICLE-ai/smart_labeler/main/docs/images/annotator/SAM3-exemplar-find-similar.png)
 
 > **Tip:** Annotate a few keyframes spread across the video, especially where an object changes shape, is partly hidden, or reappears. An object can first appear on any keyframe; it is tracked backward from there too, so you do not need to find its first frame.
 

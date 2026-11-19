@@ -1,0 +1,72 @@
+---
+id: storage-list-objects
+title: "List Objects"
+description: "List one page of objects and folder prefixes in the selected bucket. Use next_continuation_token to fetch the next page. Prefix must end with / and stay inside science-agent/."
+sidebar_label: "List Objects"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVV01v4zYQ/SuELr0odpLdAt3klA3SNmiKpLUXLRAEAS2NbG5oUktSawuG/3vfkJI/4uSwNzeHJCKHnHnz8Wa4yoKc+uziMRsF6+SUsqc8szU5GZQ1t2V2kfm08ayVD8928pWK4LM8q6WTcwrk+PQqM/iAcO2oUktsK4Ovbw25Fh+OvjXKEW6rpPaUZ76Y0VxmF6sstDVFJU6ZKURLqmSjAy8VikxBJ9BtwhBbQQXNsg9Jx3qdb9QW1gRlmmj0c7AvZH7ABGna+yqCeG3MXJk7MtMwyy7O8CWX/dcvZ5/OWX13wDRaZ+unrYnXO/aIcbRnzfuOfG2NJ896z09P+U9JvnCqZlGcHDVFQd5XjRZ/d8IwhPHBC9HautaqiDcPv3o+s9piWeMnzz6+dfGt+S61KkUXTlHLMBPWCU8aEaVS1M5WStPgB9T1+FNW7Hn5MSPnrON0wsVIqKAS6rR8EHm2u/feDYts0PeYzg4x/am8x+Fc0LJmtYxHdTgbT07EVDhaRB/eCP8HIWMCiJKMSojYBPJB3Ds1VUYoL4wNQmptF1QeLbiPh+DGM9qmG5BOmuKFwg5ExhttEwuZUFa2MceL8dMhxivDyAoohLVK6r6sxLxBCCc7DgDspi4l/4uojiiAMab+WLGen79PKV30jtT0n0/fMB0x2nQ5UUkEqCu10DgTI1LYea3R37Dm0ZD8QPxqdQlOKRHAeGwuWw4oGiEH+hKCshQBOR4NxVZlHR8ProWdR+udN1jodaGSKWurTGDuaYz8Dn/JyZG2Cmx6KhqnQht7+ljWyl9b+6Ig//jEXXgf7B3mGmENBxJt0VYdBXkhTQn+iTFPYw15rtSw65xEYQPxxZMwtAzPh5MImpCoKBSzeJKFoqaBSHNMIgZ4WCwUOvIwqvUBuaWMVyV07c1B7HOMXTPLo9mUQpzEeCTJhgA67Lr7cDunoQ1+74e0xmkWzF67gK1n40qqtW0ZlgQswyXBLWcQZ5veqyMOaQrQnm83YcLiH9T2A1iRtvN+VPv3JJ46GXdT2iv6FIlSokzq4V0/TL70DScZW9hGi2+vb6/vbsSsmQxiXihT2WhKlx+j5Dxxxc4TVw+3Bxr3JX4fjx9YDIF3nRHQjyaE3I+MHto8mnViF8wTCDd7N4bb5+LB+jB1NPrrTsgQZDGb40zKpN16OmwPoJerBoCwmCqIlfgIcc9hIrkzTyOA+EzSwUUzMA+5gfjs7IJdVsBFrDemFqhMN8ijrdJkEBTgbz9HdNPFoPMDLRHtrR3/0GRkOdNzkbw3IUbEb4BAmlNVLE8WNPFRyF8KFTZziklO3dDtQHRPje1SjHQEK7dOoDTD/eT3XNe3U0YgI70yK8Rd1Fmszb166UoXStNgjdprtZWlj+VmG/ZiSYWWPD4mtsKdcwlECDoSurwUpY1IkFucjmWp2GbErlKkcVHl7Jxh0rwOrehH/O4yrlfOkJRsp4OzwWmGPK2RKHMZKbKri0hD95uy3UvS1ZZm/4d01dFCwFXDWsOz7IBIRauOux6ZM5irujdonvX8Bd6ZwVUsslpNpKcvTq/XvJwedsxqpfLcjbZPuxewz85TFIzSsAEZv9jeEX7zAbk9+MQfTvHJ2ERgVSy5qD/dcIX0qsPOqYN2yLdsqPu3mzFkOd33mfMlMmf3z86bFI/Unbtfk2gygX/vvEr3j6xWiZfhvV4+bb17ooPYS3PcntBf/wMaMKub
+sidebar_class_name: "get api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List Objects"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/storage/objects"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List one page of objects and folder prefixes in the selected bucket. Use next_continuation_token to fetch the next page. Prefix must end with / and stay inside science-agent/.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"prefix","in":"query","required":false,"schema":{"type":"string","default":"science-agent/","title":"Prefix"}},{"name":"continuation_token","in":"query","required":false,"schema":{"anyOf":[{"type":"string","minLength":1,"maxLength":8192},{"type":"null"}],"title":"Continuation Token"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"400":{"description":"Invalid storage path or selected profile.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"S3 access denied or request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"The selected S3 bucket or requested object was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"409":{"description":"An S3 credential profile must be selected or updated in Settings.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"502":{"description":"S3 operation failed or returned incomplete results. Folder deletion may be partial; read the error before retrying.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"503":{"description":"The selected S3 endpoint is unavailable.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

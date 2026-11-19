@@ -40,7 +40,9 @@ Python: deps are declared at the **repo root** in `pyproject.toml` + `uv.lock` (
 plain `requirements.txt` mirror). `uv sync` provisions the repo-root `uv` virtualenv
 (`.venv`, gitignored); run `readme_parser.py` via `../.venv/bin/python …`. The API
 helper `api_parser.py` is standard-library only — run it with plain `python3` (no
-venv). Set `GITHUB_PAT` to fetch READMEs from private repos.
+venv). Set `GITHUB_PAT` to fetch READMEs from private repos (sent to GitHub hosts
+only); README / spec links on `huggingface.co` are supported too (`HF_TOKEN` for
+private or gated HF repos, sent to huggingface.co only).
 
 The build also writes `llms.txt` / `llms-full.txt` (an index and full text of the
 component docs for LLM crawlers) and marks the `sample_docs` / `Sample APIs` template

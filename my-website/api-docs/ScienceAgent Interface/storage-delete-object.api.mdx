@@ -1,0 +1,72 @@
+---
+id: storage-delete-object
+title: "Delete Object"
+description: "Delete an object in the selected bucket. The result confirms the S3 deletion request, not that the object previously existed. The browser requires user confirmation."
+sidebar_label: "Delete Object"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVV01vGzcQ/SvEXtoCa8lx0kPtk+K4qBEXcSIFLWAYAbU7KzHeJTck17Ig6L/3DcnVh2UX6E31xRI55Mx7M3wzWmVezlx2fpeNvbFyRtl9npmWrPTK6OsyO89c3PhWUk2evpnpdyp8lmettLLBiuXjq0zjC6wfaIk9pfHxR0eWv1j60SlLuMvbjvLMFXNqZHa+yvyypeDBKj2DpVe+5oWPuGS9vuejrjXakWPrs9NT/leSK6xqOT6YjruiIOeqrhZfkjEuKoz2pD2by7atVRHgDL87PrPaRrDGX569e+nia/0oa1WKBF+00s+FscKBhsJTKVprKlXT4D+46wFvONxSc5eRtcYy/bgYCfAqoo7LB2Rx3D1dV2yyQd9jenOI6U/lHA7ngp5adst4VMLZObLCmwfSR4vo7QvpfytkKABRklYREYdAzotPVs2UFsoJbbyQdW0WVB4tuHeH4CZz2pYbkE674oH8DkTGG2ITCxlRVqbTx4vxt0OMI83ICjhEtErW/bMSTYcUTncIAOyuLSV/RFbH5D2cumPFenb2uqSk7B1p6L+evhA6crTpCqKSSFB6ar6zOmSkME3LDQJrrqu9G4jfTV1CU0Lf4GONXHJC0Tc40RcwlKXwqPEQKLYqY/m4t0vEebTsvKBCzx8q6bI1SnvWnk7LR/Alp0faKrDpqOis8svQxyeyVe7SmAcF+7t77sL7YD+EOUBI3WsPXqPfJSDK1EAwK7EYBFBXyjYuGIKgTU2kp5AH8fJz6YNFuri19KhM5+olGpZiuYuXTq1ZcLdKlLjYu5KPwCczjdlkbniAiYNLmFj8HN+HQDhMbX244RdXPPazTGdrtsueQ//qKMRXUlubJUOVgKr5KXCrGWTMVs/mmFMZE7PH6SY9WPy4nZaKuJ33g9TfJ+HUyYRb8kEkIxGlJNhE/KkPhhYuXMfFxREuQ8TXl9eXN1di3k0HoR6UrkwIJdXFuFCkCxKjGYpTjG6vDzzuW/wxmdyyGRqOTUHAP5oPyiEouV/mIawTs2B9QHKY3ZAcl4tb4/zM0vjzjZDey2Le4AyuAJW77+iwLUBWRh0AYTG+HHYSy2qPMBHpjHUlxXuSFhTNoThkB+J9KqACFLHf0GsgYXVX0o7TGBAccLGn+SFNFYPEAz0h29s4/qLp2HD15yKyNyVGxKOyJ5QxnsrTyYKmLhi5C6H8Zj7RkdSNzA5EGsm3SyHTAazckkBxdvvJ7VHXt1FGIIOsshqEXW/ie40JPZEMZMiPrVJPcBoHasj0sjaydGKh8I46ZrGkopY8NkaVwp2NBCIkHQVdXojSBCSoLS7HslQcM3JXKapxUWVNwzCpaf1S9KN9uoxfLFdILLbTwZvBaYY6bVEojQzSmN5Fkp9P/bvdq9LVVl//NzqV1MDTkx+2NQhl3EGBVkmx7lgqWKLST7S87wpQmzkIYovVaiodfbX1es3L8bcXa1mpHPceCGGFiqZ/IeznL6nF/CJeC4t/3fW/8SBAHVsE0XuUVrGb0DIQVXhowX88MkJRtX7n1EHz41s2kv3h6uZqcgVzrvN9yYzO0wd20G/p3aCeq+c28HX+ypHVKgoyCOzt49arJxLK3popukdD/QcLfF+S
+sidebar_class_name: "delete api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete Object"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/storage/object"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete an object in the selected bucket. The result confirms the S3 deletion request, not that the object previously existed. The browser requires user confirmation.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"key","in":"query","required":true,"schema":{"type":"string","title":"Key"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"400":{"description":"Invalid storage path or selected profile.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"S3 access denied or request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"The selected S3 bucket or requested object was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"409":{"description":"An S3 credential profile must be selected or updated in Settings.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"502":{"description":"S3 operation failed or returned incomplete results. Folder deletion may be partial; read the error before retrying.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"503":{"description":"The selected S3 endpoint is unavailable.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

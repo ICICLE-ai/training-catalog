@@ -2,6 +2,7 @@
 tags:
   - AI4CI
   - Software
+  - CI4AI
 title: "Intelligent Semantic Segmentation & Annotation: Explanation"
 sidebar_label: "Explanation"
 pagination_label: "Explanation"

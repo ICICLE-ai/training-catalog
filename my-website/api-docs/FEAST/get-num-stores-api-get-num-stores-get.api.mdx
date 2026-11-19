@@ -1,0 +1,79 @@
+---
+id: get-num-stores-api-get-num-stores-get
+title: "Get Num Stores"
+description: "Gets the number of stores in the model"
+sidebar_label: "Get Num Stores"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVltP2zAU/iuWn0BqC0N76lsRhVUaG4JuL4AqE58kBscOtgPrqvz3HTtpk6bhpkl7Wh8ots/9fOc7XVHHEkvH13RyfE5vB5SDjYzIndCKjukZOEtcCkQV2R0YomNinTZgiVDhPtMc5I26URfMsAwcGDu+UQQ/VmSFZN7OQijrmIpgITjZs87sj8kcdWcn3p630siStSxxmiTg+p3H2uw4sQ5ysieUq62Hc635pq0bdQmuMGodPBeRG5MT/IummREo9yxc2mth0L4pcjAZMw/obf3KFG9JKK2Gu1J0QDXehUxmHAuP4S5QaVE9L1guFp0rPKJWvik79nBFFR5Qu1MWlBO+m48FmCUeDDwWwgD6caaAAbVRChmj4xV1y9zrYxUhAUO7cLhq+lTbdcJJ2H658i/lW6rloC/aFlI+HDQCS6jktZg32Jqd9Ic+2wjwVzNoG2olwgqXaiN+B6F1/CkwHkrZJBAzabcyYGr5PQ4N3M7F265vVCElLW+bsCdbzkr/hLDItbIIJ7R5dHjovzo5FFEE1saFJJe1MEYWaey3ciGSPJciCjYP7q3XWe1WWt/dQ+TRxzgXYULkhfH4daLy3YFR2US99kqQWci3IkO0hCmc5KJ7hUdMq0Tlz0dHu6n8ZFLwqh1TY7T5SB75VrQcHBPS/yccZHZXQOpo6/Ud7dqkfuuTr+6YMWzZAt5XHdXNG9DMJn1QXoueY9NYAnRj7GXRUAwy969l43vTsgaF1yGvynUt14JXU96qui+ncVKVr8/ZWuTLfH6xY7DqLZJXqmvGC3zmUjwcIOEd4M0QCW+4oUihYh1Sr82eas2Hk4Do4blfRGRyMdshgGMWPQByML55sg8c7jXJFCvhlqQyQFrjPYcoVVrqZEn2TqeTq/k+weIrN7xjFni180ZrBURqqp9JlDKVNHsx9g5MqAyRuAFsxHIgLI6xMChfWEi15JUYCwGMyFTxXCNwLGEGSGI0rglOCoX0QXxBRpjaEzJ9ldbh6NPo0Lcl19ZlLCC85qHtQeoWZNXMyf/9/u/2ez0bDn65g1wyEca+MIF3KtRfI2sJlOzgHocyxRb799XKI/CHkWXpr6vV6HmIC8vuZGu3vNjxvcuaAPZJzzbvi/EBlr0/KZ6YLLx0oL2/DaCzmt8Vx/aPhSacW38wwseDxfEEXO9gX6nKip/53LW0dvaFt7LhprPpHPnqD4yP6lc=
+sidebar_class_name: "get api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Num Stores"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/get-num-stores"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets the number of stores in the model
+
+Parameters:
+    simulation_instance_id (str): The ID of the simulation instance to get the number of stores for
+    simulation_step (int): The step number to get the number of stores for
+
+Returns:
+    dict: Dictionaries with the number of stores, number of supermarket stores, and number of non-supermarket stores
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"simulation_step","in":"query","required":true,"schema":{"type":"integer","description":"Simulation step","title":"Simulation Step"},"description":"Simulation step"},{"name":"simulation_instance_id","in":"query","required":true,"schema":{"type":"string","description":"Simulation instance ID","title":"Simulation Instance Id"},"description":"Simulation instance ID"},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":{"type":"integer"},"title":"Response Get Num Stores Api Get Num Stores Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

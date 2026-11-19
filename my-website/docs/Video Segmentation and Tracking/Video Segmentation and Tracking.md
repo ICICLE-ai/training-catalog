@@ -4,6 +4,7 @@ tags:
   - CI4AI
   - Software
   - Release 2026-10
+  - Release 2026-11
 ---
 # Video Segmentation & Tracking
 

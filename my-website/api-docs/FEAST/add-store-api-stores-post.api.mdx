@@ -1,0 +1,79 @@
+---
+id: add-store-api-stores-post
+title: "Add Store"
+description: "Adds a store to the model"
+sidebar_label: "Add Store"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVk1vIjkQ/SuWL0kkAmy0J25kwmiRNjsosHshETJt0+2JsXtt92RYxH+fKrs/gbAz0hynD9Bdriq7ql698p56ljo6WtLx/SN96VEuXGJl7qXRdETHnDvCiPPGCuIN8ZkgW8OFetbPesYs2wovrBs9awJPVLue499U54W/GZEFWHDhmVSOmE1wUHtbC8I4F7wfzc89DzLxxGWmUJwkRoMfTa40bHvVI1cJ8yI1dofvinnpCx7kyui0/nByW+Ci0SupnWc6ESvJYYVp3ll1XuRXfQzsSfjC6ioqDkcYkXH4Bz1mdxhICMIROE4IqXZD3qTPgkyLtxhe1KU9anJhg9KUQ25hbRVWViyX8c2tcuM8aOZ1aqE0e4oBo0XhM2Plf8EHaEksUSYYFxa+rPi3kFaA6w1TTvSoSzKxZXS0p0zvPm2CJ7/L0ZPzVuqUHnq1RBdK0QMAANKoUDDubHbAJdxBOH9v+A69Nht6W8B+WB+hfdgwz5VMgungs0Mo7VvHyS1mwkvh8CsGd3y05iB/4foB3JfVvqT7odIB/RoFlwz+rJXQosTQRYNKB/TPQ+uS9bzBybS0IACGri8EYsuJhKymocJnvMxR9wD2pbJZfxaJ76BhGTPcSmA7N62o3w3o9HQtnDTdTo/Z44F5FumCbIzFZoBsVHQSOm3sIUPrwouq2fCo5BryVlJH+G7zRskVVSxt3Uo2wFx0yeZa9NN+j7gCcLdl9lX4HkmtSYTd3ZQe65S0XTbCxBgLx4ctup6ViTCvvJTJ7DipZN/p43wV2h6nD7WDBgqVLjLrWyaTrLXDWmAk7nQDrCa5BoiVnsP3qW/mT1xKV5I3wA8BCOyVG+1iT98Nh/jXhcO8SBLh3KZQ5KlUpj/AGscIRzgFQlazDp+UesxahlCXXmzdqX3omRLC1WkIjDsS8EzGuYxvjsyQkmOMv9/dnYb1D1OSxzRNrDX2R2LqMmGck/hWH7qrAEDprH4Hr1fscXhpSKJKTUOCScnyPbp16SUCe4QCsjSwX1R5XzUkgyxw9f8ICuOKW5d6LX5p0huz+34YDzF95zarVP5YLGYnDmNtYdxmBudyPYJ9Bl8DGM6DOJxBiBV8aqbg5Cvb5ko0U6zJQjOtGllrIrWE9dBpZO8NlrMacVwMD3gf2JhQkTLaj8bw23FoutvHQMPj2fSEpe9Z8irgLgRrgaaxxdGSTKBAfkeiA9IaOguRZNookwL9fpyM54sbApjQ/nbNHFx3AuP3KwPooMy8kSRjOm0uTBvcwIaCAT9q7hIGnM02G6gX6BdOZAaufEGNhQP0yUTz3ACegXigQ4G+gc05KTRcfwiWqQ+hfYErUwxr2P+tP0S0YD23TLeKVLf5cS72Tef+uvr+1Ktv2ZBefPWDXEEoWJnCBrKLnbYEqpSI7NhrwAAZNiLI93vE1d9WHQ4ohu7DtlrC6xdmJVsj1pdIb+VVGPnwVWDnfYjVvA0khOqqCMRxzMnIl9ECwZ77i7ovLa6YfZovQHld3ogRHyC17A0JDn5HNFz70ToQdpABj0MvFEijIxp94vMNGM6sAA==
+sidebar_class_name: "post api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Add Store"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/stores"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Adds a store to the model
+
+Parameters:
+    store (StoreInput): The details of the store to be added.
+                        Dict should contain 'name', 'category', 'latitude', 'longitude', 'simulation_instance_id', and 'simulation_step'.
+
+Returns:
+    dict: A dictionary of stores in the simulation with the new added store
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"properties":{"name":{"type":"string","title":"Name"},"category":{"type":"string","title":"Category"},"longitude":{"type":"string","title":"Longitude"},"latitude":{"type":"string","title":"Latitude"},"simulation_instance_id":{"type":"string","title":"Simulation Instance Id"},"simulation_step":{"type":"integer","title":"Simulation Step"}},"type":"object","required":["name","category","longitude","latitude","simulation_instance_id","simulation_step"],"title":"StoreInput","description":"Data model for adding a store.\n\nAttributes:\n    name (str): The name of the store.\n    category (str): The category/type of the store (e.g., supermarket, grocery).\n    longitude (str): The longitude coordinate of the store location.\n    latitude (str): The latitude coordinate of the store location.\n    simulation_instance_id (str): The ID of the simulation instance to which the store belongs.\n    simulation_step (int): The step of the simulation at which the store is added."}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":{"type":"array","items":{"type":"object"}},"title":"Response Add Store Api Stores Post"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,0 +1,7 @@
+{
+  "label": "Multimodal Yield Estimation",
+  "link": {
+    "type": "generated-index",
+    "description": "A transformer-based model that estimates plot-level corn yield (bu/acre) from weekly text captions of field conditions (weather, soil chemistry, topography…"
+  }
+}

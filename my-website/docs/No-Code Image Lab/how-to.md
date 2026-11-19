@@ -95,4 +95,5 @@ apptainer run \
 ```
 
 Config can also come from env vars: `INPUT_DIR`, `OUTPUT_DIR`, `PIPELINE_FILE`,
-`IMAGE_EXTENSIONS`.
+`IMAGE_EXTENSIONS`, `COPY_NON_IMAGES` (or pass `--copy-non-images` to also copy
+non-image files unchanged into the output).

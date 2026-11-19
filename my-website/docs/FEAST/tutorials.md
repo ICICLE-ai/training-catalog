@@ -9,8 +9,6 @@ pagination_label: "Tutorials"
 description: "Tutorials for FEAST. The Food Equity Access Simulation Technology (FEAST) tool — previously known as the Food Access and Strategy Simulation (FASS) tool — is…"
 ---
 # Tutorials
-<!-- [Click here](https://youtu.be/kltZCvLqHp0) for the video tutorial. -->
-
 
 :::tip Video Tutorial — FEAST Video tutorial
 
@@ -35,4 +33,3 @@ description: "Tutorials for FEAST. The Food Equity Access Simulation Technology 
     access, particularly for households without vehicles.
 3. Remove a Store: Remove "Charlie’s Market" and/or surrounding stores and examine
     how food access challenges re-emerge in the affected area.
-

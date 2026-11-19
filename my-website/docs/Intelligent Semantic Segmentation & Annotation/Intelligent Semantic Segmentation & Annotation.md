@@ -3,17 +3,17 @@ tags:
   - AI4CI
   - Software
   - Release 2026-07A
+  - CI4AI
+  - Release 2026-11
 ---
 # Intelligent Semantic Segmentation & Annotation
 
 A streamlined, HPC-backed pipeline dedicated exclusively to semantic and instance image segmentation using interactive masking tools and Tapis job execution.
 
-Link to the hosted service: [https://icicleai.tapis.io/#/smart-segmentation](https://icicleai.tapis.io/#/smart-segmentation)
-
 <div align="center">
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/smart_labeler)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: BSD_3-Clause](https://img.shields.io/badge/License-BSD_3--Clause-yellow.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 </div>
 
@@ -32,4 +32,4 @@ Link to the hosted service: [https://icicleai.tapis.io/#/smart-segmentation](htt
 
 ## Issue reporting
 
-Please open an issue at [github.com/ICICLE-ai/smart_labeler/issues](https://github.com/ICICLE-ai/smart_labeler/issues) with a description of the problem, steps to reproduce, and any relevant logs from the Tapis job status bar.
+Please open an issue at [github.com/OSU-SAI-Lab/smart-labeler/issues](https://github.com/OSU-SAI-Lab/smart-labeler/issues) with a description of the problem, steps to reproduce, and any relevant logs from the Tapis job status bar.

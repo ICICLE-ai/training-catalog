@@ -1,0 +1,78 @@
+---
+id: reset-simulation-instance-api-simulation-instances-instance-id-reset-post
+title: "Reset Simulation Instance"
+description: "Reset the simulation instance to its initial state and deletes data from other steps."
+sidebar_label: "Reset Simulation Instance"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVU1v2zgQ/SsDnhLAsbPBnnxzkRQboEGDxLuXJDAm0shiQpMsSaX1GvrvO0PJlp2PonutL6ao4czjm3lPG5VwGdX0Ts0+XamHkSopFkH7pJ1VU3VDkRKkmiDqVWNQtkHbmNAWBMmBTpGfddJogHcTAdoSSjKUKEKJCaEKbgWOcwSOIB/H9/beXmPAFceEOL23wL9t0oUu4SimcDyFOZe9PAdX/QxAEISS8YZSE+w2XamLNIVZ/ucjGNZ8ih84gV1CbIqCYlQj5TyFnPSy5OvmZIuh0mKHCr1+bz8uFnvAF4sugXcxcW6/uyPzu1GWH7jGXjzHaGHZY6p5HehbowMxkBQaGqlY1LRCNd2otPZylGlh9ByZdDKycbklgtG37WhXA5tUu6D/zWC3VWrCksJBnQpNPCiEdv21ymgPS0rufsc2xqj2YQAxOyjWyiumwTsbKUrOs9NT+TscrNuuA1Vj4KYPZmSFs4lsyki8N7ldzk6eopzZDDhb/o3Un2dnbxP/g0aX3ZhchODC/8iqfJBxSLrDXVJCbWSlE63i2wDjioO3v0CeZiRLbkL7wPj7PQwB13tN/eKKnsqRWsXlz/p/xRTiktQu2cehmQyYy9t2qO0en6hIBzNxl+/Vle7j9po90Nux+/E1zjv63iu2DflrPr9+k7DrLeumdiLJnZZYIlM1YR1OBh2e7HQ42ezpqp1kHebBr1xmpa/42bnyZJZH7+TKsU3B7PpSvXa9T1g8E9sYv4OKWRP7kZNwwSSlNXQJ4HZwpDkVtXXGLddw9Plidjs/Bu6LTSePGKmElZQabw+wMdbuOxQ12iWJfeYClRQImTQwbKKxQM9uWlXMGcc3kWpnyi4MM4AxXNjSO56pCBgIlsE1nqs1lnUOQtWYr/bC/tNd63T8x/hUOiacrjAPf28Ync/vXWjrLK+52Qxq+v0/Dv3cJvqRJt6gzpJsQvaEbiDv2FE0R743krw9PTT7bipZTbUMNR/ebGQ+/g6mbWX7W0Nhzfu8fMGg8VFmlu2k1FHWg2F/2JKjm17Hx/AR/q1crYj1BU0jT7x8pvWrr1M2qf6rITC6CBl+n/bOvvFU+QLs9Hv99XbOov4Pg3XwYQ==
+sidebar_class_name: "post api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Reset Simulation Instance"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/simulation-instances/{instance_id}/reset"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Reset the simulation instance to its initial state and deletes data from other steps.
+
+Parameters:
+    instance_id (str): The ID of the simulation instance to reset
+
+Returns:
+    dict: A dictionary indicating success
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"instance_id","in":"path","required":true,"schema":{"type":"string","title":"Instance Id"}},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

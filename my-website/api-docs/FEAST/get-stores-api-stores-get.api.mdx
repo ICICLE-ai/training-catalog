@@ -1,0 +1,79 @@
+---
+id: get-stores-api-stores-get
+title: "Get Stores"
+description: "Gets all stores in the model"
+sidebar_label: "Get Stores"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVk1v2zgQ/SsDXpoAjuMN9uSbi7hdAxs0SLx7SQKDESmJLU2qJNWs19B/7wwpWf6QgRR73VwsksOZ92YeZ7JlgReeTZ/Y7OMdexkxIX3mVBWUNWzKPsvggWsNPlgnPSgDoZSwtkLqZ/Ns7rnjaxmk89NnA/jn1brWnG6vlPGBm0yulIALH9zlFJZ4d3ELNo9eelvobCFYKGTowuXWnbj1QVZwoUxo/cW1qdev0g3dfjYPMtTOdACFysIUZvEX3XG3ITgD9OBNhRI+xJPVV2/NB+A+Hn+TG3grVVZCiTsctPJh5wTs61eZBc9GzFbSRcwLgalEYKsUZsUr1X3iLlpWuzRiJbbM4AJvHJFGO0U1+V5Lt8GFk99r5ST6zrn2csR8Vso1Z9Mt42bzJY+uwqYiV5guWUjHmtFuy9Ras+ak4l/iB9cpr7nSiIqRUc5rHdh0MmJBBU0eHvv6PRK+5l2+CMIpwT2xnOcZXH1As2WC2lKmYMfRHwfktbhlg/gXOwNxSuOMoz0ivA6lderfaNThLyUXMXe/UqiWy1CdOtizg2ANHaGSKmu89OTzZjKhnyMOdZZJ7/Naw0NrjMgyi7owISKpKq2y6POa1E57J5lO2saLXAiVanvvSOZBpditHXeOU+lUkGvab5oefhcesLegbuK7m1Wq+8Rd5EQXfr+5OeXxN9dKpFrMnbPuV0hUB1CFDFxp+upQHhlomx2cvqNWu2f2QoQPc9Hx/9NmbeVGbO2LIR13pndYMV5ItnN23jQmA5Z02vSxd/XqJfgUeaXQrd2etvr0puyep3Gb0jcUrDP5Y7m8P3GYaovNrrRtV4z9L5S4uMbGeJ0aY3xEuY2UW3efrBVXsyjjq7vYoWf3i5NX/5Fn36QRdEYDIDZsuglzzEDYQHIAe296KbPSWG2LDVx8ms8el5eASTfh6pV7KdIwGHcXUKGlfYOs5KboB0ZOAVzMCGhuhM94JYHnOSYE7WsvS6tFMuMRwBjmRlQWBYMTBKdG4WxdYbTaYM8ASsQYqf3AiZBoTca/jSdUjsr6sOZR2W3z6d/RcTK2/dv4f5L/l0neKjzIf8J1pbmKj7d2sXsk7T5h71Fo2aoXn1SJhaL97ZZ09JfTTUPbaapRFxHK81e9NxbO1u7MTB5EhZQG/3X4wXVN1rFdvT/0xUPbOS7h/Dx9F47DCd/DeaGFU4QH00KNsx2clKPkhd5sFfZunfR58rLrKZ/nS+wzPwEkDsf4
+sidebar_class_name: "get api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Stores"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/stores"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets all stores in the model
+
+Parameters:
+    simulation_instance_id (str): The ID of the simulation instance to get stores for
+    simulation_step (int): The step number to get stores for
+
+Returns:
+    dict: A dictionary of stores in the model with 'store_json' as the key which has a list of store objects
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"simulation_step","in":"query","required":false,"schema":{"anyOf":[{"type":"integer"},{"type":"null"}],"description":"Optional step filter","default":0,"title":"Simulation Step"},"description":"Optional step filter"},{"name":"simulation_instance_id","in":"query","required":true,"schema":{"type":"string","description":"Simulation instance ID","title":"Simulation Instance Id"},"description":"Simulation instance ID"},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":{"type":"array","items":{}},"title":"Response Get Stores Api Stores Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

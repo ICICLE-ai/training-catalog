@@ -99,10 +99,47 @@ resolved the README from:
 
 - relative **images** (`![](images/x.png)`, `<img src="...">`) → `https://raw.githubusercontent.com/<user>/<repo>/<branch>/<path>`
 - relative **links** (`[text](docs/g.md)`, `<a href="...">`) → `https://github.com/<user>/<repo>/blob/<branch>/<path>`
-- absolute URLs, `#anchors`, `mailto:` and fenced code blocks are left untouched.
+- absolute URLs, `mailto:` and fenced code blocks are left untouched (`#anchors` are
+  handled after the split — see below).
 
 This is automatic — no flags needed. It exists because the catalog is deployed off
 GitHub, so relative paths would otherwise 404.
+
+### Hugging Face–hosted components (built in)
+
+A `README` link on `huggingface.co` (model, `datasets/` or `spaces/` repo — `/blob/`,
+`/resolve/`, or a bare repo URL → `main/README.md`) works the same way:
+
+- the README is fetched raw from `…/resolve/<branch>/<path>` (a `/blob/` URL is the
+  HTML page, never parsed);
+- the leading model-card YAML block (`license:`, `tags:` …) is stripped before
+  splitting — it is HF metadata, not docs, and its `---` fences would otherwise be
+  read as section delimiters. Tags still come from the `**Tags:**` line;
+- relative images → `https://huggingface.co/<org>/<repo>/resolve/<branch>/<path>`,
+  other relative links → `…/blob/<branch>/<path>`;
+- the repo badge becomes a **Hugging Face** badge linking to the repo home.
+
+`GITHUB_PAT` is sent only to GitHub hosts, never to huggingface.co. For a private/gated
+HF repo, `export HF_TOKEN=<token>` (sent only to huggingface.co).
+
+### In-README `#anchor` links across the split (built in)
+
+On GitHub a README is one page, so `[text](#some-heading)` always works. After the
+split the heading may sit on another page (Tutorials → How-To …). The parser computes
+each heading's id the way GitHub/Docusaurus do (github-slugger, duplicate `-1`/`-2`
+suffixes, `{#custom-id}`), works out which page it lands on, and rewrites the link:
+
+- heading on another page → `./how-to.md#id` (Markdown; Docusaurus resolves the file
+  to its route) or a route-relative `./how-to#id` / `../<Component>#id` (raw HTML
+  `href`, which Docusaurus doesn't resolve);
+- same page but the duplicate-suffix id changed → `#new-id`;
+- same page, same id → untouched; fenced code → untouched;
+- anchor matching **no** heading in the README → left as-is and printed as a
+  `WARNING: anchor link(s) match no heading…` line. That's a typo in the upstream
+  README (e.g. a heading was renamed); fix it there — the parser never guesses.
+
+It prints `re-pointed N in-README anchor link(s)…` per component. The build's
+broken-anchor report (warning only) is the final check.
 
 ## Prerequisites
 

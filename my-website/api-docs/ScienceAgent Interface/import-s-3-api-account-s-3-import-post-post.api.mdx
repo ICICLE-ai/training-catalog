@@ -1,0 +1,72 @@
+---
+id: import-s-3-api-account-s-3-import-post-post
+title: "Import S3"
+description: "Import S3"
+sidebar_label: "Import S3"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVsluIzcQ/RWCl1xakm3l5DnZxgQRMpNxLBkJYAgGRZYkjtjNDsm2JAj696ki2drHSG6+9ELW8mp75IYHMfP89oXfSWmbKvBxwW0NTgRtq4Hit1yXtXXh1fdfRa1fRRKj37xRW58evOAO/m3Ah3ur1vx2w6WtAqBN/CwbE3QtXOhNrSs7SgRBy17OoYxftSO3QYOnv6k2QO+wrvHNfXC6mqGDbPErKC1GaU/UtdEy4u1ZGSB0UBpEidJBBzLDfyNr24JXorxotZX7k/YLrmAqEC4ukBJUqrY6RfEzxc+tzKnypJELeFf1PkmcKjqYYUDvKT4liWNF1MzydvIdZFsT7UBRkWNaxwfOsVCv/6XAaHl7aCq4BuKCr23lU81urq7ppcBLp+sQ4fNhIyV4P20Me8rC+zKS+GH5vvsU8q4rttHtr5cMf9XeY0IKBquaMDHrmK7ehNGKNR4cC3YBVfd/OHs3c+CcdZS64z5Ny2dVinVoe4NEdrG3EfXPI3pKw8O+OT3TFdOeVTYwYYxdgvqogVxfCOS5NlYoLIwEUJ6FOTCEPtWzhupkdKnDRw3n5uY8nEHuqkxuHxI6bnqQjdMBifdlw0c4yv7B2oVG+ZfxdlycBhVnmw37CKqEMLdE9ZnFaxHm+NdDG71MBz3f7yU64OTJvYHz0VHjDInyU/vPHmLhFWAzrLHsE4E8V9GYUnd3OUFqIQ8pXyn6I+C7HODiH7BGJ5psy7Td8jn/pxO1OiOa+DMkdyyVL8okahCRkxJDMN9QBQnhOiIePAwevnxm82bSjUnX1dRGKDn5Q6mhksDuZtgB7O5xcObxWOL30eiRxBgefBlETirTCgUw/iLC6thlhTCwtyi7saN8wR6xJjMHw7++MBGCkPMSddAEptKDwa5ClWGfSWwqMiYMw3YinvdddtdgQLiY2pOcpGk8ShhL6SwS27B7EA5TNAehwHXZvbNLSpnEFJHfskGG0pU0jYIDpwkQOsB3S1mZyLo5D7DCau9x/A2ToaWjr2ApexOgiPCKIAKYNfpgq84SJj4K+U9Mhx0lVimpu3tKlw2DdWIG+6VY6Ris2CcB0tHwiz9KXc5XjABjxzmnkYu7wUYTPhW0IyiQHirAVK/QaTrbWC3WRHieLTUOUkNZVCCNILZLVIA2S4ERYdGxodUnpmyMBHuL2lEpTZixdlMNBg1NnS0pTCjrsGbtKZuNEQFRh6Rmu+ped6/oxkDDW4rIP3kuDmf8qEN3cxVgFXq1QWhkIc7yJo//Cw0dKuZepbEnO5kEcHjnRBYottlMhIdnZ7ZbWkaOdMRB+PkmnBYTkxgIFWJLRdZY4DDf8ofEop14kSNx0xCoS1fFbdEq4T0V6nAgfkbAxCw7Snv8Nhyh8CTfSEurSIcMR7vF/jOBpG45Jp5FJJ78QeDbrWp9gOKUgxJYehL0iyqbTaI1zFsrn7Z+qpEz2EpT1cbI/T8AmH0Y0w==
+sidebar_class_name: "post api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Import S3"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/account/s3/import"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Import S3
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"multipart/form-data":{"schema":{"properties":{"file":{"type":"string","contentMediaType":"application/octet-stream","title":"File"},"name":{"type":"string","title":"Name","default":""},"endpoint":{"type":"string","title":"Endpoint","default":""},"bucket":{"type":"string","title":"Bucket","default":""},"region":{"type":"string","title":"Region","default":""}},"type":"object","required":["file"],"title":"Body_import_s3_api_account_s3_import_post"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"Request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"413":{"description":"Upload exceeds the configured limit.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

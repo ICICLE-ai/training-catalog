@@ -1,0 +1,78 @@
+---
+id: advance-simulation-instance-api-simulation-instances-instance-id-advance-post
+title: "Advance Simulation Instance"
+description: "Advance the simulation instance by one step."
+sidebar_label: "Advance Simulation Instance"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVUtv2zAM/iuCTi2Q14qdfEvRFAuwokGT7dIWgWLTtlpFUiU5mxf4v4+S7ThummE7zhfLFJ8f+dF76lhmafRIp9d39HlAE7Cx4dpxJWlEp8mOyRiIy4FYvi0E8xeES+uCfFMSJfHKgR49ySe5YIZtwYGx0ZMk+LSaa56QC+vMZURW6Gt+Q1R61qtThNWBvc8HcIWRrcOExy4i0/BGI2ZKtMMPdCEzYos4BmvpgCoNJridJ1hH427dRVsfMmOafyS36/VR8ut160Ir69C/PlSK4O2pxA+Mc2SBOtxDqJnL8WzgreAGMBlnChhQG+ewZTTaU1dqb4rgYAWo6bgTXjBv4cAKqmpwiMEKlyvDf4V02yg5sARML07KhO0FYrK8T0O2/ZDedyORhRC0eu6SmPaCVf7KgNVKWrDe59Vk4l/9qVnWXUgLQR4aZcwsVtKBdCETrUVomZLjF+tt9l2eFT4D+vnq6tTxdyZ4Ug/LzBhl/sEr1caPhON13gk4xoU/cQdbe6ogVNy7/QvwOGaSYROqZ8y/kTFjWHnU1K8qbqAc0K3N/tT/O4SQZUAPzs6rBjDIyt9WXWy1eYHY9WbiMdRVh270jprdwVuje76Mmxq+j4K1Kl9Wq8WJw7q3yJtceVoeuIQUiegYmTjumDg8MHG8P+JVNW6YGEY/VQGXJuatUslwGoZveKcSEGS6mNP3S+2axa8gE39HUsTNryFvSWYIkytJ7YAsu820gjiXSqisJBe3s+lydUmwM9INN8xCQrY+1Kg1AEty9YPEOZMZnrkMAVIfwATYiGAysTHTQFiaImqoX1jIlUhqNRYSGJGZTLTCqbKEGSCZUYXGaIVEphMP1ghL2+EGqsuajD6NJr5nHtUtC+PfrIx2jR+V1G6X9+jsO0b9x9u/GUoHP91YC8YD3woTCF9P2yOuC46aH80biqP+Jm9HDsmS+5lF8/3eN/+bEVXlxW8FmBLleNwxw9nGDyRui4Rbf+728Vm0Lx4aml6ScxW0bJSeizsmCv+Fx1co3/18wg5qfgo+jVrDT7Z2R7YnK9Mv+AM9F/fLFXL2N3U31o4=
+sidebar_class_name: "post api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Advance Simulation Instance"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/simulation-instances/{instance_id}/advance"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Advance the simulation instance by one step.
+
+Parameters:
+    instance_id (str): The ID of the simulation instance to advance
+
+Returns:
+    dict: A dictionary indicating success
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"instance_id","in":"path","required":true,"schema":{"type":"string","title":"Instance Id"}},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

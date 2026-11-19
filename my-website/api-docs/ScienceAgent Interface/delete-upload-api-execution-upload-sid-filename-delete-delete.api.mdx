@@ -1,0 +1,72 @@
+---
+id: delete-upload-api-execution-upload-sid-filename-delete-delete
+title: "Delete Upload"
+description: "Delete Upload"
+sidebar_label: "Delete Upload"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVstuGzcU/RWCm6bAWHKcbKqsFMdFjbqoa9loAcMQqJkrifFoOOXDsjCYf8+55MzYspxFuiishUSR93Xu45CN9Grl5ORWTr1X+XpDlXfyLpOmJqu8NtV5ISeyoJI8zUNdGlXMVa3n9Eh54PN+c+40vuZLXVKlNjSfdzrpR2ayVhb7niy7ayQLwTK0cKYrLGvl11hb+jdoS3DrbaBMunxNGyUnjfS7Oqp4q6sVJJfGbpTHTgjRite+ZIEZ/rVtNvjoY/rPjnrDv/aG2vaO9V1tKkeOVU6Oj/mnIJdbXXNiOJCQ5+TcMpTiqhOGtdxUHmlmcVXXpc5jnsdfHes0T2G0+GTy4/H7Q8N/aOcQWibosWYIwlihqwdV6kIER1Z4c0/V6Aec9ZjN4ivlfi87t5KsNZa7orbcF14nzGn7IF8cdZ+xMxYZsPeIPhwiuoI7cl78afVKV0I7URkvVFmaLRVvFsjH7wLhmmwrfKNLTLA5ia1KmJYmVG8X0S+HiKbCdsVBVWyoKlgCCjTZGhtA8YCZjrG/VVQnJ4eozrtx6bC9ydBx6ECzVvtd5MxrMK87NeZeQ/72jkloH9SXSLbiJlIyAgPfrs0TgUcWBvdN5BiWxgOHjxOHjxuwcTtuer5sJfu3Dz1lB1uyqnzp9cYReoFEQTCzQ88vVA76YVbiYR5JDrQHMuMsppzswRkyg83faddzdZ6Os57L/zmKWkfXTHAHkUxFKmqUSUyoIgUnQhQucF05wl2M+Pz0/PTiTKzDYhRLoauliaH0N0muqcLsTlfoCzG9PD/wuC/x2/X1JYvF8UhBwD8GHrNTQAD4sxjWUSKH58PjMnFpnF9Zmv11IdTTdSwUUulQwJxZZfZB5Gg1NqZKgSbjarmRmAYAwmZqWnbiIsS9hImUziyRq/hMyiJFa1IF2ZH4bM2WU5YjRex3E3jmq7wMBT1zmgKCA/z2DN3x9qjLw9BZKY6/aTEzaAmfiZS9BTEifhF4KnfwIR6PtrRwUch9EtoPN0CVkjq8R0Zi5o1VK3raipWOYNVTEijdhD+5vdR1+YoIgJ3ZGYMYT72JJlwq6JFiIGMo0FI/wmm6ykWtdjwqTmw1RitwFgvKS8WXcCII2NwoIELR0dDFJ1GYiAS9xe1YFJpjRu2WmkoYWlqzYZi0qf1O9I+KzhjTEndIarbj0fvRsUSf1miUjYqs1M3Fy8nf69Jhtjw9+nFdIjy2Eue56SjhlgcPikPpsA69tUl6pk2GlxQGeo0YWK1pFsrRjS3blrfBppbZCssHZbVa8CCBPArteA0yWqKF6CDCgXzlu6uOTn8W/PZ6LfKeKirmCYx84H9Y3oM40puSn3//o8shMe0dZNNARdjpeIrmqf0zxYP7hSlyYOsvZxdn12cQ537ep8b7SI3dgh28GtdLlkxR8Dfn5VWVpknE27aDfDr6rkaHspfmNN3hzvoGRmVKCw==
+sidebar_class_name: "delete api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete Upload"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/execution/upload/{sid}/{filename}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete Upload
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"sid","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Sid"}},{"name":"filename","in":"path","required":true,"schema":{"type":"string","title":"Filename"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"Request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"Requested owned resource was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"409":{"description":"A request is running for this conversation.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

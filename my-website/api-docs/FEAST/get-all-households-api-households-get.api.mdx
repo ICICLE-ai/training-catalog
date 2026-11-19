@@ -1,0 +1,80 @@
+---
+id: get-all-households-api-households-get
+title: "Get All Households"
+description: "Gets all households in the model"
+sidebar_label: "Get All Households"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVsFu2zgQ/ZUBL00Ax/EGe/LNRdzWwAYNEu9eksBgpJHFliZVkmrWa+jfd4aSLNmygfSwt/VFpjh8M/Nm+EY7EeTai+mTmH28Ey8jkaJPnCqCskZMxWcMHqTWkNvSY2516kEZCDnCxqaon82zuZdObjCg89NnA/TzalNqyQgrZXyQJsGVSuHCB3c5hSWdXdyCzSJKZwutLQQLawx9l5l1A2gfsIALZUKDGdem3LyiO4fwbB4wlM60gaYqCVOYxSdBSrflsM6kCm8q5PCh211989Z8AOmjzXfcwluukhxyeiNBKx8IrXZU//ZHwb5+wyR4MRK2QBfzWaRENwW9IrZXPSeyUP0lWdCpYk85VW4nDC3o9BE5ZKe4hj9KdFtaOPxRKofkJ5Pa40j4JMeNFNOdkGb7NYtQYVswFNGKa3SiGu1fmVJrUQ065Gv8I3XNf6Y0RSXYKJOlDmI6GYmggmaEx67Wjxxf9S4sDmGYYK+xzucZXHmQZpMJ9aEya3Hs/fFEKy5uxcn4F3uDdJjGGaBeIrIMuXXqn2jUxp+jTCN3v1KoJpdTdWrDnh04q3jLoS+s8egZ82Yy4cdRDmWSoPdZqeGhMabIEkt9YUKMpCi0SiLmNV8Efjdguu5zOijTVNW1vXfc8kHVvhs76Zzk0qmAG35fVV34rXsgLYIZSdGX7n7OCtVfkgXlx4d/v7kZ5vSX1Cqt6zJ3zrpfSag4CDvFIJXmf23ERwbaJge776jb/sq9cPKHvLRc/GGTpoojsfHrUz3dmt5R9eQaxR7svGkkA5a8W3W+97Xr2vEp5lW7bux6fdbRW7N7Po3bmr5TzlqTL8vl/QCwri0JX24btYxaGHJaXJNQXndCGS9VZmPaDeQna9OrWWzrq7uo6LP7xUAFPsrkO5qU93hoRG3nkzAnFsIWagDo3fElJrmx2q63cPFpPntcXgIRb8LVq/SY1sNj3B5AT2PgDZJcmjXuB0zGDlxkBbQ0qU9kgSCzjEjpjY1oJmMAY5ibtLDUNDRsHMLa2bIgb6UhDQEmY0yp/aQJUac1Gf82nnBJCuvDRsbubsRoeK+OSdl19+T/L4L/+ouguREB/w7XhZYqXvbSRbWpe/2JtEqRZa/bX3jlA+/tdtx3fzpdVfy6noqsPKny8lX3xsrZGp+Z6ScjoyxPfnr8lLpk6yhx73d98dCozSWcn8fviuPwC6EL54UXTnE8RAuLbTN4maMahe94EXqnBrOBUfY69Hm+JG36Fzyz73Y=
+sidebar_class_name: "get api-method"
+info_path: api/FEAST/food-access-model-api
+custom_edit_url: null
+tags: [API, Food-Access, Smart-Foodsheds, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get All Households"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/households"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets all households in the model
+
+Parameters:
+    simulation_instance_id (str): The ID of the simulation instance to get households for
+    simulation_step (int): The step number to get households for
+
+Returns:
+    dict: A dictionary of households in the model with 'households_json' as the key which has a list of
+          household objects
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"simulation_step","in":"query","required":false,"schema":{"anyOf":[{"type":"integer"},{"type":"null"}],"description":"Optional step filter","default":0,"title":"Simulation Step"},"description":"Optional step filter"},{"name":"simulation_instance_id","in":"query","required":true,"schema":{"type":"string","description":"Simulation instance ID","title":"Simulation Instance Id"},"description":"Simulation instance ID"},{"name":"authorization","in":"header","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Authorization"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"type":"object","additionalProperties":{"type":"array","items":{}},"title":"Response Get All Households Api Households Get"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"properties":{"detail":{"items":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

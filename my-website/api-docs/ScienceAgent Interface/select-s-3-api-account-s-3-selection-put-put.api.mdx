@@ -1,0 +1,72 @@
+---
+id: select-s-3-api-account-s-3-selection-put-put
+title: "Select S3"
+description: "Select S3"
+sidebar_label: "Select S3"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVt9vIjcQ/lcsv/SFBcImXMs9kShSUa86GohaKYqQ1zsLvnjXW9sbQIj/vTP2Qvihntq3ewAWezwz38w333rHvVg6PnrhYylNU3n+2uGmBiu8MtUk5yPuQIP0C5cuRK0WIprR37iBZou68fThHW7h7wacvzf5lo92XJrKAzrFR1HXWsngtvfNmYrWnFxBKeipthTUK3Dtv0JpWKg8nKy2XwtMccf9tgbKyFtVLTFaYWwp0DtvGjTdd44WVaM13yMUr7ymhWn0yBDRft85mJnsGyJo01YWcirESfATB7N0doCLHvanR7xtICy42lQuIhj0+/STg5NW1eEU+mikBOeKRrOn1hhj/9ca7UPY2/7NtePflXNYkQ6DTU05MWOZqt6FVjlrHFjmzRtU3f8R7LsVAmuNpeKcdy0ujy7bFOrdVvGRTI7YD4jSa0RPkUfsq1VLVTHlWGU8E1qbNeQ/KpDB4BrIpG1DOxg/ZOq46UA2VvltGLM5Drp7MOZNof3LK83RBZHDKLBZikmV4FeGdCIKQC38Cv/00EWv1YqeS3tHreAUy76DdSFUYzVZ88sIzw6YXwHLodZmi4zOhEQKE7OJEN0w3IekZ1SxiP8s9WMVcPE32GIQRb5l3O7wSpS0+1cSTiVzGpKrTMYsNjDYxGkSYYzjUDHXUA8pw23IePIwefjyyFZN1g1lp7Y+faji40aUtYZLleNpIX6+K4a3yd2nm0/J7d1wkGRpIZOB/GWYFsOhKMQQFQ4RFCYgO+iSVFBJYOMlUoqNp5MrAOcWv87nUzJjqJ0tprZNTOVogOXsBJSJWVeICslKzQoUdR02Nc4vLcz++MKE90KuSjyDLrAzscV4ZJYyiSwlZ0KzFqXrsnGD9cHFyHcK4kLFzurPYnc6cd7ZPQiLFV+ByMF22b01a+qAxIpT3LJBjVCV1E0OJ0FjQhgAfw+i0UpJt60DbJA8H3n8CdnMIMN8h8XqZUCIaoEvQtBbjME2yRoyF4zcZ6b8UZSqWNTjW7PLZt5YsYSPpUCcAFZ8FAGiOP/kzkrX1isgQOwoHDTDYdeb4MLFhiaCgPTwABRqg0Hj24XVYquNyB1bK5zMhqqYg9SC3gtRW9BnKRARNh3nI//MchOQILeI3XmuKGfsXaFAo6PCmpJgQln7LTu851pnpGjEkEi2fvem2yee1kiUUgRBa8fsVDTOGHocUw8b36s1pkYegjTsWkF5oRnGgy1XSUXSICUHWUE5WGFIstztMuHg2er9npZx9CzpGj6+C6tEpqOq4YHAqqBDbygPI/4QlTmZUz5krpsoHxcqTTeNeAJvTVD779q+nmjk9HmOtll7OypNTkesWJO44/eIc7p9BcaQQVjbcS2qZYPdxv3oknSFiHQucW9B4tqHk+sS3p9OErxUu4iDvk/uT+dHdrsooFjPg33c+tcTbWUP1tTQV8z6H8K1n1I=
+sidebar_class_name: "put api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Select S3"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/api/account/s3/selection"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Select S3
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"properties":{"profile_id":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"title":"Profile Id"}},"type":"object","required":["profile_id"],"title":"S3Selection"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"Request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

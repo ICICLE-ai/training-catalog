@@ -5,6 +5,7 @@ tags:
   - Software
   - Release 2026-05
   - Release 2026-10
+  - Release 2026-11
 ---
 # Smart Labeling Service for Object Detection
 

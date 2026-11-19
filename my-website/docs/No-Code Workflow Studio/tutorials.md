@@ -22,7 +22,7 @@ the right.
 Sign in first — the widget in the bottom-left corner shows your Tapis username,
 or a **Login with Tapis** button if you aren't signed in yet. Nothing that
 touches files or submits jobs works until you are (see
-[Sign in to Tapis](#sign-in-to-tapis)).
+[Sign in to Tapis](./how-to.md#sign-in-to-tapis)).
 
 1. **Create a template** — go to **Templates → Create New Template**. You land on
    an empty canvas with the step palette down the right-hand side.
@@ -101,10 +101,47 @@ redirects you to your Tapis tenant, and back to the app with a session cookie.
 Embedded inside TapisUI, the host already holds your token — you're signed in
 automatically and the widget shows your username with no login/logout controls.
 
+### Set your run defaults (once)
+
+Before your first run, tell the Studio where you usually run. Click **Run
+defaults** in the header of the dashboard or the Templates page.
+
+
+| Field | What to enter |
+| --- | --- |
+| **System** | The Tapis system your jobs run on, e.g. `pitzer-tapis` or `aws-tapis`. Picking one fills in its usual queues. |
+| **CPU queue** | The queue for steps with no GPU, e.g. `cpu-partition` on `aws-tapis`. |
+| **GPU queue** | The queue for GPU steps (training, zero-shot annotation, …), e.g. `a10g-partition` on `aws-tapis`. |
+| **Work dir** | Your base folder on that system. Jobs run under it, and outputs go to `…/wf_runs`. |
+| **Containers dir** | The folder on that system that holds the step container images (`trainer.sif`, `inf.sif`, …). Jobs then use these images in place instead of copying them in each run. See [How inputs reach a job](./explanation.md#how-inputs-reach-a-job). |
+
+![Run defaults dialog](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/run_defaults_modal.png)
+
+Click **Save defaults**. From then on, these values are used everywhere a
+system, queue or folder is filled in for you:
+
+- the **Run workflow** drawer of every workflow,
+- each step's 🖥 **Run Configuration**,
+- the **System** box of every file or folder field (data sources, sinks,
+  preprocessing, zero-shot annotation, …), so **Browse** opens on your system.
+
+Your defaults never overwrite something you chose yourself. The order is:
+
+1. A value saved on the step itself (or wired in from an upstream step).
+2. The settings you last launched **this workflow** with. Launching a workflow
+   with different settings keeps them for that workflow only.
+3. Your **Run defaults**.
+4. The Studio's built-in default (`expanse-tapis-static`).
+
+Leave a field blank to use the built-in default for it. Saving updates any
+dialog that's already open, with no reload.
+
 ### Configure the run
 
 With a saved template open, click **Run Workflow** (green, top right). The **Run
-workflow** drawer opens, with three numbered sections.
+workflow** drawer opens, with three numbered sections. They start from your
+[run defaults](#set-your-run-defaults-once), or from the settings this workflow
+was last launched with.
 
 <img width="1907" height="1020" alt="Screenshot 2026-08-14 200409" src="https://github.com/user-attachments/assets/abba229d-68ff-4533-bb39-db70dbd9b496" />
 
@@ -115,7 +152,7 @@ workflow** drawer opens, with three numbered sections.
      for. Best for mixed CPU/GPU pipelines and long steps.
    - **Single job**: the whole pipeline runs as one Tapis job, so there's one queue
      wait instead of many. Best for short pipelines. See [Run a whole pipeline as
-     one Tapis job](#run-a-whole-pipeline-as-one-tapis-job).
+     one Tapis job](./how-to.md#run-a-whole-pipeline-as-one-tapis-job).
 2. **Where each step runs:** pick a system and queue for **CPU steps**, and for
    **GPU steps** if the canvas has any. Each card lists the steps it applies to,
    so Zero-Shot Annotation and Training can run on a GPU queue while Flight Plan
@@ -127,12 +164,14 @@ workflow** drawer opens, with three numbered sections.
 Two optional sections sit below, closed by default:
 
 - **Storage & archive:** where outputs are written (work dir, archive system,
-  archive dir). The defaults are usually right.
+  archive dir), and the **containers dir**. The defaults are usually right.
+
+![Storage & archive section](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/run_drawer_storage.png)
 - **Trigger with a webhook:** a URL that starts this workflow from outside the
   Studio. See [Trigger a workflow from outside
-  (webhook)](#trigger-a-workflow-from-outside-webhook).
+  (webhook)](./how-to.md#trigger-a-workflow-from-outside-webhook).
 
-Field-by-field detail is in [Run settings reference](#run-settings-reference).
+Field-by-field detail is in [Run settings reference](./how-to.md#run-settings-reference).
 
 ### Verify before launching
 
@@ -195,6 +234,8 @@ each node tinted by its live status.
 A second, smaller badge carries the raw **Tapis job status** — the full
 vocabulary (`STAGING_INPUTS`, `QUEUED`, `RUNNING`, `ARCHIVING`, `FINISHED`, …) —
 so a step that looks stuck can be told apart from one merely sitting in a queue.
+`STAGING_INPUTS` is usually brief: inputs already on the job's filesystem are
+mounted, not copied (see [How inputs reach a job](./explanation.md#how-inputs-reach-a-job)).
 The page polls every 2.5 s while the run is `RUNNING`; ⟳ in the header refreshes
 on demand.
 
@@ -211,7 +252,7 @@ jumps back to the canvas. A run that isn't in flight gets a **Resume** button �
 carry on from where it stopped, or redo a chosen step and everything after it —
 and a `FAILED` or `CANCELLED` one also gets **Start over**, which relaunches it
 from the beginning as a new run with the same settings. See
-[Stop, resume, and recover](#stop-resume-and-recover).
+[Stop, resume, and recover](./how-to.md#stop-resume-and-recover).
 
 **Past Runs** (`/runs`) lists every run with its status, with a search box and
 filters for status and ordering. Expand a finished run for its per-step
@@ -248,10 +289,6 @@ The dialog has three steps.
 3. **Work dir:** the folder where results are written. It's created if it doesn't
    exist.
 
-Use **Browse** to pick folders (Tapis systems only). Below the fields, a preview
-shows exactly where each input will be read from. Check it before going on.
-
-![Input path preview](https://raw.githubusercontent.com/ICICLE-ai/workflow-orchestrator/main/docs/images/users_node/path_preview.png)
 
 Your choices are saved for this workflow (you'll see *Saved for this workflow ✓*),
 so they're filled in next time, on any browser, and for new versions.
@@ -271,6 +308,12 @@ Pick a tab and follow its numbered steps. Every command has a copy button.
 | --- | --- |
 | **Apptainer** | Your machine has Apptainer, which most HPC clusters do. Recommended on HPC. |
 | **Docker** | Your machine has Docker and allows privileged containers. |
+
+Neither installed yet? Step 1 on the Docker and Apptainer tabs gives a command
+to check, and **Not installed? How to install** shows the install commands for
+your OS: Ubuntu, Debian, RHEL/Rocky/Alma, Fedora, macOS/Windows, an HPC
+cluster's `module load`, or an Apptainer install that needs no root. The zip's
+README has the same commands under "Before you start".
 | **Offline zip** | Your machine has no network access. Download the zip here and copy it over. |
 
 On the machine, the steps are the same for both Docker and Apptainer:

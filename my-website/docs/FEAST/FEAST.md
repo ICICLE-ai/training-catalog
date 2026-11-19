@@ -5,23 +5,46 @@ tags:
   - Release 2025-08
   - Release 2025-10
   - Release 2025-12
+  - Release 2026-11
 ---
-
-
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
 
 # The Food Equity Access Simulation Technology (FEAST)
+The Food Equity Access Simulation Technology (FEAST) tool — previously known as the Food Access and Strategy Simulation (FASS) tool — is a powerful platform for analyzing how changes in the food retail landscape, such as adding or removing stores, affect household food access. FEAST enables users to simulate and evaluate strategies aimed at improving food equity across communities.
 
-The [Food Equity Access Simulation Technology (FEAST) tool](https://feast.pods.icicleai.tapis.io/) — previously known as the Food Access and Strategy Simulation (FASS) tool — is a powerful platform for analyzing how changes in the food retail landscape, such as adding or removing stores, affect household food access. FEAST enables users to simulate and evaluate strategies aimed at improving food equity across communities. 
+<div align="center">
+
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/Food-Access-Model)
+[![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-yellow.svg)](https://github.com/ICICLE-ai/Food-Access-Model/blob/main/LICENSE)
+
+</div>
+
+:::tip API reference
+This component exposes an HTTP API — see its [API documentation](/api/FEAST/food-access-model-api) on this site.
+:::
+
+
+
 
 ### Built With
 
 * Python
 * React.j
+## References
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)](https://github.com/ICICLE-ai/Food-Access-Model/tree/main)
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+- **ICICLE Institute** — [icicle.osu.edu](https://icicle.osu.edu/)
+- **FASS-Frontend (companion React UI)** — [github.com/ICICLE-ai/FASS-Frontend](https://github.com/ICICLE-ai/FASS-Frontend)
+- **Mesa / mesa-geo** — [projectmesa/mesa](https://github.com/projectmesa/mesa) — agent-based modeling framework.
+- **OSMnx** — [gboeing/osmnx](https://github.com/gboeing/osmnx) — OpenStreetMap data retrieval.
+- **US Census Bureau API** — [api.census.gov](https://api.census.gov/) — household demographics data source.
+- **OpenStreetMap** — [openstreetmap.org](https://www.openstreetmap.org/) — store locations data source.
 
+### Key terms
 
+- **MFAI** — Modified Food Access Index; the per-household access score (0–100) the simulation outputs.
+- **Simulation step** — one calendar month advancement of the model.
+- **Convenience store (CSPM)** / **supermarket (SPM)** — the two store categories tracked, weighted differently in access scoring.
 
 ### Technical Resources
 * **Spatial Analysis:** PostGIS for geographic database operations
@@ -38,8 +61,8 @@ The [Food Equity Access Simulation Technology (FEAST) tool](https://feast.pods.i
 ## Acknowledgements
    
 *National Science Foundation (NSF) funded AI institute for Intelligent Cyberinfrastructure with Computational Learning in the Environment (ICICLE) (OAC 2112606)*
-*Wisconsin Alumni Research Fund*
-*The Farm2Facts Gift Fund*
+*Wisconsin Alumni Research Fund
+*The Farm2Facts Gift Fund
 
 ## Issue Reporting
 We welcome feedback and issue reports to help improve FEAST. Please use the following channels:
@@ -51,6 +74,12 @@ We welcome feedback and issue reports to help improve FEAST. Please use the foll
 - Use the "enhancement" label and feature request template
 - Describe the proposed functionality and use case
 
+<!--
+### Email Support
+* **Technical Support:**
+* **Research Inquiries:**
+* **Collaboration Opportunities:**
+-->
 ### Before Reporting
 1. **Check Existing Issues:** Search open and closed issues to avoid duplicates
 2. **Review Documentation:** Ensure your question isn't answered in this README or linked resources

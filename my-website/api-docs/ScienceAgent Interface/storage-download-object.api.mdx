@@ -1,0 +1,72 @@
+---
+id: storage-download-object
+title: "Download Object"
+description: "Stream the original S3 object bytes as an attachment. This does not reconstruct an ArrayMorph HDF5 dataset from its component objects."
+sidebar_label: "Download Object"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNV01v2zgQ/SuELrsLOHaatodNTm6aboO2aLZ2sQsEQUFJY5uNTKokFUcw/N/3DUn5I45zXZ8si0POvDczb6hl5uXUZee32cgbK6eU3fUyU5OVXhl9XWbnmYsLP0qz0JWR5Q+T/6TCZ72sllbOyZPlA5aZxh/Y31OLNaXx+Kshy38s/WqUJZzmbUO9zBUzmsvsfJn5tqbgwyo9haVXvuIXn3DIanXHW11ttCPH1menp/xTkiusqjlCmH61aqq0rESMS+StJ9fHWYXRnrTnHbKuK1UETANTePIn8EhyzmuHg5kYO5fYn+U433JAq1Uve/NcENf6QVaqFIksUUs/E8YKRxViolLU1kxURS/E9dPxSc/Es+Z7Q+NtRtYay8nCwUiXV5Gh+HoPC8fdUXvFJt8SrWtMr/YxfVHOYXNP0GPNbhmPSjgbR1Z4c0/6aBG93kc0ei1kUZBzoiStIiIOgZwXsYyEckIbL2RVmQWVRwvuzT648Yw25QakeVPck9+CyHhjiyxkRDkxjT5ejH/uYxxqRlbAIaJV6PnUVmLeIIX5FgGA3dSl5EdkdUTew+lLsvC/Yj07OywpKXtHGvrb02dCR47WM0RMJBKUWs03VoeMFGZeVxgdeOeayru++GCqEppSIoFh21y2nFDMGE70BQxlKTxqPASKJagzb/e2RZxHy84zKvS0UUmXtVHas/Y0Wj6AL5kf6ajAoqOiscq3YeaPZa3cpTH3Cva3dzyxn5RCmLMhcaYb1FweW7NaQI2kFtJ7WczmgNsX4xm4KA1FmbIEHhBegx0wHFor2y/G1jPx8f2HtwJdLh2UbmLNXCjvBBeX0TgouQltj4vKzPB9Zkrx7uJn+DNA/IM0tAfdDSdjkPahu9c0tmLL7Cm0744CrpLqyrTIZS6huLpMQPsZs9GxNeJUReJ3OFvTj5efNjenIi73ukvVvydh18mYR+5eJEMRpSLYxNmc5lwY0cI1XDwcYRsivr68vvx8JWZN3g/5VnpiQigp76NCkS5IDKdM4vDmes/jrsXH8fiGzTBQbAoC/jFcUNNBqX3bC2GdgGGEgXQyu6GYXU/cGOenlkZ/f94qAq6JcqdP9mUfsjFsAAgvY2ewExcg7hAmIp29ONrFO5IWFM2gKGT74p01C6asAEXsN8wSSFTVlLTlNAYEB6FY4/0g3Rr6iQd6RLY3cfxD+cjwEO6JyF5OjIivzZ6qlgfT48mCcheM3AWKd33/0JHUtYz2Rbqgb16FTAewckMCxbvZb26Hum5MMgIZZJO7Pax6E45wMaEnkoEMsIEm6hFOm1hHtWy5M5xYKLRRwyyWVFSSr4VRhXDmXAIRko6CLi/QvgEJaovLsSwVx4zcTRRVOCh0K2DSvPat6K756TBuWK6QWGyn/Vf90wx1WqNQ5jJIX+qL96llxddO+XbqdLlR0ONRotTwnh79oK7AGUMLIrNMsnTLasAqlL7JgKqTJkjKDCywzXKZw9t3W61W/Dp+bLFglcrxAIHYTVC29AInv39Lc+IPcSgw/pzrPuqgMg1bBGV7kFaxm6D7iCp0U/AftwxRObXf2nXwI4xPW8vzX1dj7OGK3hXHGEF6YC/dkt6O7KlObqJf9Q5sWS6j9ILFzj4uHdyRoHbWzNMdRuN/5v5amQ==
+sidebar_class_name: "get api-method"
+info_path: api/ScienceAgent Interface/science-agent-api
+custom_edit_url: null
+tags: [API, Software, CI4AI, Release 2026-11]
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Download Object"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/storage/download"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Stream the original S3 object bytes as an attachment. This does not reconstruct an ArrayMorph HDF5 dataset from its component objects.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"key","in":"query","required":true,"schema":{"type":"string","title":"Key"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Original object bytes.","content":{"application/octet-stream":{"schema":{"type":"string","format":"binary"}}}},"400":{"description":"Invalid storage path or selected profile.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"401":{"description":"Missing, expired or invalid user token.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"403":{"description":"S3 access denied or request Origin is not allowed.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"404":{"description":"The selected S3 bucket or requested object was not found.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"409":{"description":"An S3 credential profile must be selected or updated in Settings.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"422":{"description":"Invalid request.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"502":{"description":"S3 operation failed or returned incomplete results. Folder deletion may be partial; read the error before retrying.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}},"503":{"description":"The selected S3 endpoint is unavailable.","content":{"application/json":{"schema":{"type":"object","required":["error"],"properties":{"error":{"type":"string"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -22,7 +22,7 @@ README parser modes:
    - reads metadata per row from a table
    - column resolution is case-insensitive and tolerant of the catalog's
      release-spreadsheet headers:
-     * README        : GitHub repo URL or README blob URL          (required)
+     * README        : GitHub or Hugging Face repo URL / README blob URL (required)
      * Tags          : comma-separated tags (e.g. "AI4CI, Software") (optional
                        FALLBACK — the README's `**Tags:**` line wins). Matched by
                        prefix, so "Tags: Training Catalog" also works. A row with
@@ -53,15 +53,67 @@ def build_requests_session(github_pat: Optional[str] = None) -> requests.Session
     sess.headers.update({"Accept": "application/vnd.github.v3.raw"})
     return sess
 
+# -----------------------------
+# Hugging Face helpers
+# -----------------------------
+# HF repos (models, datasets/, spaces/) mirror GitHub's URL shape, except raw file
+# bytes live under /resolve/<branch>/<path> instead of a separate raw host:
+#   https://huggingface.co/<org>/<repo>/blob/main/README.md     (HTML page)
+#   https://huggingface.co/<org>/<repo>/resolve/main/README.md  (raw file)
+# HF model cards also open with a YAML metadata block (license, tags, …) that is not
+# part of the docs and would otherwise be mistaken for `---` section delimiters.
+
+HF_URL_RE = re.compile(
+    r"^https?://(?:www\.)?huggingface\.co/((?:datasets/|spaces/)?)([^/?#]+)/([^/?#]+)"
+    r"(?:/(?:blob|resolve|raw)/([^/?#]+)(?:/([^?#]*))?)?/?(?:[?#].*)?$",
+    re.IGNORECASE,
+)
+
+
+def is_hf_url(url: str) -> bool:
+    """True for any huggingface.co URL."""
+    return urlparse((url or "").strip()).netloc.lower() in ("huggingface.co", "www.huggingface.co")
+
+
+def parse_hf_url(url: str) -> Optional[Tuple[str, str, str, Optional[str], Optional[str]]]:
+    """
+    Decompose a Hugging Face repo/file URL into (prefix, org, repo, branch, path).
+    prefix is '' for models, 'datasets/' or 'spaces/' otherwise; branch/path are None
+    for a bare repo link.
+    """
+    m = HF_URL_RE.match((url or "").strip())
+    if not m:
+        return None
+    prefix, org, repo, branch, path = m.groups()
+    return prefix.lower(), org, repo, branch, (path or None)
+
+
+def hf_repo_home(url: str) -> Optional[str]:
+    """https://huggingface.co/[datasets/|spaces/]<org>/<repo> for any HF repo URL."""
+    p = parse_hf_url(url)
+    if not p:
+        return None
+    prefix, org, repo, _, _ = p
+    return f"https://huggingface.co/{prefix}{org}/{repo}"
+
+
 def to_raw_readme_url(repo_link: str) -> Optional[str]:
     """
-    Convert a normal GitHub URL to the corresponding raw.githubusercontent URL for README.md.
+    Convert a normal GitHub or Hugging Face URL to the corresponding raw README URL.
     Handles:
       - direct raw (returns as-is)
-      - blob links (converts)
-      - repo root links (tries main/master README.md)
+      - blob links (converts; HF blob -> /resolve/)
+      - repo root links (tries main/master README.md; HF: main)
     Returns None if conversion cannot be determined (rare).
     """
+    if is_hf_url(repo_link):
+        p = parse_hf_url(repo_link)
+        if not p:
+            return None
+        prefix, org, repo, branch, path = p
+        return (f"https://huggingface.co/{prefix}{org}/{repo}/resolve/"
+                f"{branch or 'main'}/{path or 'README.md'}")
+
     if "raw.githubusercontent.com" in repo_link and repo_link.endswith(".md"):
         return repo_link  # already raw
 
@@ -101,6 +153,20 @@ def fetch_raw_readme(repo_link: str, session: requests.Session) -> Tuple[str, st
     user/repo/branch/path needed to rewrite relative links and images.
     Raises Exception on failure.
     """
+    # Case 0: Hugging Face → /resolve/ raw URL. The session carries the GitHub PAT, so
+    # strip it for this host (never leak it off-GitHub); use HF_TOKEN if one is set.
+    if is_hf_url(repo_link):
+        raw_url = to_raw_readme_url(repo_link)
+        if not raw_url:
+            raise Exception(f"Unrecognized Hugging Face link: {repo_link}")
+        hf_token = os.getenv("HF_TOKEN")
+        headers = {"Accept": None,
+                   "Authorization": f"Bearer {hf_token.strip()}" if hf_token else None}
+        resp = session.get(raw_url, headers=headers)
+        if resp.status_code == 200:
+            return resp.text, raw_url
+        raise Exception(f"Could not fetch README, status code {resp.status_code} for {raw_url}")
+
     # Case 1: raw or blob → raw
     raw_candidate = to_raw_readme_url(repo_link)
     if raw_candidate and "raw.githubusercontent.com" in raw_candidate:
@@ -130,6 +196,8 @@ def repo_home_url(repo_link: str) -> str:
     """
     Return the 'home' URL of the repo (no /blob/...). Useful for the badge link.
     """
+    if is_hf_url(repo_link):
+        return hf_repo_home(repo_link) or repo_link.rstrip("/")
     if "/blob/" in repo_link:
         return repo_link.split("/blob/")[0]
     return repo_link.rstrip("/")
@@ -139,6 +207,9 @@ def derive_project_name(repo_link: str) -> str:
     Derive a project name from a repo URL if none is given.
     Uses the repository name portion.
     """
+    hf = parse_hf_url(repo_link)
+    if hf:
+        return hf[2]
     parsed = urlparse(repo_link.rstrip("/"))
     parts = parsed.path.strip("/").split("/")
     if len(parts) >= 2:
@@ -185,6 +256,28 @@ def parse_raw_url(raw_url: str) -> Optional[Tuple[str, str, str, str]]:
     user, repo, branch = parts[0], parts[1], parts[2]
     readme_dir = "/".join(parts[3:-1])  # drop the filename
     return user, repo, branch, readme_dir
+
+
+def repo_link_bases(raw_url: str) -> Optional[Tuple[str, str, str]]:
+    """
+    (raw_base, blob_base, readme_dir) for the README's own repo, from the raw URL
+    that was actually fetched. GitHub: raw.githubusercontent.com + github.com/…/blob;
+    Hugging Face: …/resolve/<branch> + …/blob/<branch> on huggingface.co.
+    """
+    if is_hf_url(raw_url):
+        p = parse_hf_url(raw_url)
+        if not p or not p[3]:
+            return None
+        prefix, org, repo, branch, path = p
+        home = f"https://huggingface.co/{prefix}{org}/{repo}"
+        readme_dir = "/".join((path or "").split("/")[:-1])
+        return f"{home}/resolve/{branch}", f"{home}/blob/{branch}", readme_dir
+    parsed = parse_raw_url(raw_url)
+    if not parsed:
+        return None
+    user, repo, branch, readme_dir = parsed
+    return (f"https://raw.githubusercontent.com/{user}/{repo}/{branch}",
+            f"https://github.com/{user}/{repo}/blob/{branch}", readme_dir)
 
 
 def _is_external(url: str) -> bool:
@@ -252,10 +345,9 @@ def escape_mdx_braces(segment: str) -> str:
     return "".join(out)
 
 
-def rewrite_relative_links(text: str, user: str, repo: str, branch: str, readme_dir: str) -> str:
-    """Rewrite relative image/link targets in README text to absolute GitHub URLs."""
-    raw_base = f"https://raw.githubusercontent.com/{user}/{repo}/{branch}"
-    blob_base = f"https://github.com/{user}/{repo}/blob/{branch}"
+def rewrite_relative_links(text: str, raw_base: str, blob_base: str, readme_dir: str) -> str:
+    """Rewrite relative image/link targets in README text to absolute repo URLs
+    (bases from repo_link_bases: GitHub or Hugging Face)."""
 
     def to_raw(rel: str) -> str:
         return f"{raw_base}/{_resolve_repo_path(rel, readme_dir)}"
@@ -724,7 +816,10 @@ def save_file(folder: str, fname: str, content: str, tags: List[str],
     body = strip_leading_frontmatter(content)
     body = remove_stray_tag_lines(body)
     if github_link:
-        github_badge = f'[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)]({github_link})'
+        if is_hf_url(github_link):
+            github_badge = f'[![Hugging Face Repo](https://img.shields.io/badge/Hugging%20Face-Repository-yellow?logo=huggingface&style=flat-square)]({github_link})'
+        else:
+            github_badge = f'[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square)]({github_link})'
         # Pull the license out of its README section and re-emit it as a badge next
         # to the GitHub badge; the raw "License: …" text is dropped from the body.
         license_badge, body = extract_license(body)
@@ -788,6 +883,198 @@ def split_sections(readme_text: str) -> List[str]:
     # Strip trailing whitespace from each part
     return [p.strip() for p in parts if p.strip()]
 
+
+# -----------------------------
+# In-page anchor links that cross a split boundary
+# -----------------------------
+# A README links between its own sections with `[text](#some-heading)`. On GitHub the
+# whole README is one page, so that always works. After the split, the heading may live
+# on a different page (tutorials.md vs how-to.md …), and `#some-heading` silently goes
+# nowhere. We recompute, the way GitHub/Docusaurus would, which page each heading lands
+# on and what its id is there, then rewrite the link to `./<page>.md#<id>` — a file link
+# Docusaurus resolves to the right route at build time (and whose anchor its broken-
+# anchor checker verifies).
+
+_FENCE_RE = re.compile(r"^\s{0,3}(```|~~~)")
+_ATX_HEADING_RE = re.compile(r"^\s{0,3}#{1,6}\s+(.*?)(?:\s+#+)?\s*$")
+_EXPLICIT_ID_RE = re.compile(r"\s*\{#([^}\s]+)\}\s*$")
+# `](#anchor)` / `](#anchor "title")`, `href="#anchor"`, and `[ref]: #anchor` definitions.
+_MD_ANCHOR_LINK_RE = re.compile(r"(\]\(\s*)#([^)\s]+)((?:\s+\"[^\"]*\")?\s*\))")
+_HTML_ANCHOR_HREF_RE = re.compile(r"""(href\s*=\s*["'])#([^"']+)(["'])""", re.IGNORECASE)
+_MD_ANCHOR_DEF_RE = re.compile(r"^(\s{0,3}\[[^\]]+\]:\s*)#(\S+)(.*)$")
+
+
+def _unfenced_lines(text: str):
+    """Yield (line, in_fence) for each line, tracking ``` / ~~~ code fences."""
+    in_fence = False
+    for line in text.split("\n"):
+        if _FENCE_RE.match(line):
+            yield line, True
+            in_fence = not in_fence
+            continue
+        yield line, in_fence
+
+
+def _heading_plain_text(raw: str) -> str:
+    """Reduce heading Markdown to the plain text a renderer would slug."""
+    s = re.sub(r"!\[([^\]]*)\]\([^)]*\)", r"\1", raw)          # images -> alt
+    s = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", s)             # links -> text
+    s = re.sub(r"\[([^\]]*)\]\[[^\]]*\]", r"\1", s)            # ref links -> text
+    s = re.sub(r"<[^>]+>", "", s)                               # inline HTML tags
+    s = re.sub(r"`+([^`]*)`+", r"\1", s)                        # code spans -> content
+    s = re.sub(r"(\*\*|__|\*|~~)", "", s)                       # emphasis markers
+    s = re.sub(r"\\(.)", r"\1", s)                              # backslash escapes
+    return s.strip()
+
+
+def _github_slug_base(text: str) -> str:
+    """github-slugger's slug (Docusaurus uses the same library): lowercase, drop
+    punctuation/symbols except '-' and '_', spaces -> '-'."""
+    import unicodedata
+    out = []
+    for ch in text.lower():
+        if ch in " -_":
+            out.append(ch)
+            continue
+        cat = unicodedata.category(ch)
+        if cat[0] in "LMN":
+            out.append(ch)
+    return "".join(out).replace(" ", "-")
+
+
+class _Slugger:
+    """Stateful slugger that de-duplicates like github-slugger (`x`, `x-1`, `x-2`, …)."""
+
+    def __init__(self):
+        self.seen: Dict[str, int] = {}
+
+    def slug(self, text: str) -> str:
+        base = _github_slug_base(text)
+        result = base
+        while result in self.seen:
+            self.seen[base] += 1
+            result = f"{base}-{self.seen[base]}"
+        self.seen[result] = 0
+        return result
+
+
+def _heading_ids(text: str, slugger: "_Slugger") -> List[str]:
+    """Ids of every ATX heading in `text`, in order (honours `{#custom-id}`)."""
+    ids = []
+    for line, in_fence in _unfenced_lines(text):
+        if in_fence:
+            continue
+        m = _ATX_HEADING_RE.match(line)
+        if not m:
+            continue
+        raw = m.group(1)
+        explicit = _EXPLICIT_ID_RE.search(raw)
+        if explicit:
+            ids.append(explicit.group(1))
+            slugger.seen.setdefault(explicit.group(1), 0)
+        else:
+            ids.append(slugger.slug(_heading_plain_text(raw)))
+    return ids
+
+
+def resolve_cross_page_anchors(
+    sequence: List[Tuple[str, str]],
+    page_files: Dict[str, str],
+    label: str = "",
+    main_bucket: str = "__main__",
+    page_folder: str = "",
+) -> Dict[str, List[str]]:
+    """Rewrite `#anchor` links so they still land on the right heading after the split.
+
+    `sequence` is every (bucket, fragment) in README order; `page_files` maps a bucket to
+    the .md filename it is written to. Returns {bucket: [rewritten fragments]} in order.
+
+    - Anchor is on the same page with the same id -> left alone.
+    - Anchor moved to another page             -> `./<that page>.md#<id there>`.
+    - Same page but its id changed (duplicate-heading suffix renumbered) -> `#<new id>`.
+    - Anchor matches no heading in the README  -> left alone and reported (never guessed).
+    """
+    # 1. Ids as GitHub assigns them over the whole README, and the (page, id) each
+    #    heading gets once its page is rendered on its own.
+    global_slugger = _Slugger()
+    page_sluggers: Dict[str, _Slugger] = {}
+    where: Dict[str, Tuple[str, str]] = {}           # README id -> (bucket, page id)
+    page_ids: Dict[str, set] = {}
+    for bucket, frag in sequence:
+        ps = page_sluggers.setdefault(bucket, _Slugger())
+        g_ids = _heading_ids(frag, global_slugger)
+        p_ids = _heading_ids(frag, ps)
+        page_ids.setdefault(bucket, set()).update(p_ids)
+        for g, p in zip(g_ids, p_ids):
+            where.setdefault(g, (bucket, p))
+
+    lower_where = {k.lower(): v for k, v in where.items()}
+    moved, unresolved = 0, []
+
+    def target(bucket: str, anchor: str, html: bool = False) -> Optional[str]:
+        nonlocal moved
+        hit = where.get(anchor) or lower_where.get(anchor.lower())
+        if hit is None:
+            if anchor not in page_ids.get(bucket, ()):   # not a README heading at all
+                unresolved.append(anchor)
+            return None
+        dest_bucket, dest_id = hit
+        if dest_bucket == bucket:
+            if dest_id == anchor:
+                return None
+            moved += 1
+            return f"#{dest_id}"
+        moved += 1
+        if not html:
+            # Markdown link: a file path Docusaurus resolves to the page's route.
+            return f"./{quote(page_files[dest_bucket])}#{dest_id}"
+        # Raw HTML is not run through Docusaurus' .md resolution, so emit the route
+        # (trailingSlash: false). Section pages are `/docs/<Folder>/<stem>`; the main
+        # page is named after its folder, so it is the folder's own route.
+        stem = os.path.splitext(page_files[dest_bucket])[0]
+        if dest_bucket == main_bucket:
+            return f"../{quote(stem)}#{dest_id}"
+        if bucket == main_bucket:
+            return f"./{quote(page_folder)}/{quote(stem)}#{dest_id}"
+        return f"./{quote(stem)}#{dest_id}"
+
+    def rewrite(bucket: str, frag: str) -> str:
+        out = []
+        for line, in_fence in _unfenced_lines(frag):
+            if in_fence:
+                out.append(line)
+                continue
+
+            def md_repl(m):
+                t = target(bucket, m.group(2))
+                return m.group(0) if t is None else f"{m.group(1)}{t}{m.group(3)}"
+
+            def html_repl(m):
+                t = target(bucket, m.group(2), html=True)
+                return m.group(0) if t is None else f"{m.group(1)}{t}{m.group(3)}"
+
+            line = _MD_ANCHOR_LINK_RE.sub(md_repl, line)
+            line = _HTML_ANCHOR_HREF_RE.sub(html_repl, line)
+            d = _MD_ANCHOR_DEF_RE.match(line)
+            if d:
+                t = target(bucket, d.group(2))
+                if t is not None:
+                    line = f"{d.group(1)}{t}{d.group(3)}"
+            out.append(line)
+        return "\n".join(out)
+
+    result: Dict[str, List[str]] = {}
+    for bucket, frag in sequence:
+        result.setdefault(bucket, []).append(rewrite(bucket, frag))
+
+    prefix = f"{label}: " if label else ""
+    if moved:
+        print(f"{prefix}re-pointed {moved} in-README anchor link(s) to the page their heading landed on")
+    if unresolved:
+        uniq = ", ".join(f"#{a}" for a in dict.fromkeys(unresolved))
+        print(f"{prefix}WARNING: anchor link(s) match no heading in the README, left as-is: {uniq}")
+    return result
+
 def classify_and_write_sections(
     folder: str,
     parts: List[str],
@@ -815,6 +1102,7 @@ def classify_and_write_sections(
     #     or Docusaurus titles the page from the filename ("tutorials", lowercase).
     MAIN = "__main__"
     buckets: Dict[str, List[str]] = {MAIN: [parts[0]]}
+    sequence: List[Tuple[str, str]] = [(MAIN, parts[0])]   # (bucket, fragment) in README order
     order: List[str] = []
     current = MAIN
     for part in parts[1:]:
@@ -832,14 +1120,23 @@ def classify_and_write_sections(
             head, tail = part[:at].strip(), part[at:].strip()
             if head:                       # content above the heading stays behind
                 buckets[current].append(head)
+                sequence.append((current, head))
             current = matched
             if current not in buckets:
                 buckets[current] = []
                 order.append(current)
             if tail:
                 buckets[current].append(tail)
+                sequence.append((current, tail))
         else:
             buckets[current].append(part)
+            sequence.append((current, part))
+
+    # Re-point `#anchor` links whose heading ended up on a different page.
+    page_files = {MAIN: f"{project_name}.md", **{name: name for name in order}}
+    buckets = {name: [] for name in buckets} | resolve_cross_page_anchors(
+        sequence, page_files, label=project_name,
+        main_bucket=MAIN, page_folder=os.path.basename(os.path.normpath(folder)))
 
     # Main file first: add the Release tag here only.
     main_tags = list(base_tags)
@@ -884,6 +1181,10 @@ def process_single_repo(
     project_folder = os.path.join(output_folder, repo_name)
 
     readme_text, raw_url = fetch_raw_readme(repo_link, session)
+    if is_hf_url(raw_url):
+        # Drop the HF model-card metadata block; its `---` fences would otherwise be
+        # read as section delimiters.
+        readme_text = strip_leading_frontmatter(readme_text)
 
     # README Tags line is the source of truth; table/CLI tags are only a fallback.
     tags, tag_source, tag_note = resolve_tags(readme_text, ", ".join(tags))
@@ -902,10 +1203,10 @@ def process_single_repo(
 
     # Rewrite relative images/links to absolute GitHub URLs so they survive
     # being deployed outside GitHub.
-    parsed_raw = parse_raw_url(raw_url)
-    if parsed_raw:
-        gh_user, gh_repo, gh_branch, readme_dir = parsed_raw
-        readme_text = rewrite_relative_links(readme_text, gh_user, gh_repo, gh_branch, readme_dir)
+    bases = repo_link_bases(raw_url)
+    if bases:
+        raw_base, blob_base, readme_dir = bases
+        readme_text = rewrite_relative_links(readme_text, raw_base, blob_base, readme_dir)
 
     readme_text = truncate_at_heading(readme_text, stop_at)
 
