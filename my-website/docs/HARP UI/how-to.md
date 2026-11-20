@@ -35,8 +35,6 @@ Every profiling job currently sends `nodeCount=1`. **Cores requested** maps to T
 
 For a first test, choose a system you already use successfully through Tapis, select a development or debug queue when appropriate, and request conservative resources.
 
-> **Screenshot slot — `docs/images/howto-system-queue-status.png`:** Show system access/status indicators and configured queues. Include one usable and one unavailable example without exposing account details.
-
 ## Troubleshoot a failed Tapis job
 
 Open **HARP Generate → Jobs**, expand **Failure details**, and locate the failed Tapis job. Preserve the job ID, selected system and queue, classified reason, Tapis condition, and raw message when asking an administrator for help.
@@ -57,15 +55,11 @@ Open **HARP Generate → Jobs**, expand **Failure details**, and locate the fail
 
 The Jobs table uses short summaries such as **Tapis configuration issue**, **partition unavailable**, or **GPU/QOS request rejected**. The full Tapis and scheduler text remains under the expandable raw failure detail. A later successful status poll clears a transient connection error instead of leaving a completed job marked with the old polling failure.
 
-> **Screenshot slot — `docs/images/howto-failure-details.png`:** Show the failure summary cards and one expanded raw message. Sanitize usernames, paths, job IDs, and allocations if the screenshot will be public.
-
 ## Find job output and profiling results
 
 Each profiling job writes its live output under the Tapis job output directory. Tapis archives the job output into the campaign folder selected on **Review & submit**. HARP then merges successful profiling rows into the campaign CSV used by **Profiled data** and **HARP Build**.
 
 Use the Jobs page for the Tapis job ID and status, the Profiled data page for successful timing rows, and the selected results folder for archived files such as `tapisjob.out`, progress and summary JSON, and profiling CSV data.
-
-> **Screenshot slot — `docs/images/howto-results-location.png`:** Show the submitted campaign's results location and the corresponding Profiled data view. Use a non-sensitive example path.
 
 ## Recover after a token expires or HARP restarts
 
@@ -75,8 +69,6 @@ Jobs already accepted by Tapis continue running even when HARP loses its session
 2. Sign in with a current Tapis session.
 3. Open **Jobs** and confirm the sweep resumes updating.
 4. If the remote job already ended, allow HARP time to retrieve its final state and merge available results.
-
-> **Screenshot slot — `docs/images/howto-resume-session.png`:** Show a paused or waiting-for-login sweep and the same sweep updating after login.
 
 ## Package your application for sweeps
 
@@ -89,8 +81,6 @@ Jobs already accepted by Tapis continue running even when HARP loses its session
 2. Register (or update) the Tapis app with [`Notebooks/Create_HARP_Sweep_App_TAPIS.ipynb`](https://github.com/ICICLE-ai/HARP-UI/blob/main/Notebooks/Create_HARP_Sweep_App_TAPIS.ipynb). It can also run one small test job.
 
 Inside each job, [`job_runner/harp_job_runner.py`](https://github.com/ICICLE-ai/HARP-UI/blob/main/job_runner/harp_job_runner.py) runs its parameter combinations x repetitions, measures walltime and hardware, and writes `harp_profile.csv` and `harp_progress.json` to the Tapis output directory.
-
-> **Screenshot slot — `docs/images/howto-register-sweep-app.png`:** Show the created Tapis app's image, runtime, command metadata, and `notes.harp` parameter definition. Do not include credentials.
 
 ## Register the build app (Tapis model training)
 
@@ -107,16 +97,17 @@ cd harp_server
 HARP_SSL_CERT=certs/cert.pem HARP_SSL_KEY=certs/key.pem python3 -m harp_server.serve
 ```
 
-Open `https://<server-hostname>:8443`. For real use, point `HARP_SSL_CERT` / `HARP_SSL_KEY` at an institutional or Let's Encrypt certificate. Behind nginx, Caddy or Apache, run `HARP_BEHIND_PROXY=1 HARP_PORT=8000 python3 -m harp_server.serve` and forward with an `X-Forwarded-Proto` header.
+Open `https://<server-hostname>:8443`. For real use, point `HARP_SSL_CERT` / `HARP_SSL_KEY` at an institutional or Let's Encrypt certificate. Behind nginx, Caddy or Apache, run `HARP_BEHIND_PROXY=1 HARP_PROXY_IPS=<proxy-ip-or-cidr> HARP_PORT=8000 python3 -m harp_server.serve` and forward with an `X-Forwarded-Proto` header.
 
 | Variable | Purpose | Default |
 |---|---|---|
 | `HARP_SSL_CERT`, `HARP_SSL_KEY` | Certificate and key (PEM) | required unless behind a proxy |
 | `HARP_HOST`, `HARP_PORT` | Listen address | `0.0.0.0:8443` |
 | `HARP_BEHIND_PROXY` | Serve plain HTTP and trust the proxy's forwarded headers | off |
+| `HARP_PROXY_IPS` | Exact proxy IP/CIDR allowed to supply forwarded HTTPS headers | `127.0.0.1` |
 | `HARP_SERVER_DATA` | Campaign and build state directory | `~/.harp_server` |
 | `HARP_POLL_SECONDS` | Tapis polling interval | `15` |
-| `HARP_TAPIS_BASE_URL` | Tenant used to validate tokens | `https://icicleai.tapis.io` |
+| `HARP_TAPIS_BASE_URL` | Default tenant for TapisUI token handoff; login accepts HTTPS `*.tapis.io` tenants | `https://icicleai.tapis.io` |
 | `HARP_PORTAL_ORIGINS` | Exact TapisUI origins allowed to frame HARP and hand off tokens | unset (framing disabled) |
 | `HARP_SESSION_SAME_SITE` | Session cookie policy (`strict`, `lax`, `none`; `none` for the iframe) | |
 | `HARP_ALLOW_HTTP` | Accept logins over plain HTTP (never on a shared server) | off |
@@ -144,8 +135,6 @@ curl https://harp.pods.icicleai.tapis.io/healthz      # {"status":"ok"}
 Full steps, portal settings and operational constraints (run a single replica) are in [`deploy/README.md`](https://github.com/ICICLE-ai/HARP-UI/blob/main/deploy/README.md).
 
 When configured, HARP runs `sinfo` on Ascend, Pitzer, and Cardinal at Pod startup and once every 24 hours. A successful snapshot remains usable for up to 48 hours, allowing one temporary probe failure without immediately hiding queue validation. Live Slurm output—not OSC's documentation—is used to validate each TAPIS `hpcQueueName`. The probe requires a dedicated Pod-mounted SSH identity and invokes only this fixed read-only command; HARP cannot derive SSH credentials from a TAPIS access token and never persists that token.
-
-> **Screenshot slot — `docs/images/howto-pod-deployment.png`:** Show the HARP Pod or template in the Tapis Pods interface with a healthy status and the approved image reference. Redact tenant administration details.
 
 ## Run the tests
 

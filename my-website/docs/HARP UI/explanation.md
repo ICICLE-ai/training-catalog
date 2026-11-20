@@ -13,8 +13,6 @@ description: "Explanation for HARP UI. HARP profiles scientific applications acr
 
 Each HPC workflow has its own compute, memory and I/O profile, and users routinely over- or under-request resources because they lack a history of runs to go by. HARP generates that history systematically, with many "scaled-down" (SD) runs, a few selective "full-scale" (FS) runs and held-out test_data runs, then trains regression models to estimate runtime for a target application on a given system and queue.
 
-> **Diagram slot — `docs/images/explanation-harp-pipeline.png`:** Show the current Generate → Build → Estimate data flow, including Tapis Systems, Apps, Jobs, Files, campaign storage, profiling CSVs, model artifacts, and estimates. Replace this callout with the maintained architecture diagram.
-
 ## From notebooks to the UI
 
 Earlier versions ran the whole Cheetah campaign inside **one** container, so one Tapis job ran every sweep combination on one machine, driven from a notebook or an installed module. HARP UI keeps the same pipeline and data format but changes how the generate phase runs:
@@ -35,7 +33,7 @@ Earlier versions ran the whole Cheetah campaign inside **one** container, so one
 
 | Tab | Steps |
 |---|---|
-| **HARP Generate** | Configure sweeps → Review & submit → Profiled data → Jobs |
+| **HARP Generate** | Configure sweeps → Review & submit → Jobs → Profiled data |
 | **HARP Build** | Training data → Models & where → Trained models |
 | **HARP Estimate** | Configure → Select model → Estimates |
 
